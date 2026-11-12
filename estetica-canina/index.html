@@ -4,83 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Patitas Limpias · Estética canina</title>
-<meta name="description" content="Demo de página web para estética canina y veterinaria: baño, corte, antes y después, planes y reserva.">
+<meta name="description" content="Demo de página web para estética canina y veterinaria: baño, corte, antes y después, equipo, planes y reserva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/extras.css">
-<style>
-:root { --cream:#F5E8D9; --olive:#3F5228; --terra:#D8492E; --terra-deep:#B03519; --focus:#B03519; --header-bg:#F5E8D9; --menu-bg:#F5E8D9; --menu-fg:#3F5228;
-  --x-bg:#F5E8D9; --x-ink:#2b3a1b; --x-brand:#3F5228; --x-on-brand:#F5E8D9; --x-accent:var(--terra-deep); --x-card:#fff8ee; --x-line:rgb(63 82 40 / .28); --x-head:"Bricolage Grotesque",system-ui,sans-serif;
-  --display:"Bricolage Grotesque",system-ui,sans-serif; --sans:"Nunito",system-ui,sans-serif; }
-body { background:var(--cream); color:#2b3a1b; font-family:var(--sans); font-size:1.0625rem; overflow-x:clip; }
-h1,h2,h3 { font-family:var(--display); color:var(--olive); margin:0; line-height:1.02; letter-spacing:-.02em; }
-h1 { font-size:clamp(2.8rem, 1rem + 7vw, 5.6rem); font-weight:800; }
-h2 { font-size:clamp(2rem, 1.2rem + 3vw, 3.2rem); font-weight:800; }
-h3 { font-size:1.4rem; font-weight:800; }
-.lead { font-size:1.2rem; max-inline-size:44ch; }
-.site-header { color:var(--olive); }
-.site-logo { font-family:var(--display); font-weight:800; font-size:1.4rem; display:flex; align-items:center; gap:.5rem; }
-.site-logo svg { inline-size:1.6rem; block-size:1.6rem; fill:var(--terra); }
-.btn { display:inline-block; padding:.9rem 1.6rem; background:var(--terra); color:#fff; font:inherit; font-weight:700; text-decoration:none; border-radius:999px; border:2px solid var(--olive); cursor:pointer; min-block-size:48px; box-shadow:3px 3px 0 var(--olive); transition:transform .15s ease, box-shadow .15s ease; }
-.btn:hover { background:var(--terra-deep); transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--olive); }
-.btn.alt { background:transparent; color:var(--olive); }
-.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; box-shadow:none; }
-
-.hero { display:grid; gap:2.5rem; align-items:center; padding-block:3rem 4rem; }
-.hero .lead { margin-block:1.25rem 2rem; }
-.hero-actions { display:flex; flex-wrap:wrap; gap:.9rem; }
-.hero-stage { position:relative; }
-.hero-stage figure { margin:0; border:3px solid var(--olive); border-radius:1.5rem; overflow:hidden; box-shadow:8px 8px 0 var(--olive); background:#fff; }
-.hero-stage img { inline-size:100%; aspect-ratio:16/10; object-fit:cover; }
-.chip { border:2px solid var(--olive); }
-.chip.a { inset-block-end:-1.2rem; inset-inline-start:1rem; } .chip.b { inset-block-start:-1rem; inset-inline-end:1rem; }
-@media (min-width:56rem){ .hero { grid-template-columns:1fr 1.1fr; } }
-
-.section { padding-block:4.5rem; }
-.band { background:var(--olive); color:var(--cream); }
-.band h2, .band h3 { color:var(--cream); }
-.band .eyebrow { color:#F8D5C8; }
-.cards { display:grid; gap:1.25rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); padding:0; list-style:none; }
-.cards li { padding:1.5rem; border-radius:1.25rem; background:var(--cream); color:#2b3a1b; transition:transform .25s ease; }
-.cards li:hover { transform:rotate(-1.5deg) translateY(-4px); }
-.cards li:nth-child(even) { background:#F8D5C8; }
-.cards li:nth-child(even):hover { transform:rotate(1.5deg) translateY(-4px); }
-.cards h3 { color:var(--olive); margin-block-end:.5rem; }
-.cards p { margin:0; }
-
-.ba { display:grid; gap:2.5rem; align-items:center; }
-@media (min-width:60rem){ .ba { grid-template-columns:.8fr 1.2fr; } }
-.compare { border:3px solid var(--olive); box-shadow:8px 8px 0 var(--olive); }
-
-.plans { display:grid; gap:1.25rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); }
-.plan { border:3px solid var(--olive); border-radius:1.5rem; padding:1.75rem; background:#fff8ee; display:flex; flex-direction:column; gap:.6rem; transition:transform .25s ease; }
-.plan:hover { transform:translateY(-6px); }
-.plan.main { background:var(--olive); color:var(--cream); }
-.plan.main h3, .plan.main .cost { color:var(--cream); }
-.cost { font-family:var(--display); font-weight:800; font-size:2.2rem; color:var(--terra-deep); margin:0; }
-.plan p { margin:0; } .plan ul { padding-inline-start:1.2rem; margin:0; } .plan ul li { margin-block:.25rem; }
-.plan .tagline { font-weight:700; color:var(--terra); }
-
-.band .steps li { background:#fff8ee; color:#2b3a1b; border:3px solid var(--cream); }
-.band .steps h3 { color:var(--olive); }
-.band .reviews li { background:#fff8ee; color:#2b3a1b; border:3px solid var(--cream); }
-.band .reviews blockquote, .band .reviews cite { color:#2b3a1b; }
-
-form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
-label { font-weight:700; display:block; margin-block-end:.3rem; }
-input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:2px solid var(--olive); border-radius:.9rem; background:#fffaf2; color:#2b3a1b; }
-input:user-invalid { border-color:#B3261E; }
-[role=status] { font-weight:700; min-block-size:1.5rem; margin:0; }
-.book { display:grid; gap:3rem; }
-@media (min-width:56rem){ .book { grid-template-columns:1fr 1fr; } }
-.hours { margin:1.5rem 0 0; display:grid; }
-.hours div { display:flex; justify-content:space-between; gap:1rem; padding-block:.7rem; border-block-end:1px solid var(--x-line); }
-.hours dt { font-weight:700; } .hours dd { margin:0; }
-.site-footer { background:var(--olive); color:var(--cream); padding-block:2.5rem; }
-.site-footer p { margin:.2rem 0; } .site-footer a { color:#F8D5C8; }
-</style>
+<link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 <header class="site-header">
@@ -93,7 +23,7 @@ input:user-invalid { border-color:#B3261E; }
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#resultados">Resultados</a></li>
         <li><a href="#planes">Planes</a></li>
-        <li><a href="#preguntas">Preguntas</a></li>
+        <li><a href="#equipo">Equipo</a></li>
         <li><a class="btn" href="#reservar">Reservar baño</a></li>
       </ul>
     </nav>
@@ -102,16 +32,20 @@ input:user-invalid { border-color:#B3261E; }
 
 <main id="inicio">
   <section class="wrap hero">
+    <svg class="blob a" viewBox="0 0 200 200" aria-hidden="true"><path d="M44 -52C58 -36 66 -18 63 -2C60 14 46 28 31 42C16 56 -2 70 -22 69C-42 68 -64 52 -70 32C-76 12 -66 -12 -52 -30C-38 -48 -19 -60 -1 -59C17 -58 30 -68 44 -52Z" transform="translate(100 100)"/></svg>
+    <svg class="blob b" viewBox="0 0 200 200" aria-hidden="true"><path d="M40 -48C52 -34 60 -17 59 -1C58 15 48 30 35 43C22 56 6 67 -14 67C-34 67 -57 56 -64 38C-71 20 -62 -5 -48 -24C-34 -43 -17 -56 -1 -55C15 -54 28 -62 40 -48Z" transform="translate(100 100)"/></svg>
     <div class="rise">
       <p class="eyebrow">Estética canina y revisión veterinaria</p>
-      <h1>Perros limpios, felices y consentidos.</h1>
+      <h1>Perros limpios, <span class="hl">felices</span> y consentidos.</h1>
       <p class="lead">Baño, corte, cepillado y revisión básica de piel y oídos. Tu perro se va oliendo bien y sin estrés.</p>
       <div class="hero-actions">
         <a class="btn" href="#reservar">Reservar baño</a>
         <a class="btn alt" href="#resultados">Ver el antes y después</a>
       </div>
+      <p>Sin jaulas · Con premios · Recogida a domicilio</p>
     </div>
     <div class="hero-stage">
+      <span class="sticker" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9C1.2 8.800 3 5.500 6.200 5.500c1.900 0 3.100 1 3.800 2.100.7-1.100 1.900-2.100 3.800-2.100 3.200 0 5 3.300 3.500 6.500C19 16.600 12 21 12 21z"/></svg></span>
       <figure><img src="img/hero.jpg" width="1280" height="720" alt="Ilustración de una peluquera sonriendo mientras seca con una toalla naranja a un perro dorado lleno de espuma" fetchpriority="high"></figure>
       <p class="chip a"><b>4.9</b><span><span class="stars" aria-hidden="true">★★★★★</span><br>900 perros felices</span></p>
       <p class="chip b"><b>0</b><span>jaulas ni<br>estrés</span></p>
@@ -127,24 +61,26 @@ input:user-invalid { border-color:#B3261E; }
 
   <section class="band section" id="servicios">
     <div class="wrap">
-      <div class="reveal"><p class="eyebrow">Servicios</p><h2>Lo que hacemos por tu perro</h2></div>
+      <div class="center reveal"><p class="eyebrow">Servicios</p><h2>Todo lo que tu perro necesita</h2><p class="lead">De un baño rápido a una revisión completa. Tú eliges, nosotros nos encargamos.</p></div>
       <ul class="cards">
-        <li class="reveal"><h3>Baño y secado</h3><p>Shampoo según el tipo de pelo y secado a baja temperatura.</p></li>
-        <li class="reveal"><h3>Corte y estilo</h3><p>Corte de raza o práctico para el verano, como prefieras.</p></li>
-        <li class="reveal"><h3>Uñas, oídos y dientes</h3><p>Limpieza suave de lo que casi nadie recuerda.</p></li>
-        <li class="reveal"><h3>Desparasitación externa</h3><p>Tratamiento contra pulgas y garrapatas con producto veterinario.</p></li>
-        <li class="reveal"><h3>Revisión veterinaria</h3><p>Consulta básica con médica veterinaria antes o después del baño.</p></li>
-        <li class="reveal"><h3>Recogida a domicilio</h3><p>Pasamos por tu perro y lo regresamos limpio el mismo día.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14c0-3 2-5 5-5s5 2 5 5v1H7z"/><path d="M5 18h14M9 6c0-1.5 1-2 2-2M13 7c0-1 1-1.500 2-1.500"/></svg></span><h3>Baño y secado</h3><p>Shampoo según el tipo de pelo y secado a baja temperatura.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.500"/><circle cx="6" cy="17" r="2.500"/><path d="M8 8.500L20 18M8 15.500L20 6"/></svg></span><h3>Corte y estilo</h3><p>Corte de raza o práctico para el verano, como prefieras.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20c-3 0-5-2-5-4.500 0-2 1.500-3 3-3 1 0 1.500.5 2 .5s1-.5 2-.5c1.500 0 3 1 3 3 0 2.500-2 4.500-5 4.500z"/><circle cx="6.500" cy="9" r="1.600"/><circle cx="10" cy="5.500" r="1.600"/><circle cx="14" cy="5.500" r="1.600"/><circle cx="17.500" cy="9" r="1.600"/></svg></span><h3>Uñas, oídos y dientes</h3><p>Limpieza suave de lo que casi nadie recuerda.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.500-3.200 7.800-8 9-4.800-1.200-8-4.500-8-9V6z"/><path d="M8.500 12l2.500 2.500 4.500-5"/></svg></span><h3>Desparasitación externa</h3><p>Tratamiento contra pulgas y garrapatas con producto veterinario.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v3a4 4 0 0 0 8 0v-1"/><circle cx="18" cy="12.500" r="2"/></svg></span><h3>Revisión veterinaria</h3><p>Consulta básica con médica veterinaria antes o después del baño.</p></li>
+        <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16V8h11v8M14 11h4l3 3v2h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span><h3>Recogida a domicilio</h3><p>Pasamos por tu perro y lo regresamos limpio el mismo día.</p></li>
       </ul>
     </div>
   </section>
+  <svg class="wave cream" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="background:var(--olive)"><path d="M0 40C240 90 480 0 720 40S1200 80 1440 30V80H0z"/></svg>
 
-  <section class="wrap section" id="resultados">
+  <section class="wrap section" id="resultados" style="padding-block-start:3rem">
     <div class="ba">
       <div class="reveal">
         <p class="eyebrow">El cambio</p>
-        <h2>De lodo a pelo de anuncio</h2>
+        <h2>De lodo a <span class="hl">pelo de anuncio</span></h2>
         <p class="lead" style="margin-block-start:1rem">Mueve la barra para ver cómo llega y cómo sale. Hasta la bandana va incluida.</p>
+        <ul class="checks"><li>Desenredado sin jalones</li><li>Pelo brillante y esponjoso</li><li>Foto del resultado antes de entregarlo</li></ul>
         <p><small>Ilustración de ejemplo generada para esta demo.</small></p>
       </div>
       <div class="compare reveal" role="group" aria-label="Comparación de un perro antes y después del baño">
@@ -157,30 +93,62 @@ input:user-invalid { border-color:#B3261E; }
     </div>
   </section>
 
-  <section class="wrap section" id="planes" style="padding-block-start:1rem">
-    <div class="reveal"><p class="eyebrow">Planes</p><h2>Un precio por tamaño, sin sorpresas</h2></div>
+  <section class="wrap section" style="padding-block-start:1rem" id="clientes">
+    <div class="center reveal"><p class="eyebrow">Nuestros clientes</p><h2>Salen presumiendo</h2></div>
+    <ul class="pets">
+      <li class="pet reveal"><figure><img src="img/poodle.jpg" width="1280" height="720" alt="Ilustración de una caniche blanca con moño terracota" loading="lazy"></figure><div><h3>Nube</h3><p>Caniche · corte pompón</p><span class="tag">Se fue con moño</span></div></li>
+      <li class="pet reveal"><figure><img src="img/corgi.jpg" width="1280" height="720" alt="Ilustración de un corgi sonriendo con bandana verde" loading="lazy"></figure><div><h3>Waffle</h3><p>Corgi · baño y cepillado</p><span class="tag">Sonrisa garantizada</span></div></li>
+      <li class="pet reveal"><figure><img src="img/beagle.jpg" width="1280" height="720" alt="Ilustración de un beagle con la cabeza inclinada y collar terracota" loading="lazy"></figure><div><h3>Rocky</h3><p>Beagle · baño y oídos</p><span class="tag">Ya no huye del agua</span></div></li>
+    </ul>
+    <p class="center"><small>Ilustraciones de ejemplo generadas para esta demo. Cámbialas por fotos de tus clientes.</small></p>
+  </section>
+
+  <section class="band section" id="equipo">
+    <div class="wrap team">
+      <figure class="reveal"><img src="img/equipo.jpg" width="1280" height="720" alt="Ilustración de la peluquera canina y el veterinario sonriendo con un perro cachorro en brazos" loading="lazy"></figure>
+      <div class="reveal">
+        <p class="eyebrow">El equipo</p>
+        <h2>Manos pacientes, cariño de sobra</h2>
+        <p class="lead" style="margin-block-start:1rem">Entendemos a los perros: si algo no les gusta, paramos y lo intentamos de otra forma.</p>
+        <ul class="people">
+          <li><span class="dot" aria-hidden="true">A</span><p><strong>Ana, estilista canina</strong>8 años de experiencia. Especialista en razas de pelo largo.</p></li>
+          <li><span class="dot" aria-hidden="true">D</span><p><strong>Dr. Mateo, veterinario</strong>Revisa piel, oídos y dientes antes de cada baño.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <svg class="wave cream up" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true" style="background:var(--olive)"><path d="M0 40C240 90 480 0 720 40S1200 80 1440 30V80H0z"/></svg>
+
+  <section class="wrap section" id="planes" style="padding-block-start:3rem">
+    <div class="center reveal"><p class="eyebrow">Planes</p><h2>Un precio por tamaño, sin sorpresas</h2></div>
     <div class="plans">
       <article class="plan reveal"><h3>Pequeño</h3><p class="tagline">Hasta 8 kg</p><p class="cost">$280</p><ul><li>Baño y secado</li><li>Cepillado</li><li>Limpieza de oídos</li></ul></article>
-      <article class="plan main reveal"><h3>Mediano</h3><p class="tagline" style="color:#F8D5C8">De 8 a 20 kg · el más pedido</p><p class="cost">$380</p><ul><li>Baño y secado</li><li>Cepillado y corte de uñas</li><li>Limpieza de oídos</li></ul></article>
+      <article class="plan main reveal"><span class="ribbon">El más pedido</span><h3>Mediano</h3><p class="tagline" style="color:#F8D5C8">De 8 a 20 kg</p><p class="cost">$380</p><ul><li>Baño y secado</li><li>Cepillado y corte de uñas</li><li>Limpieza de oídos</li></ul></article>
       <article class="plan reveal"><h3>Grande</h3><p class="tagline">Más de 20 kg</p><p class="cost">$520</p><ul><li>Baño y secado</li><li>Cepillado y corte de uñas</li><li>Limpieza de oídos y dientes</li></ul></article>
     </div>
-    <p style="margin-block-start:1.5rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
+    <p class="center" style="margin-block-start:1.5rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
   </section>
 
   <section class="band section">
     <div class="wrap">
-      <div class="reveal"><p class="eyebrow">Cómo funciona</p><h2>Tú descansas, él se luce</h2></div>
+      <div class="center reveal"><p class="eyebrow">Cómo funciona</p><h2>Tú descansas, él se luce</h2></div>
       <ol class="steps">
         <li class="reveal"><h3>Reservas</h3><p>Escoges día y hora por WhatsApp o aquí mismo.</p></li>
         <li class="reveal"><h3>Lo recibimos</h3><p>Lo dejas con nosotros o pasamos por él a tu casa.</p></li>
         <li class="reveal"><h3>Baño y mimos</h3><p>Con paciencia, descansos y premios en cada paso.</p></li>
         <li class="reveal"><h3>Listo para el parque</h3><p>Te mandamos una foto del resultado antes de entregarlo.</p></li>
       </ol>
+      <ul class="numbers" style="margin-block-start:3.5rem">
+        <li class="reveal"><strong>900+</strong>perros atendidos</li>
+        <li class="reveal"><strong>8 años</strong>de experiencia</li>
+        <li class="reveal"><strong>4.9</strong>de calificación</li>
+        <li class="reveal"><strong>0</strong>jaulas</li>
+      </ul>
     </div>
   </section>
 
   <section class="wrap section">
-    <div class="reveal"><p class="eyebrow">Opiniones</p><h2>Lo que dicen sus dueños</h2></div>
+    <div class="center reveal"><p class="eyebrow">Opiniones</p><h2>Lo que dicen sus dueños</h2></div>
     <ul class="reviews">
       <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Mi beagle odiaba el baño. Aquí sale moviendo la cola y pidiendo volver.”</blockquote><cite>Daniela S., dueña de Rocky</cite></li>
       <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Mandan foto del antes y el después. Mi poodle quedó irreconocible.”</blockquote><cite>Luis A., dueño de Nube</cite></li>
@@ -189,8 +157,8 @@ input:user-invalid { border-color:#B3261E; }
   </section>
 
   <section class="wrap section" id="preguntas" style="padding-block-start:1rem">
-    <div class="reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan</h2></div>
-    <div class="faq reveal">
+    <div class="center reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan</h2></div>
+    <div class="faq reveal" style="margin-inline:auto">
       <details><summary>¿Cuánto dura un baño?</summary><p>Entre 1 y 2 horas según el tamaño y el tipo de pelo. Te avisamos cuando esté listo.</p></details>
       <details><summary>¿Mi perro tiene que tener vacunas?</summary><p>Sí, pedimos cartilla al día para cuidar la salud de todos los perros.</p></details>
       <details><summary>¿Y si mi perro se pone nervioso?</summary><p>Hacemos pausas, usamos voz tranquila y premios. Nunca forzamos a un perro.</p></details>

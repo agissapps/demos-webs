@@ -4,83 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rosé Atelier · Uñas, cabello y belleza</title>
-<meta name="description" content="Demo de página web para salón de belleza: galería de trabajos, precios, opiniones y reserva.">
+<meta name="description" content="Demo de página web para salón de belleza: rituales, precios, antes y después, galería, estudio y reserva.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/extras.css">
-<style>
-:root { --nude:#F2E4DA; --mocha:#5E4B42; --rose:#B87866; --rose-deep:#8E4F3E; --focus:#8E4F3E; --header-bg:rgb(242 228 218 / .94); --menu-bg:#F2E4DA; --menu-fg:#5E4B42;
-  --x-ink:#5E4B42; --x-brand:#5E4B42; --x-on-brand:#F2E4DA; --x-accent:var(--rose-deep); --x-card:#fffaf6; --x-line:rgb(94 75 66 / .28); --x-card2:rgb(255 250 246 / .08); --x-head:"Cormorant Garamond",Georgia,serif;
-  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif; }
-body { background:var(--nude); color:var(--mocha); font-family:var(--sans); font-size:1.0625rem; overflow-x:clip; }
-h1,h2,h3 { font-family:var(--serif); font-weight:600; line-height:1.05; margin:0; }
-h1 { font-size:clamp(3rem, 1rem + 8vw, 6.5rem); letter-spacing:.01em; }
-h2 { font-size:clamp(2.2rem, 1.2rem + 3vw, 3.6rem); }
-h3 { font-size:1.6rem; }
-.lead { font-size:1.2rem; max-inline-size:46ch; }
-.site-header { color:var(--mocha); }
-.site-logo { font-family:var(--serif); font-size:1.6rem; font-style:italic; }
-.btn { display:inline-block; padding:.95rem 1.8rem; background:var(--rose-deep); color:#fff; text-decoration:none; font:inherit; font-weight:500; letter-spacing:.04em; border:0; cursor:pointer; min-block-size:48px; border-radius:.25rem; transition:background .2s ease, letter-spacing .2s ease; }
-.btn:hover { background:#6f3a2c; letter-spacing:.07em; }
-.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; }
-
-.hero { position:relative; min-block-size:min(88dvh,46rem); display:grid; align-items:end; color:#fff; isolation:isolate; overflow:hidden; }
-.hero img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:72% center; z-index:-2; }
-@media (prefers-reduced-motion: no-preference){ .hero img { animation:slow 18s ease-out both; } @keyframes slow { from { transform:scale(1.12); } } }
-.hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg, rgb(58 40 33 / .88) 0%, rgb(58 40 33 / .55) 45%, rgb(58 40 33 / 0) 80%); }
-@media (max-width:40rem){ .hero::before { background:linear-gradient(0deg, rgb(58 40 33 / .92) 0%, rgb(58 40 33 / .4) 70%, rgb(58 40 33 / .15) 100%); } .hero img { object-position:80% center; } }
-.hero .wrap { padding-block:4rem; }
-.hero h1 { max-inline-size:9ch; }
-.hero p { font-size:1.2rem; max-inline-size:34ch; margin-block:1.25rem 2rem; }
-
-.section { padding-block:5rem; }
-
-/* Galería */
-.gal-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:1.5rem; }
-.gallery { display:grid; gap:1rem; margin-block-start:2rem; grid-template-columns:repeat(auto-fill,minmax(15rem,1fr)); grid-auto-rows:16rem; padding:0; list-style:none; }
-.gallery li { display:block; }
-.gallery li[hidden] { display:none; }
-.gallery li.tall { grid-row:span 2; }
-@media (min-width:44rem){ .gallery li.wide { grid-column:span 2; } }
-.gallery { grid-auto-flow:dense; }
-.gallery button { all:unset; display:block; inline-size:100%; block-size:100%; position:relative; overflow:hidden; border-radius:.35rem; cursor:zoom-in; box-sizing:border-box; }
-.gallery button:focus-visible { outline:3px solid var(--rose-deep); outline-offset:3px; }
-.gallery img { inline-size:100%; block-size:100%; object-fit:cover; transition:transform .6s ease; }
-.gallery button:hover img { transform:scale(1.07); }
-.gallery .cap { position:absolute; inset-inline:0; inset-block-end:0; padding:2.5rem 1rem .9rem; color:#fff; font-family:var(--serif); font-size:1.4rem; background:linear-gradient(0deg, rgb(40 25 20 / .8), transparent); opacity:0; transform:translateY(8px); transition:opacity .3s ease, transform .3s ease; }
-.gallery button:hover .cap, .gallery button:focus-visible .cap { opacity:1; transform:none; }
-@media (hover:none){ .gallery .cap { opacity:1; transform:none; } }
-
-.menu-grid { display:grid; gap:3rem 4rem; margin-block-start:3rem; }
-@media (min-width:52rem){ .menu-grid { grid-template-columns:1fr 1fr; } }
-.menu-grid h3 { color:var(--rose-deep); margin-block-end:1rem; border-block-end:1px solid var(--rose); padding-block-end:.4rem; }
-.price { display:flex; align-items:baseline; gap:.6rem; padding-block:.55rem; margin:0; }
-.price::after { content:""; order:1; flex:1; border-block-end:1px dotted currentColor; opacity:.5; transform:translateY(-.25em); }
-.price dd { order:2; margin:0; font-weight:500; }
-dl { margin:0; }
-
-.dark { background:var(--mocha); color:var(--nude); }
-.dark h2, .dark h3 { color:#F7D9CB; }
-.dark .eyebrow { color:#E9B8A5; }
-.dark .steps li { background:#6b574d; border-color:rgb(255 255 255 / .15); color:var(--nude); }
-.dark .steps li::before { background:#E9B8A5; color:#3a2820; }
-.dark .reviews li { border-color:rgb(255 255 255 / .2); }
-
-form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
-label { font-weight:500; display:block; margin-block-end:.3rem; }
-input, select { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:1.5px solid #8a7569; background:#fffaf6; color:var(--mocha); border-radius:.25rem; }
-input:user-invalid { border-color:#B3261E; }
-[role=status] { font-weight:500; min-block-size:1.5rem; margin:0; }
-.book { display:grid; gap:3rem; }
-@media (min-width:56rem){ .book { grid-template-columns:1fr 1fr; } }
-.hours { margin:1.5rem 0 0; display:grid; }
-.hours div { display:flex; justify-content:space-between; gap:1rem; padding-block:.7rem; border-block-end:1px solid var(--x-line); }
-.hours dt { font-weight:500; } .hours dd { margin:0; }
-.site-footer { padding-block:2.5rem; border-block-start:1px solid rgb(94 75 66 / .25); }
-.site-footer p { margin:.2rem 0; } .site-footer a { color:var(--rose-deep); }
-</style>
+<link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 <header class="site-header">
@@ -90,9 +20,10 @@ input:user-invalid { border-color:#B3261E; }
       <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
       <ul id="site-menu" class="site-menu" popover="auto">
         <li><a href="#inicio" aria-current="page">Inicio</a></li>
-        <li><a href="#galeria">Trabajos</a></li>
+        <li><a href="#rituales">Rituales</a></li>
         <li><a href="#servicios">Precios</a></li>
-        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#galeria">Trabajos</a></li>
+        <li><a href="#estudio">El estudio</a></li>
         <li><a class="btn" href="#reservar">Reservar cita</a></li>
       </ul>
     </nav>
@@ -100,21 +31,57 @@ input:user-invalid { border-color:#B3261E; }
 </header>
 
 <main id="inicio">
-  <section class="hero">
-    <img src="img/hero.jpg" width="1280" height="720" alt="Mujer con manicura en tono rosa mientras se acomoda el cabello en un salón de belleza" fetchpriority="high">
-    <div class="wrap rise">
-      <h1>Tu mejor versión</h1>
-      <p>Uñas, cabello, cejas y maquillaje hechos con calma, para que salgas sintiéndote tú, pero más.</p>
-      <a class="btn" href="#reservar">Reservar cita</a>
+  <section class="hero wrap">
+    <div class="hero-text rise">
+      <p class="eyebrow">Salón de belleza · Ciudad Ejemplo</p>
+      <h1>Tu mejor <em>versión</em></h1>
+      <p class="lead">Uñas, cabello, cejas y maquillaje hechos con calma, para que salgas sintiéndote tú, pero más.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#reservar">Reservar cita</a>
+        <a class="btn ghost" href="#rituales">Ver rituales</a>
+      </div>
+    </div>
+    <div class="hero-stage">
+      <figure class="arch"><img src="img/hero.jpg" width="1280" height="720" alt="Mujer con manicura rosa mientras se acomoda el cabello en un salón de belleza" fetchpriority="high"></figure>
+      <svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs><text><textPath href="#circ" startOffset="0">Hecho con calma · Desde 2016 · Rosé Atelier · </textPath></text><path d="M60 46c4 8 8 10 14 14-6 4-10 6-14 14-4-8-8-10-14-14 6-4 10-6 14-14z" fill="currentColor" stroke="none"/></svg>
+      <p class="chip a"><b>4.9</b><span><span class="stars" aria-hidden="true">★★★★★</span><br>2,300 reseñas</span></p>
     </div>
   </section>
 
-  <div class="marquee" aria-label="Lo que nos distingue">
+  <div class="marquee script" aria-label="Lo que nos distingue">
     <ul>
       <li>Productos profesionales</li><li>Herramientas esterilizadas</li><li>Citas sin prisas</li><li>Diseños a tu medida</li><li>Bebida de cortesía</li>
       <li aria-hidden="true">Productos profesionales</li><li aria-hidden="true">Herramientas esterilizadas</li><li aria-hidden="true">Citas sin prisas</li><li aria-hidden="true">Diseños a tu medida</li><li aria-hidden="true">Bebida de cortesía</li>
     </ul>
   </div>
+
+  <section class="wrap section" id="rituales">
+    <div class="center reveal"><p class="eyebrow">Rituales</p><h2>Cuidarte también es un plan</h2><p class="lead">Combinamos servicios para que no tengas que pensar en nada más que en disfrutar.</p></div>
+    <ul class="rituals">
+      <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18.500 15l.8 1.7 1.700.8-1.700.8-.8 1.700-.8-1.700-1.700-.8 1.700-.8z"/></svg></span><h3>Ritual Express</h3><p>Manicura semipermanente y diseño de cejas en una sola cita.</p><p class="from">Desde <b>$520</b> · 1 h 15 min</p></li>
+      <li class="reveal feature"><span class="badge">La favorita</span><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-4-3-7-6-7-10a4 4 0 0 1 7-2.500A4 4 0 0 1 19 11c0 4-3 7-7 10z"/></svg></span><h3>Ritual Spa</h3><p>Pedicura spa, manicura de gel, masaje de manos y tratamiento de hidratación para el cabello.</p><p class="from">Desde <b>$1,450</b> · 3 h</p></li>
+      <li class="reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M5 21c0-4 3-6 7-6s7 2 7 6"/></svg></span><h3>Ritual Novia</h3><p>Prueba de peinado y maquillaje, día de la boda y manicura a juego.</p><p class="from">Desde <b>$4,200</b> · 2 citas</p></li>
+    </ul>
+  </section>
+
+  <section class="results section" id="resultados">
+    <div class="wrap ba">
+      <div class="reveal">
+        <p class="eyebrow">El cambio</p>
+        <h2>De uñas al natural a <em>oro rosa</em></h2>
+        <p class="lead">Mueve la barra y mira la diferencia de una sesión de manicura con acabado cromo.</p>
+        <ul class="checks"><li>Manicura rusa para una cutícula impecable</li><li>Gel de larga duración, hasta 3 semanas</li><li>Acabado espejo con efecto cromo</li></ul>
+        <p><small>Imágenes de ejemplo generadas para esta demo.</small></p>
+      </div>
+      <div class="compare reveal" role="group" aria-label="Comparación de unas uñas antes y después de la manicura">
+        <img class="before" src="img/antes-unas.jpg" width="1280" height="720" alt="Manos con uñas al natural, sin esmalte" loading="lazy">
+        <img class="after" src="img/despues-unas.jpg" width="1280" height="720" alt="Las mismas manos con manicura cromada en oro rosa" loading="lazy">
+        <span class="tag t-after" aria-hidden="true">Después</span><span class="tag t-before" aria-hidden="true">Antes</span>
+        <div class="bar" aria-hidden="true"><span class="knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        <input type="range" min="0" max="100" step="1" value="50" aria-label="Mover para comparar el antes y el después">
+      </div>
+    </div>
+  </section>
 
   <section class="wrap section" id="galeria">
     <div class="gal-head reveal">
@@ -139,7 +106,7 @@ input:user-invalid { border-color:#B3261E; }
 
   <section class="dark section" id="servicios">
     <div class="wrap">
-      <div class="reveal"><p class="eyebrow">Servicios y precios</p><h2>Claro desde el principio</h2></div>
+      <div class="center reveal"><p class="eyebrow">Servicios y precios</p><h2>Claro desde el principio</h2></div>
       <div class="menu-grid">
         <div class="reveal"><h3>Uñas</h3><dl>
           <div class="price"><dt>Manicura clásica</dt><dd>$250</dd></div>
@@ -160,23 +127,37 @@ input:user-invalid { border-color:#B3261E; }
           <div class="price"><dt>Maquillaje de evento</dt><dd>$900</dd></div>
           <div class="price"><dt>Maquillaje de novia con prueba</dt><dd>$2,500</dd></div></dl></div>
       </div>
-      <p style="margin-block-start:2rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
+      <p class="center" style="margin-block-start:2rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="reveal"><p class="eyebrow">Tu cita</p><h2>Cómo es una visita</h2></div>
-    <ol class="steps">
-      <li class="reveal"><h3>Platicamos</h3><p>Nos cuentas qué quieres y te recomendamos lo que mejor te queda.</p></li>
-      <li class="reveal"><h3>Te consentimos</h3><p>Con una bebida, música suave y todo el tiempo que necesites.</p></li>
-      <li class="reveal"><h3>Cuidamos el detalle</h3><p>Productos profesionales y herramientas esterilizadas en cada cita.</p></li>
-      <li class="reveal"><h3>Te llevas el resultado</h3><p>Y los consejos para que dure más tiempo.</p></li>
-    </ol>
+  <section class="wrap section" id="estudio">
+    <div class="studio">
+      <figure class="studio-photo reveal parallax"><img src="img/estudio.jpg" width="1280" height="720" alt="Interior del salón con espejo redondo iluminado, sillones de terciopelo y mostrador de mármol" loading="lazy"></figure>
+      <div class="studio-card reveal">
+        <p class="eyebrow">El estudio</p>
+        <h2>Un lugar para <em>bajar el ritmo</em></h2>
+        <p>Luz cálida, música suave y todo el tiempo que necesites. Aquí nadie te apura.</p>
+        <ul class="checks"><li>Cabinas privadas para manicura y pedicura</li><li>Productos libres de crueldad animal</li><li>Herramientas esterilizadas en cada cita</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" style="padding-block-start:0">
+    <div class="founder">
+      <figure class="portrait reveal parallax"><img src="img/fundadora.jpg" width="1280" height="720" alt="Camila Ortega, fundadora y estilista de Rosé Atelier, sonriendo en el salón" loading="lazy" style="object-position:50% center"></figure>
+      <div class="reveal">
+        <p class="eyebrow">Quién te atiende</p>
+        <h2>Camila Ortega</h2>
+        <blockquote class="pull">“Quiero que salgas de aquí sintiéndote tú, no otra persona. Mi trabajo es resaltar lo que ya tienes.”</blockquote>
+        <p>Estilista y fundadora. Más de 10 años de experiencia en color, manicura y novias.</p>
+      </div>
+    </div>
   </section>
 
   <section class="dark section" id="opiniones">
     <div class="wrap">
-      <div class="reveal"><p class="eyebrow">Opiniones</p><h2>Lo que dicen nuestras clientas</h2></div>
+      <div class="center reveal"><p class="eyebrow">Opiniones</p><h2>Lo que dicen nuestras clientas</h2></div>
       <ul class="reviews">
         <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Mis uñas duraron tres semanas perfectas. Ya no voy a otro lado.”</blockquote><cite>Fernanda L.</cite></li>
         <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“El balayage quedó justo como lo pedí en la foto. Me escucharon de verdad.”</blockquote><cite>Karla M.</cite></li>
@@ -186,8 +167,8 @@ input:user-invalid { border-color:#B3261E; }
   </section>
 
   <section class="wrap section" id="preguntas">
-    <div class="reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Antes de reservar</h2></div>
-    <div class="faq reveal">
+    <div class="center reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Antes de reservar</h2></div>
+    <div class="faq reveal" style="margin-inline:auto">
       <details><summary>¿Necesito cita?</summary><p>Sí, trabajamos con cita para dedicarte el tiempo completo. Puedes reservar aquí o por WhatsApp.</p></details>
       <details><summary>¿Cuánto dura una manicura de gel?</summary><p>Entre 2 y 3 semanas, según el cuidado que le des.</p></details>
       <details><summary>¿Puedo llevar una foto de referencia?</summary><p>Claro, nos ayuda mucho. La adaptamos a tu forma de uña y a tu tono de piel.</p></details>
@@ -195,14 +176,14 @@ input:user-invalid { border-color:#B3261E; }
     </div>
   </section>
 
-  <section class="wrap section" id="reservar" style="padding-block-start:1rem">
-    <div class="book">
-      <div class="reveal"><p class="eyebrow">Reserva</p><h2>Reserva tu cita</h2><p class="lead" style="margin-block-start:1rem">Elige el servicio y te confirmamos por mensaje.</p>
+  <section class="results section" id="reservar">
+    <div class="wrap book">
+      <div class="reveal"><p class="eyebrow">Reserva</p><h2>Reserva tu cita</h2><p class="lead">Elige el servicio y te confirmamos por mensaje.</p>
         <dl class="hours"><div><dt>Martes a sábado</dt><dd>10:00 a 20:00</dd></div><div><dt>Domingo y lunes</dt><dd>Cerrado</dd></div></dl></div>
       <form class="reveal" data-demo="Gracias. Esta es una demo: no se envió ninguna cita.">
         <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
         <div><label for="tel">WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
-        <div><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option>Uñas</option><option>Cabello</option><option>Cejas y pestañas</option><option>Maquillaje</option></select></div>
+        <div><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option>Uñas</option><option>Cabello</option><option>Cejas y pestañas</option><option>Maquillaje</option><option>Ritual Spa</option><option>Ritual Novia</option></select></div>
         <button class="btn" type="submit">Reservar cita</button>
         <p role="status" aria-live="polite"></p>
       </form>
