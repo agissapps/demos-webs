@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Navaja Roja · Barbería</title>
+<meta name="description" content="Demo de página web para barbería: cortes, barba, precios, barberos y reserva de cita.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+:root { --char:#1C1C1C; --bone:#EDE6D8; --red:#B3261E; --red-light:#E5453B; --focus:#E5453B; --header-bg:rgb(28 28 28 / .92); --menu-bg:#1C1C1C; --menu-fg:#EDE6D8;
+  --display:"Big Shoulders Display",Impact,sans-serif; --sans:"Barlow",system-ui,sans-serif; }
+body { background:var(--char); color:var(--bone); font-family:var(--sans); font-size:1.0625rem; }
+h1,h2,h3 { font-family:var(--display); text-transform:none; font-weight:900; line-height:.95; margin:0; letter-spacing:.005em; }
+h2 { font-size:clamp(2.4rem, 1.2rem + 4vw, 4.2rem); }
+h3 { font-size:1.9rem; }
+.site-header { color:var(--bone); backdrop-filter:blur(8px); }
+.site-logo { font-family:var(--display); font-weight:900; font-size:1.7rem; letter-spacing:.02em; }
+.site-logo span { color:var(--red-light); }
+.btn { display:inline-block; padding:.9rem 1.7rem; background:var(--red); color:#fff; font:inherit; font-weight:600; text-decoration:none; border:0; cursor:pointer; min-block-size:48px; border-radius:999px; }
+.btn:hover { background:var(--red-light); }
+.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; }
+
+.hero { position:relative; min-block-size:min(92dvh,50rem); display:grid; align-items:end; isolation:isolate; overflow:hidden; }
+.hero img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:70% 30%; z-index:-2; }
+.hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgb(28 28 28 / .35), rgb(28 28 28 / .1) 40%, rgb(28 28 28 / .95)); }
+.hero .wrap { padding-block:3rem 3.5rem; }
+.hero .big { font-family:var(--display); font-weight:900; font-size:clamp(5rem, 2rem + 22vw, 17rem); line-height:.8; margin:0; color:var(--bone); letter-spacing:-.01em; }
+.hero p.lead { font-size:1.25rem; max-inline-size:34ch; margin-block:1rem 1.5rem; }
+.hero h1 { font-family:var(--display); font-weight:900; font-size:clamp(1.6rem, 1rem + 2vw, 2.6rem); margin:0 0 .5rem; max-inline-size:20ch; line-height:1; }
+
+.section { padding-block:4.5rem; }
+.bone { background:var(--bone); color:var(--char); }
+.bone h2, .bone h3 { color:var(--char); }
+.table { margin-block-start:2.5rem; display:grid; gap:0; }
+.row { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:.25rem 1rem; padding-block:1.1rem; border-block-end:1.5px solid rgb(28 28 28 / .25); }
+.row h3 { flex:1 1 12rem; }
+.row p { margin:0; flex:2 1 18rem; max-inline-size:46ch; }
+.row .cost { font-family:var(--display); font-weight:900; font-size:2rem; color:var(--red); }
+.crew { display:grid; gap:1.25rem; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); margin-block-start:2.5rem; padding:0; list-style:none; }
+.crew li { padding:1.5rem; border:1.5px solid rgb(237 230 216 / .3); border-radius:1rem; }
+.crew h3 { color:var(--red-light); }
+.crew p { margin:.4rem 0 0; }
+.hours { display:grid; gap:2rem; }
+@media (min-width:52rem){ .hours { grid-template-columns:1fr 1fr; } }
+.hours dl { margin:0; }
+.hours div { display:flex; justify-content:space-between; gap:1rem; padding-block:.6rem; border-block-end:1px solid rgb(237 230 216 / .25); }
+.hours dt { font-weight:600; } .hours dd { margin:0; }
+form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
+label { font-weight:600; display:block; margin-block-end:.3rem; }
+input, select { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:1.5px solid #8b8478; background:#262626; color:var(--bone); border-radius:.5rem; }
+input:user-invalid { border-color:#ff8a80; }
+[role=status] { font-weight:600; min-block-size:1.5rem; color:var(--bone); }
+.site-footer { padding-block:2.5rem; border-block-start:1px solid rgb(237 230 216 / .2); }
+.site-footer p { margin:.2rem 0; } .site-footer a { color:var(--red-light); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio">Navaja <span>Roja</span></a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#equipo">Barberos</a></li>
+        <li><a href="#horario">Horario</a></li>
+        <li><a class="btn" href="#reservar">Reservar cita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <img src="img/hero.jpg" width="1280" height="720" alt="Hombre con barba y corte degradado sentado en el sillón de una barbería con luz roja" fetchpriority="high">
+    <div class="wrap">
+      <h1>Un estilo que habla por ti</h1>
+      <p class="lead">Corte, barba y afeitado clásico con navaja. Sin prisas y con cita para que no esperes.</p>
+      <a class="btn" href="#reservar">Reservar cita</a>
+      <p class="big" aria-hidden="true">BARBER</p>
+    </div>
+  </section>
+
+  <section class="bone section" id="servicios">
+    <div class="wrap">
+      <h2>Servicios y precios</h2>
+      <div class="table">
+        <div class="row"><h3>Corte de cabello</h3><p>Degradado, clásico o tijera. Incluye lavado y peinado.</p><span class="cost">$180</span></div>
+        <div class="row"><h3>Arreglo de barba</h3><p>Perfilado, recorte y toalla caliente.</p><span class="cost">$140</span></div>
+        <div class="row"><h3>Corte y barba</h3><p>El combo completo en una sola cita.</p><span class="cost">$290</span></div>
+        <div class="row"><h3>Afeitado clásico</h3><p>Navaja, espuma caliente y bálsamo después.</p><span class="cost">$200</span></div>
+        <div class="row"><h3>Corte infantil</h3><p>Para menores de 12 años.</p><span class="cost">$130</span></div>
+      </div>
+      <p style="margin-block-start:1.5rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
+    </div>
+  </section>
+
+  <section class="wrap section" id="equipo">
+    <h2>Quién te atiende</h2>
+    <ul class="crew">
+      <li><h3>Don Filo</h3><p>Dueño y barbero. Especialista en afeitado clásico.</p></li>
+      <li><h3>Memo</h3><p>Degradados y diseños. Su agenda se llena rápido.</p></li>
+      <li><h3>Chuy</h3><p>Barba y corte de tijera. Atiende también a niños.</p></li>
+    </ul>
+  </section>
+
+  <section class="bone section" id="horario">
+    <div class="wrap hours">
+      <div><h2>Cuándo abrimos</h2><p>Con cita o sin cita, pero con cita no esperas.</p></div>
+      <dl>
+        <div><dt>Lunes a viernes</dt><dd>10:00 a 20:00</dd></div>
+        <div><dt>Sábado</dt><dd>9:00 a 19:00</dd></div>
+        <div><dt>Domingo</dt><dd>Cerrado</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="wrap section" id="reservar">
+    <h2>Reserva tu cita</h2>
+    <form data-demo="Gracias. Esta es una demo: no se envió ninguna cita.">
+      <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+      <div><label for="tel">WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      <div><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option>Corte de cabello</option><option>Arreglo de barba</option><option>Corte y barba</option><option>Afeitado clásico</option><option>Corte infantil</option></select></div>
+      <button class="btn" type="submit">Reservar cita</button>
+      <p role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Navaja Roja</strong> · Calle Ejemplo 12, Ciudad · Tel. 55 0000 0000</p>
+    <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
+  </div>
+</footer>
+<script type="module" src="../assets/nav.js"></script>
+</body>
+</html>

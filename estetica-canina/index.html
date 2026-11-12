@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patitas Limpias · Estética canina</title>
+<meta name="description" content="Demo de página web para estética canina y veterinaria: baño, corte, planes y reserva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+:root { --cream:#F5E8D9; --olive:#3F5228; --terra:#D8492E; --terra-deep:#B03519; --focus:#B03519; --header-bg:#F5E8D9; --menu-bg:#F5E8D9; --menu-fg:#3F5228;
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --sans:"Nunito",system-ui,sans-serif; }
+body { background:var(--cream); color:#2b3a1b; font-family:var(--sans); font-size:1.0625rem; }
+h1,h2,h3 { font-family:var(--display); color:var(--olive); margin:0; line-height:1.02; letter-spacing:-.02em; }
+h1 { font-size:clamp(2.8rem, 1rem + 7vw, 5.6rem); font-weight:800; }
+h2 { font-size:clamp(2rem, 1.2rem + 3vw, 3.2rem); font-weight:800; }
+h3 { font-size:1.4rem; font-weight:800; }
+.site-header { color:var(--olive); }
+.site-logo { font-family:var(--display); font-weight:800; font-size:1.4rem; display:flex; align-items:center; gap:.5rem; }
+.site-logo svg { inline-size:1.6rem; block-size:1.6rem; fill:var(--terra); }
+.btn { display:inline-block; padding:.9rem 1.6rem; background:var(--terra); color:#fff; font:inherit; font-weight:700; text-decoration:none; border-radius:999px; border:2px solid var(--olive); cursor:pointer; min-block-size:48px; box-shadow:3px 3px 0 var(--olive); }
+.btn:hover { background:var(--terra-deep); }
+.btn.alt { background:transparent; color:var(--olive); }
+.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; box-shadow:none; }
+
+.hero { display:grid; gap:2rem; align-items:center; padding-block:3rem 4rem; }
+.hero p { font-size:1.2rem; margin-block:1.25rem 2rem; max-inline-size:44ch; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:.9rem; }
+.hero figure { margin:0; border:3px solid var(--olive); border-radius:1.5rem; overflow:hidden; box-shadow:8px 8px 0 var(--olive); background:#fff; }
+.hero img { inline-size:100%; aspect-ratio:16/10; object-fit:cover; }
+@media (min-width:56rem){ .hero { grid-template-columns:1fr 1.1fr; } }
+
+.band { background:var(--olive); color:var(--cream); }
+.band h2, .band h3 { color:var(--cream); }
+.section { padding-block:4.5rem; }
+.cards { display:grid; gap:1.25rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); padding:0; list-style:none; }
+.cards li { padding:1.5rem; border-radius:1.25rem; background:var(--cream); color:#2b3a1b; border:3px solid var(--cream); }
+.cards li:nth-child(even) { background:#F8D5C8; }
+.cards h3 { color:var(--olive); margin-block-end:.5rem; }
+.cards p { margin:0; }
+
+.plans { display:grid; gap:1.25rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); }
+.plan { border:3px solid var(--olive); border-radius:1.5rem; padding:1.75rem; background:#fff8ee; display:flex; flex-direction:column; gap:.6rem; }
+.plan.main { background:var(--olive); color:var(--cream); }
+.plan.main h3, .plan.main .cost { color:var(--cream); }
+.cost { font-family:var(--display); font-weight:800; font-size:2.2rem; color:var(--terra-deep); }
+.plan ul { padding-inline-start:1.2rem; margin:0; }
+.plan ul li { margin-block:.25rem; }
+
+form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
+label { font-weight:700; display:block; margin-block-end:.3rem; }
+input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:2px solid var(--olive); border-radius:.9rem; background:#fffaf2; color:#2b3a1b; }
+input:user-invalid { border-color:#B3261E; }
+[role=status] { font-weight:700; min-block-size:1.5rem; }
+.site-footer { background:var(--olive); color:var(--cream); padding-block:2.5rem; }
+.site-footer p { margin:.2rem 0; }
+.site-footer a { color:#F8D5C8; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="11" cy="6" rx="2.2" ry="3"/><ellipse cx="17" cy="7" rx="2.2" ry="3"/><ellipse cx="21" cy="12" rx="2" ry="2.8"/><path d="M12 11c3.5 0 7 3.2 7 6.2 0 2-1.6 3-3.4 3-1.3 0-2.2-.6-3.6-.6s-2.300.6-3.600.6C6.600 20.200 5 19.200 5 17.200 5 14.200 8.500 11 12 11z"/></svg>Patitas Limpias</a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#reservar">Contacto</a></li>
+        <li><a class="btn" href="#reservar">Reservar baño</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="wrap hero">
+    <div>
+      <h1>Perros limpios, felices y consentidos.</h1>
+      <p>Estética canina con manos pacientes: baño, corte, cepillado y revisión básica de piel y oídos. Tu perro se va oliendo bien y sin estrés.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#reservar">Reservar baño</a>
+        <a class="btn alt" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+    <figure><img src="img/hero.jpg" width="1280" height="720" alt="Ilustración de una peluquera sonriendo mientras seca con una toalla naranja a un perro dorado lleno de espuma" fetchpriority="high"></figure>
+  </section>
+
+  <section class="band section" id="servicios">
+    <div class="wrap">
+      <h2>Lo que hacemos por tu perro</h2>
+      <ul class="cards">
+        <li><h3>Baño y secado</h3><p>Shampoo según el tipo de pelo y secado a baja temperatura.</p></li>
+        <li><h3>Corte y estilo</h3><p>Corte de raza o práctico para el verano, como prefieras.</p></li>
+        <li><h3>Uñas, oídos y dientes</h3><p>Limpieza suave de lo que casi nadie recuerda.</p></li>
+        <li><h3>Desparasitación externa</h3><p>Tratamiento contra pulgas y garrapatas con producto veterinario.</p></li>
+        <li><h3>Revisión veterinaria</h3><p>Consulta básica con médica veterinaria antes o después del baño.</p></li>
+        <li><h3>Recogida a domicilio</h3><p>Pasamos por tu perro y lo regresamos limpio el mismo día.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="planes">
+    <h2>Planes para cada tamaño</h2>
+    <div class="plans">
+      <article class="plan"><h3>Pequeño</h3><p>Hasta 8 kg</p><p class="cost">$280</p><ul><li>Baño y secado</li><li>Cepillado</li><li>Limpieza de oídos</li></ul></article>
+      <article class="plan main"><h3>Mediano</h3><p>De 8 a 20 kg</p><p class="cost">$380</p><ul><li>Baño y secado</li><li>Cepillado y corte de uñas</li><li>Limpieza de oídos</li></ul></article>
+      <article class="plan"><h3>Grande</h3><p>Más de 20 kg</p><p class="cost">$520</p><ul><li>Baño y secado</li><li>Cepillado y corte de uñas</li><li>Limpieza de oídos y dientes</li></ul></article>
+    </div>
+    <p style="margin-block-start:1.5rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
+  </section>
+
+  <section class="band section" id="reservar">
+    <div class="wrap">
+      <h2>Reserva el baño de tu perro</h2>
+      <form data-demo="Gracias. Esta es una demo: no se envió ninguna reserva.">
+        <div><label for="dueno">Tu nombre</label><input id="dueno" name="dueno" autocomplete="name" required></div>
+        <div><label for="perro">Nombre y raza de tu perro</label><input id="perro" name="perro" required></div>
+        <div><label for="tel">WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <button class="btn" type="submit">Reservar baño</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Patitas Limpias</strong> · Calle Ejemplo 78, Ciudad</p>
+    <p>Lunes a sábado de 9:00 a 18:00 · Tel. 55 0000 0000</p>
+    <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
+  </div>
+</footer>
+<script type="module" src="../assets/nav.js"></script>
+</body>
+</html>

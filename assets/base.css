@@ -1,0 +1,26 @@
+/* Base común: reinicio, navegación responsiva y utilidades. Cada demo pone su propia marca encima. */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; line-height: 1.6; }
+img { max-inline-size: 100%; block-size: auto; display: block; }
+:focus-visible { outline: 3px solid var(--focus, currentColor); outline-offset: 3px; }
+.visually-hidden { position: absolute; clip-path: inset(50%); inline-size: 1px; block-size: 1px; overflow: hidden; white-space: nowrap; }
+.wrap { inline-size: min(100% - 2rem, 72rem); margin-inline: auto; }
+
+.site-header { position: sticky; inset-block-start: 0; z-index: 20; background: var(--header-bg, transparent); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: .9rem; inline-size: min(100% - 2rem, 72rem); margin-inline: auto; }
+.header-inner > * { flex-shrink: 0; white-space: nowrap; }
+.site-logo { text-decoration: none; color: inherit; font-weight: 700; }
+.menu-button { anchor-name: --menu-button; font: inherit; cursor: pointer; padding: .6rem 1rem; min-block-size: 44px; border-radius: 999px; border: 1.5px solid currentColor; background: transparent; color: inherit; }
+.site-menu { list-style: none; margin: 0; padding: .5rem; position: fixed; inset: auto; inset-block-start: 4.5rem; inset-block-start: anchor(--menu-button bottom); inset-inline-end: 1rem; inline-size: min(80dvw, 22rem); max-inline-size: calc(100dvw - 2rem); block-size: fit-content; max-block-size: calc(100dvh - 6rem); margin-block-start: .5rem; overflow: auto; background: var(--menu-bg, #fff); color: var(--menu-fg, #111); border: 1px solid color-mix(in srgb, currentColor 20%, transparent); border-radius: 1rem; box-shadow: 0 12px 32px rgb(0 0 0 / .18); }
+.site-menu a { display: block; padding: .8rem 1rem; text-decoration: none; color: inherit; border-radius: .6rem; min-block-size: 44px; }
+.site-menu a:hover { background: color-mix(in srgb, currentColor 8%, transparent); }
+.site-menu a[aria-current="page"] { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
+.site-header.is-measuring * { transition: none !important; }
+.site-header.is-wide .menu-button { display: none; }
+.site-header.is-wide .site-menu { position: static; display: flex; align-items: center; gap: .25rem; inline-size: auto; max-inline-size: none; block-size: auto; max-block-size: none; overflow: visible; margin: 0; padding: 0; border: 0; background: transparent; box-shadow: none; color: inherit; }
+.site-header.is-wide .site-menu::backdrop { display: none; }
+.site-header.is-wide .site-menu a { padding: .5rem .8rem; }
+
+@media (forced-colors: active) { .site-menu a[aria-current="page"] { text-decoration: underline; } }

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Almar Residencias · Inmobiliaria</title>
+<meta name="description" content="Demo de página web para inmobiliaria: propiedades destacadas, servicios y contacto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+:root { --navy:#172D4D; --ivory:#F4F1EA; --gold:#B58A45; --gold-deep:#8A6528; --focus:#B58A45; --header-bg:rgb(23 45 77 / .94); --menu-bg:#172D4D; --menu-fg:#F4F1EA;
+  --serif:"Bodoni Moda",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif; }
+body { background:var(--ivory); color:#1d2a40; font-family:var(--sans); font-size:1.0625rem; }
+h1,h2,h3 { font-family:var(--serif); font-weight:500; line-height:1.1; margin:0; letter-spacing:-.005em; }
+h1 { font-size:clamp(2.6rem, 1.2rem + 5.5vw, 5rem); }
+h2 { font-size:clamp(2rem, 1.2rem + 2.8vw, 3.2rem); color:var(--navy); }
+h3 { font-size:1.5rem; color:var(--navy); }
+.site-header { color:var(--ivory); backdrop-filter:blur(8px); }
+.site-logo { font-family:var(--serif); letter-spacing:.2em; font-size:1.2rem; }
+.btn { display:inline-block; padding:.9rem 1.7rem; background:var(--gold); color:#14203a; font:inherit; font-weight:600; text-decoration:none; border:0; cursor:pointer; min-block-size:48px; border-radius:.2rem; }
+.btn:hover { background:#c89a52; }
+.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; }
+
+.hero { position:relative; min-block-size:min(90dvh,48rem); display:grid; align-items:end; color:var(--ivory); isolation:isolate; }
+.hero img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; z-index:-2; }
+.hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(0deg, rgb(15 28 50 / .92) 0%, rgb(15 28 50 / .35) 55%, rgb(15 28 50 / .15)); }
+.hero .wrap { padding-block:4rem; }
+.hero p { font-size:1.2rem; max-inline-size:44ch; margin-block:1.25rem 2rem; }
+.hero h1 { max-inline-size:14ch; }
+
+.section { padding-block:5rem; }
+.props { display:grid; gap:2rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(18rem,1fr)); padding:0; list-style:none; }
+.prop { background:#fff; border:1px solid rgb(23 45 77 / .15); display:flex; flex-direction:column; }
+.prop figure { margin:0; aspect-ratio:4/3; overflow:hidden; background:var(--navy); }
+.prop img { inline-size:100%; block-size:100%; object-fit:cover; }
+.prop .body { padding:1.4rem; display:grid; gap:.5rem; }
+.prop .zone { margin:0; color:var(--gold-deep); font-weight:600; }
+.prop dl { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; margin:.3rem 0 0; font-size:.98rem; }
+.prop dt { display:none; } .prop dd { margin:0; }
+.price { font-family:var(--serif); font-size:1.5rem; color:var(--navy); margin:.5rem 0 0; }
+.dark { background:var(--navy); color:var(--ivory); }
+.dark h2, .dark h3 { color:var(--ivory); }
+.services { display:grid; gap:2rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); padding:0; list-style:none; }
+.services li { padding-block-start:1rem; border-block-start:2px solid var(--gold); }
+.services p { margin:.4rem 0 0; opacity:.9; }
+form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
+label { font-weight:600; display:block; margin-block-end:.3rem; }
+input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:1.5px solid #6a7a91; background:#fff; color:#1d2a40; border-radius:.2rem; }
+textarea { min-block-size:6rem; }
+input:user-invalid { border-color:#B3261E; }
+[role=status] { font-weight:600; min-block-size:1.5rem; color:var(--navy); }
+.site-footer { background:var(--navy); color:var(--ivory); padding-block:2.5rem; }
+.site-footer p { margin:.2rem 0; } .site-footer a { color:#E0BD83; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio">ALMAR</a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#propiedades">Propiedades</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a class="btn" href="#contacto">Hablar con un asesor</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <img src="img/hero.jpg" width="1280" height="720" alt="Villa moderna con alberca infinita iluminada al atardecer frente al mar" fetchpriority="high">
+    <div class="wrap">
+      <h1>Tu próxima dirección dice mucho de ti.</h1>
+      <p>Residencias seleccionadas por su arquitectura, ubicación y valor. Te acompañamos desde la primera visita hasta la firma.</p>
+      <a class="btn" href="#propiedades">Ver propiedades</a>
+    </div>
+  </section>
+
+  <section class="wrap section" id="propiedades">
+    <h2>Propiedades destacadas</h2>
+    <ul class="props">
+      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Fachada y alberca de la Casa Marea" style="object-position:20% 60%" loading="lazy"></figure>
+        <div class="body"><p class="zone">Costa Norte</p><h3>Casa Marea</h3>
+        <dl><div><dt>Recámaras</dt><dd>4 recámaras</dd></div><div><dt>Baños</dt><dd>4 baños</dd></div><div><dt>Terreno</dt><dd>620 m²</dd></div></dl>
+        <p class="price">$14,500,000</p><a href="#contacto">Pedir información</a></div></li>
+      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Terraza y sala de la Villa Olivo" style="object-position:90% 40%" loading="lazy"></figure>
+        <div class="body"><p class="zone">Lomas del Mar</p><h3>Villa Olivo</h3>
+        <dl><div><dt>Recámaras</dt><dd>5 recámaras</dd></div><div><dt>Baños</dt><dd>5 baños</dd></div><div><dt>Terreno</dt><dd>840 m²</dd></div></dl>
+        <p class="price">$19,800,000</p><a href="#contacto">Pedir información</a></div></li>
+      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Vista del mar desde la Casa Alba" style="object-position:0% 30%" loading="lazy"></figure>
+        <div class="body"><p class="zone">Bahía Sur</p><h3>Casa Alba</h3>
+        <dl><div><dt>Recámaras</dt><dd>3 recámaras</dd></div><div><dt>Baños</dt><dd>3 baños</dd></div><div><dt>Terreno</dt><dd>410 m²</dd></div></dl>
+        <p class="price">$9,200,000</p><a href="#contacto">Pedir información</a></div></li>
+    </ul>
+    <p style="margin-block-start:1.5rem"><small>Propiedades y precios de ejemplo. Las fotos de cada casa se cambian por las reales.</small></p>
+  </section>
+
+  <section class="dark section" id="servicios">
+    <div class="wrap">
+      <h2>Cómo te acompañamos</h2>
+      <ul class="services">
+        <li><h3>Compra</h3><p>Búsqueda a tu medida y visitas con un asesor que conoce la zona.</p></li>
+        <li><h3>Venta</h3><p>Valuación, fotografía profesional y difusión de tu propiedad.</p></li>
+        <li><h3>Renta</h3><p>Contratos claros, revisión de inquilinos y administración mensual.</p></li>
+        <li><h3>Asesoría legal</h3><p>Revisión de documentos y escrituración sin sorpresas.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="contacto">
+    <h2>Hablemos de tu próxima casa</h2>
+    <form data-demo="Gracias. Esta es una demo: no se envió ningún mensaje.">
+      <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+      <div><label for="correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" required></div>
+      <div><label for="interes">Me interesa</label><select id="interes" name="interes"><option>Comprar</option><option>Vender</option><option>Rentar</option></select></div>
+      <div><label for="msg">Mensaje</label><textarea id="msg" name="msg"></textarea></div>
+      <button class="btn" type="submit">Enviar mensaje</button>
+      <p role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>ALMAR Residencias</strong> · Av. Ejemplo 900, Ciudad · Tel. 55 0000 0000</p>
+    <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
+  </div>
+</footer>
+<script type="module" src="../assets/nav.js"></script>
+</body>
+</html>

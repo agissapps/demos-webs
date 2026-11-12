@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rosé Atelier · Uñas, cabello y belleza</title>
+<meta name="description" content="Demo de página web para salón de belleza: uñas, cabello, cejas y maquillaje con lista de precios y reserva.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+:root { --nude:#F2E4DA; --mocha:#5E4B42; --rose:#B87866; --rose-deep:#8E4F3E; --focus:#8E4F3E; --header-bg:rgb(242 228 218 / .94); --menu-bg:#F2E4DA; --menu-fg:#5E4B42;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif; }
+body { background:var(--nude); color:var(--mocha); font-family:var(--sans); font-size:1.0625rem; }
+h1,h2,h3 { font-family:var(--serif); font-weight:600; line-height:1.05; margin:0; }
+h1 { font-size:clamp(3rem, 1rem + 8vw, 6.5rem); letter-spacing:.01em; }
+h2 { font-size:clamp(2.2rem, 1.2rem + 3vw, 3.6rem); }
+h3 { font-size:1.6rem; }
+.site-header { color:var(--mocha); }
+.site-logo { font-family:var(--serif); font-size:1.6rem; font-style:italic; }
+.btn { display:inline-block; padding:.95rem 1.8rem; background:var(--rose-deep); color:#fff; text-decoration:none; font:inherit; font-weight:500; letter-spacing:.04em; border:0; cursor:pointer; min-block-size:48px; border-radius:.25rem; }
+.btn:hover { background:#6f3a2c; }
+.site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; }
+
+.hero { position:relative; min-block-size:min(88dvh,46rem); display:grid; align-items:end; color:#fff; isolation:isolate; }
+.hero img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:72% center; z-index:-2; }
+.hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(90deg, rgb(58 40 33 / .88) 0%, rgb(58 40 33 / .55) 45%, rgb(58 40 33 / 0) 80%); }
+@media (max-width:40rem){ .hero::before { background:linear-gradient(0deg, rgb(58 40 33 / .92) 0%, rgb(58 40 33 / .4) 70%, rgb(58 40 33 / .15) 100%); } .hero img { object-position:80% center; } }
+.hero .wrap { padding-block:4rem; }
+.hero h1 { max-inline-size:9ch; }
+.hero p { font-size:1.2rem; max-inline-size:34ch; margin-block:1.25rem 2rem; }
+
+.section { padding-block:5rem; }
+.menu-grid { display:grid; gap:3rem 4rem; margin-block-start:3rem; }
+@media (min-width:52rem){ .menu-grid { grid-template-columns:1fr 1fr; } }
+.menu-grid h3 { color:var(--rose-deep); margin-block-end:1rem; border-block-end:1px solid var(--rose); padding-block-end:.4rem; }
+.price { display:flex; align-items:baseline; gap:.6rem; padding-block:.55rem; margin:0; }
+.price dt { flex:0 1 auto; }
+.price::after { content:""; order:1; flex:1; border-block-end:1px dotted currentColor; opacity:.5; transform:translateY(-.25em); }
+.price dd { order:2; margin:0; font-weight:500; }
+dl { margin:0; }
+.note { background:var(--mocha); color:var(--nude); }
+.note .wrap { display:grid; gap:2rem; align-items:center; }
+.note h2 { color:#F7D9CB; }
+@media (min-width:52rem){ .note .wrap { grid-template-columns:1fr 1fr; } }
+.note ul { list-style:none; padding:0; margin:0; display:grid; gap:1rem; }
+.note li { padding-inline-start:1.6rem; position:relative; }
+.note li::before { content:""; position:absolute; inset-inline-start:0; inset-block-start:.7em; inline-size:.7rem; block-size:.7rem; background:var(--rose); border-radius:50%; }
+
+form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
+label { font-weight:500; display:block; margin-block-end:.3rem; }
+input, select { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:1.5px solid #8a7569; background:#fffaf6; color:var(--mocha); border-radius:.25rem; }
+input:user-invalid { border-color:#B3261E; }
+[role=status] { font-weight:500; min-block-size:1.5rem; }
+.site-footer { padding-block:2.5rem; border-block-start:1px solid rgb(94 75 66 / .25); }
+.site-footer p { margin:.2rem 0; }
+.site-footer a { color:var(--rose-deep); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio">Rosé Atelier</a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#servicios">Servicios y precios</a></li>
+        <li><a href="#cuidado">Tu cita</a></li>
+        <li><a class="btn" href="#reservar">Reservar cita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <img src="img/hero.jpg" width="1280" height="720" alt="Mujer con manicura en tono rosa mientras se acomoda el cabello en un salón de belleza" fetchpriority="high">
+    <div class="wrap">
+      <h1>Tu mejor versión</h1>
+      <p>Uñas, cabello, cejas y maquillaje hechos con calma, para que salgas sintiéndote tú, pero más.</p>
+      <a class="btn" href="#reservar">Reservar cita</a>
+    </div>
+  </section>
+
+  <section class="wrap section" id="servicios">
+    <h2>Servicios y precios</h2>
+    <div class="menu-grid">
+      <div><h3>Uñas</h3><dl>
+        <div class="price"><dt>Manicura clásica</dt><dd>$250</dd></div>
+        <div class="price"><dt>Esmaltado semipermanente</dt><dd>$350</dd></div>
+        <div class="price"><dt>Uñas de gel con diseño</dt><dd>$650</dd></div>
+        <div class="price"><dt>Pedicura spa</dt><dd>$450</dd></div></dl></div>
+      <div><h3>Cabello</h3><dl>
+        <div class="price"><dt>Corte y peinado</dt><dd>$400</dd></div>
+        <div class="price"><dt>Color completo</dt><dd>$1,200</dd></div>
+        <div class="price"><dt>Mechas balayage</dt><dd>$2,200</dd></div>
+        <div class="price"><dt>Tratamiento de keratina</dt><dd>$1,500</dd></div></dl></div>
+      <div><h3>Cejas y pestañas</h3><dl>
+        <div class="price"><dt>Diseño de cejas</dt><dd>$200</dd></div>
+        <div class="price"><dt>Laminado de cejas</dt><dd>$500</dd></div>
+        <div class="price"><dt>Pestañas pelo a pelo</dt><dd>$850</dd></div></dl></div>
+      <div><h3>Maquillaje</h3><dl>
+        <div class="price"><dt>Maquillaje de día</dt><dd>$600</dd></div>
+        <div class="price"><dt>Maquillaje de evento</dt><dd>$900</dd></div>
+        <div class="price"><dt>Maquillaje de novia con prueba</dt><dd>$2,500</dd></div></dl></div>
+    </div>
+    <p style="margin-block-start:2rem"><small>Precios de ejemplo en pesos. Cámbialos por los de tu negocio.</small></p>
+  </section>
+
+  <section class="note section" id="cuidado">
+    <div class="wrap">
+      <h2>Cómo es tu cita</h2>
+      <ul>
+        <li>Te recibimos con una bebida y revisamos juntas lo que quieres.</li>
+        <li>Usamos productos profesionales y herramientas esterilizadas en cada cita.</li>
+        <li>Si llegas con una idea de Instagram, tráela: la adaptamos a ti.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="reservar">
+    <h2>Reserva tu cita</h2>
+    <p>Elige el servicio y te confirmamos por mensaje.</p>
+    <form data-demo="Gracias. Esta es una demo: no se envió ninguna cita.">
+      <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+      <div><label for="tel">WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      <div><label for="servicio">Servicio</label><select id="servicio" name="servicio"><option>Uñas</option><option>Cabello</option><option>Cejas y pestañas</option><option>Maquillaje</option></select></div>
+      <button class="btn" type="submit">Reservar cita</button>
+      <p role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Rosé Atelier</strong> · Calle Ejemplo 45, Ciudad</p>
+    <p>Martes a sábado de 10:00 a 20:00 · Tel. 55 0000 0000</p>
+    <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
+  </div>
+</footer>
+<script type="module" src="../assets/nav.js"></script>
+</body>
+</html>

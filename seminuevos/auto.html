@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha del auto · Ruta Segura</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html">Ruta<span>Segura</span></a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#catalogo" aria-current="page">Catálogo</a></li>
+        <li><a href="index.html#garantia">Garantía</a></li>
+        <li><a class="btn" href="#visita">Agendar visita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="contenido">
+  <p class="crumb"><a href="index.html#catalogo">← Volver al catálogo</a></p>
+  <div id="ficha"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Ruta Segura</strong> · Av. Ejemplo 500, Ciudad · Tel. 55 0000 0000</p>
+    <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
+  </div>
+</footer>
+
+<script type="module">
+import "../assets/nav.js";
+import { autos, fmtPrecio, fmtKm, imagen } from "./autos.js";
+
+const id = new URLSearchParams(location.search).get("id");
+const a = autos.find(x => x.id === id);
+const cont = document.getElementById("ficha");
+
+if (!a) {
+  document.title = "Auto no encontrado · Ruta Segura";
+  cont.innerHTML = `<div class="empty"><h1>No encontramos ese auto</h1><p>Puede que ya se haya vendido.</p><a class="btn" href="index.html#catalogo">Ver el catálogo</a></div>`;
+} else {
+  const nombre = `${a.marca} ${a.modelo} ${a.version} ${a.anio}`;
+  document.title = `${nombre} · Ruta Segura`;
+  const filas = [["Año", a.anio], ["Kilometraje", fmtKm(a.km)], ["Transmisión", a.transmision], ["Combustible", a.combustible], ["Motor", a.motor],
+    ["Potencia", a.potencia], ["Color", a.color], ["Puertas", a.puertas], ["Asientos", a.asientos], ["Dueños anteriores", a.duenos], ["Ubicación", a.ciudad]];
+  cont.innerHTML = `
+  <article class="ficha">
+    <div>
+      <div class="photo">${imagen(a, { lazy: false })}</div>
+      <h1 style="margin-block:1.5rem .5rem;font-size:clamp(1.8rem,1rem+3vw,2.8rem)">${nombre}</h1>
+      <p>${a.tipo} · ${fmtKm(a.km)} · ${a.transmision}</p>
+      <h2 style="margin-block:2rem .75rem">Ficha técnica</h2>
+      <dl class="specs">${filas.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
+      <h2 style="margin-block:2rem .5rem">Equipamiento</h2>
+      <ul class="equip">${a.equipo.map(e => `<li>${e}</li>`).join("")}</ul>
+    </div>
+    <aside class="panel" id="visita" aria-label="Contacto">
+      <p style="margin:0;color:#35586b">Precio de contado</p>
+      <p class="price">${fmtPrecio(a.precio)}</p>
+      <p style="margin:0">Incluye 1 año de garantía y revisión de 120 puntos.</p>
+      <form data-demo="Gracias. Esta es una demo: no se envió ninguna solicitud.">
+        <div><label for="n">Nombre</label><input id="n" name="nombre" autocomplete="name" required></div>
+        <div><label for="t">WhatsApp</label><input id="t" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <button class="btn" type="submit">Agendar prueba de manejo</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </aside>
+  </article>`;
+}
+// Los formularios agregados después de cargar nav.js necesitan su propio manejador de demo.
+for (const form of cont.querySelectorAll("form[data-demo]")) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    form.querySelector("[role=status]").textContent = form.dataset.demo;
+    form.reset();
+  });
+}
+</script>
+</body>
+</html>

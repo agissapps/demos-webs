@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alba Dental · Clínica dental</title>
+<meta name="description" content="Demo de página web para clínica dental: tratamientos, primera visita y reserva de cita.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+:root { --white:#F4F8FA; --teal:#0F3D47; --peach:#F59E7B; --peach-deep:#C9552B; --ink:#12313A; --focus:#C9552B; --header-bg:rgb(244 248 250 / .92); --menu-bg:#F4F8FA; --menu-fg:#0F3D47;
+  --serif:"Fraunces",Georgia,serif; --sans:"Figtree",system-ui,sans-serif; }
+body { background:var(--white); color:var(--ink); font-family:var(--sans); font-size:1.0625rem; }
+h1,h2,h3 { font-family:var(--serif); color:var(--teal); line-height:1.1; margin:0; font-weight:600; letter-spacing:-.01em; }
+h1 { font-size:clamp(2.6rem, 1.2rem + 6vw, 5rem); }
+h2 { font-size:clamp(1.9rem, 1.2rem + 2.6vw, 3rem); }
+h3 { font-size:1.35rem; }
+p { max-inline-size:62ch; }
+.site-header { backdrop-filter:blur(8px); border-block-end:1px solid rgb(15 61 71 / .08); color:var(--teal); }
+.site-logo { font-family:var(--serif); font-size:1.4rem; }
+.btn { display:inline-block; padding:.9rem 1.6rem; border-radius:999px; background:var(--peach); color:var(--teal); font-weight:700; text-decoration:none; border:0; font:inherit; font-weight:700; cursor:pointer; min-block-size:48px; }
+.btn:hover { background:#ffb08f; }
+.btn.ghost { background:transparent; border:1.5px solid var(--teal); }
+.site-header .btn { padding:.55rem 1.1rem; min-block-size:44px; }
+
+.hero { display:grid; gap:2.5rem; padding-block:3.5rem 4.5rem; align-items:center; }
+.hero p { font-size:1.2rem; margin-block:1.25rem 2rem; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+.hero figure { margin:0; border-radius:12rem 12rem 1.5rem 1.5rem; overflow:hidden; box-shadow:0 30px 60px -30px rgb(15 61 71 / .5); aspect-ratio:4/4.6; }
+.hero img { inline-size:100%; block-size:100%; object-fit:cover; object-position:62% center; }
+@media (min-width:56rem){ .hero { grid-template-columns:1.05fr .95fr; } }
+
+.band { background:var(--teal); color:var(--white); }
+.band h2 { color:var(--white); }
+.section { padding-block:4.5rem; }
+.treat-list { display:grid; gap:1rem; margin-block-start:2.5rem; padding:0; list-style:none; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); }
+.treat-list li { padding:1.5rem; border-radius:1.25rem; background:rgb(244 248 250 / .08); border:1px solid rgb(244 248 250 / .15); }
+.treat-list h3 { color:var(--peach); margin-block-end:.4rem; }
+.treat-list p { margin:0; opacity:.9; }
+
+.steps { counter-reset:step; display:grid; gap:1.25rem; margin:2.5rem 0 0; padding:0; list-style:none; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); }
+.steps li { counter-increment:step; padding-block-start:1rem; border-block-start:3px solid var(--peach); }
+.steps li::before { content:"Paso " counter(step); font-weight:700; color:var(--peach-deep); }
+.steps h3 { margin-block:.3rem .4rem; }
+
+.team { display:grid; gap:2rem; align-items:center; }
+.quote { font-family:var(--serif); font-size:clamp(1.5rem,1rem + 1.8vw,2.2rem); color:var(--teal); line-height:1.25; margin:0; max-inline-size:34ch; }
+.quote footer { font-family:var(--sans); font-size:1rem; margin-block-start:1rem; color:var(--ink); }
+@media (min-width:56rem){ .team { grid-template-columns:1fr 1fr; } }
+
+form { display:grid; gap:1rem; max-inline-size:34rem; }
+label { font-weight:700; display:block; margin-block-end:.3rem; }
+input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border-radius:.75rem; border:1.5px solid #6b8a92; background:#fff; color:var(--ink); }
+input:user-invalid, select:user-invalid { border-color:#B3261E; }
+#cita { background:#fff; }
+[role=status] { font-weight:700; color:var(--teal); min-block-size:1.5rem; }
+footer.site-footer { background:var(--teal); color:var(--white); padding-block:2.5rem; }
+footer.site-footer p { margin:.2rem 0; }
+footer a { color:var(--peach); }
+.demo-tag { position:fixed; inset-inline-end:.75rem; inset-block-end:.75rem; z-index:30; background:var(--teal); color:var(--white); padding:.4rem .8rem; border-radius:999px; font-size:.8rem; text-decoration:none; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio">Alba dental</a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#tratamientos">Tratamientos</a></li>
+        <li><a href="#primera-visita">Primera visita</a></li>
+        <li><a href="#clinica">La clínica</a></li>
+        <li><a class="btn" href="#cita">Reservar cita</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="wrap hero">
+    <div>
+      <h1>Sonríe con tranquilidad.</h1>
+      <p>Cuidamos tu sonrisa desde la primera visita, sin prisas y explicándote cada paso antes de empezar.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#cita">Reservar cita</a>
+        <a class="btn ghost" href="#tratamientos">Ver tratamientos</a>
+      </div>
+    </div>
+    <figure><img src="img/hero.jpg" width="1280" height="720" alt="Consulta de la clínica con sillón dental azul petróleo y luz natural" fetchpriority="high"></figure>
+  </section>
+
+  <section class="band section" id="tratamientos">
+    <div class="wrap">
+      <h2>Tratamientos para toda la familia</h2>
+      <ul class="treat-list">
+        <li><h3>Limpieza y revisión</h3><p>Una revisión completa cada seis meses para detectar a tiempo cualquier problema.</p></li>
+        <li><h3>Ortodoncia invisible</h3><p>Alineadores transparentes que casi no se notan y se quitan para comer.</p></li>
+        <li><h3>Blanqueamiento</h3><p>Una sonrisa más clara en una sola sesión, con protección para las encías.</p></li>
+        <li><h3>Implantes</h3><p>Recupera un diente perdido con una solución firme y de aspecto natural.</p></li>
+        <li><h3>Odontopediatría</h3><p>Citas cortas y amables para que los niños pierdan el miedo al dentista.</p></li>
+        <li><h3>Urgencias</h3><p>Dolor o golpe: te atendemos el mismo día en horario de clínica.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="primera-visita">
+    <h2>Así es tu primera visita</h2>
+    <ol class="steps">
+      <li><h3>Hablamos</h3><p>Nos cuentas qué te preocupa y revisamos tu historial.</p></li>
+      <li><h3>Revisamos</h3><p>Exploración y radiografía digital con muy poca radiación.</p></li>
+      <li><h3>Te explicamos</h3><p>Ves tu caso en pantalla y recibes un plan claro, sin compromiso.</p></li>
+      <li><h3>Decides</h3><p>Empezamos cuando tú quieras, a tu ritmo.</p></li>
+    </ol>
+  </section>
+
+  <section class="band section" id="clinica">
+    <div class="wrap team">
+      <blockquote class="quote">“Llevaba años sin ir al dentista por miedo. Aquí me explicaron todo y no sentí nada.”
+        <footer>Mariana R., paciente desde 2024</footer></blockquote>
+      <div><h2>Una clínica pensada para que no te sientas en una clínica</h2>
+      <p>Luz natural, música suave y tiempo de sobra. Trabajamos con cita para que nunca esperes de más.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="cita">
+    <h2>Reserva tu cita</h2>
+    <p>Déjanos tus datos y te escribimos para confirmar el horario.</p>
+    <form data-demo="Gracias. Esta es una demo: no se envió ninguna cita." style="margin-block-start:1.5rem">
+      <div><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+      <div><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      <div><label for="motivo">Motivo de la visita</label>
+        <select id="motivo" name="motivo"><option>Revisión y limpieza</option><option>Ortodoncia</option><option>Blanqueamiento</option><option>Implantes</option><option>Urgencia</option></select></div>
+      <button class="btn" type="submit">Reservar cita</button>
+      <p role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Alba dental</strong> · Calle Ejemplo 123, Ciudad</p>
+    <p>Lunes a viernes de 9:00 a 19:00 · Sábados de 9:00 a 14:00</p>
+    <p>Tel. 55 0000 0000 · <a href="../index.html">Ver todas las demos</a></p>
+    <p>© <span data-year></span> Alba dental. Sitio de demostración.</p>
+  </div>
+</footer>
+<script type="module" src="../assets/nav.js"></script>
+</body>
+</html>
