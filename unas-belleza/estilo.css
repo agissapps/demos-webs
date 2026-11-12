@@ -120,3 +120,102 @@ input:user-invalid { border-color:#B3261E; }
 .hours dt { font-weight:500; } .hours dd { margin:0; }
 .site-footer { padding-block:2.5rem; border-block-start:1px solid rgb(94 75 66 / .25); }
 .site-footer p { margin:.2rem 0; } .site-footer a { color:var(--rose-deep); }
+
+/* ===== Paleta más luminosa: oro rosa metálico y dorado ===== */
+:root {
+  --nude:#FDF1EA; --nude-2:#F9DDCF; --mocha:#4A322C;
+  --rose:#E8A088; --rose-deep:#AE513C; --gold:#E9B872; --gold-deep:#B9822C;
+  --rosegold:linear-gradient(135deg,#F9D3BE 0%,#E9A184 32%,#CF7C61 55%,#F6C3A6 78%,#E3A27F 100%);
+  --focus:#AE513C; --header-bg:rgb(253 241 234 / .88); --menu-bg:#FDF1EA; --menu-fg:#4A322C;
+  --x-ink:#4A322C; --x-brand:#4A2F2A; --x-accent:#C9694F; --x-card:#FFF9F5; --x-line:rgb(174 81 60 / .28);
+}
+body { background:radial-gradient(60rem 40rem at 85% -5%, rgb(249 205 184 / .65), transparent 70%), radial-gradient(50rem 36rem at -10% 40%, rgb(246 214 150 / .28), transparent 70%), var(--nude); color:var(--mocha); }
+em { background:var(--rosegold); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; padding-inline-end:.06em; }
+.dark em { background:linear-gradient(135deg,#FBE0CB,#F0B896 50%,#FFD9A8); -webkit-background-clip:text; background-clip:text; }
+.eyebrow { color:#B9582F; }
+.site-logo { background:var(--rosegold); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; font-weight:600; }
+.site-header { border-block-end:1px solid rgb(233 160 132 / .35); }
+
+/* Botones con brillo metálico */
+.btn { background:linear-gradient(135deg,#D9805F 0%,#B8573F 55%,#D9805F 100%); border-color:#B8573F; box-shadow:0 10px 24px -10px rgb(184 87 63 / .7), inset 0 1px 0 rgb(255 255 255 / .35); position:relative; overflow:hidden; isolation:isolate; }
+.btn::after { content:""; position:absolute; inset:0; background:linear-gradient(110deg,transparent 30%,rgb(255 255 255 / .55) 50%,transparent 70%); transform:translateX(-120%); transition:transform .7s ease; z-index:-1; }
+.btn:hover { background:linear-gradient(135deg,#E48D6B 0%,#C2623F 55%,#E48D6B 100%); border-color:#C2623F; }
+.btn:hover::after { transform:translateX(120%); }
+.btn.ghost { background:transparent; color:#AE513C; box-shadow:none; border-color:#D9805F; }
+.btn.ghost::after { display:none; }
+.btn.ghost:hover { background:linear-gradient(135deg,#D9805F,#B8573F); color:#fff; }
+
+/* Portada */
+.hero::before { background:radial-gradient(closest-side, rgb(244 170 140 / .55), rgb(246 214 150 / .25) 60%, transparent); inline-size:36rem; block-size:36rem; }
+.arch { outline:2px solid transparent; outline-offset:.8rem; box-shadow:0 40px 70px -30px rgb(201 105 79 / .6), 0 0 0 .55rem #FDF1EA, 0 0 0 calc(.55rem + 2px) #E3A27F; }
+.seal { color:#B9582F; background:#FFF5EE; box-shadow:0 10px 26px -10px rgb(201 105 79 / .6), inset 0 0 0 1.5px #E9B872; }
+.chip.a { border:1px solid rgb(233 184 114 / .6); background:#FFFBF7; }
+.chip b { background:var(--rosegold); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.stars { color:#E3A24A; }
+
+.marquee.script { border-block:1px solid rgb(233 184 114 / .6); background:linear-gradient(90deg,rgb(249 211 190 / .35),rgb(246 220 160 / .35),rgb(249 211 190 / .35)); }
+.marquee.script li::after { color:#D9A441; }
+
+/* Rituales */
+.rituals li { background:linear-gradient(180deg,#FFFBF8,#FFF1E8); border-color:rgb(233 160 132 / .45); }
+.rituals li:hover { box-shadow:0 30px 50px -28px rgb(201 105 79 / .55); }
+.rituals .ico { background:var(--rosegold); box-shadow:inset 0 1px 0 rgb(255 255 255 / .6); }
+.rituals svg { stroke:#fff; }
+.rituals .feature { background:linear-gradient(160deg,#5A3630,#3E2420); border-color:#E9B872; box-shadow:0 30px 60px -30px rgb(74 47 42 / .8), inset 0 0 0 1px rgb(233 184 114 / .5); }
+.rituals .feature h3 { color:#FFE3C8; } .rituals .feature .ico { background:linear-gradient(135deg,#F3C07C,#D9964A); } .rituals .feature svg { stroke:#3E2420; }
+.rituals .badge { background:linear-gradient(135deg,#F3C07C,#D9964A); color:#3E2420; font-weight:500; }
+.rituals .from b { background:var(--rosegold); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.rituals .feature .from b { background:linear-gradient(135deg,#FFE3C8,#F3C07C); -webkit-background-clip:text; background-clip:text; }
+
+/* Antes y después */
+.results { background:linear-gradient(160deg,#F9DDCF 0%,#FBE7D8 45%,#F7D6C2 100%); }
+.compare .tag.t-after { background:linear-gradient(135deg,#F3C07C,#D9964A); color:#3E2420; }
+.checks li::before { background:linear-gradient(135deg,#F3B08E,#C9694F) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 6.8' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/70% no-repeat; }
+
+/* Galería */
+.pill { border-color:#D9805F; color:#AE513C; }
+.pill[aria-pressed="true"] { background:linear-gradient(135deg,#D9805F,#B8573F); border-color:#B8573F; color:#fff; }
+.gallery .cap { background:linear-gradient(0deg, rgb(120 52 36 / .85), transparent); }
+
+/* Zona oscura: palo de rosa con destellos dorados */
+.dark { background:radial-gradient(40rem 22rem at 85% 0%, rgb(233 160 132 / .28), transparent 70%), radial-gradient(34rem 20rem at 0% 100%, rgb(233 184 114 / .2), transparent 70%), #4A2F2A; }
+.dark h2, .dark h3 { color:#FFE3C8; }
+.dark .eyebrow { color:#F3C07C; }
+.menu-grid h3 { border-block-end:1px solid transparent; border-image:linear-gradient(90deg,#F3C07C,#E9A184,transparent) 1; }
+.price dd { background:linear-gradient(135deg,#FFE3C8,#F3C07C); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; }
+.dark .reviews li { background:rgb(255 227 200 / .07); border-color:rgb(243 192 124 / .35); }
+.dark .stars { color:#F3C07C; }
+
+/* Estudio, fundadora, pasos */
+.studio-card { background:linear-gradient(180deg,#FFFBF8,#FFF3EA); border-color:rgb(233 160 132 / .5); }
+.pull { border-inline-start:3px solid; border-image:linear-gradient(180deg,#F3C07C,#D9805F) 1; }
+.steps li { background:#FFF9F5; }
+.steps li::before { background:var(--rosegold); color:#fff; }
+.hours div { border-block-end-color:rgb(174 81 60 / .25); }
+input, select { border-color:#D9A38F; background:#FFFBF8; }
+input:focus-visible, select:focus-visible { outline:3px solid #E9A184; outline-offset:2px; }
+.site-footer { background:linear-gradient(180deg,transparent,rgb(249 211 190 / .5)); border-block-start:1px solid rgb(233 184 114 / .6); }
+.site-footer a { color:#AE513C; }
+
+/* Destellos dorados suaves en la portada */
+.hero { --spark:radial-gradient(circle, #F3C07C 0 2px, transparent 3px); }
+.hero-text::before, .hero-text::after { content:"✦"; position:absolute; color:#E3A24A; opacity:.75; font-size:1.2rem; pointer-events:none; }
+.hero-text { position:relative; }
+.hero-text::before { inset-block-start:-.5rem; inset-inline-end:12%; }
+.hero-text::after { inset-block-end:-1rem; inset-inline-start:48%; font-size:.9rem; }
+@media (prefers-reduced-motion: no-preference){
+  .hero-text::before, .hero-text::after { animation:twinkle 3.2s ease-in-out infinite; }
+  .hero-text::after { animation-delay:1.2s; }
+  @keyframes twinkle { 50% { opacity:.2; transform:scale(.7) rotate(20deg); } }
+}
+
+/* Texto con degradado: oro rosa más profundo para que se lea */
+:root { --rosegold-text:linear-gradient(135deg,#C9694F 0%,#B04A34 42%,#D98562 70%,#B9582F 100%); }
+em, .site-logo, .chip b, .rituals .from b { background-image:var(--rosegold-text); }
+.rituals .feature .from b, .dark em { background-image:linear-gradient(135deg,#FFE3C8,#F3C07C 55%,#FFD9A8); }
+.site-logo { font-weight:600; }
+
+/* Franja oscura: rosa vino con brillos en oro rosa */
+.dark { background:radial-gradient(38rem 24rem at 88% 0%, rgb(255 170 140 / .38), transparent 70%), radial-gradient(34rem 22rem at 0% 100%, rgb(246 200 120 / .3), transparent 70%), linear-gradient(160deg,#8A3F3A 0%,#6A3030 50%,#4A2326 100%); }
+.rituals .feature { background:linear-gradient(160deg,#8A3F3A,#4A2326); }
+.dark .reviews li { background:rgb(255 227 200 / .1); }
