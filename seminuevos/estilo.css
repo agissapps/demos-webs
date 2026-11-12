@@ -1,4 +1,5 @@
 :root { --navy:#002941; --mint:#CFE8E1; --coral:#FD6E6E; --coral-deep:#D84A4A; --ink:#0b2230; --paper:#F4FAF8; --focus:#D84A4A; --header-bg:#002941; --menu-bg:#002941; --menu-fg:#CFE8E1;
+  --x-ink:#0b2230; --x-brand:#002941; --x-on-brand:#CFE8E1; --x-accent:#D84A4A; --x-on-accent:#fff; --x-card:#fff; --x-line:rgb(0 41 65 / .18); --x-card2:rgb(207 232 225 / .08); --x-head:"Sora",system-ui,sans-serif;
   --display:"Sora",system-ui,sans-serif; --sans:"DM Sans",system-ui,sans-serif; }
 body { background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:1.0625rem; }
 h1,h2,h3 { font-family:var(--display); color:var(--navy); margin:0; line-height:1.08; letter-spacing:-.02em; font-weight:800; }
@@ -61,3 +62,30 @@ input:user-invalid { border-color:#B3261E; }
 [role=status] { font-weight:700; min-block-size:1.5rem; color:var(--navy); margin:0; }
 .site-footer { background:var(--navy); color:var(--mint); padding-block:2.5rem; }
 .site-footer p { margin:.2rem 0; } .site-footer a { color:var(--coral); }
+
+/* Extras: favoritos, calculadora, autos parecidos */
+body { overflow-x:clip; }
+.car { position:relative; transition:transform .3s ease, box-shadow .3s ease; }
+.car:hover { transform:translateY(-6px); box-shadow:0 28px 44px -28px rgb(0 41 65 / .6); }
+.car .photo img { transition:transform .7s ease; }
+.car:hover .photo img { transform:scale(1.05); }
+.fav { position:absolute; inset-block-start:.75rem; inset-inline-end:.75rem; z-index:2; inline-size:2.75rem; block-size:2.75rem; border-radius:50%; border:0; background:rgb(255 255 255 / .92); color:var(--navy); cursor:pointer; display:grid; place-items:center; box-shadow:0 4px 14px rgb(0 0 0 / .2); transition:transform .15s ease; }
+.fav:hover { transform:scale(1.1); }
+.fav svg { inline-size:1.4rem; block-size:1.4rem; fill:none; stroke:currentColor; stroke-width:2; }
+.fav[aria-pressed="true"] { color:var(--coral-deep); }
+.fav[aria-pressed="true"] svg { fill:currentColor; }
+.solo-fav { display:flex; align-items:center; gap:.6rem; min-block-size:48px; font-weight:700; cursor:pointer; }
+.solo-fav input { inline-size:1.3rem; block-size:1.3rem; min-block-size:0; accent-color:var(--coral-deep); }
+.dark-band { background:var(--navy); color:var(--mint); }
+.dark-band h2, .dark-band h3 { color:#fff; }
+.dark-band .eyebrow { color:var(--coral); }
+.dark-band .steps li { background:rgb(207 232 225 / .08); border-color:rgb(207 232 225 / .2); color:var(--mint); }
+.dark-band .steps h3 { color:#fff; }
+.dark-band .reviews li { border-color:rgb(207 232 225 / .2); }
+.calc-box { margin-block-start:1.2rem; padding-block-start:1.2rem; border-block-start:1px solid rgb(0 41 65 / .15); display:grid; gap:.8rem; }
+.calc-box label { display:block; font-weight:700; margin-block-end:.2rem; }
+.calc-box input[type=range] { padding:0; min-block-size:32px; border:0; background:transparent; accent-color:var(--coral-deep); }
+.calc-box .mensual { font-family:var(--display); font-weight:800; font-size:1.9rem; color:var(--navy); margin:0; }
+.parecidos { padding-block:2rem 4rem; }
+.share { display:flex; flex-wrap:wrap; gap:.5rem; margin-block-start:1rem; }
+.faq summary { color:var(--navy); }

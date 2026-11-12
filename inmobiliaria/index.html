@@ -4,55 +4,98 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Almar Residencias · Inmobiliaria</title>
-<meta name="description" content="Demo de página web para inmobiliaria: propiedades destacadas, servicios y contacto.">
+<meta name="description" content="Demo de página web para inmobiliaria: propiedades con filtros, detalle de cada una y calculadora de mensualidad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
 <style>
 :root { --navy:#172D4D; --ivory:#F4F1EA; --gold:#B58A45; --gold-deep:#8A6528; --focus:#B58A45; --header-bg:rgb(23 45 77 / .94); --menu-bg:#172D4D; --menu-fg:#F4F1EA;
+  --x-ink:#1d2a40; --x-brand:#172D4D; --x-on-brand:#F4F1EA; --x-accent:var(--gold-deep); --x-card:#fff; --x-line:rgb(23 45 77 / .2); --x-card2:rgb(244 241 234 / .06); --x-head:"Bodoni Moda",Georgia,serif;
   --serif:"Bodoni Moda",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif; }
-body { background:var(--ivory); color:#1d2a40; font-family:var(--sans); font-size:1.0625rem; }
+body { background:var(--ivory); color:#1d2a40; font-family:var(--sans); font-size:1.0625rem; overflow-x:clip; }
 h1,h2,h3 { font-family:var(--serif); font-weight:500; line-height:1.1; margin:0; letter-spacing:-.005em; }
 h1 { font-size:clamp(2.6rem, 1.2rem + 5.5vw, 5rem); }
 h2 { font-size:clamp(2rem, 1.2rem + 2.8vw, 3.2rem); color:var(--navy); }
 h3 { font-size:1.5rem; color:var(--navy); }
+.lead { font-size:1.2rem; max-inline-size:46ch; }
 .site-header { color:var(--ivory); backdrop-filter:blur(8px); }
 .site-logo { font-family:var(--serif); letter-spacing:.2em; font-size:1.2rem; }
-.btn { display:inline-block; padding:.9rem 1.7rem; background:var(--gold); color:#14203a; font:inherit; font-weight:600; text-decoration:none; border:0; cursor:pointer; min-block-size:48px; border-radius:.2rem; }
-.btn:hover { background:#c89a52; }
+.btn { display:inline-block; padding:.9rem 1.7rem; background:var(--gold); color:#14203a; font:inherit; font-weight:600; text-decoration:none; border:0; cursor:pointer; min-block-size:48px; border-radius:.2rem; transition:background .2s ease, transform .2s ease; }
+.btn:hover { background:#c89a52; transform:translateY(-2px); }
+.btn.line { background:transparent; border:1.5px solid var(--navy); color:var(--navy); }
+.btn.line:hover { background:var(--navy); color:var(--ivory); }
 .site-header .btn { padding:.5rem 1.1rem; min-block-size:44px; }
 
-.hero { position:relative; min-block-size:min(90dvh,48rem); display:grid; align-items:end; color:var(--ivory); isolation:isolate; }
+.hero { position:relative; min-block-size:min(90dvh,48rem); display:grid; align-items:end; color:var(--ivory); isolation:isolate; overflow:hidden; }
 .hero img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; z-index:-2; }
+@media (prefers-reduced-motion: no-preference){ .hero img { animation:slow 18s ease-out both; } @keyframes slow { from { transform:scale(1.1); } } }
 .hero::before { content:""; position:absolute; inset:0; z-index:-1; background:linear-gradient(0deg, rgb(15 28 50 / .92) 0%, rgb(15 28 50 / .35) 55%, rgb(15 28 50 / .15)); }
 .hero .wrap { padding-block:4rem; }
 .hero p { font-size:1.2rem; max-inline-size:44ch; margin-block:1.25rem 2rem; }
 .hero h1 { max-inline-size:14ch; }
 
+.numbers { background:var(--navy); color:var(--ivory); }
+.numbers .wrap { display:flex; flex-wrap:wrap; gap:1.5rem 4rem; padding-block:1.75rem; }
+.numbers strong { display:block; font-family:var(--serif); font-size:2rem; color:#E0BD83; font-weight:500; line-height:1; }
+.numbers p { margin:0; }
+
 .section { padding-block:5rem; }
-.props { display:grid; gap:2rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(18rem,1fr)); padding:0; list-style:none; }
-.prop { background:#fff; border:1px solid rgb(23 45 77 / .15); display:flex; flex-direction:column; }
-.prop figure { margin:0; aspect-ratio:4/3; overflow:hidden; background:var(--navy); }
-.prop img { inline-size:100%; block-size:100%; object-fit:cover; }
-.prop .body { padding:1.4rem; display:grid; gap:.5rem; }
+.filters { background:#fff; border:1px solid var(--x-line); padding:1.25rem; display:grid; gap:1rem; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); align-items:end; margin-block-start:2rem; }
+.filters label, form label { display:block; font-weight:600; margin-block-end:.3rem; font-size:.95rem; }
+select, input, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.7rem .8rem; min-block-size:48px; border:1.5px solid #6a7a91; background:#fff; color:#1d2a40; border-radius:.2rem; }
+textarea { min-block-size:6rem; }
+input:user-invalid { border-color:#B3261E; }
+.count { font-weight:600; margin:1.5rem 0 1rem; }
+.props { display:grid; gap:2rem; grid-template-columns:repeat(auto-fill,minmax(19rem,1fr)); padding:0; margin:0; list-style:none; }
+.prop { background:#fff; border:1px solid var(--x-line); display:flex; flex-direction:column; transition:transform .3s ease, box-shadow .3s ease; }
+.prop:hover { transform:translateY(-6px); box-shadow:0 30px 50px -30px rgb(23 45 77 / .6); }
+.prop figure { margin:0; aspect-ratio:4/3; overflow:hidden; background:var(--navy); position:relative; }
+.prop img { inline-size:100%; block-size:100%; object-fit:cover; transition:transform .7s ease; }
+.prop:hover img { transform:scale(1.06); }
+.prop .badge { position:absolute; inset:1rem auto auto 1rem; background:var(--ivory); color:var(--navy); padding:.3rem .8rem; font-weight:600; font-size:.85rem; }
+.prop .body { padding:1.4rem; display:grid; gap:.5rem; flex:1; align-content:start; }
 .prop .zone { margin:0; color:var(--gold-deep); font-weight:600; }
 .prop dl { display:flex; flex-wrap:wrap; gap:.4rem 1.2rem; margin:.3rem 0 0; font-size:.98rem; }
-.prop dt { display:none; } .prop dd { margin:0; }
-.price { font-family:var(--serif); font-size:1.5rem; color:var(--navy); margin:.5rem 0 0; }
+.prop dd { margin:0; }
+.price { font-family:var(--serif); font-size:1.6rem; color:var(--navy); margin:.5rem 0 .8rem; }
+.empty { padding:2.5rem; text-align:center; background:#fff; border:1px solid var(--x-line); }
+.empty[hidden] { display:none; }
+
+dialog.detalle { border:0; padding:0; max-inline-size:min(94vw,60rem); inline-size:100%; max-block-size:92dvh; overflow:auto; background:var(--ivory); color:#1d2a40; }
+dialog.detalle::backdrop { background:rgb(10 20 40 / .75); backdrop-filter:blur(4px); }
+dialog.detalle .grid { display:grid; }
+@media (min-width:52rem){ dialog.detalle .grid { grid-template-columns:1.1fr .9fr; } }
+dialog.detalle img { inline-size:100%; block-size:100%; min-block-size:16rem; max-block-size:36rem; object-fit:cover; }
+dialog.detalle .info { padding:2rem; display:grid; gap:1rem; align-content:start; }
+dialog.detalle .specs { display:grid; margin:0; }
+dialog.detalle .specs div { display:flex; justify-content:space-between; padding-block:.6rem; border-block-end:1px solid var(--x-line); }
+dialog.detalle .specs dd { margin:0; font-weight:600; }
+dialog.detalle .cerrar { position:sticky; inset-block-start:.75rem; float:right; margin:.75rem; z-index:2; min-block-size:44px; min-inline-size:44px; border-radius:999px; border:0; background:#fff; color:#111; font:inherit; font-weight:600; padding:.4rem 1rem; cursor:pointer; box-shadow:0 4px 14px rgb(0 0 0 / .25); }
+
 .dark { background:var(--navy); color:var(--ivory); }
 .dark h2, .dark h3 { color:var(--ivory); }
+.dark .eyebrow { color:#E0BD83; }
+.dark .reviews li { border-color:rgb(244 241 234 / .2); }
 .services { display:grid; gap:2rem; margin-block-start:2.5rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); padding:0; list-style:none; }
 .services li { padding-block-start:1rem; border-block-start:2px solid var(--gold); }
 .services p { margin:.4rem 0 0; opacity:.9; }
-form { display:grid; gap:1rem; max-inline-size:34rem; margin-block-start:1.5rem; }
-label { font-weight:600; display:block; margin-block-end:.3rem; }
-input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border:1.5px solid #6a7a91; background:#fff; color:#1d2a40; border-radius:.2rem; }
-textarea { min-block-size:6rem; }
-input:user-invalid { border-color:#B3261E; }
-[role=status] { font-weight:600; min-block-size:1.5rem; color:var(--navy); }
+
+.calc { display:grid; gap:2.5rem; align-items:start; }
+@media (min-width:56rem){ .calc { grid-template-columns:1fr 1fr; } }
+.calc form { display:grid; gap:1.25rem; }
+.calc output { font-weight:600; }
+.calc input[type=range] { padding:0; min-block-size:32px; accent-color:var(--gold-deep); border:0; background:transparent; }
+.result { background:var(--navy); color:var(--ivory); padding:2rem; display:grid; gap:.5rem; }
+.result .big { font-family:var(--serif); font-size:clamp(2.2rem,1rem + 4vw,3.6rem); color:#E0BD83; line-height:1; margin:0; }
+.result p { margin:0; }
+
+form.contacto { display:grid; gap:1rem; max-inline-size:34rem; }
+[role=status] { font-weight:600; min-block-size:1.5rem; margin:0; color:var(--navy); }
 .site-footer { background:var(--navy); color:var(--ivory); padding-block:2.5rem; }
 .site-footer p { margin:.2rem 0; } .site-footer a { color:#E0BD83; }
+.faq summary { color:var(--navy); }
 </style>
 </head>
 <body>
@@ -64,6 +107,7 @@ input:user-invalid { border-color:#B3261E; }
       <ul id="site-menu" class="site-menu" popover="auto">
         <li><a href="#inicio" aria-current="page">Inicio</a></li>
         <li><a href="#propiedades">Propiedades</a></li>
+        <li><a href="#calculadora">Calculadora</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a class="btn" href="#contacto">Hablar con un asesor</a></li>
       </ul>
@@ -74,54 +118,103 @@ input:user-invalid { border-color:#B3261E; }
 <main id="inicio">
   <section class="hero">
     <img src="img/hero.jpg" width="1280" height="720" alt="Villa moderna con alberca infinita iluminada al atardecer frente al mar" fetchpriority="high">
-    <div class="wrap">
+    <div class="wrap rise">
       <h1>Tu próxima dirección dice mucho de ti.</h1>
       <p>Residencias seleccionadas por su arquitectura, ubicación y valor. Te acompañamos desde la primera visita hasta la firma.</p>
       <a class="btn" href="#propiedades">Ver propiedades</a>
     </div>
   </section>
 
+  <div class="numbers"><div class="wrap">
+    <p><strong>240+</strong>propiedades vendidas</p>
+    <p><strong>18 años</strong>en el mercado</p>
+    <p><strong>45 días</strong>de venta en promedio</p>
+  </div></div>
+
   <section class="wrap section" id="propiedades">
-    <h2>Propiedades destacadas</h2>
-    <ul class="props">
-      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Fachada y alberca de la Casa Marea" style="object-position:20% 60%" loading="lazy"></figure>
-        <div class="body"><p class="zone">Costa Norte</p><h3>Casa Marea</h3>
-        <dl><div><dt>Recámaras</dt><dd>4 recámaras</dd></div><div><dt>Baños</dt><dd>4 baños</dd></div><div><dt>Terreno</dt><dd>620 m²</dd></div></dl>
-        <p class="price">$14,500,000</p><a href="#contacto">Pedir información</a></div></li>
-      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Terraza y sala de la Villa Olivo" style="object-position:90% 40%" loading="lazy"></figure>
-        <div class="body"><p class="zone">Lomas del Mar</p><h3>Villa Olivo</h3>
-        <dl><div><dt>Recámaras</dt><dd>5 recámaras</dd></div><div><dt>Baños</dt><dd>5 baños</dd></div><div><dt>Terreno</dt><dd>840 m²</dd></div></dl>
-        <p class="price">$19,800,000</p><a href="#contacto">Pedir información</a></div></li>
-      <li class="prop"><figure><img src="img/hero.jpg" width="1280" height="720" alt="Vista del mar desde la Casa Alba" style="object-position:0% 30%" loading="lazy"></figure>
-        <div class="body"><p class="zone">Bahía Sur</p><h3>Casa Alba</h3>
-        <dl><div><dt>Recámaras</dt><dd>3 recámaras</dd></div><div><dt>Baños</dt><dd>3 baños</dd></div><div><dt>Terreno</dt><dd>410 m²</dd></div></dl>
-        <p class="price">$9,200,000</p><a href="#contacto">Pedir información</a></div></li>
-    </ul>
-    <p style="margin-block-start:1.5rem"><small>Propiedades y precios de ejemplo. Las fotos de cada casa se cambian por las reales.</small></p>
+    <div class="reveal"><p class="eyebrow">Propiedades destacadas</p><h2>Encuentra la que va contigo</h2></div>
+    <search>
+      <form class="filters" id="filtros" aria-label="Filtrar propiedades">
+        <div><label for="f-zona">Zona</label><select id="f-zona" name="zona"><option value="">Todas</option></select></div>
+        <div><label for="f-tipo">Tipo</label><select id="f-tipo" name="tipo"><option value="">Todos</option></select></div>
+        <div><label for="f-precio">Precio máximo</label><select id="f-precio" name="precio"><option value="">Sin límite</option><option value="10000000">Hasta $10 millones</option><option value="15000000">Hasta $15 millones</option><option value="20000000">Hasta $20 millones</option></select></div>
+        <div><label for="f-rec">Recámaras</label><select id="f-rec" name="rec"><option value="0">Cualquiera</option><option value="3">3 o más</option><option value="4">4 o más</option><option value="5">5 o más</option></select></div>
+        <div><button class="btn line" type="reset" style="inline-size:100%">Limpiar filtros</button></div>
+      </form>
+    </search>
+    <p class="count" id="conteo" role="status" aria-live="polite"></p>
+    <ul class="props" id="lista"></ul>
+    <div class="empty" id="vacio" hidden><h3>No hay propiedades con esos filtros</h3><p>Prueba con otra zona o sube el precio máximo.</p></div>
+    <p><small>Propiedades, precios y fotos de ejemplo generados para esta demo.</small></p>
   </section>
 
   <section class="dark section" id="servicios">
     <div class="wrap">
-      <h2>Cómo te acompañamos</h2>
+      <div class="reveal"><p class="eyebrow">Servicios</p><h2>Cómo te acompañamos</h2></div>
       <ul class="services">
-        <li><h3>Compra</h3><p>Búsqueda a tu medida y visitas con un asesor que conoce la zona.</p></li>
-        <li><h3>Venta</h3><p>Valuación, fotografía profesional y difusión de tu propiedad.</p></li>
-        <li><h3>Renta</h3><p>Contratos claros, revisión de inquilinos y administración mensual.</p></li>
-        <li><h3>Asesoría legal</h3><p>Revisión de documentos y escrituración sin sorpresas.</p></li>
+        <li class="reveal"><h3>Compra</h3><p>Búsqueda a tu medida y visitas con un asesor que conoce la zona.</p></li>
+        <li class="reveal"><h3>Venta</h3><p>Valuación, fotografía profesional y difusión de tu propiedad.</p></li>
+        <li class="reveal"><h3>Renta</h3><p>Contratos claros, revisión de inquilinos y administración mensual.</p></li>
+        <li class="reveal"><h3>Asesoría legal</h3><p>Revisión de documentos y escrituración sin sorpresas.</p></li>
       </ul>
     </div>
   </section>
 
-  <section class="wrap section" id="contacto">
-    <h2>Hablemos de tu próxima casa</h2>
-    <form data-demo="Gracias. Esta es una demo: no se envió ningún mensaje.">
-      <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
-      <div><label for="correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" required></div>
-      <div><label for="interes">Me interesa</label><select id="interes" name="interes"><option>Comprar</option><option>Vender</option><option>Rentar</option></select></div>
-      <div><label for="msg">Mensaje</label><textarea id="msg" name="msg"></textarea></div>
-      <button class="btn" type="submit">Enviar mensaje</button>
-      <p role="status" aria-live="polite"></p>
-    </form>
+  <section class="wrap section" id="calculadora">
+    <div class="calc">
+      <div class="reveal">
+        <p class="eyebrow">Calculadora</p>
+        <h2>¿Cuánto pagarías al mes?</h2>
+        <p class="lead" style="margin-block-start:1rem">Un cálculo aproximado para que platiquemos con números claros. No es una oferta de crédito.</p>
+        <form id="calc" style="margin-block-start:1.5rem">
+          <div><label for="c-precio">Precio de la propiedad: <output id="o-precio"></output></label><input id="c-precio" type="range" min="3000000" max="25000000" step="250000" value="9200000"></div>
+          <div><label for="c-eng">Enganche: <output id="o-eng"></output></label><input id="c-eng" type="range" min="10" max="60" step="5" value="30"></div>
+          <div><label for="c-anios">Plazo: <output id="o-anios"></output></label><input id="c-anios" type="range" min="5" max="25" step="5" value="20"></div>
+          <div><label for="c-tasa">Tasa anual: <output id="o-tasa"></output></label><input id="c-tasa" type="range" min="8" max="14" step="0.5" value="10.5"></div>
+        </form>
+      </div>
+      <div class="result reveal" aria-live="polite">
+        <p>Mensualidad aproximada</p>
+        <p class="big" id="r-mensual"></p>
+        <p id="r-detalle"></p>
+        <p style="margin-block-start:1rem"><a class="btn" href="#contacto">Quiero platicarlo con un asesor</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark section" id="opiniones">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Opiniones</p><h2>Familias que ya encontraron su casa</h2></div>
+      <ul class="reviews">
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Nos acompañaron en cada visita y en la firma. Sin sorpresas.”</blockquote><cite>Familia Herrera</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Vendimos en seis semanas y al precio que pedíamos.”</blockquote><cite>Arturo y Mónica</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Conocen cada colonia. Nos ahorraron meses de búsqueda.”</blockquote><cite>Sofía D.</cite></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="preguntas">
+    <div class="reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Antes de decidir</h2></div>
+    <div class="faq reveal">
+      <details><summary>¿Cobran por la asesoría?</summary><p>No. Nuestra comisión solo se cobra cuando la operación se concreta.</p></details>
+      <details><summary>¿Me ayudan con el crédito?</summary><p>Sí. Comparamos opciones con varios bancos y te acompañamos en el trámite.</p></details>
+      <details><summary>¿Puedo visitar una propiedad el mismo fin de semana?</summary><p>Casi siempre. Agenda por WhatsApp y te confirmamos horario.</p></details>
+      <details><summary>¿Revisan los documentos legales?</summary><p>Sí. Revisamos escrituras, gravámenes y pagos al corriente antes de cualquier oferta.</p></details>
+    </div>
+  </section>
+
+  <section class="dark section" id="contacto">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Contacto</p><h2>Hablemos de tu próxima casa</h2></div>
+      <form class="contacto" data-demo="Gracias. Esta es una demo: no se envió ningún mensaje." style="margin-block-start:1.5rem">
+        <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+        <div><label for="correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" required></div>
+        <div><label for="interes">Me interesa</label><select id="interes" name="interes"><option>Comprar</option><option>Vender</option><option>Rentar</option></select></div>
+        <div><label for="msg">Mensaje</label><textarea id="msg" name="msg"></textarea></div>
+        <button class="btn" type="submit">Enviar mensaje</button>
+        <p role="status" aria-live="polite" style="color:var(--ivory)"></p>
+      </form>
+    </div>
   </section>
 </main>
 
@@ -131,6 +224,74 @@ input:user-invalid { border-color:#B3261E; }
     <p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración.</p>
   </div>
 </footer>
-<script type="module" src="../assets/nav.js"></script>
+
+<dialog class="detalle" id="detalle" aria-labelledby="d-titulo"><button class="cerrar" type="button" data-cerrar>Cerrar</button><div class="grid"><img id="d-img" alt=""><div class="info"><p class="eyebrow" id="d-zona" style="margin:0"></p><h2 id="d-titulo" style="font-size:2rem"></h2><p class="price" id="d-precio" style="margin:0"></p><dl class="specs" id="d-specs"></dl><p id="d-desc"></p><a class="btn" href="#contacto" data-cerrar>Agendar visita</a></div></div></dialog>
+
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.8 1 3.9 1.5 6.2 1.5 7.2 0 13-5.800 13-13S23.200 3 16 3zm0 23.600c-2 0-3.900-.5-5.500-1.500l-.4-.2-4 1 1.100-3.900-.3-.4C5.800 19.900 5.200 18 5.200 16 5.200 9.900 10.100 5.200 16 5.200S26.800 10 26.800 16 21.900 26.600 16 26.600zm5.900-7.900c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1.100 1.100-1.100 2.600 1.100 3 1.300 3.200c.2.200 2.200 3.400 5.400 4.700 2 .8 2.800.9 3.800.7.6-.1 1.900-.8 2.200-1.600.3-.8.300-1.400.2-1.600-.1-.1-.3-.2-.6-.4z"/></svg></a>
+
+<script type="module">
+import "../assets/extras.js";
+
+const props = [
+  { id: "marea", nombre: "Casa Marea", zona: "Costa Norte", tipo: "Casa", precio: 14500000, rec: 4, banos: 4, m2: 620, construccion: 410, img: "img/casa-moderna.jpg", pos: "50% 50%", etiqueta: "Nueva",
+    desc: "Casa de dos niveles con grandes ventanales, jardín con olivos y cochera para tres autos. A diez minutos de la playa." },
+  { id: "olivo", nombre: "Villa Olivo", zona: "Lomas del Mar", tipo: "Villa", precio: 19800000, rec: 5, banos: 5, m2: 840, construccion: 560, img: "img/hero.jpg", pos: "70% 50%", etiqueta: "Destacada",
+    desc: "Villa con alberca infinita frente al mar, terrazas techadas y suite principal con vista panorámica." },
+  { id: "skyline", nombre: "Penthouse Skyline", zona: "Centro", tipo: "Penthouse", precio: 12900000, rec: 3, banos: 3, m2: 260, construccion: 260, img: "img/penthouse.jpg", pos: "50% 55%", etiqueta: "",
+    desc: "Penthouse con terraza privada con fogata, vista a la ciudad y acceso a gimnasio y seguridad 24 horas." },
+  { id: "alba", nombre: "Residencia Alba", zona: "Bahía Sur", tipo: "Casa", precio: 9200000, rec: 3, banos: 3, m2: 410, construccion: 300, img: "img/sala.jpg", pos: "50% 50%", etiqueta: "Oportunidad",
+    desc: "Residencia con sala de doble altura y ventanales al mar. Cocina abierta, estudio y jardín trasero." },
+];
+const mxn = n => n.toLocaleString("es-MX", { style: "currency", currency: "MXN", maximumFractionDigits: 0 });
+const f = document.getElementById("filtros");
+for (const z of [...new Set(props.map(p => p.zona))].sort()) f.zona.add(new Option(z, z));
+for (const t of [...new Set(props.map(p => p.tipo))].sort()) f.tipo.add(new Option(t, t));
+
+const lista = document.getElementById("lista");
+function pintar() {
+  const max = Number(f.precio.value) || Infinity, rec = Number(f.rec.value);
+  const r = props.filter(p => (!f.zona.value || p.zona === f.zona.value) && (!f.tipo.value || p.tipo === f.tipo.value) && p.precio <= max && p.rec >= rec);
+  lista.innerHTML = r.map(p => `<li class="prop"><figure><img src="${p.img}" width="1280" height="720" alt="${p.nombre}, ${p.tipo.toLowerCase()} en ${p.zona}" loading="lazy" style="object-position:${p.pos}">${p.etiqueta ? `<span class="badge">${p.etiqueta}</span>` : ""}</figure>
+    <div class="body"><p class="zone">${p.zona} · ${p.tipo}</p><h3>${p.nombre}</h3>
+    <dl><div><dt class="visually-hidden">Recámaras</dt><dd>${p.rec} recámaras</dd></div><div><dt class="visually-hidden">Baños</dt><dd>${p.banos} baños</dd></div><div><dt class="visually-hidden">Terreno</dt><dd>${p.m2} m²</dd></div></dl>
+    <p class="price">${mxn(p.precio)}</p><button class="btn line" type="button" data-id="${p.id}">Ver detalles de ${p.nombre}</button></div></li>`).join("");
+  document.getElementById("vacio").hidden = r.length > 0;
+  document.getElementById("conteo").textContent = r.length === 1 ? "1 propiedad" : `${r.length} propiedades`;
+}
+f.addEventListener("input", pintar);
+f.addEventListener("reset", () => setTimeout(pintar));
+pintar();
+
+// Detalle de cada propiedad en una ventana nativa <dialog>.
+const dlg = document.getElementById("detalle");
+lista.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-id]"); if (!b) return;
+  const p = props.find(x => x.id === b.dataset.id);
+  document.getElementById("d-img").src = p.img; document.getElementById("d-img").alt = `${p.nombre}, ${p.tipo.toLowerCase()} en ${p.zona}`;
+  document.getElementById("d-img").style.objectPosition = p.pos;
+  document.getElementById("d-zona").textContent = `${p.zona} · ${p.tipo}`;
+  document.getElementById("d-titulo").textContent = p.nombre;
+  document.getElementById("d-precio").textContent = mxn(p.precio);
+  document.getElementById("d-desc").textContent = p.desc;
+  document.getElementById("d-specs").innerHTML = [["Recámaras", p.rec], ["Baños", p.banos], ["Terreno", p.m2 + " m²"], ["Construcción", p.construccion + " m²"]].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+  dlg.showModal();
+});
+dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("[data-cerrar]")) dlg.close(); });
+
+// Calculadora de mensualidad (fórmula de crédito a tasa fija).
+const c = document.getElementById("calc");
+function calcular() {
+  const precio = +c["c-precio"].value, eng = +c["c-eng"].value, anios = +c["c-anios"].value, tasa = +c["c-tasa"].value;
+  const monto = precio * (1 - eng / 100), i = tasa / 100 / 12, n = anios * 12;
+  const cuota = monto * i / (1 - Math.pow(1 + i, -n));
+  document.getElementById("o-precio").textContent = mxn(precio);
+  document.getElementById("o-eng").textContent = `${eng}% (${mxn(precio * eng / 100)})`;
+  document.getElementById("o-anios").textContent = `${anios} años`;
+  document.getElementById("o-tasa").textContent = `${tasa.toLocaleString("es-MX")}%`;
+  document.getElementById("r-mensual").textContent = mxn(cuota);
+  document.getElementById("r-detalle").textContent = `Crédito de ${mxn(monto)} a ${anios} años. Total a pagar aproximado: ${mxn(cuota * n)}.`;
+}
+c.addEventListener("input", calcular); calcular();
+</script>
 </body>
 </html>

@@ -15,15 +15,15 @@ export const autos = [
     equipo: ["Sensores de estacionamiento", "Asientos calefactables", "Piel sintética", "Sistema de sonido premium", "Frenado de emergencia"] },
   { id: "robusta-pickup-2019", marca: "Robusta", modelo: "Titán", version: "Doble cabina", anio: 2019, tipo: "Pickup", precio: 459000, km: 78000,
     transmision: "Automática", combustible: "Diésel", motor: "2.8 L turbodiésel", potencia: "200 hp", color: "Negro", colorHex: "#16181d", puertas: 4, asientos: 5,
-    duenos: 1, ciudad: "Querétaro", foto: null,
+    duenos: 1, ciudad: "Querétaro", foto: "img/auto-pickup.jpg",
     equipo: ["Tracción 4x4", "Caja con cubierta", "Estribos laterales", "Cámara de reversa", "Capacidad de remolque de 3 toneladas"] },
   { id: "kora-crossover-2023", marca: "Kora", modelo: "Rumbo", version: "Sport", anio: 2023, tipo: "SUV", precio: 379000, km: 15000,
     transmision: "Automática", combustible: "Gasolina", motor: "1.6 L turbo", potencia: "180 hp", color: "Rojo", colorHex: "#b3262d", puertas: 5, asientos: 5,
-    duenos: 1, ciudad: "Guadalajara", foto: null,
+    duenos: 1, ciudad: "Guadalajara", foto: "img/auto-crossover.jpg",
     equipo: ["Garantía de fábrica vigente", "Pantalla de 10 pulgadas", "Arranque sin llave", "Alerta de punto ciego", "Cargador inalámbrico"] },
   { id: "aurora-van-2021", marca: "Aurora", modelo: "Familia", version: "Plus", anio: 2021, tipo: "Minivan", precio: 355000, km: 53000,
     transmision: "Automática", combustible: "Gasolina", motor: "2.4 L", potencia: "175 hp", color: "Plata", colorHex: "#b8bcc4", puertas: 5, asientos: 7,
-    duenos: 1, ciudad: "Monterrey", foto: null,
+    duenos: 1, ciudad: "Monterrey", foto: "img/auto-minivan.jpg",
     equipo: ["Puertas laterales eléctricas", "Tres filas de asientos", "Pantalla trasera para pasajeros", "Cámara de reversa", "Aire acondicionado de tres zonas"] },
 ];
 
