@@ -4,75 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alba Dental · Clínica dental</title>
-<meta name="description" content="Demo de página web para clínica dental: tratamientos, primera visita y reserva de cita.">
+<meta name="description" content="Demo de página web para clínica dental: tratamientos, antes y después, equipo, preguntas frecuentes y reserva de cita.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/base.css">
-<style>
-:root { --white:#F4F8FA; --teal:#0F3D47; --peach:#F59E7B; --peach-deep:#C9552B; --ink:#12313A; --focus:#C9552B; --header-bg:rgb(244 248 250 / .92); --menu-bg:#F4F8FA; --menu-fg:#0F3D47;
-  --serif:"Fraunces",Georgia,serif; --sans:"Figtree",system-ui,sans-serif; }
-body { background:var(--white); color:var(--ink); font-family:var(--sans); font-size:1.0625rem; }
-h1,h2,h3 { font-family:var(--serif); color:var(--teal); line-height:1.1; margin:0; font-weight:600; letter-spacing:-.01em; }
-h1 { font-size:clamp(2.6rem, 1.2rem + 6vw, 5rem); }
-h2 { font-size:clamp(1.9rem, 1.2rem + 2.6vw, 3rem); }
-h3 { font-size:1.35rem; }
-p { max-inline-size:62ch; }
-.site-header { backdrop-filter:blur(8px); border-block-end:1px solid rgb(15 61 71 / .08); color:var(--teal); }
-.site-logo { font-family:var(--serif); font-size:1.4rem; }
-.btn { display:inline-block; padding:.9rem 1.6rem; border-radius:999px; background:var(--peach); color:var(--teal); font-weight:700; text-decoration:none; border:0; font:inherit; font-weight:700; cursor:pointer; min-block-size:48px; }
-.btn:hover { background:#ffb08f; }
-.btn.ghost { background:transparent; border:1.5px solid var(--teal); }
-.site-header .btn { padding:.55rem 1.1rem; min-block-size:44px; }
-
-.hero { display:grid; gap:2.5rem; padding-block:3.5rem 4.5rem; align-items:center; }
-.hero p { font-size:1.2rem; margin-block:1.25rem 2rem; }
-.hero-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
-.hero figure { margin:0; border-radius:12rem 12rem 1.5rem 1.5rem; overflow:hidden; box-shadow:0 30px 60px -30px rgb(15 61 71 / .5); aspect-ratio:4/4.6; }
-.hero img { inline-size:100%; block-size:100%; object-fit:cover; object-position:62% center; }
-@media (min-width:56rem){ .hero { grid-template-columns:1.05fr .95fr; } }
-
-.band { background:var(--teal); color:var(--white); }
-.band h2 { color:var(--white); }
-.section { padding-block:4.5rem; }
-.treat-list { display:grid; gap:1rem; margin-block-start:2.5rem; padding:0; list-style:none; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); }
-.treat-list li { padding:1.5rem; border-radius:1.25rem; background:rgb(244 248 250 / .08); border:1px solid rgb(244 248 250 / .15); }
-.treat-list h3 { color:var(--peach); margin-block-end:.4rem; }
-.treat-list p { margin:0; opacity:.9; }
-
-.steps { counter-reset:step; display:grid; gap:1.25rem; margin:2.5rem 0 0; padding:0; list-style:none; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); }
-.steps li { counter-increment:step; padding-block-start:1rem; border-block-start:3px solid var(--peach); }
-.steps li::before { content:"Paso " counter(step); font-weight:700; color:var(--peach-deep); }
-.steps h3 { margin-block:.3rem .4rem; }
-
-.team { display:grid; gap:2rem; align-items:center; }
-.quote { font-family:var(--serif); font-size:clamp(1.5rem,1rem + 1.8vw,2.2rem); color:var(--teal); line-height:1.25; margin:0; max-inline-size:34ch; }
-.quote footer { font-family:var(--sans); font-size:1rem; margin-block-start:1rem; color:var(--ink); }
-@media (min-width:56rem){ .team { grid-template-columns:1fr 1fr; } }
-
-form { display:grid; gap:1rem; max-inline-size:34rem; }
-label { font-weight:700; display:block; margin-block-end:.3rem; }
-input, select, textarea { font:inherit; font-size:max(1rem,1em); inline-size:100%; padding:.8rem .9rem; min-block-size:48px; border-radius:.75rem; border:1.5px solid #6b8a92; background:#fff; color:var(--ink); }
-input:user-invalid, select:user-invalid { border-color:#B3261E; }
-#cita { background:#fff; }
-[role=status] { font-weight:700; color:var(--teal); min-block-size:1.5rem; }
-footer.site-footer { background:var(--teal); color:var(--white); padding-block:2.5rem; }
-footer.site-footer p { margin:.2rem 0; }
-footer a { color:var(--peach); }
-.demo-tag { position:fixed; inset-inline-end:.75rem; inset-block-end:.75rem; z-index:30; background:var(--teal); color:var(--white); padding:.4rem .8rem; border-radius:999px; font-size:.8rem; text-decoration:none; }
-</style>
+<link rel="stylesheet" href="estilo.css">
 </head>
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-logo" href="#inicio">Alba dental</a>
+    <a class="site-logo" href="#inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0F3D47" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.500c-.9 0-1.200-3-1.800-5-.5-1.800-2.700-3.200-2.700-6.200C7.500 6.300 9.500 4.800 12 5.800c2.500-1 4.500.5 4.500 4.500 0 3-2.200 4.400-2.700 6.200-.6 2-.9 5-1.800 5z"/></svg>
+      Alba dental
+    </a>
     <nav class="site-nav" aria-label="Principal">
       <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
       <ul id="site-menu" class="site-menu" popover="auto">
         <li><a href="#inicio" aria-current="page">Inicio</a></li>
         <li><a href="#tratamientos">Tratamientos</a></li>
-        <li><a href="#primera-visita">Primera visita</a></li>
-        <li><a href="#clinica">La clínica</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#equipo">Equipo</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
         <li><a class="btn" href="#cita">Reservar cita</a></li>
       </ul>
     </nav>
@@ -82,71 +35,155 @@ footer a { color:var(--peach); }
 <main id="inicio">
   <section class="wrap hero">
     <div>
+      <p class="eyebrow">Clínica dental · Ciudad Ejemplo</p>
       <h1>Sonríe con tranquilidad.</h1>
-      <p>Cuidamos tu sonrisa desde la primera visita, sin prisas y explicándote cada paso antes de empezar.</p>
+      <p class="lead">Cuidamos tu sonrisa desde la primera visita, sin prisas y explicándote cada paso antes de empezar.</p>
       <div class="hero-actions">
         <a class="btn" href="#cita">Reservar cita</a>
-        <a class="btn ghost" href="#tratamientos">Ver tratamientos</a>
+        <a class="btn ghost" href="#resultados">Ver resultados</a>
       </div>
     </div>
-    <figure><img src="img/hero.jpg" width="1280" height="720" alt="Consulta de la clínica con sillón dental azul petróleo y luz natural" fetchpriority="high"></figure>
+    <div class="hero-stage">
+      <figure><img src="img/hero.jpg" width="1280" height="720" alt="Consulta de la clínica con sillón dental azul petróleo y luz natural" fetchpriority="high"></figure>
+      <p class="chip b"><b>4.9</b><span><span class="stars" aria-hidden="true">★★★★★</span><br>1,200 reseñas</span></p>
+      <p class="chip a"><b>+15</b><span>años cuidando<br>sonrisas</span></p>
+    </div>
   </section>
 
-  <section class="band section" id="tratamientos">
-    <div class="wrap">
-      <h2>Tratamientos para toda la familia</h2>
-      <ul class="treat-list">
-        <li><h3>Limpieza y revisión</h3><p>Una revisión completa cada seis meses para detectar a tiempo cualquier problema.</p></li>
-        <li><h3>Ortodoncia invisible</h3><p>Alineadores transparentes que casi no se notan y se quitan para comer.</p></li>
-        <li><h3>Blanqueamiento</h3><p>Una sonrisa más clara en una sola sesión, con protección para las encías.</p></li>
-        <li><h3>Implantes</h3><p>Recupera un diente perdido con una solución firme y de aspecto natural.</p></li>
-        <li><h3>Odontopediatría</h3><p>Citas cortas y amables para que los niños pierdan el miedo al dentista.</p></li>
-        <li><h3>Urgencias</h3><p>Dolor o golpe: te atendemos el mismo día en horario de clínica.</p></li>
-      </ul>
+  <div class="trust" aria-label="Por qué elegirnos">
+    <ul>
+      <li>Primera consulta sin costo</li><li>Radiografía digital de baja radiación</li><li>Citas el mismo día en urgencias</li><li>Planes de pago sin intereses</li><li>Atención para niños y adultos</li>
+      <li aria-hidden="true">Primera consulta sin costo</li><li aria-hidden="true">Radiografía digital de baja radiación</li><li aria-hidden="true">Citas el mismo día en urgencias</li><li aria-hidden="true">Planes de pago sin intereses</li><li aria-hidden="true">Atención para niños y adultos</li>
+    </ul>
+  </div>
+
+  <section class="wrap section" id="tratamientos">
+    <div class="reveal">
+      <p class="eyebrow">Tratamientos</p>
+      <h2>Todo lo que tu sonrisa necesita, bajo el mismo techo</h2>
+    </div>
+    <ul class="treat">
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.800 4.200L18 9l-4.200 1.800L12 15l-1.800-4.200L6 9l4.200-1.800z"/><path d="M18.500 15l.800 1.700 1.700.8-1.700.8-.8 1.700-.8-1.700-1.700-.8 1.700-.8z"/></svg><h3>Limpieza y revisión</h3><p>Una revisión completa cada seis meses para detectar a tiempo cualquier problema.</p></li>
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16M4 15h16M7 6v12M12 6v12M17 6v12"/></svg><h3>Ortodoncia invisible</h3><p>Alineadores transparentes que casi no se notan y se quitan para comer.</p></li>
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg><h3>Blanqueamiento</h3><p>Una sonrisa más clara en una sola sesión, con protección para las encías.</p></li>
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l1 6-2 3v9h-4v-9L8 9z"/></svg><h3>Implantes</h3><p>Recupera un diente perdido con una solución firme y de aspecto natural.</p></li>
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.400 3.600-7 8-7s8 2.600 8 7"/></svg><h3>Odontopediatría</h3><p>Citas cortas y amables para que los niños pierdan el miedo al dentista.</p></li>
+      <li class="reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17v.5"/></svg><h3>Urgencias</h3><p>Dolor o golpe: te atendemos el mismo día en horario de clínica.</p></li>
+    </ul>
+  </section>
+
+  <section class="results section" id="resultados">
+    <div class="wrap results-grid">
+      <div class="reveal">
+        <p class="eyebrow">Resultados reales de pacientes</p>
+        <h2>Mueve el control y mira el cambio</h2>
+        <p class="lead" style="margin-block-start:1rem">Arrastra la barra hacia la derecha para ver el antes, o hacia la izquierda para ver el después.</p>
+        <p style="margin-block-start:1rem"><strong>Alineación y blanqueamiento.</strong> Ortodoncia invisible durante 9 meses y una sesión de blanqueamiento al final.</p>
+        <p><small>Imágenes de ejemplo generadas para esta demo.</small></p>
+      </div>
+      <div class="compare reveal" role="group" aria-label="Comparación antes y después de un tratamiento">
+        <img class="before" src="img/antes.jpg" width="1280" height="720" alt="Sonrisa antes del tratamiento, con dientes desalineados y amarillentos" loading="lazy">
+        <img class="after" src="img/despues.jpg" width="1280" height="720" alt="Misma sonrisa después del tratamiento, con dientes alineados y blancos" loading="lazy">
+        <span class="tag t-after" aria-hidden="true">Después</span><span class="tag t-before" aria-hidden="true">Antes</span>
+        <div class="bar" aria-hidden="true"><span class="knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        <input type="range" min="0" max="100" step="1" value="50" aria-label="Mover para comparar el antes y el después">
+      </div>
     </div>
   </section>
 
   <section class="wrap section" id="primera-visita">
-    <h2>Así es tu primera visita</h2>
+    <div class="reveal"><p class="eyebrow">Tu primera visita</p><h2>Así de simple es empezar</h2></div>
     <ol class="steps">
-      <li><h3>Hablamos</h3><p>Nos cuentas qué te preocupa y revisamos tu historial.</p></li>
-      <li><h3>Revisamos</h3><p>Exploración y radiografía digital con muy poca radiación.</p></li>
-      <li><h3>Te explicamos</h3><p>Ves tu caso en pantalla y recibes un plan claro, sin compromiso.</p></li>
-      <li><h3>Decides</h3><p>Empezamos cuando tú quieras, a tu ritmo.</p></li>
+      <li class="reveal"><h3>Hablamos</h3><p>Nos cuentas qué te preocupa y revisamos tu historial.</p></li>
+      <li class="reveal"><h3>Revisamos</h3><p>Exploración y radiografía digital con muy poca radiación.</p></li>
+      <li class="reveal"><h3>Te explicamos</h3><p>Ves tu caso en pantalla y recibes un plan claro, sin compromiso.</p></li>
+      <li class="reveal"><h3>Decides</h3><p>Empezamos cuando tú quieras, a tu ritmo.</p></li>
     </ol>
   </section>
 
-  <section class="band section" id="clinica">
-    <div class="wrap team">
-      <blockquote class="quote">“Llevaba años sin ir al dentista por miedo. Aquí me explicaron todo y no sentí nada.”
-        <footer>Mariana R., paciente desde 2024</footer></blockquote>
-      <div><h2>Una clínica pensada para que no te sientas en una clínica</h2>
-      <p>Luz natural, música suave y tiempo de sobra. Trabajamos con cita para que nunca esperes de más.</p></div>
+  <section class="wrap section" id="equipo" style="padding-block-start:1rem">
+    <div class="team">
+      <figure class="portrait reveal"><img src="img/doctora.jpg" width="1280" height="720" alt="Doctora Laura Vega, odontóloga, sonriendo en la clínica" loading="lazy" style="object-position:48% center"></figure>
+      <div class="reveal">
+        <p class="eyebrow">Tu dentista</p>
+        <h2>Dra. Laura Vega</h2>
+        <p class="lead" style="margin-block-start:1rem">Odontóloga con más de 15 años de experiencia en estética dental y ortodoncia. Cree que ir al dentista no debería dar miedo.</p>
+        <ul class="checks">
+          <li>Especialista en ortodoncia invisible y blanqueamiento</li>
+          <li>Te explica cada paso antes de empezar</li>
+          <li>Atiende a niños, adultos y personas con ansiedad dental</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="wrap section" id="cita">
-    <h2>Reserva tu cita</h2>
-    <p>Déjanos tus datos y te escribimos para confirmar el horario.</p>
-    <form data-demo="Gracias. Esta es una demo: no se envió ninguna cita." style="margin-block-start:1.5rem">
-      <div><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" autocomplete="name" required></div>
-      <div><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
-      <div><label for="motivo">Motivo de la visita</label>
-        <select id="motivo" name="motivo"><option>Revisión y limpieza</option><option>Ortodoncia</option><option>Blanqueamiento</option><option>Implantes</option><option>Urgencia</option></select></div>
-      <button class="btn" type="submit">Reservar cita</button>
-      <p role="status" aria-live="polite"></p>
-    </form>
+  <section class="wrap section" style="padding-block-start:1rem">
+    <div class="team flip">
+      <div class="reveal">
+        <p class="eyebrow">La clínica</p>
+        <h2>Un lugar donde no se siente que estás en una clínica</h2>
+        <p class="lead" style="margin-block-start:1rem">Luz natural, música suave y tiempo de sobra. Trabajamos con cita para que nunca esperes de más.</p>
+      </div>
+      <figure class="photo-wide reveal"><img src="img/recepcion.jpg" width="1280" height="720" alt="Sala de espera de la clínica con sofá azul petróleo y luz natural" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section class="band section" id="opiniones">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow" style="color:var(--peach)">Opiniones</p><h2>Lo que dicen nuestros pacientes</h2></div>
+      <ul class="reviews">
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Llevaba años sin ir al dentista por miedo. Aquí me explicaron todo y no sentí nada.”</blockquote><cite>Mariana R., paciente desde 2024</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Mi hijo salió contento y pidió volver. Eso ya es mucho decir.”</blockquote><cite>Carlos M., papá de Mateo</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Me alinearon los dientes con alineadores y casi nadie se dio cuenta. Quedé feliz.”</blockquote><cite>Andrea P., ortodoncia invisible</cite></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="preguntas">
+    <div class="reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan</h2></div>
+    <div class="faq reveal">
+      <details><summary>¿Duele el blanqueamiento?</summary><p>No debería doler. Algunas personas sienten sensibilidad unas horas después y usamos productos para reducirla.</p></details>
+      <details><summary>¿Cuánto dura la ortodoncia invisible?</summary><p>Entre 6 y 18 meses según cada caso. En la primera consulta te damos un plan con fechas.</p></details>
+      <details><summary>¿Atienden a niños pequeños?</summary><p>Sí. Desde los 3 años, con citas cortas y explicadas con juegos.</p></details>
+      <details><summary>¿Tienen planes de pago?</summary><p>Sí. Puedes pagar tu tratamiento en mensualidades sin intereses con las tarjetas participantes.</p></details>
+      <details><summary>¿Qué hago si tengo una urgencia?</summary><p>Llámanos o escríbenos por WhatsApp. Te atendemos el mismo día dentro del horario de clínica.</p></details>
+    </div>
+  </section>
+
+  <section class="results section" id="cita">
+    <div class="wrap book">
+      <div class="reveal">
+        <p class="eyebrow">Reserva tu cita</p>
+        <h2>Tu primera consulta no tiene costo</h2>
+        <p class="lead" style="margin-block-start:1rem">Déjanos tus datos y te escribimos para confirmar el horario.</p>
+        <dl class="hours">
+          <div><dt>Lunes a viernes</dt><dd>9:00 a 19:00</dd></div>
+          <div><dt>Sábados</dt><dd>9:00 a 14:00</dd></div>
+          <div><dt>Domingos</dt><dd>Cerrado</dd></div>
+        </dl>
+      </div>
+      <form class="reveal" data-demo="Gracias. Esta es una demo: no se envió ninguna cita.">
+        <div><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+        <div><label for="tel">Teléfono</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        <div><label for="motivo">Motivo de la visita</label>
+          <select id="motivo" name="motivo"><option>Revisión y limpieza</option><option>Ortodoncia</option><option>Blanqueamiento</option><option>Implantes</option><option>Urgencia</option></select></div>
+        <button class="btn" type="submit">Reservar cita</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
     <p><strong>Alba dental</strong> · Calle Ejemplo 123, Ciudad</p>
-    <p>Lunes a viernes de 9:00 a 19:00 · Sábados de 9:00 a 14:00</p>
     <p>Tel. 55 0000 0000 · <a href="../index.html">Ver todas las demos</a></p>
     <p>© <span data-year></span> Alba dental. Sitio de demostración.</p>
   </div>
 </footer>
-<script type="module" src="../assets/nav.js"></script>
+
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.800 3 3 8.800 3 16c0 2.300.600 4.500 1.700 6.400L3 29l6.800-1.700c1.800 1 3.900 1.500 6.200 1.500 7.200 0 13-5.800 13-13S23.200 3 16 3zm0 23.600c-2 0-3.900-.5-5.500-1.500l-.4-.2-4 1 1.100-3.900-.3-.4C5.800 19.900 5.200 18 5.200 16 5.200 9.900 10.100 5.200 16 5.200S26.800 10 26.800 16 21.900 26.600 16 26.600zm5.900-7.900c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1.100 1.100-1.100 2.600 1.100 3 1.300 3.200c.2.200 2.200 3.400 5.400 4.700 2 .8 2.800.9 3.800.7.600-.1 1.900-.8 2.200-1.600.3-.8.300-1.400.2-1.600-.1-.1-.3-.2-.6-.4z"/></svg></a>
+
+<script type="module" src="app.js"></script>
 </body>
 </html>
