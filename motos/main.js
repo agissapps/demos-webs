@@ -279,3 +279,21 @@ document.addEventListener("click", (e) => {
 });
 addEventListener("popstate", () => ir(location.hash));
 ir(location.hash, { animar: false, enfocar: false });
+
+/* ---------- Estado del taller en el encabezado (lun a sáb, 9:00 a 19:00) ---------- */
+{
+  const el = $("#estado-taller");
+  const pintar = () => {
+    const d = new Date(), h = d.getHours() + d.getMinutes() / 60;
+    const abierto = d.getDay() !== 0 && h >= 9 && h < 19;
+    el.classList.toggle("abierto", abierto);
+    el.classList.toggle("cerrado", !abierto);
+    el.querySelector("span").textContent = abierto ? "Taller abierto" : "Taller cerrado";
+  };
+  pintar(); setInterval(pintar, 60000);
+}
+
+/* La portada descuenta la altura real del encabezado para que el cartel y la barra quepan */
+new ResizeObserver(([e]) => {
+  document.documentElement.style.setProperty("--header-h", `${Math.ceil(e.borderBoxSize[0].blockSize)}px`);
+}).observe($(".site-header"));

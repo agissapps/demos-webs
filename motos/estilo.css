@@ -22,7 +22,7 @@ a { color:inherit; }
 .site-menu a { font-weight:600; }
 
 /* Portada */
-.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 7rem - var(--marquee-h)); display:grid; align-items:center; }
+.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - var(--header-h, 7.7rem) - var(--marquee-h)); display:grid; align-items:center; }
 .hero > img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:70% center; z-index:-3; }
 .hero::before { content:""; position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,#0b0b0d 8%,rgb(11 11 13 / .78) 42%,rgb(11 11 13 / .1) 80%), linear-gradient(0deg,#0b0b0d 0,transparent 30%); }
 /* Portada: texto y cartel del Buen Mes caben juntos en la primera pantalla */
@@ -377,20 +377,58 @@ tr:last-child td { border-block-end:0; }
 .estimado strong { font-family:var(--display); font-style:italic; font-weight:800; font-size:2rem; color:#fff; font-variant-numeric:tabular-nums; }
 .field .note { margin-block-start:.3rem; }
 
+/* Encabezado: franja de velocidad, datos del taller y acciones */
+.site-header { background:linear-gradient(180deg,rgb(20 20 23 / .96),rgb(11 11 13 / .94)); box-shadow:0 10px 30px -18px #000; }
+.site-header::before { content:""; display:block; block-size:3px; background:linear-gradient(90deg,var(--red-deep),var(--red) 35%,#ff6a6f 50%,var(--red) 65%,var(--red-deep)); background-size:200% 100%; }
+@media (prefers-reduced-motion: no-preference) { .site-header::before { animation:franja 6s linear infinite; } @keyframes franja { to { background-position:-200% 0; } } }
+.site-header svg { inline-size:1.2rem; block-size:1.2rem; flex:none; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.site-header .header-inner { padding-block:.55rem; gap:1rem; }
+.site-logo img { transition:transform .3s ease; }
+.site-logo:hover img { transform:rotate(-4deg) scale(1.05); }
+.hdr-info { display:flex; align-items:center; gap:1.6rem; margin:0 0 0 auto; padding:0; list-style:none; }
+.hdr-info li { display:grid; grid-template-columns:auto auto; align-items:center; column-gap:.6rem; line-height:1.15; }
+.hdr-info li > :first-child { grid-row:span 2; color:var(--red); }
+.hdr-info li + li { padding-inline-start:1.6rem; border-inline-start:1px solid var(--x-line); }
+.hdr-info span { color:#fff; font-weight:700; font-size:.92rem; }
+.hdr-info small { color:var(--mute); font-size:.78rem; }
+.hdr-info i { position:relative; inline-size:.6rem; block-size:.6rem; border-radius:50%; background:#22c55e; margin-inline:.3rem; }
+.hdr-info .cerrado i { background:#f59e0b; }
+@media (prefers-reduced-motion: no-preference) {
+  .hdr-info .abierto i::after { content:""; position:absolute; inset:0; border-radius:50%; background:inherit; animation:latido 1.8s ease-out infinite; }
+  @keyframes latido { to { transform:scale(2.8); opacity:0; } }
+}
+.hdr-acciones { display:flex; align-items:center; gap:.6rem; }
+.hdr-info + .hdr-acciones { margin-inline-start:.4rem; }
+.hdr-wa { display:inline-flex; align-items:center; gap:.45rem; min-block-size:44px; padding:.4rem .9rem; border-radius:999px; border:1.5px solid rgb(37 211 102 / .55); color:#fff; text-decoration:none; font-weight:700; font-size:.92rem; transition:background .2s ease, border-color .2s ease; }
+.hdr-wa svg { color:#25D366; }
+.hdr-wa:hover { background:rgb(37 211 102 / .14); border-color:#25D366; }
+.hdr-login svg { inline-size:1.05rem; block-size:1.05rem; }
+@media (max-width:68rem){ .hdr-info { display:none; } .hdr-acciones { margin-inline-start:auto; } }
+@media (max-width:40rem){ .hdr-wa { display:none; } }
+
 /* Pestañas: cada sección del sitio es una vista; sólo se muestra la activa */
-.site-header .header-inner { padding-block:.6rem; }
-.pestanas { border-block-start:1px solid var(--x-line); }
-.pestanas ul { display:flex; gap:.25rem; list-style:none; margin:0 auto; padding:0; inline-size:min(100% - 2rem, 72rem); overflow-x:auto; scrollbar-width:none; scroll-snap-type:inline proximity; scroll-padding-inline:2rem; overscroll-behavior-inline:contain; }
+.pestanas { border-block-start:1px solid var(--x-line); background:repeating-linear-gradient(-60deg,transparent 0 14px,rgb(255 255 255 / .018) 14px 28px); }
+.pestanas ul { position:relative; display:flex; gap:.2rem; list-style:none; margin:0 auto; padding:.3rem 0; inline-size:min(100% - 2rem, 72rem); overflow-x:auto; scrollbar-width:none; scroll-snap-type:inline proximity; scroll-padding-inline:2rem; overscroll-behavior-inline:contain; }
 .pestanas ul::-webkit-scrollbar { display:none; }
 .pestanas li { flex:none; scroll-snap-align:start; }
-.pestanas a { position:relative; display:flex; align-items:center; min-block-size:44px; padding:.35rem 1rem; text-decoration:none; color:var(--mute); font-family:var(--display); font-style:italic; font-weight:800; font-size:1.08rem; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; transition:color .2s ease; }
-.pestanas a:hover { color:#fff; }
-.pestanas a:focus-visible { outline:2px solid var(--focus); outline-offset:-4px; border-radius:.3rem; }
-.pestanas a[aria-current="page"] { color:#fff; }
-.pestanas a[aria-current="page"]::after { content:""; position:absolute; inset:auto .6rem 0; border-block-end:3px solid var(--red); }
-@media (prefers-reduced-motion: no-preference) {
-  .pestanas a[aria-current="page"]::after { animation:tab-in .3s cubic-bezier(.2,.7,.2,1) both; }
-  @keyframes tab-in { from { transform:scaleX(0); } }
+.pestanas a { position:relative; display:flex; align-items:center; gap:.5rem; min-block-size:44px; padding:.35rem 1rem; border-radius:.55rem; text-decoration:none; color:var(--mute); font-family:var(--display); font-style:italic; font-weight:800; font-size:1.08rem; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; transition:color .2s ease, background-color .2s ease; }
+.pestanas a svg { transition:color .2s ease, transform .25s ease; }
+.pestanas a:hover { color:#fff; background-color:rgb(255 255 255 / .05); }
+.pestanas a:hover svg { transform:translateY(-2px) rotate(-6deg); }
+.pestanas a:focus-visible { outline:2px solid var(--focus); outline-offset:-3px; }
+.pestanas a[aria-current="page"] { color:#fff; background-color:rgb(225 29 39 / .12); }
+.pestanas a[aria-current="page"] svg { color:var(--red); }
+.pill-promo { font-style:normal; font-family:var(--sans); font-size:.66rem; font-weight:800; letter-spacing:.06em; background:#ffd400; color:#0b0b0d; padding:.12rem .45rem; border-radius:.25rem; transform:skewX(-10deg) translateY(-.45rem); }
+@media (prefers-reduced-motion: no-preference) { .pill-promo { animation:promo-pulso 2.4s ease-in-out infinite; } @keyframes promo-pulso { 50% { box-shadow:0 0 0 4px rgb(255 212 0 / .18); } } }
+@media (max-width:40rem){ .pestanas a { font-size:1rem; padding-inline:.8rem; gap:.4rem; } .pestanas a svg { inline-size:1.05rem; block-size:1.05rem; } }
+/* Indicador: una línea roja que se desliza a la pestaña activa (anchor positioning) */
+@supports (anchor-name: --a) {
+  .pestanas a[aria-current="page"] { anchor-name:--tab-activa; }
+  .pestanas ul::before { content:""; position:absolute; position-anchor:--tab-activa; inset-inline-start:calc(anchor(left) + .6rem); inset-inline-end:calc(anchor(right) + .6rem); inset-block-end:calc(anchor(bottom) - .3rem); border-block-end:3px solid var(--red); box-shadow:0 0 14px 1px rgb(225 29 39 / .75); pointer-events:none; }
+  @media (prefers-reduced-motion: no-preference) { .pestanas ul::before { transition:inset .35s cubic-bezier(.3,1.3,.5,1); } }
+}
+@supports not (anchor-name: --a) {
+  .pestanas a[aria-current="page"]::after { content:""; position:absolute; inset:auto .6rem -.3rem; border-block-end:3px solid var(--red); }
 }
 /* Desvanecido en los bordes cuando las pestañas no caben (móvil) */
 @property --fade-start { syntax:"<length>"; inherits:false; initial-value:0px; }
@@ -412,5 +450,5 @@ main { position:relative; }
 @supports not (content-visibility: hidden) { .vista.oculta { display:none; } }
 /* Las vistas sueltas empiezan con un poco más de aire bajo las pestañas */
 .vista:not(#inicio) > .section:first-child { padding-block-start:clamp(2.5rem, 5vw, 4rem); }
-.vista section[id] { scroll-margin-block-start:7.6rem; }
+.vista section[id] { scroll-margin-block-start:var(--header-h, 7.7rem); }
 @media (prefers-reduced-motion: reduce){ .marquee ul { block-size:auto; min-block-size:var(--marquee-h); padding-block:.4rem; } }
