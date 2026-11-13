@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuerza Norte · Gimnasio</title>
+<meta name="description" content="Demo de página web para gimnasio: horario de clases por día, planes de membresía, coaches y clase de prueba gratis por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#inicio"><i aria-hidden="true"></i>Fuerza Norte</a>
+    <a class="btn sm" href="#prueba">Clase gratis</a>
+  </div>
+  <nav class="tabs" aria-label="Secciones">
+    <a href="#inicio">Inicio</a>
+    <a href="#clases">Clases</a>
+    <a href="#planes">Planes</a>
+    <a href="#coaches">Coaches</a>
+    <a href="#prueba">Clase gratis</a>
+  </nav>
+</header>
+
+<main>
+  <section class="vista" id="inicio" data-titulo="Inicio">
+    <div class="hero">
+      <figure class="foto"><img src="img/hero.jpg" width="1600" height="900" alt="Persona levantando una barra en un gimnasio con luz cálida" fetchpriority="high"></figure>
+      <div class="wrap hero-in">
+        <h1>Entrena hoy.<br><span class="grad">Tu primera clase es gratis.</span></h1>
+        <p class="lead">Pesas, cardio y más de 40 clases a la semana, con coaches que te corrigen la técnica.</p>
+        <div class="acts"><a class="btn" href="#prueba">Pedir mi clase gratis</a><a class="btn soft" href="#planes">Ver planes</a></div>
+        <div class="glass">
+          <div><b>5 a 23 h</b><span>todos los días</span></div>
+          <div><b>40+</b><span>clases a la semana</span></div>
+          <div><b>$549</b><span>plan mensual</span></div>
+        </div>
+      </div>
+    </div>
+    <ul class="wrap tiles">
+      <li><a class="tile" href="#clases"><span class="foto" style="--ph:linear-gradient(140deg,#FF5A1F,#7A1FFF)"><img src="img/clases.jpg" width="900" height="700" alt="" loading="lazy"></span><b>Clases</b><span>Box, spinning, funcional, yoga y más</span></a></li>
+      <li><a class="tile" href="#planes"><span class="foto" style="--ph:linear-gradient(140deg,#FF2E7E,#2B1FFF)"><img src="img/pesas.jpg" width="900" height="700" alt="" loading="lazy"></span><b>Planes</b><span>Por día, mes o año, sin inscripción</span></a></li>
+      <li><a class="tile" href="#coaches"><span class="foto" style="--ph:linear-gradient(140deg,#1FB6FF,#7A1FFF)"><img src="img/coach.jpg" width="900" height="700" alt="" loading="lazy"></span><b>Coaches</b><span>Conoce a quien te va a entrenar</span></a></li>
+    </ul>
+  </section>
+
+  <section class="vista wrap page" id="clases" data-titulo="Clases" hidden>
+    <div class="page-head"><h2>Horario de clases</h2><p class="lead">Todas las clases están incluidas en los planes mensual y anual.</p></div>
+    <div class="pills" role="group" aria-label="Elegir día" id="dias"></div>
+    <ol class="clases" id="lista-clases"></ol>
+  </section>
+
+  <section class="vista wrap page" id="planes" data-titulo="Planes" hidden>
+    <div class="page-head"><h2>Planes</h2><p class="lead">Sin contratos forzosos. Este mes no cobramos inscripción.</p></div>
+    <fieldset class="planes" id="planes-set">
+      <legend class="visually-hidden">Plan de membresía</legend>
+      <label class="plan"><input type="radio" name="plan" value="Visita"><h3>Visita</h3><p class="price">$80 <small>por día</small></p>
+        <ul class="checks"><li>Pesas y cardio</li><li>Regaderas y lockers</li></ul></label>
+      <label class="plan"><input type="radio" name="plan" value="Mensual" checked><span class="star">El más elegido</span><h3>Mensual</h3><p class="price">$549 <small>al mes</small></p>
+        <ul class="checks"><li>Acceso ilimitado</li><li>Todas las clases</li><li>Evaluación física inicial</li></ul></label>
+      <label class="plan"><input type="radio" name="plan" value="Anual"><h3>Anual</h3><p class="price">$4,990 <small>al año</small></p>
+        <ul class="checks"><li>Todo lo del plan mensual</li><li>2 meses gratis</li><li>4 sesiones con coach personal</li></ul></label>
+    </fieldset>
+    <div class="plan-cta"><a class="btn" href="#prueba">Probar gratis con este plan</a><span class="note">Precios de ejemplo en pesos.</span></div>
+    <h3 style="margin-block:3.5rem .5rem;font-size:1.4rem">Preguntas frecuentes</h3>
+    <div class="faq">
+      <details><summary>¿Necesito experiencia para las clases?</summary><p>No. Cada clase tiene versión para principiantes y el coach te acompaña.</p></details>
+      <details><summary>¿Puedo congelar mi membresía?</summary><p>El plan anual se puede congelar hasta 30 días por viaje o lesión.</p></details>
+      <details><summary>¿Hay estacionamiento?</summary><p>Sí, gratis para socios mientras entrenan.</p></details>
+    </div>
+  </section>
+
+  <section class="vista wrap page" id="coaches" data-titulo="Coaches" hidden>
+    <div class="page-head"><h2>Coaches</h2><p class="lead">Certificados y presentes en piso todo el día.</p></div>
+    <ul class="coaches" id="lista-coaches"></ul>
+  </section>
+
+  <section class="vista wrap page" id="prueba" data-titulo="Clase gratis" hidden>
+    <div class="trial">
+      <div>
+        <h2>Tu primera clase <span class="grad">es gratis</span></h2>
+        <p class="lead">Elige la clase que quieres probar. Te confirmamos el horario por WhatsApp.</p>
+        <ul class="checks"><li>Sin compromiso de inscribirte</li><li>Trae ropa deportiva, toalla y agua</li><li>Av. Ejemplo 450, Ciudad</li></ul>
+      </div>
+      <form class="card" id="trial">
+        <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+        <div><label for="clase">Clase que quieres probar</label><select id="clase" name="clase"></select></div>
+        <div><label for="plan-sel">Plan que te interesa</label><select id="plan-sel" name="plan"><option>Visita</option><option selected>Mensual</option><option>Anual</option></select></div>
+        <button class="btn wide" type="submit">Pedir clase por WhatsApp</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><p><b>Fuerza Norte</b> · Av. Ejemplo 450, Ciudad · Tel. 55 0000 0000</p><p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración</p></div>
+</footer>
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.8 1 3.9 1.5 6.2 1.5 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.5-1.500l-.4-.2-4 1 1.100-3.900-.3-.4C5.800 19.900 5.200 18 5.200 16 5.200 9.900 10.100 5.200 16 5.200S26.800 10 26.800 16 21.900 26.600 16 26.600zm5.900-7.900c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1.100 1.100-1.100 2.600 1.100 3 1.300 3.200c.2.200 2.200 3.400 5.400 4.700 2 .8 2.800.9 3.800.7.600-.1 1.900-.8 2.200-1.600.3-.8.300-1.400.2-1.600-.1-.1-.3-.2-.6-.4z"/></svg></a>
+
+<script type="module">
+import "../assets/extras.js";
+import "../assets/vistas.js";
+
+// Horario de ejemplo: [hora, clase, coach, nivel]. Cambia por el de tu gimnasio.
+const horario = {
+  Lun: [["06:00", "Funcional", "Sam", "Todos los niveles"], ["07:00", "Spinning", "Vale", "Todos los niveles"], ["18:00", "Box", "Toño", "Intermedio"], ["19:00", "Fuerza", "Sam", "Avanzado"], ["20:00", "Yoga", "Lu", "Principiante"]],
+  Mar: [["06:00", "HIIT", "Vale", "Intermedio"], ["08:00", "Pilates", "Lu", "Todos los niveles"], ["18:00", "Funcional", "Sam", "Todos los niveles"], ["19:30", "Spinning", "Vale", "Todos los niveles"]],
+  Mié: [["06:00", "Fuerza", "Sam", "Avanzado"], ["07:00", "Spinning", "Vale", "Todos los niveles"], ["18:00", "Box", "Toño", "Principiante"], ["19:00", "HIIT", "Vale", "Intermedio"], ["20:00", "Yoga", "Lu", "Todos los niveles"]],
+  Jue: [["06:00", "Funcional", "Sam", "Todos los niveles"], ["08:00", "Pilates", "Lu", "Todos los niveles"], ["18:00", "Box", "Toño", "Intermedio"], ["19:30", "Spinning", "Vale", "Todos los niveles"]],
+  Vie: [["06:00", "HIIT", "Vale", "Intermedio"], ["07:00", "Fuerza", "Sam", "Avanzado"], ["18:00", "Funcional", "Sam", "Todos los niveles"], ["19:00", "Box", "Toño", "Todos los niveles"]],
+  Sáb: [["08:00", "Bootcamp", "Sam y Vale", "Todos los niveles"], ["10:00", "Yoga", "Lu", "Todos los niveles"]],
+};
+const nombres = { Lun: "Lunes", Mar: "Martes", Mié: "Miércoles", Jue: "Jueves", Vie: "Viernes", Sáb: "Sábado" };
+const hoy = ["Lun", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"][new Date().getDay()];
+const slug = (s) => s.normalize("NFD").replace(/[^\w]/g, "").toLowerCase();
+
+const dias = document.getElementById("dias"), lista = document.getElementById("lista-clases");
+dias.innerHTML = Object.keys(horario).map((d) => `<button class="pill" type="button" data-dia="${d}" aria-pressed="${d === hoy}">${nombres[d]}</button>`).join("");
+function pintar(d) {
+  lista.innerHTML = horario[d].map(([h, c, coach, lvl]) => `<li class="clase" style="view-transition-name:c-${slug(c)}-${h.replace(":", "")}">
+    <time>${h}</time><div><h3>${c}</h3><p>Con ${coach}</p></div><span class="lvl">${lvl}</span></li>`).join("");
+}
+pintar(hoy);
+dias.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-dia]");
+  if (!b || b.getAttribute("aria-pressed") === "true") return;
+  for (const x of dias.children) x.setAttribute("aria-pressed", String(x === b));
+  const update = () => pintar(b.dataset.dia);
+  if (document.startViewTransition) document.startViewTransition(update);
+  else update();
+});
+
+// Coaches: la foto va en img/coach-<id>.jpg; mientras no exista se ve el degradado.
+const coaches = [["sam", "Sam Ortiz", "Fuerza y funcional", "10 años entrenando atletas.", "#FF5A1F,#7A1FFF"], ["vale", "Vale Ruiz", "Spinning y HIIT", "Su clase de las 7:00 siempre se llena.", "#FF2E7E,#2B1FFF"], ["tono", "Toño Cruz", "Box", "Exboxeador amateur, paciente con principiantes.", "#FFB01F,#FF2E7E"], ["lu", "Lu Medina", "Yoga y pilates", "Movilidad y recuperación.", "#1FB6FF,#7A1FFF"]];
+document.getElementById("lista-coaches").innerHTML = coaches.map(([id, n, rol, d, g]) => `<li><article class="coach">
+  <span class="foto" style="--ph:linear-gradient(150deg,${g})"><img src="img/coach-${id}.jpg" width="750" height="1000" alt="Retrato de ${n}" loading="lazy" onerror="this.remove()"></span>
+  <span class="rol">${rol}</span><h3>${n}</h3><p>${d}</p></article></li>`).join("");
+
+// Clase de prueba → WhatsApp. El plan elegido en la pestaña Planes se copia al formulario.
+const TEL = "520000000000";
+const f = document.getElementById("trial");
+f.clase.innerHTML = [...new Set(Object.values(horario).flat().map((x) => x[1]))].map((c) => `<option>${c}</option>`).join("");
+document.getElementById("planes-set").addEventListener("change", (e) => (f.plan.value = e.target.value));
+f.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const msg = `Hola, soy ${f.nombre.value}. Quiero mi clase gratis de ${f.clase.value}. Me interesa el plan ${f.plan.value}.`;
+  window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  f.querySelector("[role=status]").textContent = "Se abrió WhatsApp con tu mensaje listo para enviar.";
+});
+</script>
+</body>
+</html>

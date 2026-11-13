@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dulce Antojo · Postres caseros</title>
+<meta name="description" content="Demo de página web para venta de postres: menú con filtros, carrito y pedido directo por WhatsApp, pasteles para eventos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#inicio" aria-label="Dulce Antojo, inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 9c1-4 4-6 7-6" stroke="#3E7C4F" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="16" cy="20" r="10" fill="currentColor"/><circle cx="12.5" cy="16.5" r="2.4" fill="#fff" opacity=".55"/></svg>
+      dulce antojo
+    </a>
+    <a class="cart-btn" href="#pedido">Mi pedido <span id="badge" class="badge" hidden>0</span></a>
+  </div>
+  <nav class="tabs" aria-label="Secciones">
+    <a href="#inicio">Inicio</a>
+    <a href="#menu">Menú</a>
+    <a href="#eventos">Pasteles para eventos</a>
+    <a href="#pedido">Hacer pedido</a>
+  </nav>
+</header>
+
+<main>
+  <!-- INICIO: sólo lo esencial -->
+  <section class="vista" id="inicio" data-titulo="Inicio">
+    <div class="hero wrap">
+      <div class="hero-txt">
+        <h1>Postres caseros, horneados cada mañana</h1>
+        <p class="lead">Pasteles, pays y postres en vaso hechos en casa. Haz tu pedido en línea y te lo llevamos al día siguiente.</p>
+        <div class="acts">
+          <a class="btn" href="#menu">Ver el menú</a>
+          <a class="btn soft" href="#eventos">Pastel para un evento</a>
+        </div>
+        <ul class="facts">
+          <li><b>4.9</b> de calificación en 320 reseñas</li>
+          <li><b>Entrega gratis</b> en pedidos de más de $350</li>
+        </ul>
+      </div>
+      <div class="hero-art">
+        <span class="blob b1" aria-hidden="true"></span><span class="blob b2" aria-hidden="true"></span>
+        <figure class="foto arch" style="--ph:linear-gradient(160deg,#FFC2D4,#E83F6F)">
+          <img src="img/hero.jpg" width="900" height="1125" alt="Rebanada de pastel de tres leches con fresas frescas" fetchpriority="high">
+        </figure>
+        <svg class="sticker" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="circ" d="M100 100m-74 0a74 74 0 1 1 148 0a74 74 0 1 1-148 0"/></defs>
+          <circle cx="100" cy="100" r="96" fill="#FFD66B"/>
+          <text><textPath href="#circ">horneado hoy ✿ pide antes de las 12 ✿ </textPath></text>
+          <path d="M100 74c-14-22-46-8-30 18l30 30 30-30c16-26-16-40-30-18z" fill="#E83F6F"/>
+        </svg>
+        <p class="tag-price"><span>Tres leches</span><b>$65</b></p>
+      </div>
+    </div>
+
+    <div class="wrap favs">
+      <div class="favs-head"><h2>Los más pedidos</h2><a class="more" href="#menu">Ver todo el menú</a></div>
+      <ul class="cards" id="favoritos"></ul>
+    </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section class="vista wrap page" id="menu" data-titulo="Menú" hidden>
+    <div class="page-head">
+      <h2>Menú</h2>
+      <p class="lead">Precios por pieza o rebanada. Toca <b>Agregar</b> y arma tu pedido.</p>
+    </div>
+    <div class="pills" role="group" aria-label="Filtrar postres" id="filtros">
+      <button class="pill" type="button" aria-pressed="true" data-cat="todos">Todos</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="pastel">Pasteles</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="vaso">En vaso</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="pay">Pays y flanes</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="galleta">Galletas</button>
+    </div>
+    <ul class="cards" id="lista"></ul>
+    <p class="note">Precios de ejemplo en pesos.</p>
+  </section>
+
+  <!-- EVENTOS -->
+  <section class="vista page" id="eventos" data-titulo="Pasteles para eventos" hidden>
+    <div class="wrap ev-hero">
+      <figure class="foto ev-photo" style="--ph:linear-gradient(160deg,#FFE7A3,#F6A6BE)">
+        <img src="img/evento.jpg" width="1200" height="900" alt="Pastel de tres pisos decorado con flores para una boda" loading="lazy">
+      </figure>
+      <div>
+        <h2>Pasteles para cumpleaños, bodas y XV años</h2>
+        <p class="lead">De 20 a 150 porciones. Eliges sabor, tamaño y decoración, y lo llevamos a tu salón listo para servir.</p>
+        <p class="from">Desde <b>$950</b> para 20 personas</p>
+        <a class="btn" href="https://wa.me/520000000000?text=Hola%2C%20quiero%20cotizar%20un%20pastel%20para%20evento" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <h3 class="sub">Cómo funciona</h3>
+      <ol class="flow">
+        <li><b>Nos cuentas tu idea</b><span>Fecha, invitados y una foto de referencia si tienes.</span></li>
+        <li><b>Recibes la cotización</b><span>En menos de 24 horas, con sabores y precio cerrado.</span></li>
+        <li><b>Apartas con el 50%</b><span>Con al menos 5 días de anticipación.</span></li>
+        <li><b>Lo entregamos</b><span>En tu salón o tu casa, a la hora acordada.</span></li>
+      </ol>
+      <h3 class="sub">Sabores para eventos</h3>
+      <ul class="flavors">
+        <li style="--c:#F6E3C6">Tres leches</li><li style="--c:#6B3E26;--t:#fff">Chocolate</li><li style="--c:#D98A3D">Zanahoria</li>
+        <li style="--c:#FFC2D4">Fresas con crema</li><li style="--c:#F2F6B8">Limón</li><li style="--c:#E7D3F2">Moka</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PEDIDO -->
+  <section class="vista wrap page" id="pedido" data-titulo="Hacer pedido" hidden>
+    <div class="order">
+      <div>
+        <h2>Tu pedido</h2>
+        <p class="lead">Revisa tus postres, elige el día y envíalo por WhatsApp. Te confirmamos en minutos.</p>
+        <form class="pedido" id="pedido-form">
+          <ul class="cart" id="cart"></ul>
+          <p class="total"><span>Total</span><span id="total">$0</span></p>
+          <div class="two">
+            <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+            <div><label for="dia">Día de entrega</label><input id="dia" name="dia" type="date" required></div>
+          </div>
+          <div><label for="entrega">Entrega</label><select id="entrega" name="entrega"><option>A domicilio</option><option>Paso a recoger</option></select></div>
+          <button class="btn wide" type="submit">Enviar pedido por WhatsApp</button>
+          <p role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <aside class="info">
+        <h3>Antes de pedir</h3>
+        <div class="faq">
+          <details open><summary>¿Con cuánto tiempo pido?</summary><p>Los postres del menú, un día antes, hasta las 12:00. Los pasteles para eventos, 5 días antes.</p></details>
+          <details><summary>¿Cuánto cuesta el envío?</summary><p>Es gratis en pedidos de más de $350 dentro de la ciudad. Si no, cuesta $40.</p></details>
+          <details><summary>¿Cómo pago?</summary><p>En efectivo al recibir o por transferencia.</p></details>
+          <details><summary>¿Cuánto duran los postres?</summary><p>De 3 a 4 días en refrigeración. Las galletas, una semana en un frasco cerrado.</p></details>
+        </div>
+        <p class="hours"><b>Horario</b> Martes a domingo, 10:00 a 20:00</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><p><b>Dulce Antojo</b> · Repostería casera · Tel. 55 0000 0000</p><p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración</p></div>
+</footer>
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.8 1 3.9 1.5 6.2 1.5 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1 1.1-3.9-.3-.4C5.8 19.9 5.2 18 5.2 16 5.2 9.9 10.1 5.2 16 5.2S26.8 10 26.8 16 21.9 26.6 16 26.6zm5.9-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.9-.9-3.1-1.7-4.3-3.8-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1.1-1.1 2.6 1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7 2 .8 2.8.9 3.8.7.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg></a>
+<script type="module" src="postres.js"></script>
+</body>
+</html>

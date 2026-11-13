@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reyes Arquitectura</title>
+<meta name="description" content="Demo de página web para arquitecto: proyectos con filtros, servicios, proceso de trabajo y solicitud de cotización por WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="#inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#14201D"/><path d="M8 23V13l8-5 8 5v10" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M14 23v-6h4v6" fill="none" stroke="#C9A24B" stroke-width="2.2"/></svg>
+      Reyes Arquitectura
+    </a>
+    <nav class="tabs" aria-label="Secciones">
+      <a href="#inicio">Inicio</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#estudio">Estudio</a>
+      <a class="cta" href="#contacto">Cotizar</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="vista" id="inicio" data-titulo="Inicio">
+    <div class="wrap hero">
+      <div>
+        <h1>Diseñamos y construimos la casa que imaginas</h1>
+        <p class="lead">Casas, locales e interiores, desde el primer boceto hasta la entrega de llaves. La primera reunión no tiene costo.</p>
+        <div class="acts"><a class="btn" href="#contacto">Cotizar mi proyecto</a><a class="btn soft" href="#proyectos">Ver proyectos</a></div>
+        <dl class="nums">
+          <div><dt>proyectos entregados</dt><dd>85</dd></div>
+          <div><dt>años de experiencia</dt><dd>12</dd></div>
+        </dl>
+      </div>
+      <div class="show">
+        <div class="slides" id="slides" tabindex="0" role="group" aria-label="Proyectos destacados"></div>
+        <div class="ctrl">
+          <button type="button" data-dir="-1" aria-label="Proyecto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" data-dir="1" aria-label="Proyecto siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vista wrap page" id="proyectos" data-titulo="Proyectos" hidden>
+    <div class="page-head"><h2>Proyectos</h2><p class="lead">Toca una imagen para verla en grande.</p></div>
+    <div class="pills" role="group" aria-label="Filtrar proyectos" id="filtros">
+      <button class="pill" type="button" aria-pressed="true" data-cat="todos">Todos</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="Residencial">Residencial</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="Comercial">Comercial</button>
+      <button class="pill" type="button" aria-pressed="false" data-cat="Interiores">Interiores</button>
+    </div>
+    <ul class="projects" id="lista"></ul>
+  </section>
+
+  <section class="vista wrap page" id="servicios" data-titulo="Servicios" hidden>
+    <div class="page-head"><h2>Servicios</h2><p class="lead">Contrata solo el diseño o el proyecto completo con construcción.</p></div>
+    <ul class="services">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V8l8-5 8 5v12zM9 20v-6h6v6"/></svg><h3>Diseño arquitectónico</h3><p>Planos, fachadas y renders para ver tu casa antes de construirla.</p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M6 20V9h5v11M11 20V4h7v16M14 8h1M14 12h1M14 16h1"/></svg><h3>Construcción</h3><p>Obra con presupuesto cerrado, calendario y reporte semanal con fotos.</p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 6l4 4M4 20l1-5L16 4l4 4L9 19z"/></svg><h3>Remodelación</h3><p>Ampliaciones, cocinas, baños y cambios de distribución.</p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18v-5a3 3 0 013-3h10a3 3 0 013 3v5M4 15h16M6 18v2M18 18v2M8 10V7a2 2 0 012-2h4a2 2 0 012 2v3"/></svg><h3>Interiorismo</h3><p>Mobiliario, iluminación y materiales que van con tu estilo.</p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7zM14 3v4h4M10 12h5M10 16h5"/></svg><h3>Trámites y permisos</h3><p>Licencia de construcción, uso de suelo y terminación de obra.</p></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><h3>Asesoría de terreno</h3><p>Antes de comprar, revisamos qué se puede construir y cuánto costaría.</p></li>
+    </ul>
+    <h3 class="sub">Cómo trabajamos</h3>
+    <ol class="flow">
+      <li><b>Primera reunión</b><span>Sin costo. Hablamos de lo que necesitas, tu terreno y tu presupuesto.</span></li>
+      <li><b>Anteproyecto</b><span>Distribución y volumetría en 2 a 3 semanas, con dos rondas de cambios.</span></li>
+      <li><b>Proyecto ejecutivo</b><span>Planos completos, renders y presupuesto de obra detallado.</span></li>
+      <li><b>Obra y entrega</b><span>Supervisión semanal hasta que recibes tu espacio terminado.</span></li>
+    </ol>
+  </section>
+
+  <section class="vista wrap page" id="estudio" data-titulo="Estudio" hidden>
+    <div class="about">
+      <figure class="foto portrait"><img src="img/arquitecto.jpg" width="800" height="1000" alt="Retrato del arquitecto Daniel Reyes en su estudio" loading="lazy"></figure>
+      <div>
+        <h2>Arq. Daniel Reyes</h2>
+        <p class="quote">Una buena casa no es la más grande. Es la que resuelve cómo vive cada familia.</p>
+        <p class="lead">12 años diseñando vivienda y espacios comerciales. Somos un equipo pequeño: el arquitecto que te atiende es el mismo que visita tu obra.</p>
+        <dl class="nums">
+          <div><dt>proyectos entregados</dt><dd>85</dd></div>
+          <div><dt>m² construidos</dt><dd>24,000</dd></div>
+          <div><dt>años de experiencia</dt><dd>12</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="vista wrap page" id="contacto" data-titulo="Cotizar" hidden>
+    <div class="contact">
+      <div>
+        <h2>Cuéntanos tu proyecto</h2>
+        <p class="lead">Respondemos en menos de 24 horas para agendar tu primera reunión sin costo.</p>
+        <address>Calle Ejemplo 88, Ciudad<br>Tel. 55 0000 0000<br>Lunes a viernes, 9:00 a 18:00</address>
+        <div class="faq" style="margin-block-start:2rem">
+          <details><summary>¿Cuánto cuesta el diseño de una casa?</summary><p>Depende de los metros cuadrados. Te damos un precio cerrado después de la primera reunión.</p></details>
+          <details><summary>¿Puedo contratar solo los planos?</summary><p>Sí. Puedes construir con tu contratista y pedirnos supervisión opcional.</p></details>
+          <details><summary>¿Cuánto tarda la obra?</summary><p>Una casa de 200 m² suele tardar de 8 a 12 meses.</p></details>
+        </div>
+      </div>
+      <form class="quote-form" id="quote">
+        <div class="two">
+          <div><label for="nombre">Nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+          <div><label for="tel">WhatsApp</label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+        </div>
+        <div class="two">
+          <div><label for="tipo">Tipo de proyecto</label><select id="tipo" name="tipo"><option>Casa nueva</option><option>Remodelación</option><option>Local comercial</option><option>Interiorismo</option></select></div>
+          <div><label for="m2">Metros cuadrados (aprox.)</label><input id="m2" name="m2" type="number" min="10" inputmode="numeric"></div>
+        </div>
+        <div><label for="idea">Tu idea</label><textarea id="idea" name="idea"></textarea></div>
+        <button class="btn wide" type="submit">Enviar por WhatsApp</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><p><b>Reyes Arquitectura</b> · Diseño y construcción</p><p><a href="../index.html">Ver todas las demos</a> · © <span data-year></span> Sitio de demostración</p></div>
+</footer>
+
+<dialog class="lightbox" closedby="any" aria-label="Proyecto ampliado"><button type="button" data-close>Cerrar</button><img alt=""><p></p></dialog>
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.8 1 3.9 1.5 6.2 1.5 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1 1.1-3.9-.3-.4C5.8 19.9 5.2 18 5.2 16 5.2 9.9 10.1 5.2 16 5.2S26.8 10 26.8 16 21.9 26.6 16 26.6zm5.9-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.9-.9-3.1-1.7-4.3-3.8-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1.1-1.1 2.6 1.1 3 1.300 3.200c.2.2 2.2 3.400 5.400 4.700 2 .8 2.800.9 3.800.7.6-.1 1.900-.8 2.200-1.600.3-.8.3-1.400.2-1.600-.1-.1-.3-.2-.6-.4z"/></svg></a>
+
+<script type="module">
+import "../assets/extras.js";
+import "../assets/vistas.js";
+
+// Proyectos de ejemplo. La foto va en img/<id>.jpg; mientras no exista se muestra la ilustración .svg.
+const proyectos = [
+  { id: "casa-lomas", nombre: "Casa Lomas", cat: "Residencial", lugar: "Zona Lomas", m2: 320, anio: 2025, alt: "Casa moderna de dos niveles con ventanales" },
+  { id: "cafe-centro", nombre: "Café del Centro", cat: "Comercial", lugar: "Centro histórico", m2: 140, anio: 2024, alt: "Fachada de cafetería con ventanales" },
+  { id: "depto-interior", nombre: "Departamento Roble", cat: "Interiores", lugar: "Col. Del Valle", m2: 95, anio: 2025, alt: "Sala con sofá verde, ventanal y planta" },
+  { id: "casa-playa", nombre: "Casa Brisa", cat: "Residencial", lugar: "Frente al mar", m2: 260, anio: 2024, alt: "Casa de playa con techo inclinado" },
+];
+const img = (p, extra = "") => `<img src="img/${p.id}.jpg" width="1200" height="900" alt="${p.alt}" ${extra} onerror="this.onerror=null;this.src='img/${p.id}.svg'">`;
+
+// Carrusel del inicio (scroll-snap nativo; los botones sólo desplazan una diapositiva)
+const slides = document.getElementById("slides");
+slides.innerHTML = proyectos.map((p, i) => `<figure class="slide">${img(p, i ? 'loading="lazy"' : 'fetchpriority="high"')}
+  <figcaption><b>${p.nombre}</b><span>${p.cat}, ${p.m2} m², ${p.anio}</span></figcaption></figure>`).join("");
+document.querySelector(".ctrl").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-dir]");
+  if (!b) return;
+  const max = slides.scrollWidth - slides.clientWidth, sig = slides.scrollLeft + b.dataset.dir * slides.clientWidth;
+  slides.scrollTo({ left: sig > max + 4 ? 0 : sig < -4 ? max : sig, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+});
+
+const lista = document.getElementById("lista");
+function pintar(cat) {
+  lista.innerHTML = proyectos.filter((p) => cat === "todos" || p.cat === cat).map((p) => `<li class="project" style="view-transition-name:p-${p.id}">
+    <button type="button" data-proy="${p.id}">${img(p, 'loading="lazy"')}<span class="kind">${p.cat}</span>
+      <span class="cap"><b>${p.nombre}</b><span>${p.lugar}, ${p.m2} m², ${p.anio}</span></span></button></li>`).join("");
+}
+pintar("todos");
+
+// Imagen ampliada: usa la imagen que realmente cargó (foto o ilustración).
+const lb = document.querySelector("dialog.lightbox");
+lista.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-proy]");
+  if (!b) return;
+  const p = proyectos.find((x) => x.id === b.dataset.proy);
+  lb.querySelector("img").src = b.querySelector("img").currentSrc;
+  lb.querySelector("img").alt = p.alt;
+  lb.querySelector("p").textContent = `${p.nombre}, ${p.lugar}`;
+  lb.showModal();
+});
+
+const filtros = document.getElementById("filtros");
+filtros.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-cat]");
+  if (!b || b.getAttribute("aria-pressed") === "true") return;
+  for (const x of filtros.children) x.setAttribute("aria-pressed", String(x === b));
+  const update = () => pintar(b.dataset.cat);
+  if (document.startViewTransition) document.startViewTransition(update);
+  else update();
+});
+
+// Cotización → WhatsApp
+const TEL = "520000000000";
+const f = document.getElementById("quote");
+f.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const msg = `Hola, soy ${f.nombre.value}. Me interesa: ${f.tipo.value}${f.m2.value ? ` de unos ${f.m2.value} m²` : ""}.${f.idea.value ? `\n${f.idea.value}` : ""}`;
+  window.open(`https://wa.me/${TEL}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  f.querySelector("[role=status]").textContent = "Se abrió WhatsApp con tu mensaje listo para enviar.";
+});
+</script>
+</body>
+</html>
