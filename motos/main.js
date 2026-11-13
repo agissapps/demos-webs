@@ -261,10 +261,26 @@ function ir(hash, { animar = true, enfocar = true } = {}) {
     else el.scrollIntoView({ block: "start", behavior });
     return;
   }
-  if (animar && !reduce && document.startViewTransition) {
-    document.startViewTransition(() => mostrar(vista, el)).finished.finally(enfocarVista);
-  } else { mostrar(vista, el); enfocarVista(); }
+  // En celular no se toma la "foto" de toda la página (View Transition): la vista
+  // nueva sólo aparece con un desvanecido corto de opacidad, que es casi gratis.
+  if (animar && !reduce && !ligero.matches && document.startViewTransition) {
+    // Las tarjetas tienen nombre propio para los filtros; al cambiar de pestaña se
+    // anulan para que el navegador no capture cada una por separado.
+    document.documentElement.classList.add("cambio-vista");
+    document.startViewTransition(() => mostrar(vista, el)).finished.finally(() => {
+      document.documentElement.classList.remove("cambio-vista");
+      enfocarVista();
+    });
+  } else {
+    mostrar(vista, el);
+    if (animar && !reduce) {
+      vista.classList.remove("entra"); void vista.offsetWidth; vista.classList.add("entra");
+      vista.addEventListener("animationend", () => vista.classList.remove("entra"), { once: true });
+    }
+    enfocarVista();
+  }
 }
+const ligero = matchMedia("(pointer: coarse), (max-width: 48rem)");
 
 function navegar(hash) {
   if (location.hash !== hash) history.pushState(null, "", hash);

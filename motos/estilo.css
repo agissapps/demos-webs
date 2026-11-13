@@ -725,3 +725,10 @@ body.claro .toast { background:var(--tinta); color:#fff; box-shadow:0 20px 40px 
   .site-header::before, #v-catalogo::after, #v-promociones::before, .pill-promo { animation:none; }
   .cartel { box-shadow:0 16px 30px -18px rgb(225 29 39 / .6), inset 0 0 0 1px rgb(255 255 255 / .18); }
 }
+
+/* Cambio de pestaña: sin capturar cada tarjeta, y en celular un desvanecido barato */
+html.cambio-vista :is(.moto, .parte) { view-transition-name:none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .vista.entra { animation:vista-entra .22s ease-out both; }
+  @keyframes vista-entra { from { opacity:0; } }
+}
