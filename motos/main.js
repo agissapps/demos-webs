@@ -243,6 +243,8 @@ function mostrar(vista, el) {
     const actual = destino(a.hash).vista === vista;
     if (actual) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   }
+  // La pestaña activa siempre queda a la vista en la tira (en celular se desliza)
+  pestanas.find((a) => a.getAttribute("aria-current"))?.scrollIntoView({ block: "nearest", inline: "nearest", container: "nearest" });
   document.title = `${vista.dataset.titulo === "Inicio" ? "" : vista.dataset.titulo + " · "}Motocity Mazatlán · Motos, taller y garantía`;
   // Ir al inicio de la vista, o a la sección pedida si está más abajo dentro de ella
   if (el === vista || el === vista.firstElementChild) window.scrollTo({ top: 0, behavior: "instant" });
@@ -262,7 +264,6 @@ function ir(hash, { animar = true, enfocar = true } = {}) {
   if (animar && !reduce && document.startViewTransition) {
     document.startViewTransition(() => mostrar(vista, el)).finished.finally(enfocarVista);
   } else { mostrar(vista, el); enfocarVista(); }
-  pestanas.find((a) => a.getAttribute("aria-current"))?.scrollIntoView({ block: "nearest", inline: "nearest", container: "nearest" });
 }
 
 function navegar(hash) {

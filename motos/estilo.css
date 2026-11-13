@@ -711,3 +711,17 @@ body.claro .toast { background:var(--tinta); color:#fff; box-shadow:0 20px 40px 
 .split { grid-template-columns:minmax(0, 1fr); } .split > *, .formgrid > *, .two > * { min-inline-size:0; }
 @media (min-width:64rem){ .split { grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); } }
 .tablewrap { position:relative; } /* el texto oculto para lectores de pantalla queda dentro del recorte */
+
+/* ---------- Rendimiento en celular ----------
+   En pantallas táctiles o angostas se quitan los efectos que obligan a repintar
+   toda la pantalla en cada cuadro o en cada scroll (capas fijas con mezcla,
+   fondos fijos, desenfoques y animaciones de background-position). Las
+   animaciones de transform/opacity (engranes, portada, cartel) se conservan. */
+@media (pointer: coarse), (max-width: 48rem) {
+  body::after { content:none; }
+  body, body.claro { background-attachment:scroll; }
+  .site-header { backdrop-filter:none; }
+  dialog.ficha::backdrop { backdrop-filter:none; }
+  .site-header::before, #v-catalogo::after, #v-promociones::before, .pill-promo { animation:none; }
+  .cartel { box-shadow:0 16px 30px -18px rgb(225 29 39 / .6), inset 0 0 0 1px rgb(255 255 255 / .18); }
+}
