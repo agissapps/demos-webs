@@ -22,8 +22,9 @@
         <li><a href="#inicio" aria-current="page">Inicio</a></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#buen-mes">El Buen Mes</a></li>
+        <li><a href="#credito">Crédito</a></li>
+        <li><a href="#refacciones">Refacciones</a></li>
         <li><a href="#taller">Taller</a></li>
-        <li><a href="#numeros">Números</a></li>
         <li><a class="btn" href="panel.html">Iniciar sesión</a></li>
       </ul>
     </nav>
@@ -99,6 +100,45 @@
     <ul class="promos" id="promos"></ul>
   </section>
 
+  <section class="dark-band section" id="credito" aria-labelledby="cr-t">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Financiamiento</p><h2 id="cr-t">Simula tu crédito</h2><p class="sub">Elige tu moto, el enganche y el plazo. Los pagos se calculan al momento.</p></div>
+      <div class="simulador">
+        <form class="card sim-form" id="sim" aria-label="Simulador de crédito">
+          <div><label for="sim-moto">Motocicleta</label><select id="sim-moto" name="moto"></select></div>
+          <div class="sim-foto" id="sim-foto"></div>
+          <div class="sim-rango">
+            <label for="sim-eng">Enganche <output id="sim-eng-out" for="sim-eng">20%</output></label>
+            <input id="sim-eng" name="eng" type="range" min="10" max="50" step="5" value="20">
+            <div class="sim-marcas" aria-hidden="true"><span>10%</span><span>30%</span><span>50%</span></div>
+          </div>
+          <fieldset class="plazos"><legend>Plazo</legend>
+            <label><input type="radio" name="plazo" value="12"><span>12 meses</span></label>
+            <label><input type="radio" name="plazo" value="18"><span>18 meses</span></label>
+            <label><input type="radio" name="plazo" value="24" checked><span>24 meses</span></label>
+            <label><input type="radio" name="plazo" value="36"><span>36 meses</span></label>
+          </fieldset>
+        </form>
+        <div class="card sim-res">
+          <p class="note">Pago mensual estimado</p>
+          <p class="sim-big"><span id="sim-mes">$0</span><small>/ mes</small></p>
+          <p class="sim-sem">o aprox. <b id="sim-sem">$0</b> por semana</p>
+          <dl class="specs sim-dl">
+            <div><dt>Precio Buen Mes</dt><dd id="sim-precio"></dd></div>
+            <div><dt>Enganche</dt><dd id="sim-enganche"></dd></div>
+            <div><dt>Monto a financiar</dt><dd id="sim-monto"></dd></div>
+            <div><dt>Total a pagar</dt><dd id="sim-total"></dd></div>
+          </dl>
+          <div class="sim-barra" aria-hidden="true"><span class="b-eng"></span><span class="b-cap"></span><span class="b-int"></span></div>
+          <ul class="sim-ley" aria-hidden="true"><li><i class="b-eng"></i>Enganche</li><li><i class="b-cap"></i>Capital</li><li><i class="b-int"></i>Intereses</li></ul>
+          <p><button class="btn" type="button" id="sim-cta">Quiero este plan</button></p>
+          <p role="status" id="sim-msg" class="ok-msg"></p>
+          <p class="note">Montos de ejemplo con tasa fija de 2.5% mensual. No es una cotización formal; sujeto a aprobación de crédito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="band section" id="taller">
     <div class="wrap taller">
       <div class="reveal">
@@ -118,6 +158,22 @@
         <li class="reveal"><h3>Entregamos</h3><p>Te avisamos y sales a rodar con garantía.</p></li>
       </ol>
     </div>
+  </section>
+
+  <section class="wrap section" id="refacciones" aria-labelledby="rf-t">
+    <div class="reveal"><p class="eyebrow">Refacciones y equipo</p><h2 id="rf-t">Refacciones para tu moto</h2><p class="sub">Piezas para Vento, CFMOTO y Triumph. Apártalas en línea y recógelas en el taller.</p></div>
+    <ul class="pills" id="rf-cats" aria-label="Filtrar refacciones por categoría"></ul>
+    <search>
+      <form class="filters" id="rf-filtros" aria-label="Buscar refacciones">
+        <div class="rf-buscar"><label for="rf-q">Buscar pieza</label><input id="rf-q" name="q" type="search" placeholder="Ej. balatas, filtro, cadena" autocomplete="off"></div>
+        <div><label for="rf-marca">Compatible con</label><select id="rf-marca" name="marca"><option value="">Todas las marcas</option><option>Vento</option><option>CFMOTO</option><option>Triumph</option></select></div>
+        <div><label class="solo-fav"><input type="checkbox" name="stock" value="1"> Solo con existencia</label></div>
+      </form>
+    </search>
+    <div class="results"><p id="rf-conteo" role="status" aria-live="polite"></p></div>
+    <ul class="partes" id="rf-lista"></ul>
+    <div class="empty" id="rf-vacio" hidden><h3>No encontramos esa pieza</h3><p>Prueba con otra palabra o pregúntanos por WhatsApp.</p></div>
+    <p class="note" style="margin-block-start:1.2rem">Piezas, precios y existencias de ejemplo.</p>
   </section>
 
   <section class="wrap section" id="numeros" aria-labelledby="num-t">
@@ -173,7 +229,7 @@
   <div class="cols"><div class="photo" id="ficha-foto"></div>
     <div class="info"><p class="eyebrow" id="ficha-marca"></p><h2 id="ficha-t"></h2><p class="price" id="ficha-precio"></p><p class="note" id="ficha-old"></p>
       <dl class="specs" id="ficha-specs"></dl><ul class="equip" id="ficha-equipo"></ul>
-      <p style="margin-block-start:.6rem"><button class="btn" type="button" id="ficha-wa">Me interesa</button></p>
+      <p class="ficha-ctas"><button class="btn" type="button" id="ficha-wa">Me interesa</button><button class="btn ghost small" type="button" id="ficha-credito">Simular crédito</button></p>
       <p role="status" id="ficha-msg"></p></div></div>
 </dialog>
 

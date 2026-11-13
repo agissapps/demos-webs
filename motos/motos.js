@@ -86,3 +86,38 @@ export const guardado = {
   leer(clave, defecto) { try { const v = localStorage.getItem(clave); return v ? JSON.parse(v) : (memoria.get(clave) ?? defecto); } catch { return memoria.get(clave) ?? defecto; } },
   escribir(clave, valor) { memoria.set(clave, valor); try { localStorage.setItem(clave, JSON.stringify(valor)); } catch { /* sin almacenamiento */ } },
 };
+
+// Refacciones de ejemplo. "marca" es con qué motos es compatible ("Todas" = universal).
+export const refacciones = [
+  { id: "r1", nombre: "Kit de arrastre (cadena y piñones)", cat: "Transmisión", marca: "Vento", modelo: "Rocketman 250", precio: 1890, promo: 1690, stock: 6 },
+  { id: "r2", nombre: "Balatas delanteras", cat: "Frenos", marca: "CFMOTO", modelo: "450SR", precio: 690, promo: null, stock: 14 },
+  { id: "r3", nombre: "Filtro de aceite", cat: "Mantenimiento", marca: "Triumph", modelo: "Speed 400 / Trident 660", precio: 420, promo: null, stock: 22 },
+  { id: "r4", nombre: "Aceite sintético 10W-40 (1 L)", cat: "Mantenimiento", marca: "Todas", modelo: "Universal", precio: 289, promo: 249, stock: 60 },
+  { id: "r5", nombre: "Bujía de iridio", cat: "Eléctrico", marca: "Vento", modelo: "Línea 150 a 250 cc", precio: 210, promo: null, stock: 30 },
+  { id: "r6", nombre: "Batería 12 V 9 Ah", cat: "Eléctrico", marca: "Todas", modelo: "Universal", precio: 1590, promo: 1390, stock: 4 },
+  { id: "r7", nombre: "Llanta trasera 130/70-17", cat: "Llantas", marca: "Todas", modelo: "Rin 17", precio: 2350, promo: null, stock: 8 },
+  { id: "r8", nombre: "Filtro de aire", cat: "Mantenimiento", marca: "CFMOTO", modelo: "800MT Touring", precio: 780, promo: null, stock: 0 },
+  { id: "r9", nombre: "Disco de freno delantero", cat: "Frenos", marca: "Triumph", modelo: "Speed 400", precio: 2150, promo: 1950, stock: 3 },
+  { id: "r10", nombre: "Juego de espejos", cat: "Accesorios", marca: "Vento", modelo: "Nitrox 200 / Rocketman 250", precio: 390, promo: null, stock: 18 },
+  { id: "r11", nombre: "Casco abatible certificado DOT", cat: "Equipo", marca: "Todas", modelo: "Tallas S a XL", precio: 1990, promo: 1590, stock: 9 },
+  { id: "r12", nombre: "Guantes con protección", cat: "Equipo", marca: "Todas", modelo: "Tallas S a XL", precio: 590, promo: null, stock: 0 },
+];
+
+// Tarifas de ejemplo para el precio estimado del servicio, según cilindrada.
+export const rangosCC = ["Hasta 250 cc", "De 251 a 500 cc", "Más de 500 cc"];
+export const tarifas = {
+  "Servicio de 1,000 km": [0, 0, 0],
+  "Servicio de 5,000 km": [1190, 1690, 2490],
+  "Servicio de 10,000 km": [1690, 2290, 3290],
+  "Frenos": [690, 890, 1190],
+  "Cadena y piñones": [450, 590, 790],
+  "Llantas": [350, 450, 550],
+  "Eléctrico": [550, 690, 890],
+};
+
+// Pago fijo de un crédito: tasa mensual de ejemplo, sólo para la demo.
+export const TASA_MENSUAL = 0.025;
+export function pagoMensual(monto, meses, tasa = TASA_MENSUAL) {
+  if (monto <= 0) return 0;
+  return (monto * tasa) / (1 - (1 + tasa) ** -meses);
+}

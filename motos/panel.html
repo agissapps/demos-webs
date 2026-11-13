@@ -103,7 +103,11 @@
             <h2 style="font-size:1.8rem">Nuevo servicio</h2>
             <div class="two"><div><label for="v-marca">Marca</label><select id="v-marca" name="marca"><option>Vento</option><option>CFMOTO</option><option>Triumph</option><option>Otra</option></select></div><div><label for="v-modelo">Modelo</label><input id="v-modelo" name="modelo" required></div></div>
             <div class="two"><div><label for="v-placas">Placas</label><input id="v-placas" name="placas" required autocomplete="off"></div><div><label for="v-km">Kilometraje</label><input id="v-km" name="km" type="number" min="0" inputmode="numeric"></div></div>
-            <div><label for="v-tipo">Servicio</label><select id="v-tipo" name="tipo"><option>Servicio de 1,000 km</option><option>Servicio de 5,000 km</option><option>Frenos</option><option>Cadena y piñones</option><option>Llantas</option><option>Eléctrico</option></select></div>
+            <div class="field"><label for="v-vin">VIN (número de serie)</label><input id="v-vin" name="vin" required minlength="17" maxlength="17" pattern="[A-HJ-NPR-Za-hj-npr-z0-9]{17}" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="17 caracteres" aria-describedby="v-vin-ayuda"><p class="note" id="v-vin-ayuda">17 letras y números, sin I, O ni Q. Viene en tu factura o tarjeta de circulación.</p></div>
+            <div class="two"><div><label for="v-motor">Número de motor</label><input id="v-motor" name="motor" required autocomplete="off" autocapitalize="characters" spellcheck="false"></div>
+              <div><label for="v-cc">Cilindrada</label><select id="v-cc" name="cc"><option value="0">Hasta 250 cc</option><option value="1">De 251 a 500 cc</option><option value="2">Más de 500 cc</option></select></div></div>
+            <div><label for="v-tipo">Servicio</label><select id="v-tipo" name="tipo"><option>Servicio de 1,000 km</option><option selected>Servicio de 5,000 km</option><option>Servicio de 10,000 km</option><option>Frenos</option><option>Cadena y piñones</option><option>Llantas</option><option>Eléctrico</option></select></div>
+            <div class="estimado" aria-live="polite"><p>Precio estimado<br><span class="note" id="v-est-nota">Mano de obra y refacciones básicas</span></p><strong id="v-est">$0</strong></div>
             <div><label for="v-fecha">Fecha preferida</label><input id="v-fecha" name="fecha" type="date" required></div>
             <div><label for="v-notas">Notas</label><textarea id="v-notas" name="notas" rows="3"></textarea></div>
             <label class="drop" for="v-fotos"><input id="v-fotos" type="file" accept="image/*" multiple><strong>Agregar fotos del problema</strong><span class="note" data-drop-msg>Demo: las fotos no se suben ni se guardan.</span></label>
@@ -111,7 +115,7 @@
           </form>
           <div>
             <h2 style="font-size:1.8rem">Mis servicios</h2>
-            <div class="tablewrap"><table><caption class="visually-hidden">Servicios registrados</caption><thead><tr><th scope="col">Moto</th><th scope="col">Servicio</th><th scope="col">Avance</th><th scope="col"><span class="visually-hidden">Acción</span></th></tr></thead><tbody id="t-serv-body"></tbody></table></div>
+            <div class="tablewrap"><table><caption class="visually-hidden">Servicios registrados</caption><thead><tr><th scope="col">Moto</th><th scope="col">Servicio</th><th scope="col">Precio estimado</th><th scope="col">Avance</th><th scope="col"><span class="visually-hidden">Acción</span></th></tr></thead><tbody id="t-serv-body"></tbody></table></div>
           </div>
         </div>
       </section>

@@ -1,5 +1,5 @@
 import "../assets/nav.js";
-import { motos, promos, serviciosPorMarca, ventasPorMarca, serviciosPorMes, tiposDeServicio, fmtPrecio, escapar, guardado } from "./motos.js";
+import { motos, promos, serviciosPorMarca, ventasPorMarca, serviciosPorMes, tiposDeServicio, fmtPrecio, escapar, guardado, tarifas } from "./motos.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -65,10 +65,11 @@ barras("#g-serv", serviciosPorMarca, "marca"); barras("#g-vent", ventasPorMarca,
 /* ---------- Datos guardados en el navegador (sólo para la demo) ---------- */
 const K = { motos: "motocity-motos-extra", serv: "motocity-servicios", gar: "motocity-garantias", promo: "motocity-promos-off" };
 const sembrarServ = [
-  { id: 1, moto: "Vento Rocketman 250", placas: "VNT-218-B", tipo: "Servicio de 5,000 km", paso: 2 },
-  { id: 2, moto: "CFMOTO 450SR", placas: "CFM-904-A", tipo: "Frenos", paso: 1 },
-  { id: 3, moto: "Triumph Speed 400", placas: "TRI-552-C", tipo: "Servicio de 1,000 km", paso: 3 },
+  { id: 1, moto: "Vento Rocketman 250", placas: "VNT-218-B", tipo: "Servicio de 5,000 km", precio: 1190, paso: 2 },
+  { id: 2, moto: "CFMOTO 450SR", placas: "CFM-904-A", tipo: "Frenos", precio: 890, paso: 1 },
+  { id: 3, moto: "Triumph Speed 400", placas: "TRI-552-C", tipo: "Servicio de 1,000 km", precio: 0, paso: 3 },
 ];
+const fmtServicio = (p) => (p === 0 ? "Sin costo" : fmtPrecio(p));
 const sembrarGar = [
   { id: 1, moto: "Vento Nitrox 200", falla: "Falla intermitente del tablero", estado: "En revisión" },
   { id: 2, moto: "CFMOTO 800MT Touring", falla: "Fuga leve en retén de horquilla", estado: "Aprobada" },
@@ -98,7 +99,7 @@ $("#f-subir").addEventListener("submit", (e) => {
 /* Servicios */
 function pintarServicios() {
   const l = guardado.leer(K.serv, sembrarServ);
-  $("#t-serv-body").innerHTML = l.map((s) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:#fff;background:none">${escapar(s.moto)}<br><small class="note">${escapar(s.placas)}</small></th><td>${escapar(s.tipo)}</td>
+  $("#t-serv-body").innerHTML = l.map((s) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:#fff;background:none">${escapar(s.moto)}<br><small class="note">${escapar(s.placas)}</small></th><td>${escapar(s.tipo)}</td><td>${fmtServicio(s.precio ?? tarifas[s.tipo]?.[1] ?? 0)}</td>
     <td><span class="badge s-${CLS[s.paso]}">${PASOS[s.paso]}</span><ul class="stepper" aria-hidden="true" style="margin-block-start:.4rem">${PASOS.map((_, i) => `<li class="${i <= s.paso ? "on" : ""}"></li>`).join("")}</ul></td>
     <td>${s.paso < 3 ? `<button class="btn ghost small" type="button" data-avanzar="${s.id}">Avanzar</button>` : ""}</td></tr>`).join("");
 }
@@ -109,12 +110,29 @@ $("#t-serv-body").addEventListener("click", (e) => {
   guardado.escribir(K.serv, l); pintarServicios(); pintarInventario();
   aviso(s?.paso === 3 ? "¡Tu moto está lista para entrega!" : "Estado del servicio actualizado.");
 });
-$("#f-serv").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const d = Object.fromEntries(new FormData(e.target));
-  guardado.escribir(K.serv, [{ id: Date.now(), moto: `${d.marca} ${d.modelo}`, placas: d.placas.toUpperCase(), tipo: d.tipo, paso: 0 }, ...guardado.leer(K.serv, sembrarServ)]);
-  e.target.reset(); pintarServicios(); pintarInventario(); aviso("Servicio registrado. Te avisaremos cuando avance.");
+// Precio estimado según tipo de servicio y cilindrada.
+const fServ = $("#f-serv");
+const estimar = () => tarifas[fServ.tipo.value]?.[Number(fServ.cc.value)] ?? 0;
+function pintarEstimado() {
+  const p = estimar();
+  $("#v-est").textContent = fmtServicio(p);
+  $("#v-est-nota").textContent = p === 0 ? "Promoción: primer servicio sin costo" : "Mano de obra y refacciones básicas";
+}
+fServ.addEventListener("input", (e) => {
+  if (e.target.name === "vin" || e.target.name === "motor") {
+    const pos = e.target.selectionStart; e.target.value = e.target.value.toUpperCase(); e.target.setSelectionRange(pos, pos);
+  }
+  pintarEstimado();
 });
+fServ.vin.addEventListener("input", () => fServ.vin.setCustomValidity(""));
+fServ.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (!/^[A-HJ-NPR-Z0-9]{17}$/.test(fServ.vin.value)) { fServ.vin.setCustomValidity("El VIN debe tener 17 letras y números, sin I, O ni Q."); fServ.vin.reportValidity(); return; }
+  const d = Object.fromEntries(new FormData(e.target));
+  guardado.escribir(K.serv, [{ id: Date.now(), moto: `${d.marca} ${d.modelo}`, placas: d.placas.toUpperCase(), tipo: d.tipo, precio: estimar(), paso: 0 }, ...guardado.leer(K.serv, sembrarServ)]);
+  e.target.reset(); pintarEstimado(); pintarServicios(); pintarInventario(); aviso("Servicio registrado. Te avisaremos cuando avance.");
+});
+pintarEstimado();
 
 /* Garantías */
 function pintarGarantias() {
