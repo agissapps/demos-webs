@@ -188,7 +188,7 @@ $("#ficha-credito").addEventListener("click", () => {
   const m = motos.find((x) => `${x.marca} ${x.modelo}` === dlg.dataset.moto);
   if (m) motoSel.value = m.id;
   dlg.close(); simular();
-  $("#credito").scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+  navegar("#credito");
 });
 simular();
 
@@ -245,3 +245,62 @@ rfLista.addEventListener("click", (e) => {
   rfLista.querySelector(`[data-apartar="${b.dataset.apartar}"]`)?.focus();
 });
 pintarRefacciones();
+
+/* ---------- Pestañas: una vista por sección, con transición y foco ---------- */
+const vistas = [...document.querySelectorAll(".vista")];
+const pestanas = [...document.querySelectorAll(".pestanas a")];
+let vistaActual = vistas.find((v) => !v.inert) ?? vistas[0];
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+function destino(hash) {
+  const el = (hash && hash.length > 1 && document.getElementById(decodeURIComponent(hash.slice(1)))) || vistas[0];
+  return { el, vista: el.closest(".vista") ?? vistas[0] };
+}
+
+function mostrar(vista, el) {
+  for (const v of vistas) {
+    const activa = v === vista;
+    v.classList.toggle("oculta", !activa);
+    v.inert = !activa;
+  }
+  vistaActual = vista;
+  for (const a of pestanas) {
+    const actual = destino(a.hash).vista === vista;
+    if (actual) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+  }
+  document.title = `${vista.dataset.titulo === "Inicio" ? "" : vista.dataset.titulo + " · "}Motocity Mazatlán · Motos, taller y garantía`;
+  // Ir al inicio de la vista, o a la sección pedida si está más abajo dentro de ella
+  if (el === vista || el === vista.firstElementChild) window.scrollTo({ top: 0, behavior: "instant" });
+  else el.scrollIntoView({ block: "start", behavior: "instant" });
+}
+
+function ir(hash, { animar = true, enfocar = true } = {}) {
+  const { el, vista } = destino(hash);
+  const cambia = vista !== vistaActual;
+  const enfocarVista = () => { if (enfocar && cambia) vista.focus({ preventScroll: true }); };
+  if (!cambia) {
+    const behavior = reduce || !animar ? "instant" : "smooth";
+    if (el === vista || el === vista.firstElementChild) window.scrollTo({ top: 0, behavior });
+    else el.scrollIntoView({ block: "start", behavior });
+    return;
+  }
+  if (animar && !reduce && document.startViewTransition) {
+    document.startViewTransition(() => mostrar(vista, el)).finished.finally(enfocarVista);
+  } else { mostrar(vista, el); enfocarVista(); }
+  pestanas.find((a) => a.getAttribute("aria-current"))?.scrollIntoView({ block: "nearest", inline: "nearest", container: "nearest" });
+}
+
+function navegar(hash) {
+  if (location.hash !== hash) history.pushState(null, "", hash);
+  ir(hash);
+}
+
+document.addEventListener("click", (e) => {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest('a[href^="#"]');
+  if (!a || a.getAttribute("href") === "#" || a.closest("dialog")) return;
+  e.preventDefault();
+  navegar(a.hash);
+});
+addEventListener("popstate", () => ir(location.hash));
+ir(location.hash, { animar: false, enfocar: false });

@@ -16,22 +16,22 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="site-logo" href="#inicio"><img src="img/logo-mivasa.png" width="120" height="160" alt="Grupo Mivasa"><span>Motocity<small>MAZATLÁN</small></span></a>
-    <nav class="site-nav" aria-label="Principal">
-      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
-      <ul id="site-menu" class="site-menu" popover="auto">
-        <li><a href="#inicio" aria-current="page">Inicio</a></li>
-        <li><a href="#catalogo">Catálogo</a></li>
-        <li><a href="#buen-mes">El Buen Mes</a></li>
-        <li><a href="#credito">Crédito</a></li>
-        <li><a href="#refacciones">Refacciones</a></li>
-        <li><a href="#taller">Taller</a></li>
-        <li><a class="btn" href="panel.html">Iniciar sesión</a></li>
-      </ul>
-    </nav>
+    <a class="btn" href="panel.html">Iniciar sesión</a>
   </div>
+  <nav class="pestanas" aria-label="Secciones">
+    <ul>
+      <li><a href="#inicio" aria-current="page">Inicio</a></li>
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#promociones">El Buen Mes</a></li>
+      <li><a href="#credito">Crédito</a></li>
+      <li><a href="#refacciones">Refacciones</a></li>
+      <li><a href="#taller">Taller</a></li>
+    </ul>
+  </nav>
 </header>
 
-<main id="inicio">
+<main>
+  <div class="vista" id="inicio" data-titulo="Inicio" tabindex="-1">
   <section class="hero" aria-labelledby="hero-t">
     <img src="img/hero.jpg" width="1024" height="576" alt="Moto deportiva roja y negra en un taller moderno con luces rojas" fetchpriority="high">
     <div class="speed" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -67,24 +67,6 @@
     </ul>
   </div>
 
-  <section class="wrap section" id="catalogo">
-    <div class="reveal"><p class="eyebrow">Catálogo</p><h2>Encuentra tu moto</h2><p class="sub">Filtra por marca, tipo o presupuesto. Los precios ya incluyen la promoción de El Buen Mes.</p></div>
-    <ul class="pills" id="marcas" aria-label="Filtrar por marca"></ul>
-    <search>
-      <form class="filters" id="filtros" aria-label="Filtrar motos">
-        <div><label for="f-tipo">Tipo</label><select id="f-tipo" name="tipo"><option value="">Todos</option></select></div>
-        <div><label for="f-estado">Estado</label><select id="f-estado" name="estado"><option value="">Todas</option><option>Nueva</option><option>Seminueva</option></select></div>
-        <div><label for="f-precio">Precio máximo</label><select id="f-precio" name="precio"><option value="">Sin límite</option><option value="50000">Hasta $50,000</option><option value="100000">Hasta $100,000</option><option value="200000">Hasta $200,000</option></select></div>
-        <div><label for="f-orden">Ordenar por</label><select id="f-orden" name="orden"><option value="vendidas">Más vendidas</option><option value="menor">Precio: menor a mayor</option><option value="mayor">Precio: mayor a menor</option><option value="cc">Más cilindrada</option></select></div>
-        <div><label class="solo-fav"><input type="checkbox" name="favs" value="1"> Solo favoritas</label></div>
-        <div><button class="btn ghost small" type="reset" style="inline-size:100%">Limpiar</button></div>
-      </form>
-    </search>
-    <div class="results"><p id="conteo" role="status" aria-live="polite"></p></div>
-    <ul class="grid" id="lista"></ul>
-    <div class="empty" id="vacio" hidden><h3>No hay motos con esos filtros</h3><p>Prueba con otra marca o sube el precio máximo.</p></div>
-    <p class="note" style="margin-block-start:1.2rem">Modelos, precios y fotos de ejemplo generados para esta demo.</p>
-  </section>
 
   <section class="dark-band section" aria-labelledby="mar-t">
     <div class="wrap">
@@ -93,87 +75,6 @@
         <li class="reveal">Vento<small>Motocicletas USA</small></li><li class="reveal">CFMOTO<small>Deportivas y touring</small></li><li class="reveal">Triumph<small>Herencia británica</small></li><li class="reveal">Motocity<small>Tu agencia en Mazatlán</small></li>
       </ul>
     </div>
-  </section>
-
-  <section class="wrap section" id="promociones" aria-labelledby="pr-t">
-    <div class="reveal"><p class="eyebrow">Promociones</p><h2 id="pr-t">Lo mejor de El Buen Mes</h2><p class="sub">Promociones de ejemplo para esta demo; vigentes hasta el 30 de noviembre.</p></div>
-    <ul class="promos" id="promos"></ul>
-  </section>
-
-  <section class="dark-band section" id="credito" aria-labelledby="cr-t">
-    <div class="wrap">
-      <div class="reveal"><p class="eyebrow">Financiamiento</p><h2 id="cr-t">Simula tu crédito</h2><p class="sub">Elige tu moto, el enganche y el plazo. Los pagos se calculan al momento.</p></div>
-      <div class="simulador">
-        <form class="card sim-form" id="sim" aria-label="Simulador de crédito">
-          <div><label for="sim-moto">Motocicleta</label><select id="sim-moto" name="moto"></select></div>
-          <div class="sim-foto" id="sim-foto"></div>
-          <div class="sim-rango">
-            <label for="sim-eng">Enganche <output id="sim-eng-out" for="sim-eng">20%</output></label>
-            <input id="sim-eng" name="eng" type="range" min="10" max="50" step="5" value="20">
-            <div class="sim-marcas" aria-hidden="true"><span>10%</span><span>30%</span><span>50%</span></div>
-          </div>
-          <fieldset class="plazos"><legend>Plazo</legend>
-            <label><input type="radio" name="plazo" value="12"><span>12 meses</span></label>
-            <label><input type="radio" name="plazo" value="18"><span>18 meses</span></label>
-            <label><input type="radio" name="plazo" value="24" checked><span>24 meses</span></label>
-            <label><input type="radio" name="plazo" value="36"><span>36 meses</span></label>
-          </fieldset>
-        </form>
-        <div class="card sim-res">
-          <p class="note">Pago mensual estimado</p>
-          <p class="sim-big"><span id="sim-mes">$0</span><small>/ mes</small></p>
-          <p class="sim-sem">o aprox. <b id="sim-sem">$0</b> por semana</p>
-          <dl class="specs sim-dl">
-            <div><dt>Precio Buen Mes</dt><dd id="sim-precio"></dd></div>
-            <div><dt>Enganche</dt><dd id="sim-enganche"></dd></div>
-            <div><dt>Monto a financiar</dt><dd id="sim-monto"></dd></div>
-            <div><dt>Total a pagar</dt><dd id="sim-total"></dd></div>
-          </dl>
-          <div class="sim-barra" aria-hidden="true"><span class="b-eng"></span><span class="b-cap"></span><span class="b-int"></span></div>
-          <ul class="sim-ley" aria-hidden="true"><li><i class="b-eng"></i>Enganche</li><li><i class="b-cap"></i>Capital</li><li><i class="b-int"></i>Intereses</li></ul>
-          <p><button class="btn" type="button" id="sim-cta">Quiero este plan</button></p>
-          <p role="status" id="sim-msg" class="ok-msg"></p>
-          <p class="note">Montos de ejemplo con tasa fija de 2.5% mensual. No es una cotización formal; sujeto a aprobación de crédito.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band section" id="taller">
-    <div class="wrap taller">
-      <div class="reveal">
-        <p class="eyebrow">Taller · Servicio · Garantía</p>
-        <h2>Tu moto en manos que saben</h2>
-        <p class="sub">Técnicos capacitados, refacciones de calidad y seguimiento de tu servicio paso a paso desde tu panel.</p>
-        <ul class="checks"><li>Diagnóstico sin costo en motos de la casa</li><li>Servicios de 1,000, 5,000 y 10,000 km</li><li>Trámite de garantía directo con la marca</li><li>Entrega el mismo día en servicios menores</li></ul>
-        <p style="margin-block-start:1.5rem"><a class="btn" href="panel.html">Registrar mi moto para servicio</a></p>
-      </div>
-      <img class="reveal" src="img/taller.jpg" width="1024" height="576" alt="Mecánico revisando una moto sobre elevador en un taller limpio" loading="lazy">
-    </div>
-    <div class="wrap">
-      <ol class="steps">
-        <li class="reveal"><h3>Registras</h3><p>Das de alta tu moto y eliges servicio o garantía.</p></li>
-        <li class="reveal"><h3>Diagnosticamos</h3><p>Revisamos y te enviamos el presupuesto.</p></li>
-        <li class="reveal"><h3>Reparamos</h3><p>Con refacciones de calidad y tiempos claros.</p></li>
-        <li class="reveal"><h3>Entregamos</h3><p>Te avisamos y sales a rodar con garantía.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="wrap section" id="refacciones" aria-labelledby="rf-t">
-    <div class="reveal"><p class="eyebrow">Refacciones y equipo</p><h2 id="rf-t">Refacciones para tu moto</h2><p class="sub">Piezas para Vento, CFMOTO y Triumph. Apártalas en línea y recógelas en el taller.</p></div>
-    <ul class="pills" id="rf-cats" aria-label="Filtrar refacciones por categoría"></ul>
-    <search>
-      <form class="filters" id="rf-filtros" aria-label="Buscar refacciones">
-        <div class="rf-buscar"><label for="rf-q">Buscar pieza</label><input id="rf-q" name="q" type="search" placeholder="Ej. balatas, filtro, cadena" autocomplete="off"></div>
-        <div><label for="rf-marca">Compatible con</label><select id="rf-marca" name="marca"><option value="">Todas las marcas</option><option>Vento</option><option>CFMOTO</option><option>Triumph</option></select></div>
-        <div><label class="solo-fav"><input type="checkbox" name="stock" value="1"> Solo con existencia</label></div>
-      </form>
-    </search>
-    <div class="results"><p id="rf-conteo" role="status" aria-live="polite"></p></div>
-    <ul class="partes" id="rf-lista"></ul>
-    <div class="empty" id="rf-vacio" hidden><h3>No encontramos esa pieza</h3><p>Prueba con otra palabra o pregúntanos por WhatsApp.</p></div>
-    <p class="note" style="margin-block-start:1.2rem">Piezas, precios y existencias de ejemplo.</p>
   </section>
 
   <section class="wrap section" id="numeros" aria-labelledby="num-t">
@@ -220,6 +121,117 @@
       <p><a class="btn alt" href="panel.html">Iniciar sesión</a></p>
     </div>
   </section>
+  </div>
+
+  <div class="vista oculta" id="v-catalogo" data-titulo="Catálogo" tabindex="-1" inert>
+  <section class="wrap section" id="catalogo">
+    <div class="reveal"><p class="eyebrow">Catálogo</p><h2>Encuentra tu moto</h2><p class="sub">Filtra por marca, tipo o presupuesto. Los precios ya incluyen la promoción de El Buen Mes.</p></div>
+    <ul class="pills" id="marcas" aria-label="Filtrar por marca"></ul>
+    <search>
+      <form class="filters" id="filtros" aria-label="Filtrar motos">
+        <div><label for="f-tipo">Tipo</label><select id="f-tipo" name="tipo"><option value="">Todos</option></select></div>
+        <div><label for="f-estado">Estado</label><select id="f-estado" name="estado"><option value="">Todas</option><option>Nueva</option><option>Seminueva</option></select></div>
+        <div><label for="f-precio">Precio máximo</label><select id="f-precio" name="precio"><option value="">Sin límite</option><option value="50000">Hasta $50,000</option><option value="100000">Hasta $100,000</option><option value="200000">Hasta $200,000</option></select></div>
+        <div><label for="f-orden">Ordenar por</label><select id="f-orden" name="orden"><option value="vendidas">Más vendidas</option><option value="menor">Precio: menor a mayor</option><option value="mayor">Precio: mayor a menor</option><option value="cc">Más cilindrada</option></select></div>
+        <div><label class="solo-fav"><input type="checkbox" name="favs" value="1"> Solo favoritas</label></div>
+        <div><button class="btn ghost small" type="reset" style="inline-size:100%">Limpiar</button></div>
+      </form>
+    </search>
+    <div class="results"><p id="conteo" role="status" aria-live="polite"></p></div>
+    <ul class="grid" id="lista"></ul>
+    <div class="empty" id="vacio" hidden><h3>No hay motos con esos filtros</h3><p>Prueba con otra marca o sube el precio máximo.</p></div>
+    <p class="note" style="margin-block-start:1.2rem">Modelos, precios y fotos de ejemplo generados para esta demo.</p>
+  </section>
+  </div>
+
+  <div class="vista oculta" id="v-promociones" data-titulo="El Buen Mes" tabindex="-1" inert>
+  <section class="wrap section" id="promociones" aria-labelledby="pr-t">
+    <div class="reveal"><p class="eyebrow">Promociones</p><h2 id="pr-t">Lo mejor de El Buen Mes</h2><p class="sub">Promociones de ejemplo para esta demo; vigentes hasta el 30 de noviembre.</p></div>
+    <ul class="promos" id="promos"></ul>
+  </section>
+  </div>
+
+  <div class="vista oculta" id="v-credito" data-titulo="Crédito" tabindex="-1" inert>
+  <section class="dark-band section" id="credito" aria-labelledby="cr-t">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Financiamiento</p><h2 id="cr-t">Simula tu crédito</h2><p class="sub">Elige tu moto, el enganche y el plazo. Los pagos se calculan al momento.</p></div>
+      <div class="simulador">
+        <form class="card sim-form" id="sim" aria-label="Simulador de crédito">
+          <div><label for="sim-moto">Motocicleta</label><select id="sim-moto" name="moto"></select></div>
+          <div class="sim-foto" id="sim-foto"></div>
+          <div class="sim-rango">
+            <label for="sim-eng">Enganche <output id="sim-eng-out" for="sim-eng">20%</output></label>
+            <input id="sim-eng" name="eng" type="range" min="10" max="50" step="5" value="20">
+            <div class="sim-marcas" aria-hidden="true"><span>10%</span><span>30%</span><span>50%</span></div>
+          </div>
+          <fieldset class="plazos"><legend>Plazo</legend>
+            <label><input type="radio" name="plazo" value="12"><span>12 meses</span></label>
+            <label><input type="radio" name="plazo" value="18"><span>18 meses</span></label>
+            <label><input type="radio" name="plazo" value="24" checked><span>24 meses</span></label>
+            <label><input type="radio" name="plazo" value="36"><span>36 meses</span></label>
+          </fieldset>
+        </form>
+        <div class="card sim-res">
+          <p class="note">Pago mensual estimado</p>
+          <p class="sim-big"><span id="sim-mes">$0</span><small>/ mes</small></p>
+          <p class="sim-sem">o aprox. <b id="sim-sem">$0</b> por semana</p>
+          <dl class="specs sim-dl">
+            <div><dt>Precio Buen Mes</dt><dd id="sim-precio"></dd></div>
+            <div><dt>Enganche</dt><dd id="sim-enganche"></dd></div>
+            <div><dt>Monto a financiar</dt><dd id="sim-monto"></dd></div>
+            <div><dt>Total a pagar</dt><dd id="sim-total"></dd></div>
+          </dl>
+          <div class="sim-barra" aria-hidden="true"><span class="b-eng"></span><span class="b-cap"></span><span class="b-int"></span></div>
+          <ul class="sim-ley" aria-hidden="true"><li><i class="b-eng"></i>Enganche</li><li><i class="b-cap"></i>Capital</li><li><i class="b-int"></i>Intereses</li></ul>
+          <p><button class="btn" type="button" id="sim-cta">Quiero este plan</button></p>
+          <p role="status" id="sim-msg" class="ok-msg"></p>
+          <p class="note">Montos de ejemplo con tasa fija de 2.5% mensual. No es una cotización formal; sujeto a aprobación de crédito.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="vista oculta" id="v-refacciones" data-titulo="Refacciones" tabindex="-1" inert>
+  <section class="wrap section" id="refacciones" aria-labelledby="rf-t">
+    <div class="reveal"><p class="eyebrow">Refacciones y equipo</p><h2 id="rf-t">Refacciones para tu moto</h2><p class="sub">Piezas para Vento, CFMOTO y Triumph. Apártalas en línea y recógelas en el taller.</p></div>
+    <ul class="pills" id="rf-cats" aria-label="Filtrar refacciones por categoría"></ul>
+    <search>
+      <form class="filters" id="rf-filtros" aria-label="Buscar refacciones">
+        <div class="rf-buscar"><label for="rf-q">Buscar pieza</label><input id="rf-q" name="q" type="search" placeholder="Ej. balatas, filtro, cadena" autocomplete="off"></div>
+        <div><label for="rf-marca">Compatible con</label><select id="rf-marca" name="marca"><option value="">Todas las marcas</option><option>Vento</option><option>CFMOTO</option><option>Triumph</option></select></div>
+        <div><label class="solo-fav"><input type="checkbox" name="stock" value="1"> Solo con existencia</label></div>
+      </form>
+    </search>
+    <div class="results"><p id="rf-conteo" role="status" aria-live="polite"></p></div>
+    <ul class="partes" id="rf-lista"></ul>
+    <div class="empty" id="rf-vacio" hidden><h3>No encontramos esa pieza</h3><p>Prueba con otra palabra o pregúntanos por WhatsApp.</p></div>
+    <p class="note" style="margin-block-start:1.2rem">Piezas, precios y existencias de ejemplo.</p>
+  </section>
+  </div>
+
+  <div class="vista oculta" id="v-taller" data-titulo="Taller" tabindex="-1" inert>
+  <section class="band section" id="taller">
+    <div class="wrap taller">
+      <div class="reveal">
+        <p class="eyebrow">Taller · Servicio · Garantía</p>
+        <h2>Tu moto en manos que saben</h2>
+        <p class="sub">Técnicos capacitados, refacciones de calidad y seguimiento de tu servicio paso a paso desde tu panel.</p>
+        <ul class="checks"><li>Diagnóstico sin costo en motos de la casa</li><li>Servicios de 1,000, 5,000 y 10,000 km</li><li>Trámite de garantía directo con la marca</li><li>Entrega el mismo día en servicios menores</li></ul>
+        <p style="margin-block-start:1.5rem"><a class="btn" href="panel.html">Registrar mi moto para servicio</a></p>
+      </div>
+      <img class="reveal" src="img/taller.jpg" width="1024" height="576" alt="Mecánico revisando una moto sobre elevador en un taller limpio" loading="lazy">
+    </div>
+    <div class="wrap">
+      <ol class="steps">
+        <li class="reveal"><h3>Registras</h3><p>Das de alta tu moto y eliges servicio o garantía.</p></li>
+        <li class="reveal"><h3>Diagnosticamos</h3><p>Revisamos y te enviamos el presupuesto.</p></li>
+        <li class="reveal"><h3>Reparamos</h3><p>Con refacciones de calidad y tiempos claros.</p></li>
+        <li class="reveal"><h3>Entregamos</h3><p>Te avisamos y sales a rodar con garantía.</p></li>
+      </ol>
+    </div>
+  </section>
+  </div>
 </main>
 
 <footer class="pie"><div class="wrap"><p>Sitio de demostración. Marcas, nombres, precios y promociones son de ejemplo.</p><p>Motocity Mazatlán · Grupo Mivasa</p></div></footer>

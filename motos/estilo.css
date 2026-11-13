@@ -22,7 +22,7 @@ a { color:inherit; }
 .site-menu a { font-weight:600; }
 
 /* Portada */
-.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 4.8rem); display:grid; align-items:center; }
+.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 7.6rem); display:grid; align-items:center; }
 .hero > img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:70% center; z-index:-3; }
 .hero::before { content:""; position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,#0b0b0d 8%,rgb(11 11 13 / .78) 42%,rgb(11 11 13 / .1) 80%), linear-gradient(0deg,#0b0b0d 0,transparent 30%); }
 /* Portada: texto y cartel del Buen Mes caben juntos en la primera pantalla */
@@ -292,7 +292,7 @@ tr:last-child td { border-block-end:0; }
 .wa { background:#25D366; }
 /* El botón de WhatsApp aparece al empezar a bajar, para no tapar los botones de la portada */
 @supports (animation-timeline: scroll()) {
-  body:has(.hero) .wa { animation:wa-in linear both; animation-timeline:scroll(root); animation-range:0 240px; }
+  body:has(#inicio:not([inert])) .wa { animation:wa-in linear both; animation-timeline:scroll(root); animation-range:0 240px; }
   @keyframes wa-in { from { opacity:0; visibility:hidden; } }
 }
 
@@ -373,3 +373,40 @@ tr:last-child td { border-block-end:0; }
 .estimado p { margin:0; }
 .estimado strong { font-family:var(--display); font-style:italic; font-weight:800; font-size:2rem; color:#fff; font-variant-numeric:tabular-nums; }
 .field .note { margin-block-start:.3rem; }
+
+/* Pestañas: cada sección del sitio es una vista; sólo se muestra la activa */
+.site-header .header-inner { padding-block:.6rem; }
+.pestanas { border-block-start:1px solid var(--x-line); }
+.pestanas ul { display:flex; gap:.25rem; list-style:none; margin:0 auto; padding:0; inline-size:min(100% - 2rem, 72rem); overflow-x:auto; scrollbar-width:none; scroll-snap-type:inline proximity; scroll-padding-inline:2rem; overscroll-behavior-inline:contain; }
+.pestanas ul::-webkit-scrollbar { display:none; }
+.pestanas li { flex:none; scroll-snap-align:start; }
+.pestanas a { position:relative; display:flex; align-items:center; min-block-size:44px; padding:.35rem 1rem; text-decoration:none; color:var(--mute); font-family:var(--display); font-style:italic; font-weight:800; font-size:1.08rem; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; transition:color .2s ease; }
+.pestanas a:hover { color:#fff; }
+.pestanas a:focus-visible { outline:2px solid var(--focus); outline-offset:-4px; border-radius:.3rem; }
+.pestanas a[aria-current="page"] { color:#fff; }
+.pestanas a[aria-current="page"]::after { content:""; position:absolute; inset:auto .6rem 0; border-block-end:3px solid var(--red); }
+@media (prefers-reduced-motion: no-preference) {
+  .pestanas a[aria-current="page"]::after { animation:tab-in .3s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes tab-in { from { transform:scaleX(0); } }
+}
+/* Desvanecido en los bordes cuando las pestañas no caben (móvil) */
+@property --fade-start { syntax:"<length>"; inherits:false; initial-value:0px; }
+@property --fade-end { syntax:"<length>"; inherits:false; initial-value:0px; }
+@supports (animation-timeline: scroll()) {
+  .pestanas ul { --fade-size:2.5rem;
+    mask:linear-gradient(black,black) no-clip subtract,
+      linear-gradient(to right,black,transparent) 0 0 / var(--fade-start) 100% no-repeat no-clip,
+      linear-gradient(to right,transparent,black) 100% 0 / var(--fade-end) 100% no-repeat no-clip;
+    animation:fade-ini linear both, fade-fin linear both; animation-timeline:scroll(self inline);
+    animation-range:0 var(--fade-size), calc(100% - var(--fade-size)) 100%; }
+  @keyframes fade-ini { to { --fade-start:var(--fade-size); } }
+  @keyframes fade-fin { from { --fade-end:var(--fade-size); } }
+}
+
+main { position:relative; }
+.vista:focus { outline:none; }
+.vista.oculta { content-visibility:hidden; position:absolute; inset:0 0 auto; }
+@supports not (content-visibility: hidden) { .vista.oculta { display:none; } }
+/* Las vistas sueltas empiezan con un poco más de aire bajo las pestañas */
+.vista:not(#inicio) > .section:first-child { padding-block-start:clamp(2.5rem, 5vw, 4rem); }
+.vista section[id] { scroll-margin-block-start:7.6rem; }
