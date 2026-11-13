@@ -565,3 +565,105 @@ body::after { content:""; position:fixed; inset:0; z-index:15; pointer-events:no
   mask:radial-gradient(90% 70% at 40% 20%, #000 30%, transparent 85%); }
 #v-taller::after { inline-size:24rem; aspect-ratio:1; inset-block-start:-3rem; inset-inline-end:-5rem; opacity:.06; rotate:-20deg;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 6.5a4 4 0 0 0-5 5L3.8 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5-5l-2.4 2.4-2.2-.5-.5-2.2Z'/%3E%3C/svg%3E") center / contain no-repeat; }
+
+/* =====================================================================
+   TEMA CLARO del sitio público (body.claro): blanco como base, rojo y
+   negro como acentos. La portada con foto, el cartel y la banda roja
+   conservan su color para que resalten.
+   ===================================================================== */
+body.claro { color-scheme:light;
+  --x-line:#e2e3e8; --mute:#5d5e68; --silver:#2a2b31; --coal:#fff; --steel:#f6f6f8; --x-card:#fff; --x-card2:#fff;
+  --x-accent:#e11d27; --x-on-accent:#fff; --tinta:#0e0e12;
+  --sombra-tarjeta:0 1px 2px rgb(16 16 24 / .06), 0 12px 28px -14px rgb(16 16 24 / .2);
+  color:var(--silver);
+  background:
+    radial-gradient(70rem 40rem at 105% -5%, rgb(225 29 39 / .07), transparent 60%),
+    linear-gradient(180deg var(--in-oklab), #fbfbfc, #f2f2f5) fixed; }
+body.claro::after { opacity:.035; mix-blend-mode:multiply; }
+body.claro :is(h1, h2, h3) { color:var(--tinta); }
+body.claro :is(.hero, .cta-band, .cartel) :is(h1, h2, h3) { color:#fff; }
+
+/* Encabezado blanco */
+body.claro .site-header { background:rgb(255 255 255 / .95); color:var(--tinta); border-block-end-color:var(--x-line); box-shadow:0 8px 24px -16px rgb(16 16 24 / .35); }
+body.claro .hdr-info span, body.claro .hdr-wa { color:var(--tinta); }
+body.claro .pestanas { background:repeating-linear-gradient(-60deg, transparent 0 14px, rgb(0 0 0 / .018) 14px 28px), #f7f7f9; border-block-start-color:var(--x-line); }
+body.claro .pestanas a { color:#55565f; }
+body.claro .pestanas a:hover { color:var(--tinta); background-color:rgb(0 0 0 / .045); }
+body.claro .pestanas a[aria-current="page"] { color:var(--tinta); background-color:rgb(225 29 39 / .08); }
+body.claro .pestanas ul::before { box-shadow:0 0 10px rgb(225 29 39 / .45); }
+body.claro .marquee { box-shadow:0 1px 0 var(--x-line), 0 -1px 0 var(--x-line); }
+
+/* Tarjetas blancas con sombra suave */
+body.claro :is(.moto, .parte, .card, .filters, .chart, .marcas li, .reviews li, .promo, .steps li) { background:linear-gradient(180deg, #fff, #fafafb); border-color:var(--x-line); box-shadow:var(--sombra-tarjeta); }
+body.claro .promo::after { background:radial-gradient(circle, rgb(225 29 39 / .16), transparent 65%); }
+body.claro :is(.promo p, .sim-sem, .checks li) { color:#4a4b54; }
+body.claro :is(.moto .price, .parte .price, .sim-big, dialog.ficha .price, .sim-sem b, .reviews blockquote, [role=status]) { color:var(--tinta); }
+body.claro :is(.ok-msg, dialog.ficha .info [role=status]) { color:#15803d !important; }
+body.claro .stock.si { color:#15803d; } body.claro .stock.poco { color:#b45309; } body.claro .stock.no { color:#c81e1e; }
+body.claro .parte .btn[disabled] { background:#e8e8ec; color:#787983; }
+body.claro .pill { color:var(--tinta); border-color:rgb(0 0 0 / .2); background:#fff; }
+body.claro .pill:hover { border-color:var(--tinta); }
+body.claro .pill[aria-pressed="true"] { background:var(--red); border-color:var(--red); color:#fff; }
+body.claro .solo-fav { color:var(--tinta) !important; }
+body.claro .vista:not(#inicio) .btn.ghost, body.claro dialog .btn.ghost { color:var(--tinta); box-shadow:inset 0 0 0 2px var(--tinta); }
+
+/* Formularios claros */
+body.claro :is(select, input:not([type=checkbox]):not([type=file]):not([type=range]):not([type=radio]), textarea) { background-color:#fff; color:var(--tinta); border-color:#cfd0d7; }
+body.claro select:hover { border-color:#9a9ba5; }
+body.claro option { background:#fff; color:var(--tinta); }
+@supports (appearance: base-select) { @media (hover:hover) and (pointer:fine) {
+  body.claro select::picker(select) { background:#fff; color:var(--tinta); border-color:var(--x-line); box-shadow:0 24px 48px -16px rgb(16 16 24 / .35); }
+  body.claro select option:hover, body.claro select option:focus-visible { background:#f1f1f4; }
+  body.claro select option:checked { background:var(--red); color:#fff; }
+} }
+
+/* Simulador */
+body.claro .sim-rango input[type=range]::-webkit-slider-runnable-track { background:linear-gradient(90deg, var(--red) var(--p), #e2e3e8 var(--p)); }
+body.claro .sim-rango input[type=range]::-moz-range-track { background:#e2e3e8; }
+body.claro .sim-rango input[type=range]::-webkit-slider-thumb { box-shadow:0 3px 10px rgb(16 16 24 / .25); }
+body.claro .plazos span { border-color:#cfd0d7; background:#fff; }
+body.claro .plazos span:hover { border-color:var(--tinta); }
+body.claro .sim-barra { background:#ececf0; }
+body.claro :is(.sim-barra, .sim-ley) .b-eng { background:var(--tinta); }
+
+/* Ficha de la moto */
+body.claro dialog.ficha { background:#fff; color:var(--silver); border-color:var(--x-line); box-shadow:0 40px 80px -30px rgb(0 0 0 / .5); }
+body.claro dialog.ficha::backdrop { background:rgb(14 14 18 / .55); }
+body.claro dialog.ficha .cerrar { background:var(--tinta); color:#fff; }
+
+/* Bandas: gris muy claro con textura fina */
+body.claro .dark-band, body.claro .vista:not(#inicio) > .dark-band.section:first-child { box-shadow:0 1px 0 var(--x-line) inset, 0 -1px 0 var(--x-line) inset; background:
+  radial-gradient(50rem 26rem at 100% 0, rgb(225 29 39 / .08), transparent 65%),
+  repeating-linear-gradient(45deg, rgb(0 0 0 / .018) 0 2px, transparent 0 7px),
+  linear-gradient(180deg var(--in-oklab), #f3f3f6, #ececf0); }
+body.claro footer.pie { background:#0e0e12; color:#a7a8b0; border:0; }
+
+/* Fondos temáticos en claro */
+body.claro #v-catalogo { background:radial-gradient(60rem 22rem at 50% 0, rgb(225 29 39 / .12), transparent 70%), linear-gradient(180deg var(--in-oklab), #fff, #f4f4f7 40rem); }
+body.claro #v-catalogo::before { opacity:.9; filter:invert(1) sepia(1) saturate(6) hue-rotate(-30deg); }
+body.claro #v-catalogo::after { opacity:.75; }
+body.claro #v-promociones { background:
+  radial-gradient(40rem 26rem at 0 0, rgb(225 29 39 / .2), transparent 70%),
+  radial-gradient(36rem 26rem at 100% 30%, rgb(255 212 0 / .25), transparent 70%),
+  radial-gradient(50rem 30rem at 50% 110%, rgb(225 29 39 / .14), transparent 70%),
+  repeating-linear-gradient(-45deg, rgb(225 29 39 / .06) 0 26px, transparent 0 52px),
+  linear-gradient(180deg var(--in-oklab), #fff7f7, #fff); }
+body.claro #v-promociones::before { opacity:.65; }
+body.claro #v-promociones::after { -webkit-text-stroke-color:rgb(225 29 39 / .16); }
+body.claro #v-refacciones { background:
+  radial-gradient(50rem 30rem at 85% 0, rgb(70 120 200 / .12), transparent 70%),
+  radial-gradient(40rem 26rem at 0 100%, rgb(225 29 39 / .08), transparent 70%),
+  linear-gradient(rgb(40 80 150 / .09) 1px, transparent 0) 0 0 / 100% 6rem,
+  linear-gradient(90deg, rgb(40 80 150 / .09) 1px, transparent 0) 0 0 / 6rem 100%,
+  linear-gradient(rgb(40 80 150 / .04) 1px, transparent 0) 0 0 / 100% 1.5rem,
+  linear-gradient(90deg, rgb(40 80 150 / .04) 1px, transparent 0) 0 0 / 1.5rem 100%,
+  linear-gradient(180deg var(--in-oklab), #f7f9fd, #fff); }
+body.claro :is(#v-refacciones, #v-taller)::before, body.claro :is(#v-refacciones, #v-taller)::after { filter:invert(1); }
+body.claro #v-taller { background:
+  radial-gradient(46rem 30rem at 30% 0, rgb(255 170 90 / .16), transparent 70%),
+  radial-gradient(40rem 30rem at 100% 100%, rgb(225 29 39 / .08), transparent 70%),
+  linear-gradient(180deg var(--in-oklab), #f6f6f8, #ededf1); }
+body.claro #v-taller::before { filter:none; background:radial-gradient(circle, rgb(0 0 0 / .16) 0 3px, rgb(255 255 255 / .9) 3.6px 4.4px, transparent 5px) 0 0 / 2.2rem 2.2rem; }
+body.claro .taller img { box-shadow:var(--sombra-tarjeta); }
+body.claro dialog.ficha .photo { background:radial-gradient(80% 70% at 50% 60%, rgb(225 29 39 / .08), transparent 70%), #fff; }
+body.claro dialog.ficha .photo img { box-shadow:var(--sombra-tarjeta); }
