@@ -80,7 +80,7 @@ const PASOS = ["Recibida", "En diagnóstico", "En proceso", "Lista para entrega"
 function pintarInventario() {
   const extra = guardado.leer(K.motos, []);
   const filas = [...extra.map((m) => ({ ...m, nueva: true })), ...motos];
-  $("#t-inv-body").innerHTML = filas.map((m) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:#fff;background:none">${escapar(m.marca)} ${escapar(m.modelo)} ${m.anio}${m.nueva ? ' <span class="badge s-vigente">Nueva en demo</span>' : ""}</th><td>${m.estado}</td><td>${fmtPrecio(m.promo)}</td><td>${m.vendidas ?? 0}</td></tr>`).join("");
+  $("#t-inv-body").innerHTML = filas.map((m) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:var(--tinta,#fff);background:none">${escapar(m.marca)} ${escapar(m.modelo)} ${m.anio}${m.nueva ? ' <span class="badge s-vigente">Nueva en demo</span>' : ""}</th><td>${m.estado}</td><td>${fmtPrecio(m.promo)}</td><td>${m.vendidas ?? 0}</td></tr>`).join("");
   const total = filas.length;
   $("#kpis").innerHTML = [[total, "Motos en inventario"], [guardado.leer(K.serv, sembrarServ).length, "Servicios abiertos"], [guardado.leer(K.gar, sembrarGar).length, "Garantías en trámite"], [promos.length - guardado.leer(K.promo, []).length, "Promociones activas"]]
     .map(([n, t]) => `<li><strong>${n}</strong><span>${t}</span></li>`).join("");
@@ -99,7 +99,7 @@ $("#f-subir").addEventListener("submit", (e) => {
 /* Servicios */
 function pintarServicios() {
   const l = guardado.leer(K.serv, sembrarServ);
-  $("#t-serv-body").innerHTML = l.map((s) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:#fff;background:none">${escapar(s.moto)}<br><small class="note">${escapar(s.placas)}</small></th><td>${escapar(s.tipo)}</td><td>${fmtServicio(s.precio ?? tarifas[s.tipo]?.[1] ?? 0)}</td>
+  $("#t-serv-body").innerHTML = l.map((s) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:var(--tinta,#fff);background:none">${escapar(s.moto)}<br><small class="note">${escapar(s.placas)}</small></th><td>${escapar(s.tipo)}</td><td>${fmtServicio(s.precio ?? tarifas[s.tipo]?.[1] ?? 0)}</td>
     <td><span class="badge s-${CLS[s.paso]}">${PASOS[s.paso]}</span><ul class="stepper" aria-hidden="true" style="margin-block-start:.4rem">${PASOS.map((_, i) => `<li class="${i <= s.paso ? "on" : ""}"></li>`).join("")}</ul></td>
     <td>${s.paso < 3 ? `<button class="btn ghost small" type="button" data-avanzar="${s.id}">Avanzar</button>` : ""}</td></tr>`).join("");
 }
@@ -138,7 +138,7 @@ pintarEstimado();
 function pintarGarantias() {
   const l = guardado.leer(K.gar, sembrarGar);
   const cls = { "En revisión": "revision", Aprobada: "aprobada", Recibida: "vigente" };
-  $("#t-gar-body").innerHTML = l.map((g) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:#fff;background:none">${escapar(g.moto)}</th><td>${escapar(g.falla)}</td><td><span class="badge s-${cls[g.estado] || "vigente"}">${g.estado}</span></td></tr>`).join("");
+  $("#t-gar-body").innerHTML = l.map((g) => `<tr><th scope="row" style="font-family:var(--sans);font-style:normal;text-transform:none;letter-spacing:0;font-size:1rem;color:var(--tinta,#fff);background:none">${escapar(g.moto)}</th><td>${escapar(g.falla)}</td><td><span class="badge s-${cls[g.estado] || "vigente"}">${g.estado}</span></td></tr>`).join("");
 }
 $("#f-gar").addEventListener("submit", (e) => {
   e.preventDefault();

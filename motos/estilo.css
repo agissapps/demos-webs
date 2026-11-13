@@ -667,3 +667,47 @@ body.claro #v-taller::before { filter:none; background:radial-gradient(circle, r
 body.claro .taller img { box-shadow:var(--sombra-tarjeta); }
 body.claro dialog.ficha .photo { background:radial-gradient(80% 70% at 50% 60%, rgb(225 29 39 / .08), transparent 70%), #fff; }
 body.claro dialog.ficha .photo img { box-shadow:var(--sombra-tarjeta); }
+
+/* ---------- Tema claro del panel ---------- */
+body.claro { --menu-bg:#fff; --menu-fg:#0e0e12; }
+body.claro :is(.site-header, .main, .login) .btn.ghost { color:var(--tinta); box-shadow:inset 0 0 0 2px var(--tinta); }
+body.claro .site-menu a:hover { background:#f1f1f4; }
+body.claro .menu-button { color:var(--tinta); }
+body.claro .login { background:
+  radial-gradient(60rem 30rem at 80% 0, rgb(225 29 39 / .1), transparent 60%),
+  radial-gradient(40rem 26rem at 0 100%, rgb(225 29 39 / .06), transparent 60%),
+  linear-gradient(180deg var(--in-oklab), #fbfbfc, #efeff3); }
+body.claro .login-card { background:#fff; box-shadow:0 1px 2px rgb(16 16 24 / .06), 0 30px 60px -28px rgb(16 16 24 / .35); }
+body.claro .login-card .brand { box-shadow:0 0 0 1px var(--x-line); }
+body.claro .hint { background:#f6f6f8; border-color:#cfd0d7; }
+body.claro .hint code { color:var(--tinta); }
+body.claro .side { background:#fff; box-shadow:1px 0 0 var(--x-line); }
+body.claro .side button { color:var(--tinta); }
+body.claro .side button:hover { background:#f1f1f4; }
+body.claro .side button[aria-current="page"] { background:var(--red); color:#fff; box-shadow:0 10px 20px -12px rgb(225 29 39 / .8); }
+body.claro .tablewrap { background:#fff; box-shadow:var(--sombra-tarjeta); }
+body.claro th { background:#f7f7f9; }
+body.claro tbody tr:hover { background:#fafafb; }
+body.claro .badge { background:#ececf0; color:#33343b; }
+body.claro .badge.s-recibida { background:#e6e6ea; color:#33343b; }
+body.claro :is(.badge.s-diagnostico, .badge.s-revision) { background:#fff4cc; color:#7a5400; }
+body.claro .badge.s-proceso { background:#ffe8d5; color:#9a4300; }
+body.claro :is(.badge.s-listo, .badge.s-aprobada) { background:#dcfce7; color:#166534; }
+body.claro .badge.s-vigente { background:#dbeefe; color:#075985; }
+body.claro .stepper li { background:#e2e3e8; } body.claro .stepper li.on { background:var(--red); }
+body.claro .drop { background:#fafafb; border-color:#c9cad2; }
+body.claro :is(.drop:hover, .drop.over, .drop:focus-within) { background:#fff3f3; border-color:var(--red); }
+body.claro .drop strong { color:var(--tinta); }
+body.claro .estimado { background:linear-gradient(120deg, #fff1f1, #fff); border-color:rgb(225 29 39 / .35); }
+body.claro :is(.estimado strong, .kpis strong, .cols-chart b) { color:var(--tinta); }
+body.claro .kpis li { background:#fff; box-shadow:var(--sombra-tarjeta); }
+body.claro .bars .track { background:#ececf0; }
+body.claro .bars .fill.alt { background:linear-gradient(90deg, #3a3b44, #8a8b94); }
+body.claro .toast { background:var(--tinta); color:#fff; box-shadow:0 20px 40px -14px rgb(0 0 0 / .45); }
+.main:focus { outline:none; }
+/* En móvil el menú del panel se desliza de lado en vez de ensanchar la página */
+.app { grid-template-columns:minmax(0, 1fr); } .app > * { min-inline-size:0; }
+@media (min-width:60rem){ .app { grid-template-columns:15rem minmax(0, 1fr); } }
+.split { grid-template-columns:minmax(0, 1fr); } .split > *, .formgrid > *, .two > * { min-inline-size:0; }
+@media (min-width:64rem){ .split { grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); } }
+.tablewrap { position:relative; } /* el texto oculto para lectores de pantalla queda dentro del recorte */
