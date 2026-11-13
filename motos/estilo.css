@@ -22,7 +22,7 @@ a { color:inherit; }
 .site-menu a { font-weight:600; }
 
 /* Portada */
-.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 7.6rem); display:grid; align-items:center; }
+.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 7rem - var(--marquee-h)); display:grid; align-items:center; }
 .hero > img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:70% center; z-index:-3; }
 .hero::before { content:""; position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,#0b0b0d 8%,rgb(11 11 13 / .78) 42%,rgb(11 11 13 / .1) 80%), linear-gradient(0deg,#0b0b0d 0,transparent 30%); }
 /* Portada: texto y cartel del Buen Mes caben juntos en la primera pantalla */
@@ -91,7 +91,10 @@ a { color:inherit; }
 
 /* Marcas */
 .marquee { background:#fff; color:var(--black); }
-.marquee li { font-family:var(--display); font-style:italic; font-weight:800; font-size:1.5rem; text-transform:uppercase; letter-spacing:.06em; }
+/* La barra que corre siempre se ve en la primera pantalla, justo debajo de la portada */
+:root { --marquee-h:3.1rem; }
+.marquee ul { padding-block:0; block-size:var(--marquee-h); align-items:center; }
+.marquee li { font-family:var(--display); font-style:italic; font-weight:800; font-size:1.3rem; text-transform:uppercase; letter-spacing:.06em; }
 .marquee li::after { color:var(--red); }
 .marcas { display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:1rem; margin-block-start:2rem; padding:0; list-style:none; }
 .marcas li { background:var(--steel); border:1px solid var(--x-line); border-radius:1rem; padding:1.4rem 1rem; text-align:center; font-family:var(--display); font-style:italic; font-weight:800; font-size:2rem; text-transform:uppercase; letter-spacing:.04em; position:relative; overflow:hidden; transition:transform .25s ease, border-color .25s ease; }
@@ -410,3 +413,4 @@ main { position:relative; }
 /* Las vistas sueltas empiezan con un poco más de aire bajo las pestañas */
 .vista:not(#inicio) > .section:first-child { padding-block-start:clamp(2.5rem, 5vw, 4rem); }
 .vista section[id] { scroll-margin-block-start:7.6rem; }
+@media (prefers-reduced-motion: reduce){ .marquee ul { block-size:auto; min-block-size:var(--marquee-h); padding-block:.4rem; } }
