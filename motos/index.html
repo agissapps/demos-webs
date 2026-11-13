@@ -31,30 +31,28 @@
 </header>
 
 <main id="inicio">
-  <section class="hero">
+  <section class="hero" aria-labelledby="hero-t">
     <img src="img/hero.jpg" width="1024" height="576" alt="Moto deportiva roja y negra en un taller moderno con luces rojas" fetchpriority="high">
     <div class="speed" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="wrap rise">
-      <p class="eyebrow">Vento · CFMOTO · Triumph</p>
-      <h1>Calidad en el taller. <span>Potencia en la calle.</span></h1>
-      <p class="lead">Motos nuevas y seminuevas, servicio con refacciones de calidad y garantía que sí se respeta.</p>
-      <div class="ctas"><a class="btn" href="#catalogo">Ver catálogo</a><a class="btn ghost" href="#taller">Agendar servicio</a></div>
-    </div>
-  </section>
-
-  <section class="buenfin" id="buen-mes" aria-labelledby="bf-t">
-    <div class="wrap">
-      <div>
-        <span class="kicker">Durante todo noviembre</span>
-        <h2 id="bf-t">El <em>Buen</em> Mes</h2>
-        <p>Grandes descuentos en motos nuevas, equipo de protección de regalo y servicio de taller con precio especial.</p>
+    <div class="wrap hero-grid">
+      <div class="hero-text rise">
+        <p class="eyebrow">Taller · Servicio · Calidad</p>
+        <h1 id="hero-t">Calidad en el taller. <span>Potencia en la calle.</span></h1>
+        <p class="lead">Motos nuevas y seminuevas, servicio con refacciones de calidad y garantía que sí se respeta.</p>
+        <div class="ctas"><a class="btn" href="#catalogo">Ver catálogo</a><a class="btn ghost" href="#taller">Agendar servicio</a></div>
       </div>
-      <div>
+
+      <aside class="cartel" id="buen-mes" aria-labelledby="bf-t">
+        <p class="bar">Durante todo noviembre</p>
+        <h2 id="bf-t"><span>El Buen Mes</span></h2>
+        <p class="bar">Grandes descuentos</p>
+        <p class="plate">Mazatlán</p>
         <ul class="countdown" aria-label="Tiempo restante de la promoción" id="cuenta">
           <li><b data-u="d">00</b><span>Días</span></li><li><b data-u="h">00</b><span>Horas</span></li><li><b data-u="m">00</b><span>Min</span></li><li><b data-u="s">00</b><span>Seg</span></li>
         </ul>
-        <p class="countdown-note" style="margin-block-start:.8rem"><button class="btn alt small" type="button" id="festejar">¡Festejar!</button></p>
-      </div>
+        <ul class="cartel-marcas" aria-label="Marcas participantes"><li>Vento</li><li>CFMOTO</li><li>Motocity</li><li>Triumph</li></ul>
+        <p class="cartel-cta"><a class="btn alt small" href="#promociones">Ver promociones</a><button class="btn small dark" type="button" id="festejar">¡Festejar!</button></p>
+      </aside>
     </div>
   </section>
 
@@ -71,7 +69,7 @@
     <search>
       <form class="filters" id="filtros" aria-label="Filtrar motos">
         <div><label for="f-tipo">Tipo</label><select id="f-tipo" name="tipo"><option value="">Todos</option></select></div>
-        <div><label for="f-estado">Estado</label><select id="f-estado" name="estado"><option value="">Nuevas y seminuevas</option><option>Nueva</option><option>Seminueva</option></select></div>
+        <div><label for="f-estado">Estado</label><select id="f-estado" name="estado"><option value="">Todas</option><option>Nueva</option><option>Seminueva</option></select></div>
         <div><label for="f-precio">Precio máximo</label><select id="f-precio" name="precio"><option value="">Sin límite</option><option value="50000">Hasta $50,000</option><option value="100000">Hasta $100,000</option><option value="200000">Hasta $200,000</option></select></div>
         <div><label for="f-orden">Ordenar por</label><select id="f-orden" name="orden"><option value="vendidas">Más vendidas</option><option value="menor">Precio: menor a mayor</option><option value="mayor">Precio: mayor a menor</option><option value="cc">Más cilindrada</option></select></div>
         <div><label class="solo-fav"><input type="checkbox" name="favs" value="1"> Solo favoritas</label></div>
@@ -93,7 +91,7 @@
     </div>
   </section>
 
-  <section class="wrap section" aria-labelledby="pr-t">
+  <section class="wrap section" id="promociones" aria-labelledby="pr-t">
     <div class="reveal"><p class="eyebrow">Promociones</p><h2 id="pr-t">Lo mejor de El Buen Mes</h2><p class="sub">Promociones de ejemplo para esta demo; vigentes hasta el 30 de noviembre.</p></div>
     <ul class="promos" id="promos"></ul>
   </section>
@@ -172,10 +170,11 @@
   <div class="cols"><div class="photo" id="ficha-foto"></div>
     <div class="info"><p class="eyebrow" id="ficha-marca"></p><h2 id="ficha-t"></h2><p class="price" id="ficha-precio"></p><p class="note" id="ficha-old"></p>
       <dl class="specs" id="ficha-specs"></dl><ul class="equip" id="ficha-equipo"></ul>
-      <p style="margin-block-start:.6rem"><a class="btn" id="ficha-wa" href="#contacto">Me interesa</a></p></div></div>
+      <p style="margin-block-start:.6rem"><button class="btn" type="button" id="ficha-wa">Me interesa</button></p>
+      <p role="status" id="ficha-msg"></p></div></div>
 </dialog>
 
-<a class="wa" href="#inicio" aria-label="Escribir por WhatsApp (demo)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800 0-1.300.7-2 1-2.300.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600-.3.400c-.1.100-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2 1.300 2.300 1.400.3.100.5.100.6-.1l.9-1.100c.2-.3.400-.2.700-.1l1.900.9c.3.100.5.200.5.300.1.100.1.700-.1 1.300z"/></svg></a>
+<a class="wa" href="https://wa.me/520000000000" aria-label="Escribir por WhatsApp (número de ejemplo)"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.8 3 3 8.8 3 16c0 2.3.6 4.5 1.7 6.4L3 29l6.8-1.7c1.8 1 3.9 1.5 6.2 1.5 7.2 0 13-5.8 13-13S23.2 3 16 3zm0 23.6c-2 0-3.9-.5-5.5-1.5l-.4-.2-4 1 1.1-3.9-.3-.4C5.8 19.9 5.2 18 5.2 16 5.2 9.9 10.1 5.2 16 5.2S26.8 10 26.8 16 21.9 26.6 16 26.6zm5.9-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-1.9-.9-3.1-1.7-4.3-3.8-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.5l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1.1 1.1-1.1 2.6 1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7 2 .8 2.8.9 3.8.7.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.4.2-1.6-.1-.1-.3-.2-.6-.4z"/></svg></a>
 <div class="confeti" id="confeti" aria-hidden="true"></div>
 <script type="module" src="main.js"></script>
 </body>

@@ -65,7 +65,7 @@ pills.innerHTML = ["Todas", ...marcas].map((m, i) => `<li><button class="pill" t
 for (const t of [...new Set(motos.map((m) => m.tipo))].sort()) form.tipo.add(new Option(t, t));
 
 const orden = { vendidas: (a, b) => b.vendidas - a.vendidas, menor: (a, b) => a.promo - b.promo, mayor: (a, b) => b.promo - a.promo, cc: (a, b) => b.cc - a.cc };
-const corazon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-9.3-9C1.2 8.8 3 5.5 6.200 5.500c1.900 0 3.100 1 3.800 2.100.7-1.100 1.900-2.100 3.800-2.100 3.200 0 5 3.300 3.500 6.500C19 16.600 12 21 12 21z"/></svg>`;
+const corazon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5 10.6 19.2C5.4 14.5 2 11.4 2 7.6 2 4.5 4.4 2 7.5 2 9.2 2 10.9 2.8 12 4.1 13.1 2.8 14.8 2 16.5 2 19.6 2 22 4.5 22 7.6 22 11.4 18.6 14.5 13.4 19.2Z"/></svg>`;
 
 function html(m, favs) {
   return `<li class="moto" data-id="${m.id}" style="view-transition-name:m-${m.id}">
@@ -122,12 +122,15 @@ function abrir(id) {
   const specs = [["Cilindrada", m.cc + " cc"], ["Potencia", m.potencia], ["Transmisión", m.transmision], ["ABS", m.abs ? "Sí" : "No"], ["Tipo", m.tipo], ["Color", m.color], ["Kilometraje", fmtKm(m.km)], ["Estado", m.estado]];
   $("#ficha-specs").innerHTML = specs.map(([k, v]) => `<div><dt>${k}</dt><dd>${escapar(v)}</dd></div>`).join("");
   $("#ficha-equipo").innerHTML = m.equipo.map((x) => `<li>${escapar(x)}</li>`).join("");
-  $("#ficha-wa").href = `#inicio`;
+  $("#ficha-msg").textContent = "";
+  dlg.dataset.moto = `${m.marca} ${m.modelo}`;
   dlg.showModal();
 }
 dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("[data-cerrar]")) dlg.close(); });
 dlg.addEventListener("close", () => { document.documentElement.style.overflow = ""; });
 dlg.addEventListener("toggle", () => { document.documentElement.style.overflow = dlg.open ? "hidden" : ""; });
-$("#ficha-wa").addEventListener("click", () => dlg.close());
+$("#ficha-wa").addEventListener("click", () => {
+  $("#ficha-msg").textContent = `¡Listo! Un asesor te contactaría para apartar tu ${dlg.dataset.moto}. (Es una demo: no se envió nada.)`;
+});
 
 dibujar();

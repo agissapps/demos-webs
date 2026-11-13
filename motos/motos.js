@@ -1,11 +1,11 @@
 // Datos de ejemplo de la demo. Marcas reales del flyer; modelos, precios y cifras son inventados.
 // Para agregar una moto al catálogo: copia un bloque, cambia los datos y pon su foto en img/ (o deja foto: null).
 export const motos = [
-  { id: "vento-rocketman-250", marca: "Vento", modelo: "Rocketman 250", tipo: "Naked", cc: 250, anio: 2026, estado: "Nueva", precio: 52900, promo: 47900, km: 0, color: "Rojo", colorHex: "#d7191f", potencia: "21 hp", transmision: "6 velocidades", abs: true, foto: null, vendidas: 38,
+  { id: "vento-rocketman-250", marca: "Vento", modelo: "Rocketman 250", tipo: "Naked", cc: 250, anio: 2026, estado: "Nueva", precio: 52900, promo: 47900, km: 0, color: "Rojo", colorHex: "#d7191f", potencia: "21 hp", transmision: "6 velocidades", abs: true, foto: "img/rocketman-roja.jpg", vendidas: 38,
     equipo: ["Tablero digital", "Faro LED", "Frenos de disco", "Garantía de fábrica 2 años"] },
   { id: "vento-crossmax-250", marca: "Vento", modelo: "Crossmax 250", tipo: "Doble propósito", cc: 250, anio: 2026, estado: "Nueva", precio: 61900, promo: 56900, km: 0, color: "Naranja", colorHex: "#e8590c", potencia: "23 hp", transmision: "6 velocidades", abs: true, foto: "img/doble-proposito.jpg", vendidas: 29,
     equipo: ["Suspensión de recorrido largo", "Protector de motor", "Faro LED", "Tablero digital"] },
-  { id: "vento-nitrox-200", marca: "Vento", modelo: "Nitrox 200", tipo: "Deportiva", cc: 200, anio: 2025, estado: "Nueva", precio: 44900, promo: 39900, km: 0, color: "Negro", colorHex: "#1a1a1f", potencia: "18 hp", transmision: "6 velocidades", abs: false, foto: null, vendidas: 24,
+  { id: "vento-nitrox-200", marca: "Vento", modelo: "Nitrox 200", tipo: "Deportiva", cc: 200, anio: 2025, estado: "Nueva", precio: 44900, promo: 39900, km: 0, color: "Negro", colorHex: "#1a1a1f", potencia: "18 hp", transmision: "6 velocidades", abs: false, foto: "img/deportiva-negra.jpg", vendidas: 24,
     equipo: ["Carenado completo", "Escape deportivo", "Frenos de disco", "Luz de día LED"] },
   { id: "vento-urban-150", marca: "Vento", modelo: "Urban 150", tipo: "Scooter", cc: 150, anio: 2026, estado: "Nueva", precio: 32900, promo: 29900, km: 0, color: "Blanco", colorHex: "#eceef1", potencia: "11 hp", transmision: "Automática", abs: false, foto: "img/scooter.jpg", vendidas: 52,
     equipo: ["Cajuela bajo el asiento", "Puerto USB", "Arranque sin llave", "Bajo consumo"] },
@@ -15,15 +15,15 @@ export const motos = [
     equipo: ["Maletas laterales", "Pantalla TFT conectada", "Suspensión ajustable", "Control de crucero"] },
   { id: "cfmoto-300cl-x", marca: "CFMOTO", modelo: "300CL-X", tipo: "Naked", cc: 300, anio: 2025, estado: "Nueva", precio: 78900, promo: 72900, km: 0, color: "Negro", colorHex: "#222228", potencia: "29 hp", transmision: "6 velocidades", abs: true, foto: "img/retro.jpg", vendidas: 21,
     equipo: ["Estilo neo-retro", "Faro redondo LED", "ABS", "Embrague deslizante"] },
-  { id: "cfmoto-papio-125", marca: "CFMOTO", modelo: "Papio 125", tipo: "Miniatura", cc: 125, anio: 2025, estado: "Nueva", precio: 36900, promo: 33900, km: 0, color: "Verde", colorHex: "#2f8f5b", potencia: "9 hp", transmision: "4 velocidades", abs: false, foto: null, vendidas: 14,
+  { id: "cfmoto-papio-125", marca: "CFMOTO", modelo: "Papio 125", tipo: "Miniatura", cc: 125, anio: 2025, estado: "Nueva", precio: 36900, promo: 33900, km: 0, color: "Verde", colorHex: "#2f8f5b", potencia: "9 hp", transmision: "4 velocidades", abs: false, foto: "img/mini-verde.jpg", vendidas: 14,
     equipo: ["Ligera y fácil de manejar", "Ideal para primera moto", "Tablero LCD"] },
   { id: "triumph-speed-400", marca: "Triumph", modelo: "Speed 400", tipo: "Naked", cc: 400, anio: 2026, estado: "Nueva", precio: 114900, promo: 106900, km: 0, color: "Negro", colorHex: "#111114", potencia: "40 hp", transmision: "6 velocidades", abs: true, foto: "img/naked.jpg", vendidas: 15,
     equipo: ["Control de tracción", "ABS", "Faro LED", "Acelerador electrónico"] },
-  { id: "triumph-trident-660", marca: "Triumph", modelo: "Trident 660", tipo: "Naked", cc: 660, anio: 2026, estado: "Nueva", precio: 189900, promo: 179900, km: 0, color: "Plata", colorHex: "#aeb2ba", potencia: "81 hp", transmision: "6 velocidades", abs: true, foto: null, vendidas: 8,
+  { id: "triumph-trident-660", marca: "Triumph", modelo: "Trident 660", tipo: "Naked", cc: 660, anio: 2026, estado: "Nueva", precio: 189900, promo: 179900, km: 0, color: "Plata", colorHex: "#aeb2ba", potencia: "81 hp", transmision: "6 velocidades", abs: true, foto: "img/tricilindrica.jpg", vendidas: 8,
     equipo: ["Tres cilindros", "Modos de manejo", "Pantalla TFT", "Quickshifter opcional"] },
   { id: "triumph-bonneville-t120", marca: "Triumph", modelo: "Bonneville T120", tipo: "Crucero", cc: 1200, anio: 2024, estado: "Seminueva", precio: 238000, promo: 224000, km: 6800, color: "Negro", colorHex: "#16161a", potencia: "79 hp", transmision: "6 velocidades", abs: true, foto: "img/crucero.jpg", vendidas: 3,
     equipo: ["Revisada en 80 puntos", "Un solo dueño", "Garantía de 6 meses", "Escapes cromados"] },
-  { id: "vento-rocketman-2023", marca: "Vento", modelo: "Rocketman 250", tipo: "Naked", cc: 250, anio: 2023, estado: "Seminueva", precio: 39900, promo: 36900, km: 14200, color: "Azul", colorHex: "#1d4ed8", potencia: "21 hp", transmision: "6 velocidades", abs: true, foto: null, vendidas: 5,
+  { id: "vento-rocketman-2023", marca: "Vento", modelo: "Rocketman 250", tipo: "Naked", cc: 250, anio: 2023, estado: "Seminueva", precio: 39900, promo: 36900, km: 14200, color: "Azul", colorHex: "#1d4ed8", potencia: "21 hp", transmision: "6 velocidades", abs: true, foto: "img/rocketman-azul.jpg", vendidas: 5,
     equipo: ["Servicios al corriente", "Factura original", "Garantía de 6 meses"] },
 ];
 
