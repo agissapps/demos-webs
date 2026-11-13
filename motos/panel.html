@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi panel · Motocity Mazatlán</title>
+<meta name="description" content="Panel de demostración: inicio de sesión, inventario de motos, registro de servicios y garantías, y estadísticas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="index.html"><img src="img/logo-mivasa.png" width="120" height="160" alt="Grupo Mivasa"><span>Motocity<small>MAZATLÁN</small></span></a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="index.html">Volver al sitio</a></li>
+        <li><a href="index.html#catalogo">Catálogo</a></li>
+        <li><button class="btn ghost small" type="button" id="salir" hidden>Cerrar sesión</button></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Inicio de sesión -->
+  <section class="login" id="vista-login">
+    <form class="login-card" id="form-login" novalidate>
+      <div class="brand"><img src="img/logo-mivasa.png" width="120" height="160" alt="Grupo Mivasa"></div>
+      <h1 style="font-size:2.6rem">Inicia sesión</h1>
+      <p class="note">Entra para registrar tu moto en servicio o garantía y, si eres del equipo, subir motos al catálogo.</p>
+      <div class="field"><label for="u">Correo</label><input id="u" name="u" type="email" autocomplete="username" required></div>
+      <div class="field"><label for="p">Contraseña</label><input id="p" name="p" type="password" autocomplete="current-password" required></div>
+      <p class="hint">Es una demo. Usa <code>demo@motocity.mx</code> y <code>demo1234</code>, o toca el botón.</p>
+      <p role="alert" id="login-error" style="color:#ff8a8f;margin:0" hidden>Correo o contraseña incorrectos.</p>
+      <button class="btn" type="submit">Entrar</button>
+      <button class="btn ghost small" type="button" id="demo-fill">Llenar datos de la demo</button>
+    </form>
+  </section>
+
+  <!-- Panel -->
+  <div class="app" id="vista-app" hidden>
+    <aside class="side" aria-label="Menú del panel">
+      <ul id="menu-panel">
+        <li><button type="button" data-ir="resumen" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13h6V4H4zM14 20h6v-9h-6zM4 20h6v-4H4zM14 4v4h6V4z"/></svg>Resumen</button></li>
+        <li><button type="button" data-ir="inventario"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="16" r="3"/><circle cx="18" cy="16" r="3"/><path d="M6 16l4-7h5l3 7M9 9l-1-3H6"/></svg>Inventario</button></li>
+        <li><button type="button" data-ir="subir"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>Subir moto</button></li>
+        <li><button type="button" data-ir="servicios"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6a4 4 0 0 0-5 5l-6 6 3 3 6-6a4 4 0 0 0 5-5l-3 3-2-2z"/></svg>Servicios</button></li>
+        <li><button type="button" data-ir="garantias"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Garantías</button></li>
+        <li><button type="button" data-ir="promos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12l-8 8-9-9V3h8z"/><circle cx="7.500" cy="7.500" r="1.200"/></svg>Promociones</button></li>
+      </ul>
+    </aside>
+
+    <div class="main" id="contenido" tabindex="-1">
+      <p class="eyebrow" id="saludo"></p>
+
+      <section id="s-resumen" class="on" aria-labelledby="t-resumen">
+        <h1 id="t-resumen">Resumen</h1>
+        <p class="sub">Lo que pasa en el taller y en la agencia.</p>
+        <ul class="kpis" id="kpis"></ul>
+        <div class="charts">
+          <figure class="chart" style="margin:0"><h3>Marcas que más entran a servicio</h3><p>Servicios del año.</p><ul class="bars" id="g-serv"></ul></figure>
+          <figure class="chart" style="margin:0"><h3>Marcas que más se venden</h3><p>Motos entregadas del año.</p><ul class="bars" id="g-vent"></ul></figure>
+          <figure class="chart" style="margin:0"><h3>Servicios por mes</h3><p>Noviembre sigue en curso.</p><ul class="cols-chart" id="g-mes"></ul></figure>
+          <figure class="chart" style="margin:0"><h3>Servicios más pedidos</h3><p>Por tipo de trabajo.</p><ul class="bars" id="g-tipo"></ul></figure>
+        </div>
+      </section>
+
+      <section id="s-inventario" aria-labelledby="t-inv">
+        <h1 id="t-inv">Inventario</h1>
+        <p class="sub">Motos del catálogo, incluidas las que subas en esta sesión de demo.</p>
+        <p style="margin-block-start:1rem"><button class="btn small" type="button" data-ir="subir">Subir moto nueva</button></p>
+        <div class="tablewrap"><table><caption class="visually-hidden">Inventario de motos</caption><thead><tr><th scope="col">Moto</th><th scope="col">Estado</th><th scope="col">Precio Buen Mes</th><th scope="col">Vendidas</th></tr></thead><tbody id="t-inv-body"></tbody></table></div>
+      </section>
+
+      <section id="s-subir" aria-labelledby="t-subir">
+        <h1 id="t-subir">Subir moto</h1>
+        <p class="sub">Agrega una moto al inventario de esta demo.</p>
+        <form class="card formgrid" id="f-subir" style="margin-block-start:1.2rem;max-inline-size:40rem" data-demo="">
+          <div class="two"><div><label for="s-marca">Marca</label><select id="s-marca" name="marca" required><option>Vento</option><option>CFMOTO</option><option>Triumph</option></select></div>
+            <div><label for="s-modelo">Modelo</label><input id="s-modelo" name="modelo" required placeholder="Ej. Crossmax 250"></div></div>
+          <div class="two"><div><label for="s-anio">Año</label><input id="s-anio" name="anio" type="number" min="2000" max="2027" value="2026" required></div>
+            <div><label for="s-cc">Cilindrada (cc)</label><input id="s-cc" name="cc" type="number" min="50" max="2500" required></div></div>
+          <div class="two"><div><label for="s-precio">Precio de lista</label><input id="s-precio" name="precio" type="number" min="1000" step="100" required inputmode="numeric"></div>
+            <div><label for="s-estado">Estado</label><select id="s-estado" name="estado"><option>Nueva</option><option>Seminueva</option></select></div></div>
+          <div><label for="s-tipo">Tipo</label><select id="s-tipo" name="tipo"><option>Naked</option><option>Deportiva</option><option>Touring</option><option>Doble propósito</option><option>Scooter</option><option>Crucero</option></select></div>
+          <div><span style="font-weight:600;display:block;margin-block-end:.3rem">Fotos</span>
+            <label class="drop" for="s-fotos"><input id="s-fotos" type="file" accept="image/*" multiple><strong>Toca o arrastra tus fotos aquí</strong><span class="note" data-drop-msg>Demo: las fotos no se suben ni se guardan.</span></label></div>
+          <button class="btn" type="submit">Guardar moto</button>
+        </form>
+      </section>
+
+      <section id="s-servicios" aria-labelledby="t-serv">
+        <h1 id="t-serv">Servicios</h1>
+        <p class="sub">Registra tu moto para servicio y sigue su avance.</p>
+        <div class="split">
+          <form class="card formgrid" id="f-serv" style="max-inline-size:none">
+            <h2 style="font-size:1.8rem">Nuevo servicio</h2>
+            <div class="two"><div><label for="v-marca">Marca</label><select id="v-marca" name="marca"><option>Vento</option><option>CFMOTO</option><option>Triumph</option><option>Otra</option></select></div><div><label for="v-modelo">Modelo</label><input id="v-modelo" name="modelo" required></div></div>
+            <div class="two"><div><label for="v-placas">Placas</label><input id="v-placas" name="placas" required autocomplete="off"></div><div><label for="v-km">Kilometraje</label><input id="v-km" name="km" type="number" min="0" inputmode="numeric"></div></div>
+            <div><label for="v-tipo">Servicio</label><select id="v-tipo" name="tipo"><option>Servicio de 1,000 km</option><option>Servicio de 5,000 km</option><option>Frenos</option><option>Cadena y piñones</option><option>Llantas</option><option>Eléctrico</option></select></div>
+            <div><label for="v-fecha">Fecha preferida</label><input id="v-fecha" name="fecha" type="date" required></div>
+            <div><label for="v-notas">Notas</label><textarea id="v-notas" name="notas" rows="3"></textarea></div>
+            <label class="drop" for="v-fotos"><input id="v-fotos" type="file" accept="image/*" multiple><strong>Agregar fotos del problema</strong><span class="note" data-drop-msg>Demo: las fotos no se suben ni se guardan.</span></label>
+            <button class="btn" type="submit">Registrar servicio</button>
+          </form>
+          <div>
+            <h2 style="font-size:1.8rem">Mis servicios</h2>
+            <div class="tablewrap"><table><caption class="visually-hidden">Servicios registrados</caption><thead><tr><th scope="col">Moto</th><th scope="col">Servicio</th><th scope="col">Avance</th><th scope="col"><span class="visually-hidden">Acción</span></th></tr></thead><tbody id="t-serv-body"></tbody></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-garantias" aria-labelledby="t-gar">
+        <h1 id="t-gar">Garantías</h1>
+        <p class="sub">Reporta una falla cubierta y da seguimiento al trámite.</p>
+        <div class="split">
+          <form class="card formgrid" id="f-gar" style="max-inline-size:none">
+            <h2 style="font-size:1.8rem">Nueva garantía</h2>
+            <div class="two"><div><label for="g-marca">Marca</label><select id="g-marca" name="marca"><option>Vento</option><option>CFMOTO</option><option>Triumph</option></select></div><div><label for="g-modelo">Modelo</label><input id="g-modelo" name="modelo" required></div></div>
+            <div class="two"><div><label for="g-serie">Número de serie</label><input id="g-serie" name="serie" required autocomplete="off"></div><div><label for="g-compra">Fecha de compra</label><input id="g-compra" name="compra" type="date" required></div></div>
+            <div><label for="g-falla">¿Qué falla presenta?</label><textarea id="g-falla" name="falla" rows="4" required></textarea></div>
+            <label class="drop" for="g-fotos"><input id="g-fotos" type="file" accept="image/*" multiple><strong>Agregar fotos o factura</strong><span class="note" data-drop-msg>Demo: los archivos no se suben ni se guardan.</span></label>
+            <button class="btn" type="submit">Enviar garantía</button>
+          </form>
+          <div>
+            <h2 style="font-size:1.8rem">Mis garantías</h2>
+            <div class="tablewrap"><table><caption class="visually-hidden">Garantías registradas</caption><thead><tr><th scope="col">Moto</th><th scope="col">Falla</th><th scope="col">Estado</th></tr></thead><tbody id="t-gar-body"></tbody></table></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="s-promos" aria-labelledby="t-promos">
+        <h1 id="t-promos">Promociones de El Buen Mes</h1>
+        <p class="sub">Activa o pausa las promociones que se muestran en el sitio (demo).</p>
+        <ul class="promos" id="p-lista"></ul>
+      </section>
+    </div>
+  </div>
+</main>
+
+<p class="toast" id="toast" role="status" hidden></p>
+<script type="module" src="panel.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motocity Mazatlán · Motos, taller y garantía</title>
+<meta name="description" content="Demo de página web para agencia de motocicletas: catálogo Vento, CFMOTO y Triumph, promociones de El Buen Mes, taller con servicio y garantías, y panel con inicio de sesión.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,700;1,800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/extras.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio"><img src="img/logo-mivasa.png" width="120" height="160" alt="Grupo Mivasa"><span>Motocity<small>MAZATLÁN</small></span></a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#buen-mes">El Buen Mes</a></li>
+        <li><a href="#taller">Taller</a></li>
+        <li><a href="#numeros">Números</a></li>
+        <li><a class="btn" href="panel.html">Iniciar sesión</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <img src="img/hero.jpg" width="1024" height="576" alt="Moto deportiva roja y negra en un taller moderno con luces rojas" fetchpriority="high">
+    <div class="speed" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="wrap rise">
+      <p class="eyebrow">Vento · CFMOTO · Triumph</p>
+      <h1>Calidad en el taller. <span>Potencia en la calle.</span></h1>
+      <p class="lead">Motos nuevas y seminuevas, servicio con refacciones de calidad y garantía que sí se respeta.</p>
+      <div class="ctas"><a class="btn" href="#catalogo">Ver catálogo</a><a class="btn ghost" href="#taller">Agendar servicio</a></div>
+    </div>
+  </section>
+
+  <section class="buenfin" id="buen-mes" aria-labelledby="bf-t">
+    <div class="wrap">
+      <div>
+        <span class="kicker">Durante todo noviembre</span>
+        <h2 id="bf-t">El <em>Buen</em> Mes</h2>
+        <p>Grandes descuentos en motos nuevas, equipo de protección de regalo y servicio de taller con precio especial.</p>
+      </div>
+      <div>
+        <ul class="countdown" aria-label="Tiempo restante de la promoción" id="cuenta">
+          <li><b data-u="d">00</b><span>Días</span></li><li><b data-u="h">00</b><span>Horas</span></li><li><b data-u="m">00</b><span>Min</span></li><li><b data-u="s">00</b><span>Seg</span></li>
+        </ul>
+        <p class="countdown-note" style="margin-block-start:.8rem"><button class="btn alt small" type="button" id="festejar">¡Festejar!</button></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Marcas disponibles">
+    <ul>
+      <li>Vento</li><li>CFMOTO</li><li>Triumph</li><li>Motocity Mazatlán</li><li>Taller certificado</li><li>Garantía respaldada</li>
+      <li aria-hidden="true">Vento</li><li aria-hidden="true">CFMOTO</li><li aria-hidden="true">Triumph</li><li aria-hidden="true">Motocity Mazatlán</li><li aria-hidden="true">Taller certificado</li><li aria-hidden="true">Garantía respaldada</li>
+    </ul>
+  </div>
+
+  <section class="wrap section" id="catalogo">
+    <div class="reveal"><p class="eyebrow">Catálogo</p><h2>Encuentra tu moto</h2><p class="sub">Filtra por marca, tipo o presupuesto. Los precios ya incluyen la promoción de El Buen Mes.</p></div>
+    <ul class="pills" id="marcas" aria-label="Filtrar por marca"></ul>
+    <search>
+      <form class="filters" id="filtros" aria-label="Filtrar motos">
+        <div><label for="f-tipo">Tipo</label><select id="f-tipo" name="tipo"><option value="">Todos</option></select></div>
+        <div><label for="f-estado">Estado</label><select id="f-estado" name="estado"><option value="">Nuevas y seminuevas</option><option>Nueva</option><option>Seminueva</option></select></div>
+        <div><label for="f-precio">Precio máximo</label><select id="f-precio" name="precio"><option value="">Sin límite</option><option value="50000">Hasta $50,000</option><option value="100000">Hasta $100,000</option><option value="200000">Hasta $200,000</option></select></div>
+        <div><label for="f-orden">Ordenar por</label><select id="f-orden" name="orden"><option value="vendidas">Más vendidas</option><option value="menor">Precio: menor a mayor</option><option value="mayor">Precio: mayor a menor</option><option value="cc">Más cilindrada</option></select></div>
+        <div><label class="solo-fav"><input type="checkbox" name="favs" value="1"> Solo favoritas</label></div>
+        <div><button class="btn ghost small" type="reset" style="inline-size:100%">Limpiar</button></div>
+      </form>
+    </search>
+    <div class="results"><p id="conteo" role="status" aria-live="polite"></p></div>
+    <ul class="grid" id="lista"></ul>
+    <div class="empty" id="vacio" hidden><h3>No hay motos con esos filtros</h3><p>Prueba con otra marca o sube el precio máximo.</p></div>
+    <p class="note" style="margin-block-start:1.2rem">Modelos, precios y fotos de ejemplo generados para esta demo.</p>
+  </section>
+
+  <section class="dark-band section" aria-labelledby="mar-t">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Nuestras marcas</p><h2 id="mar-t">Tres marcas, una sola casa</h2></div>
+      <ul class="marcas">
+        <li class="reveal">Vento<small>Motocicletas USA</small></li><li class="reveal">CFMOTO<small>Deportivas y touring</small></li><li class="reveal">Triumph<small>Herencia británica</small></li><li class="reveal">Motocity<small>Tu agencia en Mazatlán</small></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" aria-labelledby="pr-t">
+    <div class="reveal"><p class="eyebrow">Promociones</p><h2 id="pr-t">Lo mejor de El Buen Mes</h2><p class="sub">Promociones de ejemplo para esta demo; vigentes hasta el 30 de noviembre.</p></div>
+    <ul class="promos" id="promos"></ul>
+  </section>
+
+  <section class="band section" id="taller">
+    <div class="wrap taller">
+      <div class="reveal">
+        <p class="eyebrow">Taller · Servicio · Garantía</p>
+        <h2>Tu moto en manos que saben</h2>
+        <p class="sub">Técnicos capacitados, refacciones de calidad y seguimiento de tu servicio paso a paso desde tu panel.</p>
+        <ul class="checks"><li>Diagnóstico sin costo en motos de la casa</li><li>Servicios de 1,000, 5,000 y 10,000 km</li><li>Trámite de garantía directo con la marca</li><li>Entrega el mismo día en servicios menores</li></ul>
+        <p style="margin-block-start:1.5rem"><a class="btn" href="panel.html">Registrar mi moto para servicio</a></p>
+      </div>
+      <img class="reveal" src="img/taller.jpg" width="1024" height="576" alt="Mecánico revisando una moto sobre elevador en un taller limpio" loading="lazy">
+    </div>
+    <div class="wrap">
+      <ol class="steps">
+        <li class="reveal"><h3>Registras</h3><p>Das de alta tu moto y eliges servicio o garantía.</p></li>
+        <li class="reveal"><h3>Diagnosticamos</h3><p>Revisamos y te enviamos el presupuesto.</p></li>
+        <li class="reveal"><h3>Reparamos</h3><p>Con refacciones de calidad y tiempos claros.</p></li>
+        <li class="reveal"><h3>Entregamos</h3><p>Te avisamos y sales a rodar con garantía.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wrap section" id="numeros" aria-labelledby="num-t">
+    <div class="reveal"><p class="eyebrow">Números del taller y de la agencia</p><h2 id="num-t">Lo que más entra y lo que más sale</h2><p class="sub">Cifras de ejemplo para mostrar cómo se vería el panel de estadísticas.</p></div>
+    <ul class="kpis">
+      <li class="reveal"><strong data-count="282">0</strong><span>Servicios realizados</span></li>
+      <li class="reveal"><strong data-count="230">0</strong><span>Motos vendidas</span></li>
+      <li class="reveal"><strong data-count="39">0</strong><span>Garantías atendidas</span></li>
+      <li class="reveal"><strong data-count="97" data-suf="%">0</strong><span>Clientes satisfechos</span></li>
+    </ul>
+    <div class="charts">
+      <figure class="chart reveal" style="margin:0"><h3>Marcas que más entran a servicio</h3><p>Servicios en lo que va del año.</p><ul class="bars" id="g-serv"></ul></figure>
+      <figure class="chart reveal" style="margin:0"><h3>Marcas que más se venden</h3><p>Motos entregadas en lo que va del año.</p><ul class="bars" id="g-vent"></ul></figure>
+      <figure class="chart reveal" style="margin:0"><h3>Servicios por mes</h3><p>Noviembre sigue en curso.</p><ul class="cols-chart" id="g-mes"></ul></figure>
+      <figure class="chart reveal" style="margin:0"><h3>Servicios más pedidos</h3><p>Por tipo de trabajo.</p><ul class="bars" id="g-tipo"></ul></figure>
+    </div>
+  </section>
+
+  <section class="dark-band section">
+    <div class="wrap">
+      <div class="reveal"><p class="eyebrow">Opiniones</p><h2>Rodando con confianza</h2></div>
+      <ul class="reviews">
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Me explicaron cada paso del servicio y la moto quedó lista el mismo día.”</blockquote><cite>Ramón G., Vento Rocketman</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“La garantía de mi CFMOTO se resolvió sin vueltas. Muy recomendable.”</blockquote><cite>Daniela V., CFMOTO 450SR</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Me dieron buen precio por mi moto usada y salí con una Triumph nueva.”</blockquote><cite>Alonso P., Triumph Speed 400</cite></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="preguntas" style="padding-block-start:3rem">
+    <div class="reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Antes de rodar</h2></div>
+    <div class="faq reveal">
+      <details><summary>¿Cuánto dura la garantía?</summary><p>Las motos nuevas incluyen garantía de fábrica. Las seminuevas, 6 meses de cobertura de la agencia. Los plazos exactos dependen de cada marca.</p></details>
+      <details><summary>¿Puedo dar mi moto a cuenta?</summary><p>Sí. La valuamos en el momento y en noviembre sumamos un bono extra.</p></details>
+      <details><summary>¿Cómo registro mi moto para servicio?</summary><p>Inicia sesión en el panel, entra a “Servicios” y llena el registro. Verás el avance de tu servicio en la misma pantalla.</p></details>
+      <details><summary>¿Hay financiamiento?</summary><p>Sí, con enganche desde 10% y plazos de hasta 36 meses.</p></details>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>¿Eres cliente?</h2>
+      <p>Entra a tu panel para registrar tu moto en servicio o garantía, dar seguimiento y, si eres del equipo, subir nuevas motos al catálogo.</p>
+      <p><a class="btn alt" href="panel.html">Iniciar sesión</a></p>
+    </div>
+  </section>
+</main>
+
+<footer class="pie"><div class="wrap"><p>Sitio de demostración. Marcas, nombres, precios y promociones son de ejemplo.</p><p>Motocity Mazatlán · Grupo Mivasa</p></div></footer>
+
+<dialog class="ficha" id="ficha" aria-labelledby="ficha-t">
+  <button class="cerrar" type="button" aria-label="Cerrar" data-cerrar>×</button>
+  <div class="cols"><div class="photo" id="ficha-foto"></div>
+    <div class="info"><p class="eyebrow" id="ficha-marca"></p><h2 id="ficha-t"></h2><p class="price" id="ficha-precio"></p><p class="note" id="ficha-old"></p>
+      <dl class="specs" id="ficha-specs"></dl><ul class="equip" id="ficha-equipo"></ul>
+      <p style="margin-block-start:.6rem"><a class="btn" id="ficha-wa" href="#contacto">Me interesa</a></p></div></div>
+</dialog>
+
+<a class="wa" href="#inicio" aria-label="Escribir por WhatsApp (demo)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.300 1.200-1.800 1.200-.5.1-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800 0-1.300.7-2 1-2.300.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.8 2c.1.200.1.400 0 .5l-.4.600-.3.400c-.1.100-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.100 1 2 1.300 2.300 1.400.3.100.5.100.6-.1l.9-1.100c.2-.3.400-.2.700-.1l1.900.9c.3.100.5.200.5.300.1.100.1.700-.1 1.300z"/></svg></a>
+<div class="confeti" id="confeti" aria-hidden="true"></div>
+<script type="module" src="main.js"></script>
+</body>
+</html>
