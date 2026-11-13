@@ -1,5 +1,5 @@
 import "../assets/nav.js";
-import { motos, promos, refacciones, serviciosPorMarca, ventasPorMarca, serviciosPorMes, tiposDeServicio, fmtPrecio, fmtKm, escapar, imagen, guardado, pagoMensual } from "./motos.js";
+import { motos, promos, refacciones, fmtPrecio, fmtKm, escapar, imagen, guardado, pagoMensual } from "./motos.js";
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (s) => document.querySelector(s);
@@ -26,31 +26,6 @@ $("#festejar").addEventListener("click", () => {
   }));
   setTimeout(() => box.replaceChildren(), 3800);
 });
-
-/* ---------- Gráficas ---------- */
-function barras(sel, datos, clave, alt) {
-  const max = Math.max(...datos.map((d) => d.total));
-  $(sel).innerHTML = datos.map((d) => `<li><span>${d[clave]}</span><span class="track"><span class="fill${alt ? " alt" : ""}" style="--v:${Math.round(d.total / max * 100)}"></span></span><b>${d.total}</b></li>`).join("");
-}
-barras("#g-serv", serviciosPorMarca, "marca");
-barras("#g-vent", ventasPorMarca, "marca", true);
-barras("#g-tipo", tiposDeServicio, "tipo");
-{ const max = Math.max(...serviciosPorMes.map((d) => d.total));
-  $("#g-mes").innerHTML = serviciosPorMes.map((d) => `<li><b>${d.total}</b><span class="col" style="--v:${Math.round(d.total / max * 100)}"></span>${d.mes}</li>`).join(""); }
-
-/* ---------- Contadores animados al entrar en pantalla ---------- */
-const io = new IntersectionObserver((es) => {
-  for (const e of es) {
-    if (!e.isIntersecting) continue;
-    io.unobserve(e.target);
-    const fin = Number(e.target.dataset.count), suf = e.target.dataset.suf || "";
-    if (reduce) { e.target.textContent = fin + suf; continue; }
-    const t0 = performance.now();
-    const paso = (t) => { const p = Math.min((t - t0) / 1400, 1); e.target.textContent = Math.round(fin * (1 - (1 - p) ** 3)) + suf; if (p < 1) requestAnimationFrame(paso); };
-    requestAnimationFrame(paso);
-  }
-}, { threshold: .6 });
-document.querySelectorAll("[data-count]").forEach((el) => io.observe(el));
 
 /* ---------- Promociones ---------- */
 $("#promos").innerHTML = promos.map((p) => `<li class="promo reveal"><span class="et">${p.etiqueta}</span><h3>${p.titulo}</h3><p>${p.texto}</p></li>`).join("");
