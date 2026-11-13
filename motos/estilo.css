@@ -22,14 +22,15 @@ a { color:inherit; }
 .site-menu a { font-weight:600; }
 
 /* Portada */
-.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 4.6rem); display:grid; align-items:center; }
+.hero { position:relative; isolation:isolate; overflow:hidden; min-block-size:calc(100svh - 4.8rem); display:grid; align-items:center; }
 .hero > img { position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover; object-position:70% center; z-index:-3; }
 .hero::before { content:""; position:absolute; inset:0; z-index:-2; background:linear-gradient(90deg,#0b0b0d 8%,rgb(11 11 13 / .78) 42%,rgb(11 11 13 / .1) 80%), linear-gradient(0deg,#0b0b0d 0,transparent 30%); }
 /* Portada: texto y cartel del Buen Mes caben juntos en la primera pantalla */
-.hero-grid { display:grid; gap:1.25rem; padding-block:1.25rem 1.5rem; align-items:center; }
-.hero-grid .cartel { order:-1; }
-@media (min-width:56rem){ .hero-grid { grid-template-columns:1.1fr minmax(20rem,26rem); gap:2.5rem; padding-block:2rem; } .hero-grid .cartel { order:0; } }
-.hero h1 { font-size:clamp(2rem, min(1rem + 4.2vw, 9.5svh), 4.8rem); }
+.hero { grid-template-rows:1fr auto; align-items:stretch; }
+.hero-grid { align-self:center; padding-block:1.5rem 1rem; }
+.hero-text { max-inline-size:46rem; }
+.cartel-wrap { padding-block-end:1.1rem; }
+.hero h1 { font-size:clamp(2rem, min(1rem + 4.2vw, 9.5svh), 4.1rem); }
 .hero h1 span { color:var(--red); display:block; }
 .hero .eyebrow { margin-block-end:.4rem; }
 .hero p.lead { font-size:1.2rem; max-inline-size:36ch; color:#e4e5ea; margin-block:1rem 1.4rem; }
@@ -48,12 +49,26 @@ a { color:inherit; }
 @media (prefers-reduced-motion: reduce) { .speed { display:none; } }
 
 /* Cartel de El Buen Mes, con el estilo del flyer: barras inclinadas sobre rojo */
-.cartel { position:relative; isolation:isolate; overflow:hidden; display:grid; justify-items:center; gap:.45rem; text-align:center; padding:1.1rem 1rem 1rem; border-radius:1.1rem; color:#fff;
+.cartel { position:relative; isolation:isolate; overflow:hidden; display:grid; justify-items:center; align-items:center; gap:.7rem 1.5rem; text-align:center; padding:.9rem 1rem; border-radius:1.1rem; color:#fff;
   background:linear-gradient(150deg,#ff2a35,var(--red) 45%,var(--red-deep)); box-shadow:0 30px 60px -25px rgb(225 29 39 / .7), inset 0 0 0 1px rgb(255 255 255 / .18); }
 .cartel::before { content:""; position:absolute; inset:0; z-index:-1; background:repeating-linear-gradient(120deg,rgb(0 0 0 / .13) 0 22px,transparent 22px 54px); }
-.cartel > * { margin:0; }
+.cartel > *, .cartel p, .cartel h2 { margin:0; }
 .cartel .bar { background:#0b0b0d; padding:.2rem 1rem; font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(1rem,.8rem + 1vw,1.35rem); transform:skewX(-12deg); box-shadow:0 6px 0 rgb(0 0 0 / .25); }
-.cartel h2 { font-size:clamp(2.6rem,1.6rem + 4vw,4.2rem); line-height:.9; letter-spacing:-.01em; }
+.cartel h2 { font-size:clamp(2.4rem,1.6rem + 3vw,3.6rem); line-height:.9; letter-spacing:-.01em; }
+.cartel-head { display:grid; justify-items:center; gap:.35rem; }
+.cartel-sub { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:.5rem; }
+.cartel-sub .bar, .cartel-sub .plate { display:inline-block; font-size:clamp(1rem,.85rem + .6vw,1.3rem); padding-block:.15rem; white-space:nowrap; }
+@media (min-width:62rem){ .cartel-sub { flex-wrap:nowrap; } .cartel-head .bar:first-child { font-size:1.05rem; } }
+@media (min-width:62rem) and (max-height:760px){ .hero p.lead { display:none; } .hero .ctas { margin-block-start:1.2rem; } }
+/* Franja horizontal en pantallas anchas: título | cuenta regresiva | marcas | botones */
+@media (min-width:62rem){
+  .cartel { grid-template-columns:auto minmax(15rem,20rem) auto auto; justify-content:space-between; padding:.9rem 1.6rem; }
+  .cartel .countdown { margin:0; }
+  .cartel-marcas { inline-size:auto; }
+  .cartel-cta { flex-direction:column; padding:0; }
+}
+@media (min-width:40rem) and (max-width:61.99rem){ .cartel { grid-template-columns:1fr 1fr; } }
+@media (max-width:39.99rem){ .cartel { gap:.6rem; } }
 .cartel h2 span { display:block; background:linear-gradient(180deg,#fff 30%,#c9cad0); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 4px 0 #6d0a0f) drop-shadow(0 0 2px #000); }
 .cartel .plate { background:#fff; color:#0b0b0d; padding:.1rem 1.4rem; font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; font-size:clamp(1.3rem,1rem + 1.4vw,1.8rem); letter-spacing:.04em; transform:skewX(-12deg); }
 .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:.4rem; margin:.25rem 0 0; padding:0; list-style:none; inline-size:100%; }
