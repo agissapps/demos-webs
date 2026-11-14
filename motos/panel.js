@@ -6,15 +6,15 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- Sesión de demostración ---------- */
-const USUARIO = "demo@motocity.mx", CLAVE = "demo1234";
-const leerSesion = () => { try { return sessionStorage.getItem("motocity-sesion") === "1"; } catch { return window.__s === true; } };
-const escribirSesion = (v) => { window.__s = v; try { v ? sessionStorage.setItem("motocity-sesion", "1") : sessionStorage.removeItem("motocity-sesion"); } catch { /* sin almacenamiento */ } };
+const USUARIO = "demo@motozona.mx", CLAVE = "demo1234";
+const leerSesion = () => { try { return sessionStorage.getItem("motozona-sesion") === "1"; } catch { return window.__s === true; } };
+const escribirSesion = (v) => { window.__s = v; try { v ? sessionStorage.setItem("motozona-sesion", "1") : sessionStorage.removeItem("motozona-sesion"); } catch { /* sin almacenamiento */ } };
 
 const vLogin = $("#vista-login"), vApp = $("#vista-app"), salir = $("#salir");
 function mostrar() {
   const on = leerSesion();
   vLogin.hidden = on; vApp.hidden = !on; salir.hidden = !on;
-  if (on) { $("#saludo").textContent = "Hola, Demo · Motocity Mazatlán"; ir(location.hash.slice(1) || "resumen", false); }
+  if (on) { $("#saludo").textContent = "Hola, Demo · MotoZona Mazatlán"; ir(location.hash.slice(1) || "resumen", false); }
 }
 $("#demo-fill").addEventListener("click", () => { $("#u").value = USUARIO; $("#p").value = CLAVE; });
 $("#form-login").addEventListener("submit", (e) => {
@@ -63,7 +63,7 @@ barras("#g-serv", serviciosPorMarca, "marca"); barras("#g-vent", ventasPorMarca,
   $("#g-mes").innerHTML = serviciosPorMes.map((d) => `<li><b>${d.total}</b><span class="col" style="--v:${Math.round(d.total / max * 100)}"></span>${d.mes}</li>`).join(""); }
 
 /* ---------- Datos guardados en el navegador (sólo para la demo) ---------- */
-const K = { motos: "motocity-motos-extra", serv: "motocity-servicios", gar: "motocity-garantias", promo: "motocity-promos-off" };
+const K = { motos: "motozona-motos-extra", serv: "motozona-servicios", gar: "motozona-garantias", promo: "motozona-promos-off" };
 const sembrarServ = [
   { id: 1, moto: "Vento Rocketman 250", placas: "VNT-218-B", tipo: "Servicio de 5,000 km", precio: 1190, paso: 2 },
   { id: 2, moto: "CFMOTO 450SR", placas: "CFM-904-A", tipo: "Frenos", precio: 890, paso: 1 },

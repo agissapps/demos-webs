@@ -32,7 +32,7 @@ $("#promos").innerHTML = promos.map((p) => `<li class="promo reveal"><span class
 
 /* ---------- Catálogo ---------- */
 const form = $("#filtros"), lista = $("#lista"), vacio = $("#vacio"), conteo = $("#conteo"), pills = $("#marcas");
-const CLAVE_FAV = "motocity-favoritos";
+const CLAVE_FAV = "motozona-favoritos";
 const favoritos = () => guardado.leer(CLAVE_FAV, []);
 let marcaActiva = "";
 const marcas = [...new Set(motos.map((m) => m.marca))];
@@ -178,7 +178,7 @@ const iconos = {
   Equipo: '<path d="M4 15a8 8 0 0 1 16 0v2H4z"/><path d="M12 7v4h8"/>',
 };
 const rfForm = $("#rf-filtros"), rfLista = $("#rf-lista"), rfCats = $("#rf-cats"), rfConteo = $("#rf-conteo"), rfVacio = $("#rf-vacio");
-const CLAVE_AP = "motocity-apartados";
+const CLAVE_AP = "motozona-apartados";
 let catActiva = "";
 const cats = [...new Set(refacciones.map((r) => r.cat))];
 rfCats.innerHTML = ["Todas", ...cats].map((c, i) => `<li><button class="pill" type="button" data-cat="${i ? c : ""}" aria-pressed="${i === 0}">${c}</button></li>`).join("");
@@ -245,7 +245,7 @@ function mostrar(vista, el) {
   }
   // La pestaña activa siempre queda a la vista en la tira (en celular se desliza)
   pestanas.find((a) => a.getAttribute("aria-current"))?.scrollIntoView({ block: "nearest", inline: "nearest", container: "nearest" });
-  document.title = `${vista.dataset.titulo === "Inicio" ? "" : vista.dataset.titulo + " · "}Motocity Mazatlán · Motos, taller y garantía`;
+  document.title = `${vista.dataset.titulo === "Inicio" ? "" : vista.dataset.titulo + " · "}MotoZona Mazatlán · Motos, taller y garantía`;
   // Ir al inicio de la vista, o a la sección pedida si está más abajo dentro de ella
   if (el === vista || el === vista.firstElementChild) window.scrollTo({ top: 0, behavior: "instant" });
   else el.scrollIntoView({ block: "start", behavior: "instant" });

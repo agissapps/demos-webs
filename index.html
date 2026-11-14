@@ -3,63 +3,385 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demos de páginas web para negocios</title>
-<meta name="description" content="Diez páginas web de ejemplo listas para mostrar a clientes: dentista, uñas y belleza, estética canina, barbería, inmobiliaria, autos seminuevos, motos, postres, gimnasio y arquitecto.">
+<title>AGIS Web Studio · Páginas web para negocios</title>
+<meta name="description" content="Hacemos páginas web para negocios locales: se ven perfecto en el celular, te encuentran en Google y tus clientes te escriben directo por WhatsApp. Mira nuestros trabajos y pide tu cotización.">
+<meta property="og:title" content="AGIS Web Studio · Páginas web para negocios">
+<meta property="og:description" content="Páginas web para barberías, consultorios, gimnasios, repostería y más. Pide tu cotización por WhatsApp.">
+<meta property="og:image" content="assets/portafolio/barberia-pc.webp">
+<meta name="theme-color" content="#EFEDE8">
+<link rel="icon" href="assets/agis/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-:root { --bg:#EFEDE8; --ink:#1b1b1b; --muted:#55524c; --line:rgb(27 27 27 / .15); --focus:#1b1b1b; color-scheme:light; }
-*, *::before, *::after { box-sizing:border-box; }
-body { margin:0; background:var(--bg); color:var(--ink); font-family:"Instrument Sans",system-ui,sans-serif; font-size:1.0625rem; line-height:1.55; }
-.wrap { inline-size:min(100% - 2rem, 76rem); margin-inline:auto; }
-header { padding-block:4rem 2.5rem; }
-h1 { font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(2.6rem,1rem + 6vw,5.2rem); line-height:1; margin:0; letter-spacing:-.01em; max-inline-size:14ch; }
-header p { max-inline-size:52ch; color:var(--muted); margin:1.25rem 0 0; font-size:1.15rem; }
-.grid { display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fill,minmax(20rem,1fr)); padding:0 0 4rem; margin:0; list-style:none; }
-a.card { display:flex; flex-direction:column; color:inherit; text-decoration:none; background:#fff; border-radius:1.25rem; overflow:hidden; border:1px solid var(--line); block-size:100%; transition:transform .2s ease, box-shadow .2s ease; }
-a.card:hover { transform:translateY(-4px); box-shadow:0 18px 40px -20px rgb(0 0 0 / .35); }
-a.card:focus-visible { outline:3px solid var(--focus); outline-offset:3px; }
-.shot { aspect-ratio:16/10; overflow:hidden; background:#ddd; }
-.shot img { inline-size:100%; block-size:100%; object-fit:cover; display:block; }
-.info { padding:1.1rem 1.3rem 1.4rem; display:grid; gap:.5rem; }
-.info h2 { font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:1.8rem; margin:0; line-height:1.05; }
-.info p { margin:0; color:var(--muted); }
-.dots { display:flex; gap:.4rem; margin-block-start:.4rem; }
-.dots span { inline-size:1.2rem; block-size:1.2rem; border-radius:50%; border:1px solid var(--line); }
-@media (prefers-reduced-motion: reduce){ a.card { transition:none; } a.card:hover { transform:none; } }
-footer { padding-block:0 3rem; color:var(--muted); }
+:root{
+  --crema:#EFEDE8; --crema2:#E7E2D9; --tinta:#15161B; --coral:#FF5B3A; --coral2:#FF8E6E;
+  --gris:#55524c; --blanco:#F4F1EA; --linea:rgb(21 22 27/.12); --wa:#25D366;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--crema);color:var(--tinta);font-family:var(--sans);font-size:1.0625rem;line-height:1.55;overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(100% - 2rem,76rem);margin-inline:auto}
+.puntos{background-image:radial-gradient(rgb(21 22 27/.09) 1.4px,transparent 1.6px);background-size:28px 28px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1;margin:0}
+.serif-c{color:var(--coral)}
+.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--tinta);color:var(--blanco);font-weight:700;font-size:.8rem;letter-spacing:.08em;padding:.45rem .95rem;border-radius:999px;text-transform:uppercase}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;font:700 1.05rem var(--sans);text-decoration:none;border-radius:999px;padding:.95rem 1.6rem;border:2px solid transparent;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;cursor:pointer}
+.btn:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.btn-coral{background:var(--coral);color:var(--tinta);box-shadow:0 14px 30px -14px rgb(200 60 20/.7)}
+.btn-coral:hover{transform:translateY(-2px);background:#ff6c4e}
+.btn-tinta{background:var(--tinta);color:var(--blanco)}
+.btn-tinta:hover{transform:translateY(-2px)}
+.btn-borde{border-color:var(--tinta);color:var(--tinta);background:transparent}
+.btn-borde:hover{background:var(--tinta);color:var(--blanco)}
+.btn svg{width:1.3em;height:1.3em;flex:none}
+
+/* Encabezado */
+header.barra{position:sticky;top:0;z-index:20;background:rgb(239 237 232/.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.barra .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4.25rem}
+.marca{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:700;letter-spacing:.06em;font-size:.95rem}
+.marca img{width:2.4rem;height:2.4rem;border-radius:50%;background:var(--blanco);box-shadow:inset 0 0 0 1.5px #d8d4cc}
+nav.menu{display:flex;gap:1.6rem}
+nav.menu a{text-decoration:none;font-weight:600;color:var(--gris)}
+nav.menu a:hover{color:var(--tinta)}
+.barra .btn{padding:.6rem 1.1rem;font-size:.95rem}
+@media (max-width:860px){nav.menu{display:none}}
+@media (max-width:420px){.marca span{display:none}}
+
+/* Portada */
+.portada{position:relative;padding-block:4rem 5rem;overflow:hidden}
+.portada .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
+.portada h1{font-size:clamp(3rem,1.2rem + 5.6vw,6.1rem);margin-top:1.2rem}
+.portada p.sub{font-size:1.25rem;color:var(--gris);max-width:34ch;margin:1.4rem 0 2rem}
+.acciones{display:flex;flex-wrap:wrap;gap:.8rem}
+.datos{display:flex;flex-wrap:wrap;gap:1.6rem 2.4rem;margin-top:2.6rem}
+.datos b{display:block;font-family:var(--serif);font-weight:400;font-size:2.4rem;line-height:1}
+.datos span{color:var(--gris);font-size:.95rem}
+@media (max-width:900px){.portada .wrap{grid-template-columns:1fr}.portada{padding-block:2.5rem 3.5rem}}
+
+/* Dispositivos */
+.escena{position:relative;aspect-ratio:1.15;width:100%;max-width:40rem;margin-inline:auto}
+.escena .circulo{position:absolute;inset:6% 4% 0 12%;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--coral2) 0%,#FF6A45 45%,#F2512F 100%)}
+.escena .anillo{position:absolute;inset:2% 0 -4% 8%;border-radius:50%;border:2px dashed rgb(255 91 58/.45)}
+.laptop{position:absolute;left:0;right:9%;top:16%}
+.laptop .tapa{background:#0B0B0E;border-radius:3.2% / 5%;padding:2.2%;box-shadow:inset 0 0 0 2px #2c2d34,0 40px 60px -30px rgb(0 0 0/.7)}
+.laptop .base{height:clamp(8px,2.4vw,16px);margin:0 -7%;border-radius:0 0 40px 40px;background:linear-gradient(#d4d5da,#8d8f98);box-shadow:0 30px 40px -20px rgb(0 0 0/.6)}
+.pantalla{position:relative;overflow:hidden;background:#111;border-radius:4px}
+.laptop .pantalla{aspect-ratio:16/10}
+.cel{position:absolute;right:0;bottom:2%;width:27%;background:#0B0B0E;border-radius:16% / 7.5%;padding:2.6%;box-shadow:inset 0 0 0 2px #2c2d34,0 30px 50px -20px rgb(0 0 0/.8);transform:rotate(4deg)}
+.cel .pantalla{aspect-ratio:390/844;border-radius:13% / 6%}
+.cel::after{content:"";position:absolute;top:4.2%;left:50%;width:30%;height:3%;border-radius:99px;background:#000;transform:translateX(-50%)}
+.pantalla img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .7s ease}
+.pantalla img.activa{opacity:1}
+.etiqueta-giro{position:absolute;left:4%;bottom:0;transform:rotate(-3deg)}
+.etiqueta-giro .chip{background:var(--blanco);color:var(--tinta);font-size:.9rem;box-shadow:0 14px 30px -16px rgb(0 0 0/.6)}
+@media (prefers-reduced-motion:reduce){.pantalla img{transition:none}}
+
+/* Secciones */
+section{padding-block:5.5rem}
+.titulo-sec{display:grid;gap:1rem;margin-bottom:2.8rem;max-width:44rem}
+.titulo-sec h2{font-size:clamp(2.4rem,1.2rem + 3.6vw,4.2rem)}
+.titulo-sec p{color:var(--gris);font-size:1.15rem;margin:0}
+
+/* Trabajos */
+.trabajos{background:var(--blanco);border-block:1px solid var(--linea)}
+.filtros{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.filtros button{font:600 .95rem var(--sans);border:1.5px solid var(--linea);background:#fff;color:var(--tinta);padding:.5rem 1rem;border-radius:999px;cursor:pointer}
+.filtros button[aria-pressed="true"]{background:var(--tinta);color:var(--blanco);border-color:var(--tinta)}
+.filtros button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.rejilla{list-style:none;margin:0;padding:0;display:grid;gap:1.6rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,21.5rem),1fr))}
+.tarjeta{display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid var(--linea);border-radius:1.6rem;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.tarjeta:hover{transform:translateY(-4px);box-shadow:0 24px 50px -28px rgb(0 0 0/.45)}
+.vitrina{position:relative;padding:1.6rem 1.4rem 1.2rem;background:var(--fondo,var(--crema2))}
+.vitrina .mini-pc{width:86%;background:#0B0B0E;border-radius:10px;padding:2.4%;box-shadow:0 20px 30px -18px rgb(0 0 0/.6)}
+.vitrina .mini-pc img{aspect-ratio:16/10;width:100%;height:auto;object-fit:cover;object-position:top;border-radius:4px}
+.vitrina .mini-cel{position:absolute;right:1.1rem;bottom:.9rem;width:27%;background:#0B0B0E;border-radius:14px;padding:2%;box-shadow:0 16px 26px -12px rgb(0 0 0/.7);transform:rotate(4deg)}
+.vitrina .mini-cel img{aspect-ratio:390/844;width:100%;height:auto;object-fit:cover;object-position:top;border-radius:10px}
+.info{padding:1.3rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.info .giro{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--coral)}
+.info h3{font-size:1.9rem}
+.info p{margin:0;color:var(--gris)}
+.info ul{list-style:none;margin:.2rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.info li{font-size:.85rem;font-weight:600;background:var(--crema);border-radius:999px;padding:.3rem .7rem}
+.info .botones{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:auto;padding-top:.8rem}
+.info .btn{padding:.65rem 1.1rem;font-size:.95rem}
+.tarjeta[hidden]{display:none}
+
+/* Beneficios */
+.beneficios .rej{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.beneficio{background:var(--tinta);color:var(--blanco);border-radius:1.6rem;padding:1.6rem;display:grid;gap:.8rem;align-content:start}
+.ico{width:3.4rem;height:3.4rem;border-radius:1rem;background:rgb(255 91 58/.15);display:grid;place-items:center}
+.ico svg{width:1.7rem;height:1.7rem;stroke:var(--coral);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.beneficio h3{font-family:var(--sans);font-weight:700;font-size:1.2rem;line-height:1.25}
+.beneficio p{margin:0;color:rgb(244 241 234/.7);font-size:.98rem}
+
+/* Pasos */
+.pasos{list-style:none;padding:0;margin:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));counter-reset:paso}
+.pasos li{background:#fff;border:1px solid var(--linea);border-radius:1.6rem;padding:1.6rem;counter-increment:paso;position:relative}
+.pasos li::before{content:counter(paso);font-family:var(--serif);font-size:3.6rem;line-height:1;color:var(--coral);display:block;margin-bottom:.6rem}
+.pasos h3{font-family:var(--sans);font-weight:700;font-size:1.2rem;margin-bottom:.4rem}
+.pasos p{margin:0;color:var(--gris)}
+
+/* Checador */
+.checador{background:radial-gradient(120% 70% at 100% 0%,#24252C 0%,var(--tinta) 60%);color:var(--blanco);position:relative;overflow:hidden}
+.checador .wrap{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.checador .titulo-sec p{color:rgb(244 241 234/.72)}
+.checador .chip{background:var(--coral);color:var(--tinta)}
+.checador ul{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.7rem}
+.checador li{display:flex;gap:.8rem;align-items:center;font-weight:600}
+.checador li::before{content:"";width:1.4rem;height:1.4rem;flex:none;border-radius:50%;background:var(--coral) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2315161B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/70% no-repeat}
+.foto-checador{position:relative;display:grid;place-items:center}
+.foto-checador::before{content:"";position:absolute;width:82%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--coral2) 0%,#FF6A45 45%,#F2512F 100%)}
+.foto-checador img{position:relative;width:100%;height:auto;max-width:34rem;filter:drop-shadow(0 30px 30px rgb(80 20 0/.45))}
+.checador .btn-borde{border-color:var(--blanco);color:var(--blanco)}
+.checador .btn-borde:hover{background:var(--blanco);color:var(--tinta)}
+@media (max-width:860px){.checador .wrap{grid-template-columns:1fr}.foto-checador{order:-1}}
+
+/* Contacto */
+.contacto{background:radial-gradient(120% 80% at 30% 20%,var(--coral2) 0%,var(--coral) 55%,#E84A2A 100%);text-align:center}
+.contacto h2{font-size:clamp(2.6rem,1.2rem + 4.4vw,5rem);max-width:16ch;margin-inline:auto}
+.contacto p{font-size:1.2rem;max-width:40ch;margin:1.2rem auto 2rem}
+footer{padding-block:2.4rem;color:var(--gris);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+
+/* Botón flotante */
+.flotante{position:fixed;right:1rem;bottom:1rem;z-index:30;width:3.6rem;height:3.6rem;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 30px -10px rgb(0 0 0/.5);transition:transform .15s ease}
+.flotante:hover{transform:scale(1.07)}
+.flotante:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+.flotante svg{width:1.9rem;height:1.9rem;fill:#fff}
+
+/* Aparición */
+.aparece{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.aparece.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.aparece{opacity:1;transform:none;transition:none}.tarjeta,.btn,.flotante{transition:none}}
 </style>
 </head>
 <body>
-<header class="wrap">
-  <h1>Diez páginas listas para mostrar</h1>
-  <p>Cada demo usa los colores y la voz de su negocio. Ábrelas en el celular y en la computadora para ver cómo se adaptan.</p>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.4 5.1 5.2-1.4A9.9 9.9 0 1 0 12.04 2Zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.9Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.4-.3Z"/></symbol>
+</svg>
+
+<header class="barra">
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="assets/agis/logo.png" alt="" width="40" height="40"><span>AGIS WEB STUDIO</span></a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#trabajos">Trabajos</a>
+      <a href="#incluye">Qué incluye</a>
+      <a href="#como">Cómo trabajamos</a>
+      <a href="#checador">Checador</a>
+    </nav>
+    <a class="btn btn-tinta" data-wa="Hola, me interesa una página web para mi negocio" href="https://wa.me/526693823318"><svg aria-hidden="true" style="fill:var(--wa)"><use href="#wa"/></svg>Cotizar</a>
+  </div>
 </header>
-<main class="wrap">
-  <ul class="grid">
-    <li><a class="card" href="dentista/"><div class="shot"><img src="dentista/img/hero.jpg" width="1280" height="720" alt="Consulta dental con sillón azul petróleo" loading="lazy"></div>
-      <div class="info"><h2>Dentista</h2><p>Tratamientos, primera visita y reserva de cita.</p><div class="dots" aria-hidden="true"><span style="background:#F4F8FA"></span><span style="background:#0F3D47"></span><span style="background:#F59E7B"></span></div></div></a></li>
-    <li><a class="card" href="unas-belleza/"><div class="shot"><img src="unas-belleza/img/hero.jpg" width="1280" height="720" alt="Mujer con manicura rosa en un salón de belleza" loading="lazy"></div>
-      <div class="info"><h2>Uñas y belleza</h2><p>Lista de precios por servicio y reserva por WhatsApp.</p><div class="dots" aria-hidden="true"><span style="background:#F2E4DA"></span><span style="background:#5E4B42"></span><span style="background:#B87866"></span></div></div></a></li>
-    <li><a class="card" href="estetica-canina/"><div class="shot"><img src="estetica-canina/img/hero.jpg" width="1280" height="720" alt="Ilustración de un perro dorado en su baño" loading="lazy"></div>
-      <div class="info"><h2>Estética canina</h2><p>Baños, cortes y planes por tamaño de perro.</p><div class="dots" aria-hidden="true"><span style="background:#F5E8D9"></span><span style="background:#3F5228"></span><span style="background:#D8492E"></span></div></div></a></li>
-    <li><a class="card" href="barberia/"><div class="shot"><img src="barberia/img/hero.jpg" width="1280" height="720" alt="Barbería con sillón de cuero y luz roja" loading="lazy"></div>
-      <div class="info"><h2>Barbería</h2><p>Servicios, precios, barberos y horario.</p><div class="dots" aria-hidden="true"><span style="background:#1C1C1C"></span><span style="background:#EDE6D8"></span><span style="background:#B3261E"></span></div></div></a></li>
-    <li><a class="card" href="inmobiliaria/"><div class="shot"><img src="inmobiliaria/img/hero.jpg" width="1280" height="720" alt="Villa con alberca al atardecer" loading="lazy"></div>
-      <div class="info"><h2>Inmobiliaria</h2><p>Propiedades destacadas y contacto con un asesor.</p><div class="dots" aria-hidden="true"><span style="background:#172D4D"></span><span style="background:#F4F1EA"></span><span style="background:#B58A45"></span></div></div></a></li>
-    <li><a class="card" href="seminuevos/"><div class="shot"><img src="seminuevos/img/hero.jpg" width="1280" height="720" alt="SUV oscuro frente al mar al atardecer" loading="lazy"></div>
-      <div class="info"><h2>Autos seminuevos</h2><p>Catálogo con filtros y ficha técnica de cada auto.</p><div class="dots" aria-hidden="true"><span style="background:#CFE8E1"></span><span style="background:#002941"></span><span style="background:#FD6E6E"></span></div></div></a></li>
-    <li><a class="card" href="motos/"><div class="shot"><img src="motos/img/hero.jpg" width="1024" height="576" alt="Moto deportiva roja en un taller moderno" loading="lazy"></div>
-      <div class="info"><h2>Motos y taller</h2><p>Catálogo, El Buen Mes, servicio, garantías y panel con sesión.</p><div class="dots" aria-hidden="true"><span style="background:#0B0B0D"></span><span style="background:#E11D27"></span><span style="background:#FFFFFF"></span></div></div></a></li>
-    <li><a class="card" href="postres/"><div class="shot" style="background:linear-gradient(140deg,#FFD66B,#E83F6F)"><img src="postres/img/hero.jpg" width="900" height="1125" alt="Rebanada de pastel con fresas" loading="lazy" onerror="this.remove()"></div>
-      <div class="info"><h2>Postres</h2><p>Menú con carrito, pedido por WhatsApp y pasteles para eventos.</p><div class="dots" aria-hidden="true"><span style="background:#FFF8F3"></span><span style="background:#E83F6F"></span><span style="background:#FFD66B"></span></div></div></a></li>
-    <li><a class="card" href="gym/"><div class="shot" style="background:linear-gradient(140deg,#FF5A1F,#FF2E7E 55%,#12102A)"><img src="gym/img/hero.jpg" width="1600" height="900" alt="Persona entrenando con barra en un gimnasio" loading="lazy" onerror="this.remove()"></div>
-      <div class="info"><h2>Gimnasio</h2><p>Horario de clases, planes, coaches y clase de prueba gratis.</p><div class="dots" aria-hidden="true"><span style="background:#12102A"></span><span style="background:#FF5A1F"></span><span style="background:#FF2E7E"></span></div></div></a></li>
-    <li><a class="card" href="arquitecto/"><div class="shot"><img src="arquitecto/img/casa-lomas.jpg" width="1200" height="900" alt="Casa moderna de dos niveles con ventanales" loading="lazy" onerror="this.onerror=null;this.src='arquitecto/img/casa-lomas.svg'"></div>
-      <div class="info"><h2>Arquitecto</h2><p>Proyectos con filtros, servicios y cotización por WhatsApp.</p><div class="dots" aria-hidden="true"><span style="background:#F1F4F3"></span><span style="background:#14201D"></span><span style="background:#0F5C4D"></span></div></div></a></li>
-  </ul>
+
+<main id="inicio">
+  <!-- Portada -->
+  <section class="portada puntos">
+    <div class="wrap">
+      <div>
+        <span class="chip">Páginas web para negocios</span>
+        <h1>Tu negocio, <span class="serif-c">en línea</span> y a un mensaje de tus clientes</h1>
+        <p class="sub">Hacemos páginas web que se ven perfecto en el celular, te ayudan a aparecer en Google y mandan a tus clientes directo a tu WhatsApp.</p>
+        <div class="acciones">
+          <a class="btn btn-coral" data-wa="Hola, quiero cotizar una página web para mi negocio" href="https://wa.me/526693823318"><svg aria-hidden="true"><use href="#wa"/></svg>Pide tu cotización</a>
+          <a class="btn btn-borde" href="#trabajos">Ver trabajos</a>
+        </div>
+        <div class="datos">
+          <div><b>10</b><span>giros de negocio</span></div>
+          <div><b>100%</b><span>adaptadas al celular</span></div>
+          <div><b>1 clic</b><span>para escribirte</span></div>
+        </div>
+      </div>
+      <div class="escena" aria-label="Ejemplo de una página nuestra en computadora y celular" role="img">
+        <div class="anillo" aria-hidden="true"></div>
+        <div class="circulo" aria-hidden="true"></div>
+        <div class="laptop">
+          <div class="tapa"><div class="pantalla" data-carrusel="pc"></div></div>
+          <div class="base"></div>
+        </div>
+        <div class="cel"><div class="pantalla" data-carrusel="cel"></div></div>
+        <div class="etiqueta-giro"><span class="chip" id="giro-actual">Barbería</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trabajos -->
+  <section class="trabajos" id="trabajos">
+    <div class="wrap">
+      <div class="titulo-sec">
+        <span class="chip" style="justify-self:start">Nuestros trabajos</span>
+        <h2>Así se vería <span class="serif-c">la tuya</span></h2>
+        <p>Cada página lleva los colores y el estilo de su negocio. Ábrelas en tu celular y en la computadora: todas se adaptan solas.</p>
+      </div>
+      <div class="filtros" role="group" aria-label="Filtrar por tipo de negocio">
+        <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+        <button type="button" data-filtro="salud" aria-pressed="false">Salud y belleza</button>
+        <button type="button" data-filtro="comida" aria-pressed="false">Comida</button>
+        <button type="button" data-filtro="servicios" aria-pressed="false">Servicios</button>
+        <button type="button" data-filtro="ventas" aria-pressed="false">Ventas</button>
+      </div>
+      <ul class="rejilla" id="rejilla"></ul>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="beneficios" id="incluye">
+    <div class="wrap">
+      <div class="titulo-sec">
+        <span class="chip" style="justify-self:start">Qué incluye</span>
+        <h2>Una página que <span class="serif-c">trabaja</span> por tu negocio</h2>
+        <p>No es solo verse bonito: está pensada para que más gente te encuentre y te escriba.</p>
+      </div>
+      <div class="rej">
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div><h3>Se ve perfecto en el celular</h3><p>La mayoría de tus clientes te va a ver desde el teléfono. La diseñamos primero para ahí.</p></article>
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.3A8.5 8.5 0 1 1 21 12z"/></svg></div><h3>Pedidos y citas por WhatsApp</h3><p>Botones que abren tu WhatsApp con el mensaje ya escrito: lo que quiere y para cuándo.</p></article>
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></div><h3>Te encuentran en Google</h3><p>Preparada para que aparezcas cuando buscan lo que vendes en tu ciudad.</p></article>
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div><h3>Tu propio dominio</h3><p>Tu dirección www.tunegocio.com, registrada a tu nombre.</p></article>
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 21h8M12 17v4"/><path d="m9 11 2 2 4-4"/></svg></div><h3>Hosting incluido</h3><p>Tu página en línea las 24 horas, sin que tengas que preocuparte por servidores.</p></article>
+        <article class="beneficio aparece"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div><h3>Hecha a tu medida</h3><p>Tu menú, tus servicios, tus fotos y tus colores. Nada de plantillas genéricas.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo trabajamos -->
+  <section id="como" style="padding-top:0">
+    <div class="wrap">
+      <div class="titulo-sec">
+        <span class="chip" style="justify-self:start">Cómo trabajamos</span>
+        <h2>De la idea a <span class="serif-c">tu página</span> en cuatro pasos</h2>
+      </div>
+      <ol class="pasos">
+        <li class="aparece"><h3>Platicamos</h3><p>Nos cuentas de tu negocio por WhatsApp y te pasamos tu cotización.</p></li>
+        <li class="aparece"><h3>Diseñamos</h3><p>Armamos tu página con tus fotos, colores, servicios y precios.</p></li>
+        <li class="aparece"><h3>Revisas y ajustamos</h3><p>Te la mostramos y hacemos los cambios que necesites.</p></li>
+        <li class="aparece"><h3>Publicamos</h3><p>La subimos con tu dominio y queda lista para compartir. Pagas la mitad al empezar y la otra mitad al entregar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Checador -->
+  <section class="checador" id="checador">
+    <div class="wrap">
+      <div>
+        <div class="titulo-sec" style="margin-bottom:1.8rem">
+          <span class="chip" style="justify-self:start">También instalamos</span>
+          <h2>Checador con <span class="serif-c">huella digital</span></h2>
+          <p>Tus empleados registran su entrada y salida en segundos, y tú lo revisas desde tu celular, estés donde estés.</p>
+        </div>
+        <ul>
+          <li>Registro con huella o con clave</li>
+          <li>Consulta de asistencias desde la app</li>
+          <li>Reportes de asistencia</li>
+          <li>Instalación y configuración incluidas</li>
+          <li>30 días de soporte y garantía de 11 meses</li>
+        </ul>
+        <div class="acciones">
+          <a class="btn btn-coral" data-wa="Hola, me interesa el checador con huella digital" href="https://wa.me/526693823318"><svg aria-hidden="true"><use href="#wa"/></svg>Cotizar checador</a>
+        </div>
+      </div>
+      <div class="foto-checador"><img src="assets/agis/checador.png" alt="Checador con lector de huella digital y pantalla" width="620" height="620" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section class="contacto puntos" id="contacto">
+    <div class="wrap">
+      <h2>¿Listo para tener tu página?</h2>
+      <p>Cuéntanos de tu negocio y te pasamos tu cotización sin compromiso. Cada página se cotiza según lo que necesitas.</p>
+      <a class="btn btn-tinta" data-wa="Hola, quiero cotizar una página web para mi negocio" href="https://wa.me/526693823318"><svg aria-hidden="true" style="fill:var(--wa)"><use href="#wa"/></svg>Mándanos mensaje</a>    </div>
+  </section>
 </main>
-<footer class="wrap"><p>Sitios de demostración. Nombres, precios y datos de contacto son de ejemplo.</p></footer>
+
+<footer>
+  <div class="wrap">
+    <a class="marca" href="#inicio"><img src="assets/agis/logo.png" alt="" width="40" height="40"><span>AGIS WEB STUDIO</span></a>
+    <p style="margin:0">Las páginas de ejemplo usan nombres, precios y datos de contacto ficticios.</p>
+  </div>
+</footer>
+
+<a class="flotante" data-wa="Hola, me interesa una página web para mi negocio" href="https://wa.me/526693823318" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true"><use href="#wa"/></svg></a>
+
+<script>
+const WA = "526693823318";
+const enlaceWA = (texto) => `https://wa.me/${WA}?text=${encodeURIComponent(texto)}`;
+document.querySelectorAll("[data-wa]").forEach((a) => {
+  a.href = enlaceWA(a.dataset.wa);
+  a.target = "_blank";
+  a.rel = "noopener";
+});
+
+const DEMOS = [
+  { id: "barberia", nombre: "Navaja Roja", giro: "Barbería", grupo: "salud", fondo: "#2a2321", desc: "Servicios, precios, barberos y horario. El cliente elige y reserva por WhatsApp.", tags: ["Reservas", "Precios", "Equipo"] },
+  { id: "dentista", nombre: "Alba Dental", giro: "Consultorio dental", grupo: "salud", fondo: "#dbe8ec", desc: "Tratamientos, primera visita, antes y después, y botón para agendar cita.", tags: ["Citas", "Tratamientos", "Reseñas"] },
+  { id: "gym", nombre: "Fuerza Norte", giro: "Gimnasio", grupo: "servicios", fondo: "#24203f", desc: "Horario de clases, planes, coaches y clase de prueba gratis.", tags: ["Horarios", "Planes", "Clase gratis"] },
+  { id: "postres", nombre: "Dulce Antojo", giro: "Repostería", grupo: "comida", fondo: "#fbe3c4", desc: "Menú con fotos y carrito: el pedido llega a WhatsApp ya armado.", tags: ["Menú", "Carrito", "Pedidos"] },
+  { id: "unas-belleza", nombre: "Rosé Atelier", giro: "Uñas y belleza", grupo: "salud", fondo: "#f2e4da", desc: "Lista de precios por servicio, galería y reserva por WhatsApp.", tags: ["Precios", "Galería", "Reservas"] },
+  { id: "estetica-canina", nombre: "Patitas Limpias", giro: "Estética canina", grupo: "servicios", fondo: "#f5e8d9", desc: "Baños, cortes y planes por tamaño de perro, con antes y después.", tags: ["Planes", "Antes y después", "Citas"] },
+  { id: "inmobiliaria", nombre: "Almar Residencias", giro: "Inmobiliaria", grupo: "ventas", fondo: "#1f3352", desc: "Propiedades destacadas con fotos y contacto directo con un asesor.", tags: ["Propiedades", "Asesores", "Galería"] },
+  { id: "seminuevos", nombre: "Ruta Segura", giro: "Autos seminuevos", grupo: "ventas", fondo: "#cfe8e1", desc: "Catálogo con filtros y ficha técnica de cada auto.", tags: ["Catálogo", "Filtros", "Fichas"] },
+  { id: "motos", nombre: "MotoZona", giro: "Motos y taller", grupo: "ventas", fondo: "#2b0d0f", desc: "Catálogo, promociones del mes, citas de servicio, garantías y panel con sesión.", tags: ["Catálogo", "Promociones", "Panel"] },
+  { id: "arquitecto", nombre: "Reyes Arquitectura", giro: "Arquitecto", grupo: "servicios", fondo: "#dfe7e4", desc: "Proyectos con filtros, servicios y cotización por WhatsApp.", tags: ["Proyectos", "Servicios", "Cotización"] },
+];
+
+/* Portada: computadora y celular con la misma web, rotando */
+const pc = document.querySelector('[data-carrusel="pc"]');
+const cel = document.querySelector('[data-carrusel="cel"]');
+const giro = document.getElementById("giro-actual");
+const HERO = DEMOS.slice(0, 6);
+HERO.forEach((d, i) => {
+  for (const [cont, suf] of [[pc, "pc"], [cel, "cel"]]) {
+    const img = new Image();
+    img.src = `assets/portafolio/${d.id}-${suf}.webp`;
+    img.alt = "";
+    img.decoding = "async";
+    if (i === 0) { img.className = "activa"; img.fetchPriority = "high"; }
+    cont.append(img);
+  }
+});
+let actual = 0;
+const mover = matchMedia("(prefers-reduced-motion: reduce)");
+setInterval(() => {
+  if (mover.matches || document.hidden) return;
+  actual = (actual + 1) % HERO.length;
+  for (const cont of [pc, cel]) [...cont.children].forEach((img, i) => img.classList.toggle("activa", i === actual));
+  giro.textContent = HERO[actual].giro;
+}, 3200);
+
+/* Trabajos */
+const rejilla = document.getElementById("rejilla");
+rejilla.innerHTML = DEMOS.map((d) => `
+  <li class="tarjeta aparece" data-grupo="${d.grupo}">
+    <div class="vitrina" style="--fondo:${d.fondo}">
+      <div class="mini-pc"><img src="assets/portafolio/${d.id}-pc.webp" alt="Página de ${d.giro.toLowerCase()} en computadora" width="1440" height="900" loading="lazy"></div>
+      <div class="mini-cel"><img src="assets/portafolio/${d.id}-cel.webp" alt="" width="780" height="1688" loading="lazy"></div>
+    </div>
+    <div class="info">
+      <span class="giro">${d.giro}</span>
+      <h3>${d.nombre}</h3>
+      <p>${d.desc}</p>
+      <ul>${d.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
+      <div class="botones">
+        <a class="btn btn-tinta" href="${d.id}/">Ver página</a>
+        <a class="btn btn-borde" href="${enlaceWA(`Hola, me interesa una página como la de ${d.giro.toLowerCase()} (${d.nombre})`)}" target="_blank" rel="noopener">Quiero una así</a>
+      </div>
+    </div>
+  </li>`).join("");
+
+document.querySelectorAll(".filtros button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".filtros button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  const f = b.dataset.filtro;
+  rejilla.querySelectorAll(".tarjeta").forEach((t) => { t.hidden = f !== "todos" && t.dataset.grupo !== f; t.classList.add("visto"); });
+}));
+
+/* Aparición al hacer scroll */
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+document.querySelectorAll(".aparece").forEach((el) => io.observe(el));
+</script>
 </body>
 </html>
