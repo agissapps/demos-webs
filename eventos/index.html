@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Velada Eventos · Organización de bodas, XV años y fiestas</title>
+<meta name="description" content="Demo de página web para organizador de eventos: bodas, XV años, fiestas infantiles y eventos corporativos. Paquetes, antes y después del salón y cotización por WhatsApp.">
+<meta name="theme-color" content="#2D1433">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Albert+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="#inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l1.6 4.4 4.4 1.6-4.4 1.6L12 14.5l-1.6-4.4L6 8.5l4.4-1.6z"/><path d="M18.5 14l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z"/><path d="M5.5 15.5l.6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/></svg>
+      Velada<span>eventos</span>
+    </a>
+    <nav class="site-nav" aria-label="Principal">
+      <button class="menu-button" type="button" popovertarget="site-menu" aria-controls="site-menu">Menú</button>
+      <ul id="site-menu" class="site-menu" popover="auto">
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#transformacion">Antes y después</a></li>
+        <li><a href="#paquetes">Paquetes</a></li>
+        <li><a href="#como">Cómo trabajamos</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+        <li><a class="btn" href="#cotiza">Cotiza tu evento</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <img class="hero-bg" src="img/hero.jpg" width="1280" height="720" alt="" fetchpriority="high">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Organización de eventos · Ciudad Ejemplo</p>
+      <h1>Tú disfrutas la fiesta. <em>Nosotros nos encargamos del resto.</em></h1>
+      <p class="lead">Bodas, XV años, cumpleaños y eventos de empresa. Planeamos, decoramos y coordinamos cada detalle para que ese día solo tengas que llegar.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#cotiza">Cotiza tu evento</a>
+        <a class="btn ghost" href="#paquetes">Ver paquetes</a>
+      </div>
+      <ul class="hero-stats" aria-label="En números">
+        <li><b>+350</b> eventos realizados</li>
+        <li><b>4.9 <span aria-hidden="true">★</span></b> en 600 reseñas</li>
+        <li><b>12</b> años de experiencia</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="trust" aria-label="Lo que incluye trabajar con nosotros">
+    <ul>
+      <li>Coordinadora el día del evento</li><li>Proveedores de confianza</li><li>Montaje y desmontaje incluidos</li><li>Pagos en parcialidades</li><li>Visita al salón sin costo</li>
+      <li aria-hidden="true">Coordinadora el día del evento</li><li aria-hidden="true">Proveedores de confianza</li><li aria-hidden="true">Montaje y desmontaje incluidos</li><li aria-hidden="true">Pagos en parcialidades</li><li aria-hidden="true">Visita al salón sin costo</li>
+    </ul>
+  </div>
+
+  <section class="wrap section" id="eventos">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Tipos de evento</p>
+      <h2>Cada celebración tiene su propia historia</h2>
+      <p class="lead">Adaptamos la decoración, el menú y la música a lo que tú imaginas. Estos son los eventos que más organizamos.</p>
+    </div>
+    <ul class="events">
+      <li class="event reveal">
+        <img src="img/boda.jpg" width="1280" height="720" alt="Ceremonia de boda en jardín con arco de flores y pasillo de sillas blancas" loading="lazy">
+        <div><h3>Bodas</h3><p>Ceremonia, recepción y banquete con la coordinación de principio a fin.</p>
+        <a href="#cotiza" data-evento="Boda">Cotizar<span class="visually-hidden"> boda</span> <span aria-hidden="true">→</span></a></div>
+      </li>
+      <li class="event reveal">
+        <img src="img/xv-anos.jpg" width="1280" height="720" alt="Quinceañera con vestido rosa bailando el vals con su papá" loading="lazy">
+        <div><h3>XV años</h3><p>Vals, coreografía, temática y una entrada que nadie va a olvidar.</p>
+        <a href="#cotiza" data-evento="XV años">Cotizar<span class="visually-hidden"> XV años</span> <span aria-hidden="true">→</span></a></div>
+      </li>
+      <li class="event reveal">
+        <img src="img/infantil.jpg" width="1280" height="720" alt="Fiesta infantil en jardín con arco de globos de colores, pastel y piñata" loading="lazy">
+        <div><h3>Fiestas infantiles</h3><p>Globos, mesa de dulces, piñata y animación para los más chicos.</p>
+        <a href="#cotiza" data-evento="Fiesta infantil">Cotizar<span class="visually-hidden"> fiesta infantil</span> <span aria-hidden="true">→</span></a></div>
+      </li>
+      <li class="event reveal">
+        <img src="img/corporativo.jpg" width="1280" height="720" alt="Cena de gala corporativa en salón de hotel con mesas redondas y escenario iluminado" loading="lazy">
+        <div><h3>Eventos corporativos</h3><p>Posadas, convenciones, lanzamientos y cenas de fin de año.</p>
+        <a href="#cotiza" data-evento="Evento corporativo">Cotizar<span class="visually-hidden"> evento corporativo</span> <span aria-hidden="true">→</span></a></div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="transform section" id="transformacion">
+    <div class="wrap transform-grid">
+      <div class="reveal">
+        <p class="eyebrow">Antes y después</p>
+        <h2>El mismo salón, otra historia</h2>
+        <p class="lead">Arrastra la barra para ver cómo un salón vacío se convierte en la fiesta que imaginaste.</p>
+        <ul class="checks">
+          <li>Mantelería, sillas y centros de mesa</li>
+          <li>Iluminación cálida y guirnalda de flores</li>
+          <li>Montaje listo tres horas antes del evento</li>
+        </ul>
+        <p><small>Imágenes de ejemplo generadas para esta demo.</small></p>
+      </div>
+      <div class="compare reveal" role="group" aria-label="Comparación del salón antes y después de decorarlo">
+        <img class="before" src="img/salon-antes.jpg" width="1280" height="720" alt="Salón de eventos vacío, con mesas sin manteles y sillas apiladas" loading="lazy">
+        <img class="after" src="img/salon-despues.jpg" width="1280" height="720" alt="El mismo salón decorado para la fiesta, con mesas vestidas, flores y luces cálidas" loading="lazy">
+        <span class="tag t-after" aria-hidden="true">Después</span><span class="tag t-before" aria-hidden="true">Antes</span>
+        <div class="bar" aria-hidden="true"><span class="knob"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+        <input type="range" min="0" max="100" step="1" value="50" aria-label="Mover para comparar el salón antes y después">
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section" id="paquetes">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Paquetes</p>
+      <h2>Elige un punto de partida</h2>
+      <p class="lead">Precios de ejemplo para 100 invitados. Todos se ajustan a tu fecha, tu salón y tu presupuesto.</p>
+    </div>
+    <ul class="plans">
+      <li class="plan reveal">
+        <img src="img/paquete-esencial.jpg" width="1280" height="720" alt="Mesa con mantel verde salvia, centro de rosas blancas y velas" loading="lazy">
+        <div class="plan-body">
+          <h3>Esencial</h3>
+          <p class="price"><small>desde</small> $28,000 <small>MXN</small></p>
+          <ul>
+            <li>Decoración de mesas y centros de mesa</li>
+            <li>Mantelería y sillas vestidas</li>
+            <li>Coordinadora el día del evento</li>
+            <li>Montaje y desmontaje</li>
+          </ul>
+          <a class="btn ghost" href="#cotiza" data-paquete="Esencial">Quiero este paquete</a>
+        </div>
+      </li>
+      <li class="plan featured reveal">
+        <p class="badge">El más elegido</p>
+        <img src="img/paquete-celebra.jpg" width="1280" height="720" alt="Mesa de dulces con frascos de colores, pastel y fondo de globos" loading="lazy">
+        <div class="plan-body">
+          <h3>Celebra</h3>
+          <p class="price"><small>desde</small> $54,000 <small>MXN</small></p>
+          <ul>
+            <li>Todo lo del paquete Esencial</li>
+            <li>Mesa de dulces y postres</li>
+            <li>Arco de globos o flores a tu gusto</li>
+            <li>Planeación con 3 juntas previas</li>
+            <li>Banquete de 3 tiempos</li>
+          </ul>
+          <a class="btn" href="#cotiza" data-paquete="Celebra">Quiero este paquete</a>
+        </div>
+      </li>
+      <li class="plan reveal">
+        <img src="img/paquete-gran-noche.jpg" width="1280" height="720" alt="Pista iluminada con invitados bailando, chispas frías y luces" loading="lazy">
+        <div class="plan-body">
+          <h3>Gran noche</h3>
+          <p class="price"><small>desde</small> $98,000 <small>MXN</small></p>
+          <ul>
+            <li>Todo lo del paquete Celebra</li>
+            <li>Pista iluminada y DJ</li>
+            <li>Chispas frías para el baile</li>
+            <li>Foto y video del evento</li>
+            <li>Planeación completa desde el día uno</li>
+          </ul>
+          <a class="btn ghost" href="#cotiza" data-paquete="Gran noche">Quiero este paquete</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap section" id="como" style="padding-block-start:1rem">
+    <div class="sec-head reveal"><p class="eyebrow">Cómo trabajamos</p><h2>De la primera llamada al último baile</h2></div>
+    <ol class="steps">
+      <li class="reveal"><h3>Platicamos</h3><p>Nos cuentas qué celebras, cuántos invitados y qué tienes en mente.</p></li>
+      <li class="reveal"><h3>Diseñamos</h3><p>Te mandamos una propuesta con decoración, menú y presupuesto claro.</p></li>
+      <li class="reveal"><h3>Afinamos</h3><p>Ajustamos colores, horarios y detalles en juntas contigo hasta que quede perfecto.</p></li>
+      <li class="reveal"><h3>¡A celebrar!</h3><p>Llegas a tu evento y lo disfrutas. Nosotros coordinamos todo detrás.</p></li>
+    </ol>
+  </section>
+
+  <section class="wrap section" id="nosotros" style="padding-block-start:1rem">
+    <div class="team">
+      <figure class="portrait reveal"><img src="img/organizadora.jpg" width="1280" height="720" alt="Fernanda Ríos, organizadora de eventos, sonriendo en un salón decorado" loading="lazy"></figure>
+      <div class="reveal">
+        <p class="eyebrow">Quién organiza</p>
+        <h2>Fernanda Ríos</h2>
+        <p class="lead">Lleva 12 años organizando bodas, XV años y fiestas en la ciudad. Le gusta que cada evento se parezca a quien lo celebra.</p>
+        <ul class="checks">
+          <li>Te acompaña desde la primera junta hasta el último baile</li>
+          <li>Trabaja con proveedores que conoce en persona</li>
+          <li>Responde tus mensajes el mismo día</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band section" id="opiniones">
+    <div class="wrap">
+      <div class="sec-head reveal"><p class="eyebrow">Testimonios</p><h2>Lo que dicen quienes ya celebraron</h2></div>
+      <ul class="reviews">
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Nuestra boda fue exactamente como la soñamos. Ese día no tuvimos que preocuparnos por nada.”</blockquote><cite>Daniela y Rodrigo, boda en jardín</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Los XV de mi hija quedaron preciosos. La entrada y el vals hicieron llorar a todos.”</blockquote><cite>Patricia G., mamá de Valeria</cite></li>
+        <li class="reveal"><span class="stars" aria-label="5 de 5 estrellas">★★★★★</span><blockquote>“Organizaron nuestra posada para 200 personas sin un solo contratiempo. Ya los apartamos para el próximo año.”</blockquote><cite>Luis M., gerente de Recursos Humanos</cite></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section" id="preguntas">
+    <div class="sec-head reveal"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que más nos preguntan</h2></div>
+    <div class="faq reveal">
+      <details><summary>¿Con cuánto tiempo debo apartar mi fecha?</summary><p>Para bodas y XV años recomendamos de 6 a 12 meses. Para fiestas infantiles y eventos pequeños, con 3 o 4 semanas suele ser suficiente.</p></details>
+      <details><summary>¿Ustedes consiguen el salón?</summary><p>Sí. Te proponemos salones y jardines según tu número de invitados y presupuesto, o trabajamos en el lugar que tú ya tengas.</p></details>
+      <details><summary>¿Cómo se paga?</summary><p>Apartas tu fecha con un anticipo del 30% y el resto lo pagas en parcialidades antes del evento.</p></details>
+      <details><summary>¿Puedo cambiar cosas de un paquete?</summary><p>Claro. Los paquetes son un punto de partida: puedes quitar, agregar o cambiar lo que quieras.</p></details>
+      <details><summary>¿Trabajan fuera de la ciudad?</summary><p>Sí, organizamos eventos en toda la región. Los viáticos se cotizan aparte según la distancia.</p></details>
+    </div>
+  </section>
+
+  <section class="transform section" id="cotiza">
+    <div class="wrap book">
+      <div class="reveal">
+        <p class="eyebrow">Cotiza tu evento</p>
+        <h2>Cuéntanos qué celebras</h2>
+        <p class="lead">Llena estos datos y te abrimos WhatsApp con el mensaje listo. Te respondemos el mismo día con una propuesta.</p>
+        <dl class="hours">
+          <div><dt>Lunes a viernes</dt><dd>10:00 a 19:00</dd></div>
+          <div><dt>Sábados</dt><dd>10:00 a 15:00</dd></div>
+          <div><dt>Visitas a salón</dt><dd>Con cita</dd></div>
+        </dl>
+      </div>
+      <form class="quote reveal" id="cotizador" novalidate>
+        <div><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" autocomplete="name" required></div>
+        <div class="row">
+          <div><label for="evento">Tipo de evento</label>
+            <select id="evento" name="evento"><option>Boda</option><option>XV años</option><option>Fiesta infantil</option><option>Cumpleaños</option><option>Evento corporativo</option><option>Otro</option></select></div>
+          <div><label for="paquete">Paquete</label>
+            <select id="paquete" name="paquete"><option value="">Aún no sé</option><option>Esencial</option><option>Celebra</option><option>Gran noche</option></select></div>
+        </div>
+        <div class="row">
+          <div><label for="fecha">Fecha aproximada</label><input id="fecha" name="fecha" type="date"></div>
+          <div><label for="invitados">Invitados</label><input id="invitados" name="invitados" type="number" inputmode="numeric" min="10" max="2000" step="10" placeholder="100"></div>
+        </div>
+        <div><label for="detalles">¿Algo más que debamos saber? <span class="opt">(opcional)</span></label><textarea id="detalles" name="detalles" rows="3" placeholder="Colores, temática, salón…"></textarea></div>
+        <button class="btn wa-btn" type="submit"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#wa-icon"/></svg>Enviar por WhatsApp</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Velada eventos</strong> · Av. Ejemplo 456, Ciudad Ejemplo</p>
+    <p>Tel. 55 0000 0000 · <a href="../index.html">Ver todas las demos</a></p>
+    <p>© <span data-year></span> Velada eventos. Sitio de demostración: nombres, precios y datos de contacto son ficticios.</p>
+  </div>
+</footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="wa-icon" viewBox="0 0 32 32"><path d="M16 3C8.800 3 3 8.800 3 16c0 2.300.600 4.500 1.700 6.400L3 29l6.800-1.700c1.800 1 3.900 1.500 6.200 1.500 7.200 0 13-5.800 13-13S23.200 3 16 3zm0 23.600c-2 0-3.900-.5-5.500-1.500l-.4-.2-4 1 1.100-3.900-.3-.4C5.800 19.900 5.200 18 5.200 16 5.200 9.900 10.100 5.200 16 5.200S26.800 10 26.800 16 21.900 26.600 16 26.600zm5.900-7.900c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100c-1.900-.9-3.100-1.700-4.300-3.800-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.100-.8.400s-1.100 1.100-1.100 2.600 1.100 3 1.300 3.200c.2.200 2.200 3.400 5.400 4.700 2 .8 2.800.9 3.800.7.600-.1 1.900-.8 2.200-1.600.3-.8.300-1.400.2-1.600-.1-.1-.3-.2-.6-.4z"/></symbol></svg>
+<a class="wa" href="https://wa.me/520000000000?text=Hola%2C%20quiero%20cotizar%20un%20evento" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><use href="#wa-icon"/></svg></a>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
