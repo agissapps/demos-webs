@@ -21,14 +21,14 @@ function deEjemplo(tema) {
     tema, editado: false, nombre: p.nombre, lema: p.lema, pie: { ...p.pie }, colores: { ...p.colores },
     columnas: p.columnas, formato: "carta", escala: 1, diseno: "lista", sinSigno: false, logo: null, textura: p.textura || "", franja: false,
     portada: p.portada || null, promo: p.promo || "", nota: p.nota || "", redes: p.redes || "",
-    secciones: p.secciones.map((s) => ({ titulo: s.titulo, paquete: !!s.paquete, items: s.items.map(([n, d, pr, o = {}]) => ({ n, d, p: pr, f: o.f || (o.x ? `img/estrella-${tema}.png` : null), r: !!o.x, e: o.e || "", x: !!o.x })) })),
+    secciones: p.secciones.map((s) => ({ titulo: s.titulo, paquete: !!s.paquete, items: s.items.map(([n, d, pr, o = {}]) => ({ n, d, p: pr, f: o.f || (o.x ? `img/estrella-${tema}.webp` : null), r: !!o.x, e: o.e || "", x: !!o.x })) })),
     qr: { ...QR_BASE, leyenda: p.leyenda },
   };
 }
 
 function leer() {
   try {
-    const g = JSON.parse(localStorage.getItem(CLAVE));
+    const g = JSON.parse((localStorage.getItem(CLAVE) || "null").replace(/(img\/estrella-[a-z]+)\.png/g, "$1.webp"));
     if (g && PLANTILLAS[g.tema] && Array.isArray(g.secciones)) {
       const base = deEjemplo(g.tema);
       return { ...base, ...g, pie: { ...base.pie, ...g.pie }, colores: { ...base.colores, ...g.colores }, qr: { ...base.qr, ...g.qr } };
