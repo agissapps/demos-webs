@@ -13,9 +13,16 @@ body.costeo{height:auto !important;overflow:visible !important;display:block !im
 
 /* Resumen: cuatro datos grandes */
 .resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem}
-.dato{background:var(--papel);border-radius:1rem;padding:1.1rem 1.2rem;display:grid;gap:.15rem;border-top:.4rem solid var(--linea)}
-.dato-n{font-family:var(--serif);font-size:2.6rem;line-height:1}
-.dato-t{font-weight:700}
+.dato{background:var(--papel);border-radius:1rem;padding:1.1rem 1.2rem;display:grid;gap:.3rem;align-content:start;border-top:.4rem solid var(--linea)}
+.dato-n{font-family:var(--serif);font-size:2.8rem;line-height:1}
+.dato-t{font-weight:700;line-height:1.25}
+
+/* Pasos */
+.pasos{list-style:none;counter-reset:paso;margin:0 0 1.3rem;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:.6rem}
+.pasos li{counter-increment:paso;display:grid;grid-template-columns:auto 1fr;column-gap:.7rem;background:#F7F5F0;border-radius:.8rem;padding:.8rem .9rem}
+.pasos li::before{content:counter(paso);grid-row:span 2;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--tinta);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.95rem}
+.pasos b{font-weight:700}
+.pasos span{font-size:.88rem;color:var(--gris)}
 .dato-s{font-size:.85rem;color:var(--gris)}
 .dato.bien{border-top-color:#1F8A70}.dato.bien .dato-n{color:#1F7A63}
 .dato.mal{border-top-color:var(--coral)}.dato.mal .dato-n{color:var(--coral-osc)}
@@ -29,9 +36,20 @@ body.costeo{height:auto !important;overflow:visible !important;display:block !im
 .tabla-c input:focus-visible{outline:3px solid var(--enfoque);outline-offset:1px}
 .tabla-c td:first-child{min-width:13rem}
 .tabla-c .num{width:6.5rem}
-.tabla-c .calc{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
-.tabla-c .calc small{display:block;font-weight:500;color:var(--coral-osc);font-size:.78rem}
-.tabla-c .alto{color:var(--coral-osc)}
+.tabla-c th small{display:block;font-weight:500;font-size:.75rem;margin-top:.15rem}
+.tabla-c th.llenar{color:var(--tinta)}
+.tabla-c th.sale{background:#F7F5F0}
+.tabla-c td.calc,.tabla-c td.c-g{background:#FBFAF7}
+.caja.pesos{position:relative;display:block}
+.caja.pesos::before{content:"$";position:absolute;left:.6rem;top:50%;translate:0 -50%;color:var(--gris);pointer-events:none}
+.caja.pesos input{padding-left:1.35rem}
+.tabla-c .calc{font-variant-numeric:tabular-nums;font-weight:700}
+.tabla-c td small{display:block;font-weight:500;font-size:.78rem;color:var(--gris);margin-top:.15rem}
+.pct{font-size:1.05rem}
+.pct.bajo,small.bajo{color:#1F7A63}
+.pct.alto,small.alto{color:var(--coral-osc)}
+small.alto{font-weight:700 !important}
+.vacio{color:var(--gris);font-weight:400}
 .quitar{border:0;background:none;color:var(--gris);cursor:pointer;min-width:2.6rem;min-height:2.6rem;border-radius:.5rem;font-size:1.2rem}
 .quitar:hover{background:#F4F1EA;color:var(--tinta)}
 .vacio-c{border:2px dashed var(--linea);border-radius:.8rem;padding:2rem 1rem;text-align:center;color:var(--gris);margin:1rem 0 0}
@@ -65,3 +83,23 @@ body.costeo{height:auto !important;overflow:visible !important;display:block !im
 .como dd{margin:0;color:var(--gris)}
 @media (max-width:640px){.como dl{grid-template-columns:1fr}.como dd{margin-bottom:.4rem}}
 @media (max-width:900px){.barra nav{gap:.9rem}}
+
+/* Celular: cada platillo es una ficha */
+@media (max-width:760px){
+  .tabla-envoltura{overflow:visible;margin:0;padding:0}
+  .tabla-c{min-width:0}
+  .tabla-c thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .tabla-c tbody{display:grid;gap:.8rem}
+  .tabla-c tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 2.6rem;gap:.5rem .5rem;border:1.5px solid var(--linea);border-radius:.9rem;padding:.7rem}
+  .tabla-c td{display:block;border:0;padding:0;min-width:0 !important}
+  .tabla-c td[data-t]::before{content:attr(data-t);display:block;font-size:.74rem;font-weight:700;color:var(--gris);margin-bottom:.2rem;line-height:1.2}
+  .tabla-c .c-n{grid-column:1 / 4}
+  .tabla-c .c-x{grid-column:4;grid-row:1}
+  .tabla-c .num{width:100%}
+  .tabla-c td.calc,.tabla-c td.c-g{background:#F7F5F0;border-radius:.6rem;padding:.5rem .55rem}
+  .tabla-c .c-pct{grid-column:1 / 3}
+  .tabla-c .c-m{grid-column:3 / 5}
+  .tabla-c .c-g{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;gap:.2rem .6rem}
+  .tabla-c .c-g::before{width:100%;margin:0}
+  .tabla-c .c-g small{margin:0}
+}

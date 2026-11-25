@@ -32,7 +32,12 @@
 <main class="libreta">
   <section class="hoja-c cab-c">
     <h1>Costeo de platillos</h1>
-    <p>Pon cuánto te cuesta hacer cada platillo, a cuánto lo vendes y cuántos vendes a la semana. Te decimos cuánto ganas, si tu costo está en la meta del 30% y cuáles platillos conviene destacar, ajustar o quitar.</p>
+    <p>Descubre cuánto ganas con cada platillo y cuáles te conviene destacar, ajustar o quitar.</p>
+    <ol class="pasos">
+      <li><b>Agrega tus platillos</b><span>Tráelos de tu menú o escríbelos uno por uno.</span></li>
+      <li><b>Llena tres datos</b><span>Cuánto te cuesta hacerlo, a cuánto lo vendes y cuántos vendes por semana.</span></li>
+      <li><b>Mira tus resultados</b><span>Cuánto ganas y qué hacer con cada platillo.</span></li>
+    </ol>
     <div class="fila-botones">
       <button type="button" class="btn btn-coral" id="traer">Traer platillos de mi menú</button>
       <button type="button" class="btn btn-linea" id="agregar">Agregar platillo</button>
@@ -42,22 +47,31 @@
     <p id="aviso" class="aviso" role="status"></p>
   </section>
 
-  <section class="resumen" aria-label="Resumen">
-    <div class="dato" id="r-costo"><span class="dato-n">—</span><span class="dato-t">Costo de alimentos</span><span class="dato-s">Meta: 30% o menos</span></div>
-    <div class="dato" id="r-ganancia"><span class="dato-n">—</span><span class="dato-t">Ganancia bruta por semana</span><span class="dato-s">Precio menos costo, por lo vendido</span></div>
-    <div class="dato" id="r-ventas"><span class="dato-n">—</span><span class="dato-t">Platillos vendidos por semana</span><span class="dato-s" id="r-ventas-s"></span></div>
-    <div class="dato" id="r-alto"><span class="dato-n">—</span><span class="dato-t">Platillos arriba de 35%</span><span class="dato-s">Revisa su precio o porción</span></div>
-  </section>
-
   <section class="hoja-c">
     <h2>Tus platillos</h2>
+    <p class="nota">Llena las columnas blancas. Las de la derecha se calculan solas.</p>
     <div class="tabla-envoltura">
       <table class="tabla-c">
-        <thead><tr><th scope="col">Platillo</th><th scope="col">Costo</th><th scope="col">Precio</th><th scope="col">Vendidos por semana</th><th scope="col">% de costo</th><th scope="col">Ganas por platillo</th><th scope="col">Grupo</th><th scope="col"><span class="sr">Quitar</span></th></tr></thead>
+        <thead><tr>
+          <th scope="col">Platillo</th>
+          <th scope="col" class="llenar">Te cuesta hacerlo<small>Ingredientes de una porción</small></th>
+          <th scope="col" class="llenar">Lo vendes en<small>Precio del menú</small></th>
+          <th scope="col" class="llenar">Vendes por semana<small>Más o menos</small></th>
+          <th scope="col" class="sale">Costo<small>Meta: 30% o menos</small></th>
+          <th scope="col" class="sale">Ganas en cada uno</th>
+          <th scope="col" class="sale">Qué hacer</th>
+          <th scope="col"><span class="sr">Quitar</span></th></tr></thead>
         <tbody id="filas"></tbody>
       </table>
     </div>
     <p class="vacio-c" id="vacio" hidden>Todavía no hay platillos. Tráelos de tu menú, agrégalos uno por uno o <button type="button" class="enlace" id="ejemplo">mira un ejemplo de taquería</button>.</p>
+  </section>
+
+  <section class="resumen" aria-label="Tus resultados de la semana">
+    <div class="dato" id="r-costo"><span class="dato-t">De cada $100 que vendes, en ingredientes se van</span><span class="dato-n">—</span><span class="dato-s" id="r-costo-s">Lo ideal es $30 o menos</span></div>
+    <div class="dato" id="r-ganancia"><span class="dato-t">Te quedan por semana</span><span class="dato-n">—</span><span class="dato-s">Lo que cobras menos ingredientes. Aún sin pagar renta, sueldos ni gas.</span></div>
+    <div class="dato" id="r-ventas"><span class="dato-t">Platillos que vendes por semana</span><span class="dato-n">—</span><span class="dato-s" id="r-ventas-s"></span></div>
+    <div class="dato" id="r-alto"><span class="dato-t">Platillos que te dejan poco</span><span class="dato-n">—</span><span class="dato-s" id="r-alto-s">Su costo pasa de 35%</span></div>
   </section>
 
   <section class="hoja-c">
@@ -80,7 +94,7 @@
     <dl>
       <dt>% de costo</dt><dd>Costo entre precio. Si un platillo cuesta 70 y lo vendes en 180, su costo es 38.9%.</dd>
       <dt>Costo de alimentos</dt><dd>El de todo tu menú según lo que vendes. Unos platillos pueden ir al 20% y otros al 35%, mientras la mezcla no pase del 30%.</dd>
-      <dt>Precio sugerido</dt><dd>Cuando un platillo pasa del 35%, te sugerimos el precio que lo deja en 30%.</dd>
+      <dt>«Súbelo a…»</dt><dd>Cuando un platillo pasa del 35%, te decimos el precio que lo deja en 30%, redondeado de 5 en 5. Puedes subirlo poco a poco, bajar la porción o buscar ingredientes más baratos.</dd>
       <dt>Grupo</dt><dd>Se vende mucho si llega al 70% de lo que vende un platillo promedio. Deja buena ganancia si gana igual o más que el promedio de lo que vendes.</dd>
     </dl>
   </section>

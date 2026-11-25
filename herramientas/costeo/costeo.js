@@ -7,6 +7,7 @@ const nuevoId = () => Math.random().toString(36).slice(2, 9);
 const num = (v) => { const x = parseFloat(String(v ?? "").replace(/[$\s]/g, "").replace(/,(?=\d{3}\b)/g, "").replace(",", ".")); return Number.isFinite(x) ? x : null; };
 const dinero = (v) => "$" + v.toLocaleString("es-MX", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
 const GRUPOS = { estrella: "Estrella", enigma: "Enigma", vaca: "Vaca", perro: "Perro" };
+const HACER = { estrella: "Destácalo con foto", enigma: "Promuévelo más", vaca: "Cuida su costo", perro: "Cámbialo o quítalo" };
 const tbody = $("#filas");
 
 let filas = (() => { try { const g = JSON.parse(localStorage.getItem(CLAVE)); if (Array.isArray(g?.filas)) return g.filas; } catch {} return []; })();
@@ -26,7 +27,7 @@ function calcular() {
     const c = num(f.c), p = num(f.p), v = num(f.v), r = {};
     if (c !== null && p > 0) { r.pct = (c / p) * 100; r.m = p - c; }
     if (r.m !== undefined && v !== null && totV > 0) r.g = v >= popMin ? (r.m >= margenProm ? "estrella" : "vaca") : r.m >= margenProm ? "enigma" : "perro";
-    else r.falta = !(p > 0) ? "Falta precio" : c === null ? "Falta costo" : "Faltan ventas";
+    else r.falta = !(p > 0) ? "Falta a cuánto lo vendes" : c === null ? "Falta cuánto te cuesta" : "Falta cuántos vendes";
     res.set(f.id, r);
   }
   const venta = vendidos.reduce((a, x) => a + x.p * x.v, 0);
@@ -41,13 +42,12 @@ const sugerido = (c) => Math.ceil(c / 0.3 / 5) * 5;
 
 /* ---------- Pintar ---------- */
 function renderTabla() {
+  const campo = (f, k, t, modo, pesos) => `<td class="c-${k}" data-t="${t}"><span class="caja${pesos ? " pesos" : ""}"><input class="num" data-k="${k}" value="${esc(f[k] ?? "")}" inputmode="${modo}" placeholder="0" aria-label="${t}: ${esc(f.n || "este platillo")}"></span></td>`;
   tbody.innerHTML = filas.map((f) => `<tr data-id="${f.id}">
-    <td><input data-k="n" value="${esc(f.n)}" placeholder="Nombre del platillo" aria-label="Nombre del platillo" maxlength="60"></td>
-    <td><input class="num" data-k="c" value="${esc(f.c ?? "")}" inputmode="decimal" placeholder="0" aria-label="Costo de ${esc(f.n || "este platillo")}"></td>
-    <td><input class="num" data-k="p" value="${esc(f.p ?? "")}" inputmode="decimal" placeholder="0" aria-label="Precio de ${esc(f.n || "este platillo")}"></td>
-    <td><input class="num" data-k="v" value="${esc(f.v ?? "")}" inputmode="numeric" placeholder="0" aria-label="Vendidos por semana de ${esc(f.n || "este platillo")}"></td>
-    <td class="calc" data-o="pct"></td><td class="calc" data-o="m"></td><td data-o="g"></td>
-    <td><button type="button" class="quitar" data-quitar aria-label="Quitar ${esc(f.n || "platillo")}">×</button></td></tr>`).join("");
+    <td class="c-n"><input data-k="n" value="${esc(f.n)}" placeholder="Nombre del platillo" aria-label="Nombre del platillo" maxlength="60"></td>
+    ${campo(f, "c", "Te cuesta hacerlo", "decimal", true)}${campo(f, "p", "Lo vendes en", "decimal", true)}${campo(f, "v", "Vendes por semana", "numeric", false)}
+    <td class="calc c-pct" data-t="Costo" data-o="pct"></td><td class="calc c-m" data-t="Ganas en cada uno" data-o="m"></td><td class="c-g" data-t="Qué hacer" data-o="g"></td>
+    <td class="c-x"><button type="button" class="quitar" data-quitar aria-label="Quitar ${esc(f.n || "platillo")}" title="Quitar platillo">×</button></td></tr>`).join("");
   $("#vacio").hidden = filas.length > 0;
   actualizar();
 }
@@ -55,13 +55,17 @@ function actualizar() {
   const k = calcular();
   for (const tr of tbody.rows) {
     const f = filas.find((x) => x.id === tr.dataset.id), r = k.res.get(tr.dataset.id) || {};
-    $("[data-o=pct]", tr).innerHTML = r.pct !== undefined ? `<span class="${r.pct > 35 ? "alto" : ""}">${r.pct.toFixed(1)}%</span>${r.pct > 35 ? `<small>Sugerido: ${dinero(sugerido(num(f.c)))}</small>` : ""}` : "—";
-    $("[data-o=m]", tr).textContent = r.m !== undefined ? dinero(Math.round(r.m * 100) / 100) : "—";
-    $("[data-o=g]", tr).innerHTML = r.g ? `<span class="grupo ${r.g}">${GRUPOS[r.g]}</span>` : `<span class="grupo falta">${r.falta}</span>`;
+    const nivel = r.pct === undefined ? "" : r.pct <= 30 ? "bajo" : r.pct <= 35 ? "medio" : "alto";
+    const nota = { bajo: "Bien", medio: "Aceptable", alto: `Te deja poco. Súbelo a ${r.pct > 35 ? dinero(sugerido(num(f.c))) : ""}` }[nivel];
+    $("[data-o=pct]", tr).innerHTML = nivel ? `<span class="pct ${nivel}">${Math.round(r.pct)}%</span><small class="${nivel}">${nota}</small>` : `<span class="vacio">—</span>`;
+    $("[data-o=m]", tr).innerHTML = r.m !== undefined ? `<span class="${r.m < 0 ? "pct alto" : ""}">${dinero(Math.round(r.m * 100) / 100)}</span>` : `<span class="vacio">—</span>`;
+    $("[data-o=g]", tr).innerHTML = r.g ? `<span class="grupo ${r.g}">${GRUPOS[r.g]}</span><small>${HACER[r.g]}</small>` : `<span class="grupo falta">${r.falta}</span>`;
   }
   // Resumen
   const dato = (id, txt, clase = "") => { const d = $(id); $(".dato-n", d).textContent = txt; d.classList.remove("bien", "mal"); if (clase) d.classList.add(clase); };
-  dato("#r-costo", k.mezcla === null ? "—" : `${k.mezcla.toFixed(1)}%`, k.mezcla === null ? "" : k.mezcla <= 30 ? "bien" : "mal");
+  dato("#r-costo", k.mezcla === null ? "—" : dinero(Math.round(k.mezcla)), k.mezcla === null ? "" : k.mezcla <= 30 ? "bien" : "mal");
+  $("#r-costo-s").textContent = k.mezcla === null ? "Lo ideal es $30 o menos" : k.mezcla <= 30 ? "Vas bien: lo ideal es $30 o menos" : "Lo ideal es $30 o menos. Revisa los platillos en rojo.";
+  $("#r-alto-s").textContent = k.altos ? "Su costo pasa de 35%. Están marcados en rojo." : "Su costo pasa de 35%";
   dato("#r-ganancia", k.ganancia === null ? "—" : dinero(Math.round(k.ganancia)));
   dato("#r-ventas", k.nVend ? k.totV.toLocaleString("es-MX") : "—");
   $("#r-ventas-s").textContent = filas.length ? `${k.nVend} de ${filas.length} platillos con todos sus datos` : "Pon cuántos vendes de cada uno";
