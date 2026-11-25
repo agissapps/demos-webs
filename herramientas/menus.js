@@ -20,7 +20,7 @@ function deEjemplo(tema) {
   const p = PLANTILLAS[tema];
   return {
     tema, editado: false, nombre: p.nombre, lema: p.lema, pie: { ...p.pie }, colores: { ...p.colores },
-    columnas: p.columnas, formato: "carta", escala: 1, diseno: "lista", sinSigno: false, logo: null, textura: p.textura || "", franja: false,
+    columnas: p.columnas, formato: "carta", escala: 1, diseno: "lista", sinSigno: true, tituloRec: "", ver: 2, logo: null, textura: p.textura || "", franja: false,
     portada: p.portada || null, promo: p.promo || "", nota: p.nota || "", redes: p.redes || "",
     secciones: p.secciones.map((s) => ({ titulo: s.titulo, paquete: !!s.paquete, items: s.items.map(([n, d, pr, o = {}]) => ({ n, d, p: pr, f: o.f || (o.x ? `img/estrella-${tema}.webp` : null), r: !!o.x, e: o.e || "", x: !!o.x })) })),
     qr: { ...QR_BASE, leyenda: p.leyenda },
@@ -32,6 +32,7 @@ function leer() {
     const g = JSON.parse((localStorage.getItem(CLAVE) || "null").replace(/(img\/estrella-[a-z]+)\.png/g, "$1.webp"));
     if (g && PLANTILLAS[g.tema] && Array.isArray(g.secciones)) {
       const base = deEjemplo(g.tema);
+      if (g.ver !== 2) { g.sinSigno = true; g.ver = 2; } // los precios sin $ se ven menos caros
       return { ...base, ...g, pie: { ...base.pie, ...g.pie }, colores: { ...base.colores, ...g.colores }, qr: { ...base.qr, ...g.qr } };
     }
   } catch {}
@@ -68,7 +69,7 @@ function efectivo() {
   return {
     diseno: sen ? "cuadricula" : ava ? estado.diseno : "lista",
     desc: !sen,
-    signo: !(ava && estado.sinSigno),
+    signo: !estado.sinSigno,
     cols: sen ? Math.max(2, estado.columnas) : estado.columnas,
     formato: ava ? estado.formato : "carta",
     escala: ava ? estado.escala : 1,
@@ -168,15 +169,19 @@ function qrSVG(texto, o) {
 
 /* ---------- Precio: "95", "Chico 120 / Grande 160", "Por kilo 380" ---------- */
 const ETIQUETAS = { picante: "Picante", nuevo: "Nuevo", favorito: "Favorito", veg: "Vegetariano" };
+// Acepta "95", "$95", "1,200", "1200.50" y "95,50"
+const NUM = String.raw`\d{1,3}(?:,\d{3})+(?:\.\d{1,2})?|\d+(?:[.,]\d{1,2})?`;
+const RE_SOLO = new RegExp(`^\\$?\\s*(${NUM})$`), RE_ETQ = new RegExp(`^(.*?)\\s*\\$?\\s*(${NUM})$`);
 function cifra(t, signo) {
-  const v = Number(t.replace(",", "."));
+  const v = /^\d{1,3}(?:,\d{3})+/.test(t) ? Number(t.replace(/,/g, "")) : Number(t.replace(",", "."));
   return (signo ? "$" : "") + v.toLocaleString("es-MX", { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
 }
 function precioHTML(p, signo) {
   const partes = String(p ?? "").split("/").map((x) => x.trim()).filter(Boolean);
   return partes.map((t) => {
-    if (/^\d+([.,]\d{1,2})?$/.test(t)) return `<span class="m-var">${cifra(t, signo)}</span>`;
-    const m = t.match(/^(.*?)\s*\$?\s*(\d+(?:[.,]\d{1,2})?)$/);
+    const solo = t.match(RE_SOLO);
+    if (solo) return `<span class="m-var">${cifra(solo[1], signo)}</span>`;
+    const m = t.match(RE_ETQ);
     if (m && m[1]) return `<span class="m-var"><small>${esc(m[1])}</small> ${cifra(m[2], signo)}</span>`;
     return `<span class="m-var">${esc(t)}</span>`;
   }).join("");
@@ -185,7 +190,7 @@ function precioHTML(p, signo) {
 /* ---------- Tabla de tamaños: si todos los productos de una sección tienen los mismos tamaños ---------- */
 function partesPrecio(p) {
   return String(p ?? "").split("/").map((x) => x.trim()).filter(Boolean).map((t) => {
-    const m = t.match(/^(.*?)\s*\$?\s*(\d+(?:[.,]\d{1,2})?)$/);
+    const m = t.match(RE_ETQ);
     return m ? { et: m[1].trim(), v: m[2] } : { et: "", v: t };
   });
 }
@@ -227,10 +232,11 @@ function renderHoja() {
   const destacados = modo === "sencillo" ? [] : estado.secciones.flatMap((s) => s.items.filter((i) => i.x && conTexto(i)));
   // Destacados con foto: van grandes, hasta 3 por hoja en zigzag (arriba a la derecha, en medio a la izquierda, abajo a la derecha)
   const ests = destacados.filter((i) => i.f);
+  const tituloRec = (estado.tituloRec || "").trim() || "Recomendaciones del Chef";
   const resto = destacados.filter((i) => !i.f);
-  const estrellaDe = (it, pos, n) => `<section class="m-estrella${pos === 1 ? " izq" : ""}${n > 1 ? " chica" : ""}"><div class="m-estrella-txt"><p class="m-estrella-et">${ests.indexOf(it) ? "Recomendado" : "Lo más pedido"}</p><p class="m-estrella-n">${esc(it.n)}</p>${it.d.trim() ? `<p class="m-d">${esc(it.d)}</p>` : ""}</div>
+  const estrellaDe = (it, pos, n) => `<section class="m-estrella${pos === 1 ? " izq" : ""}${n > 1 ? " chica" : ""}"><div class="m-estrella-txt"><p class="m-estrella-et">${ests.indexOf(it) ? "Recomendado" : esc(tituloRec)}</p><p class="m-estrella-n">${esc(it.n)}</p>${it.d.trim() ? `<p class="m-d">${esc(it.d)}</p>` : ""}</div>
     <div class="m-estrella-foto${it.r ? "" : " foto-entera"}"><img src="${esc(it.f)}" alt=""${it.r ? ` class="ajustable"${ajusteAttr(it)}` : ""}><span class="m-sello">${precioHTML(it.p, e.signo)}</span></div></section>`;
-  const destHTML = (resto.length ? `<section class="m-destacado"><h3 class="m-dest-t">Lo más pedido</h3><ul class="m-dest-items">${resto.map((i) => `
+  const destHTML = (resto.length ? `<section class="m-destacado"><h3 class="m-dest-t">${esc(ests.length ? "Más recomendaciones" : tituloRec)}</h3><ul class="m-dest-items">${resto.map((i) => `
     <li class="m-dest${i.f ? " con-foto" : ""}">${fotoHTML(i, "m-dest-foto")}<div class="m-dest-txt"><p class="m-dest-n">${esc(i.n)}</p>${i.d.trim() ? `<p class="m-d">${esc(i.d)}</p>` : ""}<p class="m-p">${precioHTML(i.p, e.signo)}</p></div></li>`).join("")}</ul></section>` : "");
 
   const secs = estado.secciones.map((s) => ({ ...s, items: s.items.filter((i) => conTexto(i) && !(i.x && modo !== "sencillo")) })).filter((s) => s.items.length);
@@ -687,8 +693,8 @@ $("#add-sec").addEventListener("click", () => {
 
 function cambiarTipo(tema) {
   if (!estado.editado) {
-    const { logo, qr, formato, escala, diseno, sinSigno, franja } = estado;
-    estado = Object.assign(deEjemplo(tema), { logo, formato, escala, diseno, sinSigno, franja });
+    const { logo, qr, formato, escala, diseno, sinSigno, franja, tituloRec } = estado;
+    estado = Object.assign(deEjemplo(tema), { logo, formato, escala, diseno, sinSigno, franja, tituloRec });
     estado.qr = { ...qr, leyenda: PLANTILLAS[tema].leyenda };
   } else {
     estado.tema = tema;

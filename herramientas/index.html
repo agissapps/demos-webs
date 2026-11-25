@@ -85,6 +85,9 @@
         <summary><span class="paso">3</span><span class="solo-sencillo">Productos, fotos y precios</span><span class="no-sencillo">Secciones y platillos</span></summary>
         <div class="cuerpo">
           <p class="nota no-sencillo">En el precio puedes poner tamaños: <i>Chico 120 / Grande 160</i>.</p>
+          <p class="nota no-sencillo">Describe para antojar, no para listar ingredientes: «Pechuga a la mantequilla con vegetales salteados» vende más que «Pechuga con verduras».</p>
+          <label class="interruptor"><input type="checkbox" switch role="switch" data-ruta="sinSigno"> Precios sin el signo $ (se ven menos caros)</label>
+          <div class="campo no-sencillo"><label for="f-titulo-rec">Título de tus platillos destacados</label><input id="f-titulo-rec" data-ruta="tituloRec" maxlength="40" placeholder="Recomendaciones del Chef"></div>
           <p class="nota solo-sencillo">Toca el cuadro de cada producto para ponerle una foto desde tu celular o computadora.</p>
           <div id="ed-secciones"></div>
           <div class="fila-botones">
@@ -177,7 +180,6 @@
           <div class="campo"><label for="f-diseno">Cómo se acomodan los productos</label>
             <select id="f-diseno" data-ruta="diseno"><option value="lista">Lista con precios</option><option value="lado">Lista con foto chica al lado</option><option value="cuadricula">Tarjetas con foto grande</option></select>
           </div>
-          <label class="interruptor"><input type="checkbox" switch role="switch" data-ruta="sinSigno"> Precios sin el signo $</label>
           <div class="campo"><label for="f-textura">Textura del fondo</label>
             <select id="f-textura" data-ruta="textura"><option value="">Lisa</option><option value="papel">Papel de acuarela</option><option value="pizarra">Pizarrón</option><option value="madera">Madera</option></select>
           </div>
