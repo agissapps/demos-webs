@@ -13,7 +13,8 @@ const QR_BASE = { activo: true, tipo: "wa", waTel: "", waMsg: "Hola, vi su menú
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (t = "") => String(t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const hoja = $("#hoja"), edSec = $("#ed-secciones"), avisoEstado = $("#estado");
+const hoja = $("#hoja"), lienzo = $("#lienzo"), edSec = $("#ed-secciones"), avisoEstado = $("#estado");
+let pendientePaginar = false;
 
 function deEjemplo(tema) {
   const p = PLANTILLAS[tema];
@@ -198,7 +199,14 @@ function tamanosComunes(items) {
 /* ---------- Hoja del menú ---------- */
 let qrActual = null;
 const conTexto = (i) => i.n.trim() || i.p.trim();
-function fotoHTML(i, clase = "m-foto") { return i.f ? `<img class="${clase}${i.r ? " recorte" : ""}" src="${esc(i.f)}" alt="">` : ""; }
+let refFoto = new Map();
+const num = (v, d) => (Number.isFinite(+v) ? +v : d);
+function ajusteAttr(i) {
+  if (!i.r) return "";
+  const t = i.t || {};
+  return ` data-ref="${refFoto.get(i) || ""}" style="--esc:${num(t.s, 1)};--rot:${num(t.r, 0)}deg;--tx:${num(t.x, 0)}px;--ty:${num(t.y, 0)}px"`;
+}
+function fotoHTML(i, clase = "m-foto") { return i.f ? `<img class="${clase}${i.r ? " recorte ajustable" : ""}" src="${esc(i.f)}" alt=""${ajusteAttr(i)}>` : ""; }
 function itemMenu(i, e) {
   const conFoto = e.diseno !== "lista" && i.f;
   return `<li class="m-item${conFoto ? " con-foto" : ""}">${conFoto ? fotoHTML(i) : ""}
@@ -212,27 +220,30 @@ function renderHoja() {
   hoja.dataset.fotos = e.diseno;
   hoja.dataset.textura = modo === "avanzado" || estado.textura ? estado.textura : "";
   hoja.dataset.franja = modo === "avanzado" && estado.franja && estado.portada ? "si" : "no";
-  hoja.style.cssText = `--m-fondo:${c.fondo};--m-tinta:${c.tinta};--m-acento:${c.acento};--m-precio:${c.precio};--m-cols:${e.cols};--m-escala:${e.escala};--zoom:${hoja.style.getPropertyValue("--zoom") || 1}`;
+  hoja.style.cssText = `--m-fondo:${c.fondo};--m-tinta:${c.tinta};--m-acento:${c.acento};--m-precio:${c.precio};--m-cols:${e.cols};--m-escala:${e.escala}`;
+  refFoto = new Map();
+  estado.secciones.forEach((s, si) => s.items.forEach((it, ii) => refFoto.set(it, `${si}-${ii}`)));
 
   const destacados = modo === "sencillo" ? [] : estado.secciones.flatMap((s) => s.items.filter((i) => i.x && conTexto(i)));
   const estrella = destacados.find((i) => i.f && i.r) || destacados.find((i) => i.f);
   const resto = destacados.filter((i) => i !== estrella);
   const estrellaHTML = estrella ? `<section class="m-estrella"><div class="m-estrella-txt"><p class="m-estrella-et">Lo más pedido</p><p class="m-estrella-n">${esc(estrella.n)}</p>${estrella.d.trim() ? `<p class="m-d">${esc(estrella.d)}</p>` : ""}</div>
-    <div class="m-estrella-foto${estrella.r ? "" : " foto-entera"}"><img src="${esc(estrella.f)}" alt=""><span class="m-sello">${precioHTML(estrella.p, e.signo)}</span></div></section>` : "";
+    <div class="m-estrella-foto${estrella.r ? "" : " foto-entera"}"><img src="${esc(estrella.f)}" alt=""${estrella.r ? ` class="ajustable"${ajusteAttr(estrella)}` : ""}><span class="m-sello">${precioHTML(estrella.p, e.signo)}</span></div></section>` : "";
   const destHTML = estrellaHTML + (resto.length ? `<section class="m-destacado"><h3 class="m-dest-t">Lo más pedido</h3><ul class="m-dest-items">${resto.map((i) => `
     <li class="m-dest${i.f ? " con-foto" : ""}">${fotoHTML(i, "m-dest-foto")}<div class="m-dest-txt"><p class="m-dest-n">${esc(i.n)}</p>${i.d.trim() ? `<p class="m-d">${esc(i.d)}</p>` : ""}<p class="m-p">${precioHTML(i.p, e.signo)}</p></div></li>`).join("")}</ul></section>` : "");
 
   const secs = estado.secciones.map((s) => ({ ...s, items: s.items.filter((i) => conTexto(i) && !(i.x && modo !== "sencillo")) })).filter((s) => s.items.length);
-  const cuerpo = secs.length || destacados.length ? secs.map((s) => `
+  const secHTML = (s) => `
     <section class="m-sec${s.paquete && modo !== "sencillo" ? " m-paquetes" : ""}">
-      ${s.titulo.trim() ? `<h3 class="m-sec-t">${esc(s.titulo)}</h3>` : ""}
+      ${s.titulo.trim() ? `<h3 class="m-sec-t">${esc(s.titulo)}${s.sigue ? ' <span class="m-sigue">(continúa)</span>' : ""}</h3>` : ""}
       ${(() => {
         const tam = e.diseno === "lista" ? tamanosComunes(s.items) : null;
         if (!tam) return `<ul class="m-items">${s.items.map((i) => itemMenu(i, e)).join("")}</ul>`;
         return `<div class="m-tabla" style="--n:${tam.length}"><div class="m-tabla-cab"><span></span>${tam.map((t) => `<span>${esc(t)}</span>`).join("")}</div>
           <ul class="m-items">${s.items.map((i) => `<li class="m-item m-tabla-fila"><div class="m-txt"><span class="m-n">${esc(i.n)}${i.e && ETIQUETAS[i.e] ? ` <em class="m-et m-et-${i.e}">${ETIQUETAS[i.e]}</em>` : ""}</span>${e.desc && i.d.trim() ? `<p class="m-d">${esc(i.d)}</p>` : ""}</div>${partesPrecio(i.p).map((x) => `<span class="m-p">${cifra(x.v, e.signo)}</span>`).join("")}</li>`).join("")}</ul></div>`;
       })()}
-    </section>`).join("") : `<p class="m-vacio">Agrega tus productos en el paso 3 y aparecerán aquí.</p>`;
+    </section>`;
+  const vacio = secs.length || destacados.length ? "" : `<p class="m-vacio">Agrega tus productos en el paso 3 y aparecerán aquí.</p>`;
 
   const p = estado.pie, completo = modo !== "sencillo";
   const datos = [completo && p.direccion && `<p>${esc(p.direccion)}</p>`, p.telefono && `<p class="tel">${esc(p.telefono)}</p>`, completo && p.horario && `<p>${esc(p.horario)}</p>`, completo && estado.redes.trim() && `<p class="redes">${esc(estado.redes)}</p>`].filter(Boolean).join("");
@@ -245,20 +256,85 @@ function renderHoja() {
     if (r.svg) { qrActual = r.svg; qrHTML = `<figure class="m-qr">${r.svg}${estado.qr.leyenda.trim() ? `<figcaption>${esc(estado.qr.leyenda)}</figcaption>` : ""}</figure>`; }
   }
 
-  hoja.innerHTML = `
-    ${estado.textura ? '<div class="m-textura" aria-hidden="true"></div>' : ""}
+  const textura = estado.textura ? '<div class="m-textura" aria-hidden="true"></div>' : "";
+  const cabecera = `
     ${estado.portada ? `<div class="m-portada"><img src="${esc(estado.portada)}" alt=""></div>` : ""}
     <header class="m-cab" data-inicial="${esc((estado.nombre.trim()[0] || "").toUpperCase())}">
       ${estado.logo ? `<img class="m-logo" src="${esc(estado.logo)}" alt="">` : ""}
       <h2 class="m-nombre">${esc(estado.nombre)}</h2>
       ${estado.lema.trim() ? `<p class="m-lema">${esc(estado.lema)}</p>` : ""}
     </header>
-    ${completo && estado.promo.trim() ? `<p class="m-promo">${esc(estado.promo)}</p>` : ""}
-    ${destHTML}
-    <div class="m-secciones">${cuerpo}</div>
-    ${completo && estado.nota.trim() ? `<p class="m-nota">${esc(estado.nota)}</p>` : ""}
+    ${completo && estado.promo.trim() ? `<p class="m-promo">${esc(estado.promo)}</p>` : ""}`;
+  const arriba = cabecera + destHTML;
+  const mini = `<header class="m-cab-mini"><p class="m-nombre-mini">${esc(estado.nombre)}</p></header>`;
+  const abajo = `${completo && estado.nota.trim() ? `<p class="m-nota">${esc(estado.nota)}</p>` : ""}
     ${datos || qrHTML ? `<footer class="m-pie"><div class="m-datos">${datos}</div>${qrHTML}</footer>` : ""}`;
+  const armar = (top, lista, conAbajo, folio) => `${textura}${top}<div class="m-secciones">${lista.map(secHTML).join("") || (top === arriba ? vacio : "")}</div>${conAbajo ? abajo : ""}${folio ? `<p class="m-folio">${folio}</p>` : ""}`;
+
+  esperarImagenes([estado.portada, estado.logo, ...estado.secciones.flatMap((s) => s.items.map((i) => i.f))]);
+  $$(".hoja-extra", lienzo).forEach((x) => x.remove());
+  hoja.dataset.varias = "no";
+  hoja.innerHTML = armar(arriba, secs, true, "");
   ajustarZoom();
+  // Si el contenido no cabe en una hoja, se reparte en varias
+  pendientePaginar = tapete.clientWidth === 0;
+  if (!pendientePaginar && secs.length) {
+    const html = hoja.innerHTML;
+    hoja.innerHTML = "";
+    const base = hoja.offsetHeight;
+    hoja.innerHTML = html;
+    if (hoja.offsetHeight > base + 1) {
+      hoja.dataset.varias = "si";
+      const paginas = [];
+      // Si la portada, el platillo estrella y los destacados no caben juntos, los destacados pasan a la hoja 2
+      let tops = [arriba, mini];
+      hoja.innerHTML = armar(arriba, [], false, "Página 0 de 0");
+      if (hoja.offsetHeight > base + 1 && destHTML) {
+        hoja.innerHTML = armar(cabecera + estrellaHTML, [], false, "Página 0 de 0");
+        tops = resto.length && hoja.offsetHeight <= base + 1 ? [cabecera + estrellaHTML, mini + destHTML.slice(estrellaHTML.length)] : [cabecera, mini + destHTML];
+      }
+      let cola = secs.slice();
+      // Llena una hoja con lo que quepa; el pie (datos y QR) solo se reserva en la última
+      const llenar = (top, conPie, q) => {
+        q = q.slice();
+        const cur = [];
+        const cabe = (lista) => { hoja.innerHTML = armar(top, lista, conPie, "Página 0 de 0"); return hoja.offsetHeight <= base + 1; };
+        while (q.length) {
+          const s = q[0];
+          if (cabe([...cur, s])) { cur.push(q.shift()); continue; }
+          let k = 0, hi = s.items.length - 1;
+          while (k < hi) { const m = (k + hi + 1) >> 1; if (cabe([...cur, { ...s, items: s.items.slice(0, m) }])) k = m; else hi = m - 1; }
+          if (!k && !cur.length && top !== tops[0]) k = 1; // nunca dejar una hoja vacía
+          if (k) {
+            cur.push({ ...s, items: s.items.slice(0, k) });
+            const resto = s.items.slice(k);
+            if (resto.length) q[0] = { ...s, items: resto, sigue: true }; else q.shift();
+          }
+          break;
+        }
+        return { cur, q };
+      };
+      while ((cola.length || (paginas.length === 1 && tops[1] !== mini)) && paginas.length < 40) {
+        const top = paginas.length === 0 ? tops[0] : paginas.length === 1 ? tops[1] : mini;
+        let r = llenar(top, false, cola);
+        if (!r.q.length && !(paginas.length === 0 && tops[1] !== mini)) r = llenar(top, true, cola);
+        paginas.push({ top, lista: r.cur });
+        cola = r.q;
+      }
+      const n = paginas.length;
+      paginas.forEach((pg, k) => {
+        const html = armar(pg.top, pg.lista, k === n - 1, `Página ${k + 1} de ${n}`);
+        if (!k) { hoja.innerHTML = html; return; }
+        const extra = hoja.cloneNode(false);
+        extra.removeAttribute("id");
+        extra.classList.add("hoja-extra");
+        extra.innerHTML = html;
+        lienzo.append(extra);
+      });
+    }
+  }
+  $("#bajar-png").textContent = $$(".hoja", lienzo).length > 1 ? `Descargar imágenes (${$$(".hoja", lienzo).length})` : "Descargar imagen";
+  marcarSeleccion();
   renderQRPanel(txt);
 }
 
@@ -290,9 +366,139 @@ function ajustarZoom() {
   const cs = getComputedStyle(tapete);
   const disp = tapete.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
   if (disp <= 0) return;
-  hoja.style.setProperty("--zoom", Math.min(1, disp / w).toFixed(4));
+  lienzo.style.setProperty("--zoom", Math.min(1, disp / w).toFixed(4));
 }
-new ResizeObserver(ajustarZoom).observe(tapete);
+new ResizeObserver(() => { if (pendientePaginar && tapete.clientWidth) renderHoja(); else ajustarZoom(); posicionarMarco(); }).observe(tapete);
+
+// Las fotos cambian la altura del menú: al terminar de cargar se vuelve a repartir en hojas
+const imgsVistas = new Set();
+let tImgs = 0;
+function esperarImagenes(srcs) {
+  srcs.filter((s) => s && !imgsVistas.has(s)).forEach((s) => {
+    imgsVistas.add(s);
+    const im = new Image();
+    im.src = s;
+    im.decode().catch(() => {}).finally(() => { clearTimeout(tImgs); tImgs = setTimeout(renderHoja, 60); });
+  });
+}
+document.fonts?.ready.then(() => renderHoja());
+
+/* ---------- Ajustar fotos recortadas: tamaño, giro y posición (como en Word) ---------- */
+const marco = document.createElement("div");
+marco.className = "marco-foto";
+marco.hidden = true;
+marco.innerHTML = `<span class="asa" data-a="nw"></span><span class="asa" data-a="ne"></span><span class="asa" data-a="sw"></span><span class="asa" data-a="se"></span>
+  <span class="asa-giro" data-a="giro" title="Arrastra para girar"></span>`;
+const barra = document.createElement("div");
+barra.className = "marco-barra";
+barra.hidden = true;
+barra.setAttribute("role", "toolbar");
+barra.setAttribute("aria-label", "Ajustar foto");
+barra.innerHTML = `<button type="button" data-acc="menos" aria-label="Más chica">−</button><button type="button" data-acc="mas" aria-label="Más grande">+</button><button type="button" data-acc="girar" aria-label="Girar 15 grados">↻</button><button type="button" data-acc="reset">Restablecer</button><button type="button" data-acc="listo">Listo</button>`;
+document.body.append(marco, barra);
+let selRef = null, gesto = null;
+const ptrs = new Map();
+const itemPorRef = (ref) => { const [si, ii] = String(ref).split("-").map(Number); return estado.secciones[si]?.items[ii]; };
+const imgSel = () => (selRef ? lienzo.querySelector(`img.ajustable[data-ref="${selRef}"]`) : null);
+const leerT = (it) => { const t = it?.t || {}; return { s: num(t.s, 1), r: num(t.r, 0), x: num(t.x, 0), y: num(t.y, 0) }; };
+const escalaVista = () => hoja.getBoundingClientRect().width / hoja.offsetWidth || 1;
+function aplicarT(im, t) { im.style.setProperty("--esc", t.s); im.style.setProperty("--rot", `${t.r}deg`); im.style.setProperty("--tx", `${t.x}px`); im.style.setProperty("--ty", `${t.y}px`); }
+function centro(im) { const r = im.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; }
+function posicionarMarco() {
+  const im = imgSel();
+  if (!im) { marco.hidden = barra.hidden = true; return; }
+  const t = leerT(itemPorRef(selRef)), k = escalaVista(), c = centro(im);
+  // tamaño visible de la foto dentro de su caja (object-fit: contain)
+  const bw = im.offsetWidth, bh = im.offsetHeight, f = im.naturalWidth ? Math.min(bw / im.naturalWidth, bh / im.naturalHeight) : 1;
+  const w = (im.naturalWidth ? im.naturalWidth * f : bw) * k * t.s, h = (im.naturalHeight ? im.naturalHeight * f : bh) * k * t.s;
+  marco.hidden = barra.hidden = false;
+  marco.style.cssText = `left:${c.x}px;top:${c.y}px;width:${w}px;height:${h}px;--r:${t.r}deg`;
+  // la barra va siempre derecha, debajo de la foto (o arriba si no cabe)
+  const rad = (t.r * Math.PI) / 180, alto = Math.abs(w * Math.sin(rad)) + Math.abs(h * Math.cos(rad));
+  const abajo = c.y + alto / 2 + 16, arriba = c.y - alto / 2 - 60;
+  barra.style.cssText = `left:${Math.min(Math.max(c.x, 170), innerWidth - 170)}px;top:${abajo + 50 < innerHeight || arriba < 0 ? abajo : arriba - 10}px`;
+}
+function marcarSeleccion() {
+  $$("img.ajustable.sel", lienzo).forEach((i) => i.classList.remove("sel"));
+  const im = imgSel();
+  if (im) im.classList.add("sel"); else selRef = null;
+  posicionarMarco();
+}
+function cerrarMarco() { selRef = null; gesto = null; ptrs.clear(); marcarSeleccion(); }
+function guardarAjuste(it, t) {
+  it.t = { s: +t.s.toFixed(3), r: +t.r.toFixed(1), x: Math.round(t.x), y: Math.round(t.y) };
+  if (it.t.s === 1 && !it.t.r && !it.t.x && !it.t.y) delete it.t;
+  estado.editado = true;
+  guardar(); renderHoja();
+}
+function iniciarGesto(tipo) {
+  const im = imgSel(), it = itemPorRef(selRef);
+  if (!im || !it) return;
+  gesto = { tipo: ptrs.size >= 2 ? "pellizco" : tipo, t0: leerT(it), c: centro(im), k: escalaVista(), p0: new Map([...ptrs].map(([id, p]) => [id, { ...p }])), it, im, movido: false };
+}
+lienzo.addEventListener("pointerdown", (ev) => {
+  const im = ev.target.closest("img.ajustable");
+  if (!im) return;
+  ev.preventDefault();
+  if (selRef !== im.dataset.ref) { selRef = im.dataset.ref; marcarSeleccion(); }
+  if (ev.pointerType === "mouse") { ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); iniciarGesto("mover"); }
+});
+marco.addEventListener("pointerdown", (ev) => {
+  if (ev.target.closest("button")) return;
+  ev.preventDefault();
+  ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  iniciarGesto(ev.target.dataset.a || "mover");
+});
+addEventListener("pointermove", (ev) => {
+  if (!gesto || !ptrs.has(ev.pointerId)) return;
+  ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  const g = gesto, t = { ...g.t0 };
+  if (g.tipo === "pellizco") {
+    const [ia, ib] = [...g.p0.keys()], a0 = g.p0.get(ia), b0 = g.p0.get(ib), a = ptrs.get(ia), b = ptrs.get(ib);
+    if (!a || !b) return;
+    t.s = g.t0.s * Math.hypot(b.x - a.x, b.y - a.y) / (Math.hypot(b0.x - a0.x, b0.y - a0.y) || 1);
+    t.r = g.t0.r + (Math.atan2(b.y - a.y, b.x - a.x) - Math.atan2(b0.y - a0.y, b0.x - a0.x)) * 180 / Math.PI;
+    t.x = g.t0.x + ((a.x + b.x) - (a0.x + b0.x)) / 2 / g.k;
+    t.y = g.t0.y + ((a.y + b.y) - (a0.y + b0.y)) / 2 / g.k;
+  } else {
+    const p0 = g.p0.get(ev.pointerId), p = ptrs.get(ev.pointerId);
+    if (!p0) return;
+    if (g.tipo === "mover") { t.x = g.t0.x + (p.x - p0.x) / g.k; t.y = g.t0.y + (p.y - p0.y) / g.k; }
+    else if (g.tipo === "giro") { const ang = Math.atan2(p.y - g.c.y, p.x - g.c.x) * 180 / Math.PI + 90; t.r = ev.shiftKey ? Math.round(ang / 15) * 15 : ang; }
+    else t.s = g.t0.s * Math.hypot(p.x - g.c.x, p.y - g.c.y) / (Math.hypot(p0.x - g.c.x, p0.y - g.c.y) || 1);
+  }
+  t.s = Math.min(3, Math.max(0.25, t.s));
+  t.r = ((t.r % 360) + 540) % 360 - 180;
+  if (Math.abs(t.r) < 3) t.r = 0;
+  if (!g.movido && Math.hypot(t.x - g.t0.x, t.y - g.t0.y) < 2 && t.s === g.t0.s && t.r === g.t0.r) return;
+  g.movido = true;
+  g.it.t = t;
+  aplicarT(g.im, t);
+  posicionarMarco();
+});
+function soltar(ev) {
+  if (!ptrs.delete(ev.pointerId) || !gesto) return;
+  const g = gesto;
+  if (ptrs.size) { iniciarGesto("mover"); if (gesto) gesto.movido = g.movido; return; }
+  gesto = null;
+  if (g.movido) guardarAjuste(g.it, leerT(g.it));
+}
+addEventListener("pointerup", soltar);
+addEventListener("pointercancel", soltar);
+addEventListener("scroll", () => selRef && posicionarMarco(), { passive: true, capture: true });
+addEventListener("pointerdown", (ev) => { if (selRef && !marco.contains(ev.target) && !barra.contains(ev.target) &&!ev.target.closest?.("img.ajustable")) cerrarMarco(); });
+addEventListener("keydown", (ev) => { if (ev.key === "Escape" && selRef) cerrarMarco(); });
+barra.addEventListener("click", (ev) => {
+  const acc = ev.target.closest("button")?.dataset.acc, it = itemPorRef(selRef);
+  if (!acc || !it) return;
+  if (acc === "listo") return cerrarMarco();
+  const t = leerT(it);
+  if (acc === "reset") { delete it.t; estado.editado = true; guardar(); renderHoja(); return; }
+  if (acc === "mas") t.s = Math.min(3, t.s * 1.1);
+  if (acc === "menos") t.s = Math.max(0.25, t.s / 1.1);
+  if (acc === "girar") t.r = ((t.r + 15 + 180) % 360) - 180;
+  guardarAjuste(it, t);
+});
 
 /* ---------- Selector de tipo ---------- */
 $("#tipos").innerHTML = Object.entries(PLANTILLAS).map(([k, p]) => `
@@ -527,29 +733,33 @@ function cargarLib() {
 cargarLib().catch(() => {});
 
 $("#bajar-png").addEventListener("click", async (ev) => {
-  const btn = ev.currentTarget, z = hoja.style.getPropertyValue("--zoom");
+  const btn = ev.currentTarget, z = lienzo.style.getPropertyValue("--zoom");
   btn.disabled = true; mostrar("Preparando tu imagen…");
+  cerrarMarco();
   try {
     const lib = await cargarLib();
     await document.fonts.ready;
     const vista = document.body.dataset.vista;
     document.body.dataset.vista = "ver";
-    hoja.style.setProperty("--zoom", 1);
-    const formato = efectivo().formato;
-    const blob = await lib.toBlob(hoja, { width: hoja.offsetWidth, height: hoja.offsetHeight, pixelRatio: formato === "carta" || formato === "horizontal" ? 2 : 1, style: { boxShadow: "none" } });
+    if (pendientePaginar) renderHoja();
+    lienzo.style.setProperty("--zoom", 1);
+    const formato = efectivo().formato, paginas = $$(".hoja", lienzo), archivos = [];
+    for (const [k, pg] of paginas.entries()) {
+      const blob = await lib.toBlob(pg, { width: pg.offsetWidth, height: pg.offsetHeight, pixelRatio: formato === "carta" || formato === "horizontal" ? 2 : 1, style: { boxShadow: "none", margin: "0" } });
+      if (!blob) throw new Error("vacía");
+      archivos.push(new File([blob], `menu-${nombreArchivo()}${paginas.length > 1 ? `-${k + 1}` : ""}.png`, { type: "image/png" }));
+    }
     document.body.dataset.vista = vista;
-    hoja.style.setProperty("--zoom", z);
-    if (!blob) throw new Error("vacía");
-    const archivo = new File([blob], `menu-${nombreArchivo()}.png`, { type: "image/png" });
-    if (matchMedia("(pointer: coarse)").matches && navigator.canShare?.({ files: [archivo] })) {
-      try { await navigator.share({ files: [archivo], title: estado.nombre }); mostrar("Listo."); return; }
+    lienzo.style.setProperty("--zoom", z);
+    if (matchMedia("(pointer: coarse)").matches && navigator.canShare?.({ files: archivos })) {
+      try { await navigator.share({ files: archivos, title: estado.nombre }); mostrar("Listo."); return; }
       catch (e) { if (e.name === "AbortError") { mostrar(""); return; } }
     }
-    descargar(blob, archivo.name);
-    mostrar("Imagen descargada. Búscala en tu carpeta de descargas.");
+    for (const [k, a] of archivos.entries()) { if (k) await new Promise((r) => setTimeout(r, 400)); descargar(a, a.name); }
+    mostrar(archivos.length > 1 ? `Se descargaron ${archivos.length} imágenes, una por página. Búscalas en tu carpeta de descargas.` : "Imagen descargada. Búscala en tu carpeta de descargas.");
   } catch {
     document.body.dataset.vista = document.querySelector(".cambiar-vista [aria-pressed=true]")?.dataset.vista || "editar";
-    hoja.style.setProperty("--zoom", z);
+    lienzo.style.setProperty("--zoom", z);
     mostrar("No se pudo crear la imagen. Revisa tu conexión e intenta otra vez, o usa «Imprimir o guardar PDF».");
   } finally { btn.disabled = false; }
 });
@@ -558,6 +768,11 @@ $("#imprimir").addEventListener("click", () => {
   let st = $("#estilo-pagina");
   if (!st) { st = document.createElement("style"); st.id = "estilo-pagina"; document.head.append(st); }
   st.textContent = `@page{size:${ANCHOS[efectivo().formato][2]};margin:0}`;
+  cerrarMarco();
+  const vista = document.body.dataset.vista;
+  document.body.dataset.vista = "ver";
+  if (pendientePaginar) renderHoja();
+  addEventListener("afterprint", () => { document.body.dataset.vista = vista; }, { once: true });
   window.print();
 });
 
@@ -566,7 +781,7 @@ $$(".cambiar-vista button").forEach((b) => b.addEventListener("click", () => {
   document.body.dataset.vista = b.dataset.vista;
   $$(".cambiar-vista button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
   scrollTo({ top: 0 });
-  ajustarZoom();
+  if (pendientePaginar && tapete.clientWidth) renderHoja(); else ajustarZoom();
 }));
 
 function actualizarPromo() {

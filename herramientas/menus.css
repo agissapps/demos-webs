@@ -230,6 +230,11 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
   background:repeating-linear-gradient(90deg,var(--m-acento) 0 70px,var(--m-precio) 70px 140px,#F2A900 140px 210px,#D9418C 210px 280px);
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='80'%3E%3Crect y='2' width='70' height='2'/%3E%3Cpath fill-rule='evenodd' d='M6 4H64V66L56.75 74L49.5 66L42.25 74L35 66L27.75 74L20.5 66L13.25 74L6 66Z M35 20L44 31L35 42L26 31Z M15 52a4 4 0 1 0 8 0a4 4 0 1 0-8 0Z M47 52a4 4 0 1 0 8 0a4 4 0 1 0-8 0Z M14 11H56V14H14Z M31 52H39V57H31Z'/%3E%3C/svg%3E") 0 0/70px 80px repeat-x;
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='80'%3E%3Crect y='2' width='70' height='2'/%3E%3Cpath fill-rule='evenodd' d='M6 4H64V66L56.75 74L49.5 66L42.25 74L35 66L27.75 74L20.5 66L13.25 74L6 66Z M35 20L44 31L35 42L26 31Z M15 52a4 4 0 1 0 8 0a4 4 0 1 0-8 0Z M47 52a4 4 0 1 0 8 0a4 4 0 1 0-8 0Z M14 11H56V14H14Z M31 52H39V57H31Z'/%3E%3C/svg%3E") 0 0/70px 80px repeat-x}
+/* Azulejo de talavera muy tenue detrás de todo */
+.hoja[data-tema=cocina]{isolation:isolate}
+.hoja[data-tema=cocina]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--m-acento);opacity:.085;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg transform='translate(60 60)'%3E%3Cellipse cy='-19' rx='8' ry='15'/%3E%3Cellipse cy='19' rx='8' ry='15'/%3E%3Cellipse cx='-19' rx='15' ry='8'/%3E%3Cellipse cx='19' rx='15' ry='8'/%3E%3Ccircle r='5' fill='white'/%3E%3Cpath d='M-30-30l5 5M30-30l-5 5M-30 30l5-5M30 30l-5-5' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/g%3E%3Cg fill='none' stroke='black' stroke-width='2.5'%3E%3Ccircle r='24'/%3E%3Ccircle cx='120' r='24'/%3E%3Ccircle cy='120' r='24'/%3E%3Ccircle cx='120' cy='120' r='24'/%3E%3C/g%3E%3Cpath d='M60 0l6 6-6 6-6-6zM60 108l6 6-6 6-6-6zM0 54l6 6-6 6M120 54l-6 6 6 6'/%3E%3C/svg%3E") 0 0/120px 120px;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg transform='translate(60 60)'%3E%3Cellipse cy='-19' rx='8' ry='15'/%3E%3Cellipse cy='19' rx='8' ry='15'/%3E%3Cellipse cx='-19' rx='15' ry='8'/%3E%3Cellipse cx='19' rx='15' ry='8'/%3E%3Ccircle r='5' fill='white'/%3E%3Cpath d='M-30-30l5 5M30-30l-5 5M-30 30l5-5M30 30l-5-5' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/g%3E%3Cg fill='none' stroke='black' stroke-width='2.5'%3E%3Ccircle r='24'/%3E%3Ccircle cx='120' r='24'/%3E%3Ccircle cy='120' r='24'/%3E%3Ccircle cx='120' cy='120' r='24'/%3E%3C/g%3E%3Cpath d='M60 0l6 6-6 6-6-6zM60 108l6 6-6 6-6-6zM0 54l6 6-6 6M120 54l-6 6 6 6'/%3E%3C/svg%3E") 0 0/120px 120px}
 .hoja[data-tema=cocina] .m-nombre{font-weight:800;font-style:italic;font-size:3.6em}
 .hoja[data-tema=cocina] .m-sec-t{font-style:italic;font-weight:700;display:flex;align-items:center;gap:.4em}
 .hoja[data-tema=cocina] .m-sec-t::after{content:"";flex:1;height:3px;background:repeating-linear-gradient(90deg,var(--m-acento) 0 10px,transparent 10px 16px)}
@@ -304,7 +309,10 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
   .estudio{display:block;min-height:0}
   .tapete{display:block !important;padding:0;background:none;min-height:0}
   .lienzo{position:static}
-  .hoja{zoom:1;box-shadow:none;margin:0}
+  .hoja{zoom:1;box-shadow:none;margin:0;break-after:page}
+  .hoja:last-child{break-after:auto}
+  .lienzo{display:block}
+  .marco-foto,.marco-barra{display:none !important}
 }
 
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
@@ -397,5 +405,31 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
 .m-foto.recorte{object-fit:contain;background:none !important;border-radius:0 !important;box-shadow:none !important;filter:drop-shadow(0 .5em .5em rgb(0 0 0/.3))}
 .hoja[data-fotos=lado] .m-foto.recorte{aspect-ratio:1}
 .m-dest-foto.recorte{object-fit:contain;border-radius:0;filter:drop-shadow(0 .5em .5em rgb(0 0 0/.3))}
+/* ===== Menú de varias páginas ===== */
+.lienzo{display:grid;gap:2rem;justify-items:center}
+.m-cab-mini{margin:0 0 1.4em;padding-bottom:.5em;border-bottom:2px solid color-mix(in srgb,var(--m-acento) 45%,transparent)}
+.m-nombre-mini{font-family:var(--m-titulo);color:var(--m-acento);font-size:1.7em;font-weight:700;line-height:1;margin:0}
+.m-sigue{font-size:.5em;font-weight:600;font-style:italic;opacity:.75;white-space:nowrap}
+.hoja[data-varias=si]:not([data-tema=dulces]) .m-sec:not(.m-paquetes){break-inside:auto}
+.hoja[data-varias=si] .m-sec-t,.hoja[data-varias=si] .m-tabla-cab{break-after:avoid}
+.m-folio{margin:1.2em 0 0;text-align:center;font-size:.78em;opacity:.6}
+.hoja[data-tema=sushi] .m-sigue{writing-mode:horizontal-tb}
+
+/* ===== Foto recortada que se ajusta con el recuadro ===== */
+img.ajustable{transform:translate(var(--tx,0px),var(--ty,0px)) rotate(var(--rot,0deg)) scale(var(--esc,1));cursor:grab;position:relative;z-index:1}
+img.ajustable.sel{touch-action:none}
+.hoja[data-fotos=cuadricula] .m-item:has(.ajustable){overflow:visible}
+.marco-foto{position:fixed;z-index:50;translate:-50% -50%;rotate:var(--r,0deg);border:1.5px solid #1A73E8;touch-action:none;cursor:move}
+.marco-foto .asa{position:absolute;width:14px;height:14px;background:#fff;border:1.5px solid #1A73E8;border-radius:2px;translate:-50% -50%}
+.marco-foto .asa[data-a=nw]{left:0;top:0;cursor:nwse-resize}.marco-foto .asa[data-a=ne]{left:100%;top:0;cursor:nesw-resize}
+.marco-foto .asa[data-a=sw]{left:0;top:100%;cursor:nesw-resize}.marco-foto .asa[data-a=se]{left:100%;top:100%;cursor:nwse-resize}
+.marco-foto .asa-giro{position:absolute;left:50%;top:-34px;width:18px;height:18px;translate:-50% 0;border-radius:50%;background:#fff;border:1.5px solid #1A73E8;cursor:grab}
+.marco-foto .asa-giro::after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:16px;background:#1A73E8}
+.m-sello{z-index:2}
+.marco-barra{position:fixed;z-index:51;translate:-50% 0;display:flex;gap:4px;padding:4px;background:#15161B;border-radius:999px;box-shadow:0 10px 24px -8px rgb(0 0 0/.5);white-space:nowrap;cursor:default}
+.marco-barra button{border:0;background:none;color:#fff;font:700 .85rem/1 system-ui,sans-serif;min-width:2.4rem;min-height:2.4rem;padding:0 .7rem;border-radius:999px;cursor:pointer}
+.marco-barra button:hover,.marco-barra button:focus-visible{background:rgb(255 255 255/.16);outline:none}
+.marco-barra button[data-acc=listo]{background:#fff;color:#15161B}
+@media (pointer:coarse){.marco-foto .asa{width:22px;height:22px}.marco-foto .asa-giro{width:26px;height:26px;top:-44px}}
 .m-estrella-foto.foto-entera::before{display:none}
 .m-estrella-foto.foto-entera img{width:100%;margin:0;border-radius:.6em;aspect-ratio:4/3;object-fit:cover}
