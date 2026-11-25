@@ -64,6 +64,7 @@ function actualizar() {
   // Resumen
   const dato = (id, txt, clase = "") => { const d = $(id); $(".dato-n", d).textContent = txt; d.classList.remove("bien", "mal"); if (clase) d.classList.add(clase); };
   dato("#r-costo", k.mezcla === null ? "—" : dinero(Math.round(k.mezcla)), k.mezcla === null ? "" : k.mezcla <= 30 ? "bien" : "mal");
+  $("#r-costo").style.setProperty("--ing", k.mezcla === null ? "0%" : `${Math.min(100, k.mezcla)}%`);
   $("#r-costo-s").textContent = k.mezcla === null ? "Lo ideal es $30 o menos" : k.mezcla <= 30 ? "Vas bien: lo ideal es $30 o menos" : "Lo ideal es $30 o menos. Revisa los platillos en rojo.";
   $("#r-alto-s").textContent = k.altos ? "Su costo pasa de 35%. Están marcados en rojo." : "Su costo pasa de 35%";
   dato("#r-ganancia", k.ganancia === null ? "—" : dinero(Math.round(k.ganancia)));
@@ -73,6 +74,7 @@ function actualizar() {
   // Matriz
   for (const g of Object.keys(GRUPOS)) {
     const nombres = filas.filter((f) => k.res.get(f.id)?.g === g).map((f) => f.n.trim() || "Sin nombre");
+    $(`.cuad.${g}`).dataset.n = nombres.length;
     $(`.cuad.${g} ul`).innerHTML = nombres.length ? nombres.map((n) => `<li>${esc(n)}</li>`).join("") : `<li class="nada">Ninguno todavía</li>`;
   }
 }

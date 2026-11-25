@@ -31,6 +31,7 @@
 
 <main class="libreta">
   <section class="hoja-c cab-c">
+    <div class="cab-txt">
     <h1>Costeo de platillos</h1>
     <p>Descubre cuánto ganas con cada platillo y cuáles te conviene destacar, ajustar o quitar.</p>
     <ol class="pasos">
@@ -45,6 +46,15 @@
     </div>
     <p class="nota">Se guarda solo en este equipo. Nada de esto se imprime en tu menú.</p>
     <p id="aviso" class="aviso" role="status"></p>
+    </div>
+    <figure class="comanda" aria-label="Ejemplo: la tripa se vende en 28 pesos, cuesta 13 y deja 15 de ganancia">
+      <figcaption>Así se lee un platillo</figcaption>
+      <p class="c-plato">Taco de tripa</p>
+      <p class="c-lin"><span>Lo vendes en</span><b>$28</b></p>
+      <p class="c-lin"><span>Te cuesta hacerlo</span><b>− $13</b></p>
+      <p class="c-lin c-total"><span>Ganas en cada uno</span><b>$15</b></p>
+      <p class="c-sello">Costo 46% · Súbelo a $45</p>
+    </figure>
   </section>
 
   <section class="hoja-c">
@@ -68,7 +78,9 @@
   </section>
 
   <section class="resumen" aria-label="Tus resultados de la semana">
-    <div class="dato" id="r-costo"><span class="dato-t">De cada $100 que vendes, en ingredientes se van</span><span class="dato-n">—</span><span class="dato-s" id="r-costo-s">Lo ideal es $30 o menos</span></div>
+    <div class="dato dato-ancho" id="r-costo"><span class="dato-t">De cada $100 que vendes, en ingredientes se van</span><span class="dato-n">—</span>
+      <div class="cien" aria-hidden="true"><span class="cien-ing"></span><i class="cien-meta"><em>Meta $30</em></i></div>
+      <span class="dato-s" id="r-costo-s">Lo ideal es $30 o menos</span></div>
     <div class="dato" id="r-ganancia"><span class="dato-t">Te quedan por semana</span><span class="dato-n">—</span><span class="dato-s">Lo que cobras menos ingredientes. Aún sin pagar renta, sueldos ni gas.</span></div>
     <div class="dato" id="r-ventas"><span class="dato-t">Platillos que vendes por semana</span><span class="dato-n">—</span><span class="dato-s" id="r-ventas-s"></span></div>
     <div class="dato" id="r-alto"><span class="dato-t">Platillos que te dejan poco</span><span class="dato-n">—</span><span class="dato-s" id="r-alto-s">Su costo pasa de 35%</span></div>
@@ -77,11 +89,15 @@
   <section class="hoja-c">
     <h2>Tu matriz de platillos</h2>
     <p class="nota">Cada platillo se compara con el promedio de tu menú: si se vende más o menos que los demás, y si deja más o menos ganancia.</p>
+    <div class="ejes">
+    <span class="eje-y" aria-hidden="true">Deja más ganancia →</span>
+    <span class="eje-x" aria-hidden="true">Se vende más →</span>
     <div class="matriz" id="matriz">
       <div class="cuad estrella"><h3>Estrellas <small>Se venden mucho y dejan buena ganancia</small></h3><ul></ul><p class="hacer">Dales el mejor lugar: arriba a la derecha y con foto grande.</p></div>
       <div class="cuad enigma"><h3>Enigmas <small>Dejan buena ganancia pero se venden poco</small></h3><ul></ul><p class="hacer">Promuévelos: mejor nombre y descripción, foto, y que los recomienden los meseros.</p></div>
       <div class="cuad vaca"><h3>Vacas <small>Se venden mucho pero dejan poca ganancia</small></h3><ul></ul><p class="hacer">Cuida la porción o el costo de los ingredientes, o sube el precio poco a poco.</p></div>
       <div class="cuad perro"><h3>Perros <small>Se venden poco y dejan poca ganancia</small></h3><ul></ul><p class="hacer">Cámbialos o quítalos del menú.</p></div>
+    </div>
     </div>
     <div class="fila-botones">
       <button type="button" class="btn btn-tinta" id="destacar">Destacar estrellas y enigmas en mi menú</button>
