@@ -24,16 +24,21 @@
       <div><b>¿Tienes empleados?</b><p>Instalamos checadores con huella digital. Revisa entradas y salidas desde tu celular.</p>
       <a href="${wa("Hola, me interesa el checador con huella digital")}" target="_blank" rel="noopener">Cotizar checador</a></div>
       <button type="button" class="aviso-cerrar" aria-label="Cerrar aviso">×</button><i class="aviso-tiempo" aria-hidden="true"></i>`;
-    document.body.append(aviso);
+    const fondo = document.createElement("div");
+    fondo.className = "aviso-fondo";
+    fondo.append(aviso);
+    document.body.append(fondo);
+    fondo.addEventListener("click", (e) => { if (e.target === fondo) cerrar(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && fondo.isConnected) cerrar(); });
     let quedan = 4000, desde = performance.now(), reloj;
-    const cerrar = () => { clearTimeout(reloj); aviso.classList.add("saliendo"); setTimeout(() => aviso.remove(), 300); };
+    const cerrar = () => { clearTimeout(reloj); fondo.classList.add("saliendo"); setTimeout(() => fondo.remove(), 300); };
     const correr = () => { desde = performance.now(); reloj = setTimeout(cerrar, quedan); aviso.classList.remove("pausa"); };
     const pausar = () => { clearTimeout(reloj); quedan -= performance.now() - desde; aviso.classList.add("pausa"); };
     aviso.querySelector(".aviso-cerrar").addEventListener("click", cerrar);
     // Si la persona lo está leyendo o lo está usando con el teclado, no se cierra solo
     aviso.addEventListener("mouseenter", pausar); aviso.addEventListener("mouseleave", correr);
     aviso.addEventListener("focusin", pausar); aviso.addEventListener("focusout", correr);
-    requestAnimationFrame(() => { aviso.classList.add("visible"); correr(); });
+    requestAnimationFrame(() => { fondo.classList.add("visible"); correr(); });
   }
 
   // Oferta de página web (se abre al descargar el Excel)
