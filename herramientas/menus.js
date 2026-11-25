@@ -225,11 +225,12 @@ function renderHoja() {
   estado.secciones.forEach((s, si) => s.items.forEach((it, ii) => refFoto.set(it, `${si}-${ii}`)));
 
   const destacados = modo === "sencillo" ? [] : estado.secciones.flatMap((s) => s.items.filter((i) => i.x && conTexto(i)));
-  const estrella = destacados.find((i) => i.f && i.r) || destacados.find((i) => i.f);
-  const resto = destacados.filter((i) => i !== estrella);
-  const estrellaHTML = estrella ? `<section class="m-estrella"><div class="m-estrella-txt"><p class="m-estrella-et">Lo más pedido</p><p class="m-estrella-n">${esc(estrella.n)}</p>${estrella.d.trim() ? `<p class="m-d">${esc(estrella.d)}</p>` : ""}</div>
-    <div class="m-estrella-foto${estrella.r ? "" : " foto-entera"}"><img src="${esc(estrella.f)}" alt=""${estrella.r ? ` class="ajustable"${ajusteAttr(estrella)}` : ""}><span class="m-sello">${precioHTML(estrella.p, e.signo)}</span></div></section>` : "";
-  const destHTML = estrellaHTML + (resto.length ? `<section class="m-destacado"><h3 class="m-dest-t">Lo más pedido</h3><ul class="m-dest-items">${resto.map((i) => `
+  // Destacados con foto: van grandes, hasta 3 por hoja en zigzag (arriba a la derecha, en medio a la izquierda, abajo a la derecha)
+  const ests = destacados.filter((i) => i.f);
+  const resto = destacados.filter((i) => !i.f);
+  const estrellaDe = (it, pos, n) => `<section class="m-estrella${pos === 1 ? " izq" : ""}${n > 1 ? " chica" : ""}"><div class="m-estrella-txt"><p class="m-estrella-et">${ests.indexOf(it) ? "Recomendado" : "Lo más pedido"}</p><p class="m-estrella-n">${esc(it.n)}</p>${it.d.trim() ? `<p class="m-d">${esc(it.d)}</p>` : ""}</div>
+    <div class="m-estrella-foto${it.r ? "" : " foto-entera"}"><img src="${esc(it.f)}" alt=""${it.r ? ` class="ajustable"${ajusteAttr(it)}` : ""}><span class="m-sello">${precioHTML(it.p, e.signo)}</span></div></section>`;
+  const destHTML = (resto.length ? `<section class="m-destacado"><h3 class="m-dest-t">Lo más pedido</h3><ul class="m-dest-items">${resto.map((i) => `
     <li class="m-dest${i.f ? " con-foto" : ""}">${fotoHTML(i, "m-dest-foto")}<div class="m-dest-txt"><p class="m-dest-n">${esc(i.n)}</p>${i.d.trim() ? `<p class="m-d">${esc(i.d)}</p>` : ""}<p class="m-p">${precioHTML(i.p, e.signo)}</p></div></li>`).join("")}</ul></section>` : "");
 
   const secs = estado.secciones.map((s) => ({ ...s, items: s.items.filter((i) => conTexto(i) && !(i.x && modo !== "sencillo")) })).filter((s) => s.items.length);
@@ -269,42 +270,54 @@ function renderHoja() {
   const mini = `<header class="m-cab-mini"><p class="m-nombre-mini">${esc(estado.nombre)}</p></header>`;
   const abajo = `${completo && estado.nota.trim() ? `<p class="m-nota">${esc(estado.nota)}</p>` : ""}
     ${datos || qrHTML ? `<footer class="m-pie"><div class="m-datos">${datos}</div>${qrHTML}</footer>` : ""}`;
-  const armar = (top, lista, conAbajo, folio) => `${textura}${top}<div class="m-secciones">${lista.map(secHTML).join("") || (top === arriba ? vacio : "")}</div>${conAbajo ? abajo : ""}${folio ? `<p class="m-folio">${folio}</p>` : ""}`;
+  // Con 2 o 3 destacados las secciones se parten en dos bloques para dejar uno en medio
+  const partir = (l) => {
+    if (l.length === 1 && l[0].items.length >= 4) { const s = l[0], m = Math.ceil(s.items.length / 2); return [[{ ...s, items: s.items.slice(0, m) }], [{ ...s, items: s.items.slice(m), sigue: true }]]; }
+    if (l.length < 2) return [l, []];
+    const tot = l.reduce((a, s) => a + s.items.length, 0);
+    let k = 0, acc = 0;
+    while (k < l.length - 1 && acc + l[k].items.length / 2 < tot / 2) acc += l[k++].items.length;
+    k = Math.max(1, k);
+    return [l.slice(0, k), l.slice(k)];
+  };
+  const bloque = (l, vac = "") => (l.length || vac ? `<div class="m-secciones">${l.map(secHTML).join("") || vac}</div>` : "");
+  const armar = (top, es, lista, conAbajo, folio) => {
+    const E = (k) => (es[k] ? estrellaDe(es[k], k, es.length) : "");
+    const [a, b] = es.length >= 2 ? partir(lista) : [lista, []];
+    return `${textura}${top}${E(0)}${bloque(a, top === arriba ? vacio : "")}${E(1)}${bloque(b)}${E(2)}${conAbajo ? abajo : ""}${folio ? `<p class="m-folio">${folio}</p>` : ""}`;
+  };
 
   esperarImagenes([estado.portada, estado.logo, ...estado.secciones.flatMap((s) => s.items.map((i) => i.f))]);
   $$(".hoja-extra", lienzo).forEach((x) => x.remove());
   hoja.dataset.varias = "no";
-  hoja.innerHTML = armar(arriba, secs, true, "");
+  hoja.innerHTML = armar(arriba, ests.slice(0, 3), secs, true, "");
   ajustarZoom();
-  // Si el contenido no cabe en una hoja, se reparte en varias
+  // Si el contenido no cabe en una hoja (o hay más de 3 destacados), se reparte en varias
   pendientePaginar = tapete.clientWidth === 0;
-  if (!pendientePaginar && secs.length) {
+  if (!pendientePaginar && (secs.length || ests.length > 3)) {
     const html = hoja.innerHTML;
     hoja.innerHTML = "";
     const base = hoja.offsetHeight;
     hoja.innerHTML = html;
-    if (hoja.offsetHeight > base + 1) {
+    if (hoja.offsetHeight > base + 1 || ests.length > 3) {
       hoja.dataset.varias = "si";
       const paginas = [];
-      // Si la portada, el platillo estrella y los destacados no caben juntos, los destacados pasan a la hoja 2
+      // Si la portada y la caja de destacados sin foto no caben juntas, la caja pasa a la hoja 2
       let tops = [arriba, mini];
-      hoja.innerHTML = armar(arriba, [], false, "Página 0 de 0");
-      if (hoja.offsetHeight > base + 1 && destHTML) {
-        hoja.innerHTML = armar(cabecera + estrellaHTML, [], false, "Página 0 de 0");
-        tops = resto.length && hoja.offsetHeight <= base + 1 ? [cabecera + estrellaHTML, mini + destHTML.slice(estrellaHTML.length)] : [cabecera, mini + destHTML];
-      }
-      let cola = secs.slice();
+      hoja.innerHTML = armar(arriba, ests.slice(0, 1), [], false, "Página 0 de 0");
+      if (hoja.offsetHeight > base + 1 && destHTML) tops = [cabecera, mini + destHTML];
+      let cola = secs.slice(), colaE = ests.slice();
       // Llena una hoja con lo que quepa; el pie (datos y QR) solo se reserva en la última
-      const llenar = (top, conPie, q) => {
+      const llenar = (top, es, conPie, q) => {
         q = q.slice();
         const cur = [];
-        const cabe = (lista) => { hoja.innerHTML = armar(top, lista, conPie, "Página 0 de 0"); return hoja.offsetHeight <= base + 1; };
+        const cabe = (lista) => { hoja.innerHTML = armar(top, es, lista, conPie, "Página 0 de 0"); return hoja.offsetHeight <= base + 1; };
         while (q.length) {
           const s = q[0];
           if (cabe([...cur, s])) { cur.push(q.shift()); continue; }
           let k = 0, hi = s.items.length - 1;
           while (k < hi) { const m = (k + hi + 1) >> 1; if (cabe([...cur, { ...s, items: s.items.slice(0, m) }])) k = m; else hi = m - 1; }
-          if (!k && !cur.length && top !== tops[0]) k = 1; // nunca dejar una hoja vacía
+          if (!k && !cur.length && top !== tops[0] && !es.length) k = 1; // nunca dejar una hoja vacía
           if (k) {
             cur.push({ ...s, items: s.items.slice(0, k) });
             const resto = s.items.slice(k);
@@ -314,16 +327,36 @@ function renderHoja() {
         }
         return { cur, q };
       };
-      while ((cola.length || (paginas.length === 1 && tops[1] !== mini)) && paginas.length < 40) {
+      while ((cola.length || colaE.length || (paginas.length === 1 && tops[1] !== mini)) && paginas.length < 40) {
         const top = paginas.length === 0 ? tops[0] : paginas.length === 1 ? tops[1] : mini;
-        let r = llenar(top, false, cola);
-        if (!r.q.length && !(paginas.length === 0 && tops[1] !== mini)) r = llenar(top, true, cola);
-        paginas.push({ top, lista: r.cur });
+        // hasta 3 destacados en esta hoja, los que quepan
+        let nE = Math.min(3, colaE.length);
+        while (nE > 0) { hoja.innerHTML = armar(top, colaE.slice(0, nE), [], false, "Página 0 de 0"); if (hoja.offsetHeight <= base + 1) break; nE--; }
+        if (!nE && colaE.length && paginas.length) nE = 1;
+        let es, r, soloPie = false;
+        for (;;) {
+          es = colaE.slice(0, nE);
+          r = llenar(top, es, false, cola);
+          const ultima = colaE.length === nE && !(paginas.length === 0 && tops[1] !== mini);
+          if (r.q.length || !ultima) break;
+          // es la última hoja: debe caber también el pie
+          r = llenar(top, es, true, cola);
+          if (r.q.length) break;
+          hoja.innerHTML = armar(top, es, r.cur, true, "Página 0 de 0");
+          if (hoja.offsetHeight <= base + 1) break;
+          if (nE > 1) { nE--; continue; }
+          r = llenar(top, es, false, cola);
+          soloPie = !r.q.length;
+          break;
+        }
+        paginas.push({ top, es, lista: r.cur });
+        if (soloPie) paginas.push({ top: mini, es: [], lista: [] });
         cola = r.q;
+        colaE = colaE.slice(nE);
       }
       const n = paginas.length;
       paginas.forEach((pg, k) => {
-        const html = armar(pg.top, pg.lista, k === n - 1, `Página ${k + 1} de ${n}`);
+        const html = armar(pg.top, pg.es, pg.lista, k === n - 1, `Página ${k + 1} de ${n}`);
         if (!k) { hoja.innerHTML = html; return; }
         const extra = hoja.cloneNode(false);
         extra.removeAttribute("id");
@@ -518,7 +551,7 @@ function itemHTML(si, ii, it, total) {
     <div class="campo"><label for="p-${id}">Precio</label><input id="p-${id}" data-s="${si}" data-i="${ii}" data-k="p" value="${esc(it.p)}" inputmode="decimal" maxlength="20"></div>
     <div class="campo desc no-sencillo"><label for="d-${id}">Descripción (opcional)</label><textarea id="d-${id}" data-s="${si}" data-i="${ii}" data-k="d" rows="1" maxlength="140">${esc(it.d)}</textarea></div>
     <div class="campo no-sencillo"><label for="e-${id}">Etiqueta</label><select id="e-${id}" data-s="${si}" data-i="${ii}" data-k="e"><option value="">Ninguna</option>${Object.entries(ETIQUETAS).map(([k, v]) => `<option value="${k}"${it.e === k ? " selected" : ""}>${v}</option>`).join("")}</select></div>
-    <label class="interruptor chico no-sencillo"><input type="checkbox" role="switch" data-s="${si}" data-i="${ii}" data-k="x"${it.x ? " checked" : ""}> Destacar arriba</label>
+    <label class="interruptor chico no-sencillo"><input type="checkbox" role="switch" data-s="${si}" data-i="${ii}" data-k="x"${it.x ? " checked" : ""}> Destacar con foto grande</label>
     <div class="acc">
       ${ii > 0 ? `<button type="button" class="mini" data-acc="item-subir" data-s="${si}" data-i="${ii}" aria-label="Mover arriba ${esc(nom)}">Mover arriba</button>` : ""}
       ${it.f && !it.r ? `<button type="button" class="mini" data-acc="foto-recortar" data-s="${si}" data-i="${ii}" aria-label="Quitar el fondo de la foto de ${esc(nom)}">Quitar fondo</button>` : ""}
