@@ -17,6 +17,22 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* Barra */
 .barra{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.6rem clamp(1rem,3vw,1.8rem);background:var(--papel);border-bottom:1px solid var(--linea);position:relative;z-index:5}
+/* Menú desplegable de Herramientas en la barra */
+.herr-menu{position:relative}
+.herr-btn{font:inherit;font-weight:600;color:var(--gris);background:none;border:0;cursor:pointer;min-height:2.75rem;display:inline-flex;align-items:center;gap:.3rem;padding:0}
+.herr-btn:hover,.herr-btn[aria-expanded=true],.herr-menu.actual .herr-btn{color:var(--tinta)}
+.herr-menu.actual .herr-btn{box-shadow:inset 0 -2px var(--coral)}
+.herr-btn svg{width:.8rem;height:.8rem;transition:rotate .15s}
+.herr-btn[aria-expanded=true] svg{rotate:180deg}
+.herr-lista{display:none;position:absolute;right:0;top:100%;z-index:30;list-style:none;margin:0;padding:.6rem 0 0;min-width:17rem}
+.herr-lista::before{content:"";position:absolute;inset:.6rem 0 0;background:#fff;border:1px solid var(--linea);border-radius:.8rem;box-shadow:0 18px 40px -16px rgb(0 0 0/.35);z-index:-1}
+.herr-menu:hover .herr-lista,.herr-btn[aria-expanded=true] + .herr-lista{display:block}
+.herr-lista li{position:relative}
+.barra .herr-lista a,.herr-lista a{display:grid;gap:.1rem;padding:.75rem 1rem;text-decoration:none;color:var(--tinta);border-radius:.6rem;margin:.25rem}
+.herr-lista a:hover,.herr-lista a:focus-visible{background:var(--papel-2,#F4F1EA)}
+.herr-lista a[aria-current]{box-shadow:inset 3px 0 var(--coral)}
+.herr-lista b{font-weight:700}
+.herr-lista span{font-size:.85rem;color:var(--gris);font-weight:400}
 .marca{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:inherit;font-weight:700}
 .marca img{width:2.25rem;height:2.25rem;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--linea)}
 .barra nav{display:flex;gap:1.2rem}

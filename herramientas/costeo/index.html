@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Costeo de platillos · AGIS Web Studio</title>
+<meta name="description" content="Calcula gratis cuánto te cuesta y cuánto ganas con cada platillo, tu porcentaje de costo de alimentos y qué platillos son estrellas, vacas, enigmas o perros en tu menú.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../../assets/agis/logo.png">
+<link rel="stylesheet" href="../../assets/fuentes/instrument-sans_instrument-serif.css">
+<link rel="stylesheet" href="../menus.css">
+<link rel="stylesheet" href="costeo.css">
+<script src="costeo.js" defer></script>
+<script src="../../assets/herr-menu.js" defer></script>
+</head>
+<body class="costeo">
+
+<header class="barra">
+  <a class="marca" href="../../"><img src="../../assets/agis/logo.png" alt="" width="36" height="36"><span>AGIS Web Studio</span></a>
+  <nav aria-label="Sitio">
+    <a href="../../#trabajos">Trabajos</a>
+    <div class="herr-menu actual">
+      <button type="button" class="herr-btn" aria-expanded="false" aria-controls="herr-lista">Herramientas <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <ul class="herr-lista" id="herr-lista">
+        <li><a href="../"><b>Menú con QR</b><span>Arma, imprime y comparte tu menú</span></a></li>
+        <li><a href="./" aria-current="page"><b>Costeo de platillos</b><span>Cuánto ganas por platillo y qué destacar</span></a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="libreta">
+  <section class="hoja-c cab-c">
+    <h1>Costeo de platillos</h1>
+    <p>Pon cuánto te cuesta hacer cada platillo, a cuánto lo vendes y cuántos vendes a la semana. Te decimos cuánto ganas, si tu costo está en la meta del 30% y cuáles platillos conviene destacar, ajustar o quitar.</p>
+    <div class="fila-botones">
+      <button type="button" class="btn btn-coral" id="traer">Traer platillos de mi menú</button>
+      <button type="button" class="btn btn-linea" id="agregar">Agregar platillo</button>
+      <button type="button" class="btn btn-linea" id="csv">Descargar para Excel</button>
+    </div>
+    <p class="nota">Se guarda solo en este equipo. Nada de esto se imprime en tu menú.</p>
+    <p id="aviso" class="aviso" role="status"></p>
+  </section>
+
+  <section class="resumen" aria-label="Resumen">
+    <div class="dato" id="r-costo"><span class="dato-n">—</span><span class="dato-t">Costo de alimentos</span><span class="dato-s">Meta: 30% o menos</span></div>
+    <div class="dato" id="r-ganancia"><span class="dato-n">—</span><span class="dato-t">Ganancia bruta por semana</span><span class="dato-s">Precio menos costo, por lo vendido</span></div>
+    <div class="dato" id="r-ventas"><span class="dato-n">—</span><span class="dato-t">Platillos vendidos por semana</span><span class="dato-s" id="r-ventas-s"></span></div>
+    <div class="dato" id="r-alto"><span class="dato-n">—</span><span class="dato-t">Platillos arriba de 35%</span><span class="dato-s">Revisa su precio o porción</span></div>
+  </section>
+
+  <section class="hoja-c">
+    <h2>Tus platillos</h2>
+    <div class="tabla-envoltura">
+      <table class="tabla-c">
+        <thead><tr><th scope="col">Platillo</th><th scope="col">Costo</th><th scope="col">Precio</th><th scope="col">Vendidos por semana</th><th scope="col">% de costo</th><th scope="col">Ganas por platillo</th><th scope="col">Grupo</th><th scope="col"><span class="sr">Quitar</span></th></tr></thead>
+        <tbody id="filas"></tbody>
+      </table>
+    </div>
+    <p class="vacio-c" id="vacio" hidden>Todavía no hay platillos. Tráelos de tu menú, agrégalos uno por uno o <button type="button" class="enlace" id="ejemplo">mira un ejemplo de taquería</button>.</p>
+  </section>
+
+  <section class="hoja-c">
+    <h2>Tu matriz de platillos</h2>
+    <p class="nota">Cada platillo se compara con el promedio de tu menú: si se vende más o menos que los demás, y si deja más o menos ganancia.</p>
+    <div class="matriz" id="matriz">
+      <div class="cuad estrella"><h3>Estrellas <small>Se venden mucho y dejan buena ganancia</small></h3><ul></ul><p class="hacer">Dales el mejor lugar: arriba a la derecha y con foto grande.</p></div>
+      <div class="cuad enigma"><h3>Enigmas <small>Dejan buena ganancia pero se venden poco</small></h3><ul></ul><p class="hacer">Promuévelos: mejor nombre y descripción, foto, y que los recomienden los meseros.</p></div>
+      <div class="cuad vaca"><h3>Vacas <small>Se venden mucho pero dejan poca ganancia</small></h3><ul></ul><p class="hacer">Cuida la porción o el costo de los ingredientes, o sube el precio poco a poco.</p></div>
+      <div class="cuad perro"><h3>Perros <small>Se venden poco y dejan poca ganancia</small></h3><ul></ul><p class="hacer">Cámbialos o quítalos del menú.</p></div>
+    </div>
+    <div class="fila-botones">
+      <button type="button" class="btn btn-tinta" id="destacar">Destacar estrellas y enigmas en mi menú</button>
+      <a class="btn btn-linea" href="../">Ir a mi menú</a>
+    </div>
+  </section>
+
+  <section class="hoja-c como">
+    <h2>Cómo se calcula</h2>
+    <dl>
+      <dt>% de costo</dt><dd>Costo entre precio. Si un platillo cuesta 70 y lo vendes en 180, su costo es 38.9%.</dd>
+      <dt>Costo de alimentos</dt><dd>El de todo tu menú según lo que vendes. Unos platillos pueden ir al 20% y otros al 35%, mientras la mezcla no pase del 30%.</dd>
+      <dt>Precio sugerido</dt><dd>Cuando un platillo pasa del 35%, te sugerimos el precio que lo deja en 30%.</dd>
+      <dt>Grupo</dt><dd>Se vende mucho si llega al 70% de lo que vende un platillo promedio. Deja buena ganancia si gana igual o más que el promedio de lo que vendes.</dd>
+    </dl>
+  </section>
+</main>
+
+</body>
+</html>

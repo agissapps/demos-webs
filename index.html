@@ -49,6 +49,20 @@ nav.menu a{text-decoration:none;font-weight:600;color:var(--gris)}
 nav.menu a:hover{color:var(--tinta)}
 .barra .btn{padding:.6rem 1.1rem;font-size:.95rem}
 @media (max-width:860px){nav.menu{display:none}}
+nav.menu{align-items:center}
+.herr-menu{position:relative}
+.herr-btn{font:inherit;font-weight:600;color:var(--gris);background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:.3rem;padding:0}
+.herr-btn:hover,.herr-btn[aria-expanded=true]{color:var(--tinta)}
+.herr-btn svg{width:.8rem;height:.8rem;transition:rotate .15s}
+.herr-btn[aria-expanded=true] svg{rotate:180deg}
+.herr-lista{display:none;position:absolute;right:0;top:100%;z-index:30;list-style:none;margin:0;padding:.7rem 0 0;min-width:17rem}
+.herr-lista::before{content:"";position:absolute;inset:.7rem 0 0;background:#fff;border:1px solid var(--linea);border-radius:.8rem;box-shadow:0 18px 40px -16px rgb(0 0 0/.35);z-index:-1}
+.herr-menu:hover .herr-lista,.herr-btn[aria-expanded=true] + .herr-lista{display:block}
+.herr-lista li{position:relative}
+nav.menu .herr-lista a{display:grid;gap:.1rem;padding:.75rem 1rem;color:var(--tinta);border-radius:.6rem;margin:.25rem}
+nav.menu .herr-lista a:hover,nav.menu .herr-lista a:focus-visible{background:#F4F1EA}
+.herr-lista b{font-weight:700}
+.herr-lista span{font-size:.85rem;color:var(--gris);font-weight:400}
 @media (max-width:420px){.marca span{display:none}}
 
 /* Portada */
@@ -184,7 +198,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       <a href="#incluye">Qué incluye</a>
       <a href="#como">Cómo trabajamos</a>
       <a href="#checador">Checador</a>
-      <a href="herramientas/">Herramientas</a>
+      <div class="herr-menu">
+        <button type="button" class="herr-btn" aria-expanded="false" aria-controls="herr-lista">Herramientas <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <ul class="herr-lista" id="herr-lista">
+          <li><a href="herramientas/"><b>Menú con QR</b><span>Arma, imprime y comparte tu menú</span></a></li>
+          <li><a href="herramientas/costeo/"><b>Costeo de platillos</b><span>Cuánto ganas por platillo y qué destacar</span></a></li>
+        </ul>
+      </div>
     </nav>
     <a class="btn btn-tinta" data-wa="Hola, me interesa una página web para mi negocio" href="https://wa.me/526693823318"><svg aria-hidden="true" style="fill:var(--wa)"><use href="#wa"/></svg>Cotizar</a>
   </div>
@@ -415,5 +435,6 @@ document.querySelectorAll(".filtros button").forEach((b) => b.addEventListener("
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
 document.querySelectorAll(".aparece").forEach((el) => io.observe(el));
 </script>
+<script src="assets/herr-menu.js" defer></script>
 </body>
 </html>

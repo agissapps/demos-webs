@@ -19,6 +19,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
 <script src="plantillas.js" defer></script>
 <script src="menus.js" defer></script>
+<script src="../assets/herr-menu.js" defer></script>
 </head>
 <body data-modo="sencillo" data-vista="editar">
 
@@ -26,7 +27,13 @@
   <a class="marca" href="../"><img src="../assets/agis/logo.png" alt="" width="36" height="36"><span>AGIS Web Studio</span></a>
   <nav aria-label="Sitio">
     <a href="../#trabajos">Trabajos</a>
-    <a href="./" aria-current="page">Herramientas</a>
+    <div class="herr-menu actual">
+      <button type="button" class="herr-btn" aria-expanded="false" aria-controls="herr-lista">Herramientas <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      <ul class="herr-lista" id="herr-lista">
+        <li><a href="./" aria-current="page"><b>Menú con QR</b><span>Arma, imprime y comparte tu menú</span></a></li>
+        <li><a href="costeo/"><b>Costeo de platillos</b><span>Cuánto ganas por platillo y qué destacar</span></a></li>
+      </ul>
+    </div>
   </nav>
 </header>
 
