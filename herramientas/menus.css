@@ -329,7 +329,7 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
 .m-dest-t{position:absolute;top:0;left:1em;translate:0 -55%;background:var(--m-fondo);color:var(--m-acento);font-family:var(--m-titulo);font-size:1.25em;padding:0 .4em;margin:0;line-height:1}
 .m-dest-items{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:1.1em}
 .m-dest{display:grid;gap:.5em;align-content:start}
-.m-dest-foto{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:.3em}
+.m-dest-foto{width:100%;aspect-ratio:16/10;max-height:12em;object-fit:cover;border-radius:.3em}
 .m-dest-n{font-family:var(--m-titulo);font-size:1.45em;font-weight:700;line-height:1.05;margin:0}
 .m-dest .m-p{font-size:1.35em;justify-content:flex-start;margin:.1em 0 0}
 .m-paquetes{background:color-mix(in srgb,var(--m-acento) 10%,var(--m-fondo));padding:1em 1.1em;border-radius:.4em;outline:2px dashed color-mix(in srgb,var(--m-acento) 60%,transparent);outline-offset:-.45em}
@@ -353,7 +353,7 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
 .m-estrella-n{font-family:var(--m-titulo);font-size:2.6em;line-height:.95;margin:0 0 .25em;font-weight:700;color:var(--m-tinta)}
 .m-estrella-foto{position:relative;align-self:stretch;display:grid;place-items:center}
 .m-estrella-foto::before{content:"";position:absolute;inset:6% -4% 4% 10%;background:var(--m-acento);opacity:.9;border-radius:62% 38% 46% 54% / 55% 44% 56% 45%}
-.m-estrella-foto img{position:relative;width:118%;max-width:none;margin-right:-10%;filter:drop-shadow(0 1.2em 1em rgb(0 0 0/.35))}
+.m-estrella-foto img{position:relative;width:118%;max-width:none;height:auto;max-height:19em;object-fit:contain;margin-right:-10%;filter:drop-shadow(0 1.2em 1em rgb(0 0 0/.35))}
 .m-sello{position:absolute;left:-.6em;bottom:.2em;width:6.6em;height:6.6em;display:grid;place-content:center;text-align:center;background:var(--m-precio);color:var(--m-fondo);font-weight:900;font-size:.95em;line-height:1.05;rotate:-10deg;
   clip-path:polygon(50% 0,61% 9%,75% 5%,79% 19%,93% 22%,90% 36%,100% 47%,91% 58%,96% 72%,82% 76%,78% 90%,64% 87%,53% 100%,42% 90%,28% 95%,23% 81%,9% 78%,12% 64%,0 52%,9% 41%,4% 27%,18% 23%,22% 9%,36% 12%)}
 .m-sello .m-var{display:block;font-size:1.5em}
@@ -396,5 +396,6 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
 /* Fotos recortadas (sin fondo) en el menú */
 .m-foto.recorte{object-fit:contain;background:none !important;border-radius:0 !important;box-shadow:none !important;filter:drop-shadow(0 .5em .5em rgb(0 0 0/.3))}
 .hoja[data-fotos=lado] .m-foto.recorte{aspect-ratio:1}
+.m-dest-foto.recorte{object-fit:contain;border-radius:0;filter:drop-shadow(0 .5em .5em rgb(0 0 0/.3))}
 .m-estrella-foto.foto-entera::before{display:none}
 .m-estrella-foto.foto-entera img{width:100%;margin:0;border-radius:.6em;aspect-ratio:4/3;object-fit:cover}
