@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creador de menús con QR · AGIS Web Studio</title>
+<meta name="description" content="Arma gratis el menú de tu negocio: taquería, sushi, mariscos, comida italiana, botanas, fonda o dulces para fiestas. Pon fotos, precios y un código QR con tus colores, y descárgalo para imprimir o compartir.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="../assets/agis/logo.png">
+<link rel="stylesheet" href="../assets/fuentes/instrument-sans_instrument-serif.css">
+<link rel="stylesheet" href="../assets/fuentes/fraunces_figtree.css">
+<link rel="stylesheet" href="../assets/fuentes/big-shoulders-display_barlow.css">
+<link rel="stylesheet" href="../assets/fuentes/barlow-condensed_barlow.css">
+<link rel="stylesheet" href="../assets/fuentes/cormorant-garamond_jost.css">
+<link rel="stylesheet" href="../assets/fuentes/bodoni-moda_hanken-grotesk.css">
+<link rel="stylesheet" href="../assets/fuentes/gloock_albert-sans.css">
+<link rel="stylesheet" href="../assets/fuentes/bricolage-grotesque_nunito.css">
+<link rel="stylesheet" href="menus.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" defer></script>
+<script src="plantillas.js" defer></script>
+<script src="menus.js" defer></script>
+</head>
+<body data-modo="sencillo" data-vista="editar">
+
+<header class="barra">
+  <a class="marca" href="../"><img src="../assets/agis/logo.png" alt="" width="36" height="36"><span>AGIS Web Studio</span></a>
+  <nav aria-label="Sitio">
+    <a href="../#trabajos">Trabajos</a>
+    <a href="./" aria-current="page">Herramientas</a>
+  </nav>
+</header>
+
+<main class="estudio">
+  <!-- Columna de edición -->
+  <section class="comanda" aria-labelledby="titulo-editor">
+    <div class="comanda-cab">
+      <h1 id="titulo-editor">Arma tu menú</h1>
+      <p>Elige el tipo de negocio, pon tus productos y precios, y descárgalo listo para imprimir o mandar por WhatsApp. Se guarda solo en este equipo.</p>
+      <fieldset class="modos">
+        <legend>¿Cómo quieres armarlo?</legend>
+        <label><input type="radio" name="modo" value="sencillo" checked><span><b>Sencillo</b>Foto, nombre y precio</span></label>
+        <label><input type="radio" name="modo" value="basico"><span><b>Básico</b>Secciones y QR</span></label>
+        <label><input type="radio" name="modo" value="avanzado"><span><b>Avanzado</b>Colores, QR a tu gusto</span></label>
+      </fieldset>
+    </div>
+
+    <form id="editor" class="paneles" autocomplete="off">
+      <details name="panel" open>
+        <summary><span class="paso">1</span>Tipo de negocio</summary>
+        <div class="cuerpo">
+          <fieldset class="sin-marco"><legend class="sr">Tipo de negocio</legend><div class="tipos" id="tipos"></div></fieldset>
+          <p class="nota">Mientras no cambies nada, cada tipo trae productos de ejemplo. Si ya escribiste los tuyos, cambiar de tipo solo cambia el estilo y los colores.</p>
+        </div>
+      </details>
+
+      <details name="panel">
+        <summary><span class="paso">2</span>Tu negocio</summary>
+        <div class="cuerpo campos">
+          <div class="campo"><label for="f-nombre">Nombre del negocio</label><input id="f-nombre" name="nombre" data-ruta="nombre" maxlength="60"></div>
+          <div class="campo"><label for="f-lema">Frase corta</label><input id="f-lema" name="lema" data-ruta="lema" maxlength="90"></div>
+          <div class="campo"><label for="f-tel">Teléfono o WhatsApp</label><input id="f-tel" name="telefono" data-ruta="pie.telefono" inputmode="tel" autocomplete="tel" maxlength="30"></div>
+          <div class="campo" data-nivel="basico"><label for="f-dir">Dirección</label><input id="f-dir" name="direccion" data-ruta="pie.direccion" maxlength="80"></div>
+          <div class="campo" data-nivel="basico"><label for="f-hor">Horario</label><input id="f-hor" name="horario" data-ruta="pie.horario" maxlength="80"></div>
+          <div class="campo">
+            <span class="etq" id="portada-etq">Foto grande de portada (opcional)</span>
+            <div class="logo-fila">
+              <label class="boton-archivo"><input type="file" accept="image/*" id="f-portada" aria-labelledby="portada-etq">Elegir foto</label>
+              <button type="button" class="enlace" id="quitar-portada" hidden>Quitar portada</button>
+            </div>
+          </div>
+          <div class="campo" data-nivel="basico"><label for="f-promo">Promoción (opcional)</label><input id="f-promo" data-ruta="promo" maxlength="80" placeholder="Ej. Martes de 2x1 en tacos al pastor"></div>
+          <div class="campo" data-nivel="basico"><label for="f-redes">Redes sociales</label><input id="f-redes" data-ruta="redes" maxlength="60" placeholder="Ej. @tunegocio en Facebook e Instagram"></div>
+          <div class="campo" data-nivel="basico"><label for="f-nota">Nota al pie</label><input id="f-nota" data-ruta="nota" maxlength="140" placeholder="Ej. Precios en pesos mexicanos, incluyen IVA"></div>
+          <div class="campo">
+            <span class="etq" id="logo-etq">Logo (opcional)</span>
+            <div class="logo-fila">
+              <label class="boton-archivo"><input type="file" accept="image/*" id="f-logo" aria-labelledby="logo-etq">Subir logo</label>
+              <button type="button" class="enlace" id="quitar-logo" hidden>Quitar logo</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details name="panel">
+        <summary><span class="paso">3</span><span class="solo-sencillo">Productos, fotos y precios</span><span class="no-sencillo">Secciones y platillos</span></summary>
+        <div class="cuerpo">
+          <p class="nota no-sencillo">En el precio puedes poner tamaños: <i>Chico 120 / Grande 160</i>.</p>
+          <p class="nota solo-sencillo">Toca el cuadro de cada producto para ponerle una foto desde tu celular o computadora.</p>
+          <div id="ed-secciones"></div>
+          <button type="button" class="btn btn-linea no-sencillo" id="add-sec">Agregar sección</button>
+        </div>
+      </details>
+
+      <details name="panel">
+        <summary><span class="paso">4</span>Código QR</summary>
+        <div class="cuerpo campos">
+          <label class="interruptor"><input type="checkbox" switch role="switch" data-ruta="qr.activo" id="qr-activo"> Poner código QR en el menú</label>
+          <p class="nota solo-sencillo">El QR abre un chat de WhatsApp con el teléfono que pusiste en el paso 2.</p>
+          <div class="campo no-sencillo"><label for="qr-tipo">¿A dónde lleva el QR?</label>
+            <select id="qr-tipo" data-ruta="qr.tipo">
+              <option value="wa">A mi WhatsApp</option>
+              <option value="url">A una página o red social</option>
+              <option value="wifi" data-nivel-op="avanzado">A la red Wi-Fi del local</option>
+              <option value="texto" data-nivel-op="avanzado">A un texto</option>
+            </select>
+          </div>
+          <div class="campo no-sencillo" data-qr="wa"><label for="qr-watel">Número de WhatsApp (10 dígitos)</label><input id="qr-watel" data-ruta="qr.waTel" inputmode="tel" autocomplete="tel" maxlength="20"></div>
+          <div class="campo no-sencillo" data-qr="wa"><label for="qr-wamsg">Mensaje que te llega</label><input id="qr-wamsg" data-ruta="qr.waMsg" maxlength="120"></div>
+          <div class="campo no-sencillo" data-qr="url"><label for="qr-url">Enlace</label><input id="qr-url" type="text" data-ruta="qr.url" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="https://"></div>
+          <div class="campo no-sencillo" data-qr="wifi"><label for="qr-red">Nombre de la red</label><input id="qr-red" data-ruta="qr.wifiRed" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
+          <div class="campo no-sencillo" data-qr="wifi"><label for="qr-pass">Contraseña del Wi-Fi</label><input id="qr-pass" data-ruta="qr.wifiPass" autocapitalize="none" autocorrect="off" spellcheck="false"></div>
+          <div class="campo no-sencillo" data-qr="texto"><label for="qr-texto">Texto</label><textarea id="qr-texto" data-ruta="qr.texto" rows="2" maxlength="300"></textarea></div>
+          <div class="campo"><label for="qr-ley">Texto debajo del QR</label><input id="qr-ley" data-ruta="qr.leyenda" maxlength="40"></div>
+
+          <div class="grupo-avanzado" data-nivel="avanzado">
+            <p class="sub-t">Diseño del QR</p>
+            <div class="colores">
+              <label><input type="color" data-ruta="qr.color"> Cuadritos</label>
+              <label><input type="color" data-ruta="qr.ojos"> Esquinas</label>
+              <label><input type="color" data-ruta="qr.fondo"> Fondo</label>
+            </div>
+            <fieldset class="opciones-qr"><legend>Forma de los cuadritos</legend>
+              <label><input type="radio" name="qr-estilo" data-ruta="qr.estilo" value="cuadro"><span class="m-cuadro"></span>Cuadros</label>
+              <label><input type="radio" name="qr-estilo" data-ruta="qr.estilo" value="suave"><span class="m-suave"></span>Suaves</label>
+              <label><input type="radio" name="qr-estilo" data-ruta="qr.estilo" value="punto"><span class="m-punto"></span>Puntos</label>
+              <label><input type="radio" name="qr-estilo" data-ruta="qr.estilo" value="liquido"><span class="m-liquido"></span>Unidos</label>
+            </fieldset>
+            <fieldset class="opciones-qr"><legend>Forma de las esquinas</legend>
+              <label><input type="radio" name="qr-ojos" data-ruta="qr.forma" value="cuadro"><span class="o-cuadro"></span>Cuadradas</label>
+              <label><input type="radio" name="qr-ojos" data-ruta="qr.forma" value="redondo"><span class="o-redondo"></span>Redondeadas</label>
+              <label><input type="radio" name="qr-ojos" data-ruta="qr.forma" value="circulo"><span class="o-circulo"></span>Círculos</label>
+              <label><input type="radio" name="qr-ojos" data-ruta="qr.forma" value="hoja"><span class="o-hoja"></span>Hoja</label>
+            </fieldset>
+            <div class="campo"><label for="qr-centro">Al centro del QR</label>
+              <select id="qr-centro" data-ruta="qr.centro">
+                <option value="nada">Nada</option>
+                <option value="inicial">La inicial del negocio</option>
+                <option value="logo">Mi logo</option>
+              </select>
+            </div>
+          </div>
+          <div class="qr-solo no-sencillo">
+            <div id="qr-vista" class="qr-vista"></div>
+            <p id="qr-aviso" class="aviso" role="status"></p>
+            <div class="fila-botones">
+              <button type="button" class="btn btn-linea" id="qr-png">Descargar QR (PNG)</button>
+              <button type="button" class="btn btn-linea" id="qr-svg" data-nivel="avanzado">Descargar QR (SVG)</button>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details name="panel" data-nivel="avanzado">
+        <summary><span class="paso">5</span>Colores, letra y tamaño</summary>
+        <div class="cuerpo campos">
+          <div class="colores">
+            <label><input type="color" data-ruta="colores.fondo"> Fondo</label>
+            <label><input type="color" data-ruta="colores.tinta"> Letra</label>
+            <label><input type="color" data-ruta="colores.acento"> Títulos</label>
+            <label><input type="color" data-ruta="colores.precio"> Precios</label>
+          </div>
+          <button type="button" class="enlace" id="restaurar-colores">Volver a los colores del tipo de negocio</button>
+          <div class="campo"><label for="f-formato">Tamaño de la hoja</label>
+            <select id="f-formato" data-ruta="formato">
+              <option value="carta">Hoja carta vertical</option>
+              <option value="horizontal">Hoja carta horizontal</option>
+              <option value="cuadrado">Cuadrado para redes y WhatsApp</option>
+              <option value="historia">Historia de Instagram</option>
+            </select>
+          </div>
+          <div class="campo"><label for="f-cols">Columnas</label>
+            <select id="f-cols" data-ruta="columnas"><option value="1">Una</option><option value="2">Dos</option><option value="3">Tres</option></select>
+          </div>
+          <div class="campo"><label for="f-diseno">Cómo se acomodan los productos</label>
+            <select id="f-diseno" data-ruta="diseno"><option value="lista">Lista con precios</option><option value="lado">Lista con foto chica al lado</option><option value="cuadricula">Tarjetas con foto grande</option></select>
+          </div>
+          <label class="interruptor"><input type="checkbox" switch role="switch" data-ruta="sinSigno"> Precios sin el signo $</label>
+          <div class="campo"><label for="f-textura">Textura del fondo</label>
+            <select id="f-textura" data-ruta="textura"><option value="">Lisa</option><option value="papel">Papel de acuarela</option><option value="pizarra">Pizarrón</option><option value="madera">Madera</option></select>
+          </div>
+          <label class="interruptor"><input type="checkbox" switch role="switch" data-ruta="franja"> Foto de portada en franja lateral</label>
+          <div class="campo"><label for="f-escala">Tamaño de letra <output id="o-escala" for="f-escala"></output></label>
+            <input id="f-escala" type="range" min="0.75" max="1.35" step="0.05" data-ruta="escala">
+          </div>
+        </div>
+      </details>
+    </form>
+
+    <div class="salida">
+      <p class="sub-t">Listo. ¿Qué quieres hacer?</p>
+      <div class="fila-botones">
+        <button type="button" class="btn btn-coral" id="bajar-png">Descargar imagen</button>
+        <button type="button" class="btn btn-tinta" id="imprimir">Imprimir o guardar PDF</button>
+      </div>
+      <p id="estado" class="aviso" role="status"></p>
+      <button type="button" class="enlace" id="reiniciar">Borrar todo y empezar con el ejemplo</button>
+      <a class="promo" id="promo" href="https://wa.me/526693823318" target="_blank" rel="noopener">¿Quieres este menú como página web, con pedidos por WhatsApp? <b>Cotízala con AGIS</b></a>
+    </div>
+  </section>
+
+  <!-- Vista previa -->
+  <section class="tapete" aria-label="Vista previa del menú">
+    <div class="lienzo" id="lienzo"><article class="hoja" id="hoja"></article></div>
+  </section>
+</main>
+
+<dialog id="recortador" class="recortador" aria-labelledby="rec-titulo" closedby="any">
+  <h2 id="rec-titulo">Quitar el fondo de la foto</h2>
+  <div class="rec-lienzo"><img id="rec-foto" alt="Foto del producto. Toca el platillo para recortarlo."><img id="rec-resultado" alt="Producto ya recortado" hidden></div>
+  <p id="rec-aviso" class="aviso" role="status"></p>
+  <div class="fila-botones">
+    <button type="button" class="btn btn-coral" id="rec-usar" disabled>Usar recorte</button>
+    <button type="button" class="btn btn-linea" id="rec-otra">Probar otra vez</button>
+    <button type="button" class="btn btn-linea" id="rec-circulo">Recortar en círculo</button>
+    <button type="button" class="enlace" id="rec-completa">Dejar la foto completa</button>
+  </div>
+</dialog>
+
+<div class="cambiar-vista" role="group" aria-label="Cambiar vista">
+  <button type="button" data-vista="editar" aria-pressed="true">Editar</button>
+  <button type="button" data-vista="ver" aria-pressed="false">Ver menú</button>
+</div>
+</body>
+</html>

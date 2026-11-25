@@ -140,6 +140,17 @@ section{padding-block:5.5rem}
 .checador .btn-borde:hover{background:var(--blanco);color:var(--tinta)}
 @media (max-width:860px){.checador .wrap{grid-template-columns:1fr}.foto-checador{order:-1}}
 
+/* Herramientas */
+.herramienta{background:#2E5A4C;color:var(--blanco);background-image:linear-gradient(rgb(255 255 255/.12) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255/.12) 1px,transparent 1px);background-size:96px 96px}
+.herramienta .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center}
+.herramienta .titulo-sec p{color:rgb(244 241 234/.8)}
+.herramienta .chip{background:var(--blanco);color:var(--tinta)}
+.modos-h{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.modos-h li{background:var(--blanco);color:var(--tinta);border-radius:1rem;padding:1.1rem 1.3rem;display:grid;gap:.2rem}
+.modos-h b{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1}
+.modos-h span{color:var(--gris)}
+@media (max-width:860px){.herramienta .wrap{grid-template-columns:1fr}}
+
 /* Contacto */
 .contacto{background:radial-gradient(120% 80% at 30% 20%,var(--coral2) 0%,var(--coral) 55%,#E84A2A 100%);text-align:center}
 .contacto h2{font-size:clamp(2.6rem,1.2rem + 4.4vw,5rem);max-width:16ch;margin-inline:auto}
@@ -173,6 +184,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
       <a href="#incluye">Qué incluye</a>
       <a href="#como">Cómo trabajamos</a>
       <a href="#checador">Checador</a>
+      <a href="herramientas/">Herramientas</a>
     </nav>
     <a class="btn btn-tinta" data-wa="Hola, me interesa una página web para mi negocio" href="https://wa.me/526693823318"><svg aria-hidden="true" style="fill:var(--wa)"><use href="#wa"/></svg>Cotizar</a>
   </div>
@@ -260,6 +272,27 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
         <li class="aparece"><h3>Revisas y ajustamos</h3><p>Te la mostramos y hacemos los cambios que necesites.</p></li>
         <li class="aparece"><h3>Publicamos</h3><p>La subimos con tu dominio y queda lista para compartir. Pagas la mitad al empezar y la otra mitad al entregar.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <!-- Herramientas -->
+  <section class="herramienta" id="herramientas">
+    <div class="wrap">
+      <div>
+        <div class="titulo-sec" style="margin-bottom:1.6rem">
+          <span class="chip" style="justify-self:start">Herramienta gratis</span>
+          <h2>Arma el menú de tu negocio con código QR</h2>
+          <p>Taquería, sushi, mariscos, comida italiana, botanas, fonda o dulces para fiestas. Pon tus fotos y precios, elige tus colores y descárgalo para imprimir o mandar por WhatsApp.</p>
+        </div>
+        <div class="acciones">
+          <a class="btn btn-coral" href="herramientas/">Armar mi menú</a>
+        </div>
+      </div>
+      <ul class="modos-h">
+        <li><b>Sencillo</b><span>Elige una plantilla, pon foto, nombre y precio. Listo.</span></li>
+        <li><b>Básico</b><span>Secciones, descripciones, horario y un QR a tu WhatsApp.</span></li>
+        <li><b>Avanzado</b><span>Tus colores, tamaño para redes y un QR con tu logo y tu estilo.</span></li>
+      </ul>
     </div>
   </section>
 
