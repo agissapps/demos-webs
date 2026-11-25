@@ -482,3 +482,31 @@ img.ajustable.sel{touch-action:none}
 @media (pointer:coarse){.marco-foto .asa{width:22px;height:22px}.marco-foto .asa-giro{width:26px;height:26px;top:-44px}}
 .m-estrella-foto.foto-entera::before{display:none}
 .m-estrella-foto.foto-entera img{width:100%;margin:0;border-radius:.6em;aspect-ratio:4/3;object-fit:cover}
+
+/* ---------- Avisos de herramientas: WhatsApp, checador y oferta web ---------- */
+.wa-flota{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:.5rem;background:#25D366;color:#0B3B1E;font-weight:800;text-decoration:none;border-radius:99px;padding:.7rem 1.1rem .7rem .8rem;box-shadow:0 12px 28px -10px rgb(0 0 0/.5)}
+.wa-flota svg{width:1.7rem;height:1.7rem}
+.wa-flota:hover{background:#2EE677}
+.wa-flota:focus-visible{outline:3px solid var(--tinta);outline-offset:3px}
+@media (max-width:860px){.wa-flota{padding:.8rem}.wa-flota span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}}
+.aviso-flota{position:fixed;left:1rem;bottom:calc(1rem + env(safe-area-inset-bottom));z-index:61;width:min(24rem,calc(100vw - 2rem));display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center;background:var(--tinta);color:#fff;border-radius:1rem;padding:1rem 2.6rem 1.1rem 1rem;box-shadow:0 24px 50px -18px rgb(0 0 0/.6);overflow:hidden;opacity:0;translate:0 1rem;transition:opacity .3s,translate .3s}
+.aviso-flota.visible{opacity:1;translate:0 0}
+.aviso-flota.saliendo{opacity:0;translate:0 1rem}
+.aviso-flota img{width:4.6rem;height:4.6rem;object-fit:contain;background:radial-gradient(circle,var(--coral) 0 55%,transparent 56%)}
+.aviso-flota b{font-size:1.05rem}
+.aviso-flota p{margin:.2rem 0 .5rem;font-size:.88rem;color:rgb(255 255 255/.78)}
+.aviso-flota a{color:var(--coral);font-weight:800}
+.aviso-cerrar{position:absolute;top:.4rem;right:.4rem;width:2.4rem;height:2.4rem;border:0;border-radius:50%;background:none;color:inherit;font-size:1.4rem;cursor:pointer}
+.aviso-cerrar:hover{background:rgb(127 127 127/.2)}
+.aviso-tiempo{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--coral);transform-origin:left;animation:aviso-tiempo 4s linear forwards}
+.aviso-flota.pausa .aviso-tiempo{animation-play-state:paused}
+@keyframes aviso-tiempo{to{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.aviso-flota{transition:none}}
+.oferta-web{border:0;border-radius:1.2rem;padding:1.8rem 1.6rem 1.5rem;max-width:30rem;width:calc(100vw - 2rem);background:var(--papel);color:var(--tinta);box-shadow:0 30px 70px -20px rgb(0 0 0/.6)}
+.oferta-web::backdrop{background:rgb(21 22 27/.55)}
+.oferta-web h2{font-family:var(--serif);font-weight:400;font-size:2.1rem;line-height:1;margin:.5rem 0 .7rem}
+.oferta-web p{margin:0 0 .8rem;color:var(--gris)}
+.oferta-web .oferta-chip{display:inline-block;margin:0;background:#CDEFE4;color:#145C49;font-weight:800;font-size:.8rem;padding:.25rem .7rem;border-radius:99px}
+.oferta-web ul{margin:0 0 1.2rem;padding-left:1.2rem;display:grid;gap:.3rem;font-weight:600}
+.oferta-botones{display:flex;flex-wrap:wrap;gap:.5rem}
+.oferta-botones svg{width:1.2rem;height:1.2rem;margin-right:.4rem;vertical-align:-.2rem}

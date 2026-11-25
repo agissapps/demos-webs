@@ -166,6 +166,7 @@ $("#csv").addEventListener("click", () => {
   a.href = url; a.download = "costeo-de-platillos.csv"; document.body.append(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 4000);
   aviso("Archivo descargado. Ábrelo con Excel o Google Sheets.");
+  setTimeout(() => window.agisOfertaWeb?.(), 600);
 });
 
 renderTabla();
