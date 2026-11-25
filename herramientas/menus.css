@@ -348,6 +348,20 @@ body:not([data-modo=sencillo]) .solo-sencillo{display:none !important}
 .hoja[data-tema=dulces] .m-sec:nth-child(4n+1){rotate:-.6deg}.hoja[data-tema=dulces] .m-sec:nth-child(4n+2){rotate:.5deg;background:color-mix(in srgb,#FFC93C 14%,var(--m-fondo))}.hoja[data-tema=dulces] .m-sec:nth-child(4n+3){rotate:.4deg;background:color-mix(in srgb,var(--m-precio) 10%,var(--m-fondo))}.hoja[data-tema=dulces] .m-sec:nth-child(4n){rotate:-.4deg}
 .comanda::after{content:"";position:absolute;top:0;bottom:0;right:-12px;width:12px;background:var(--papel);-webkit-mask:conic-gradient(from -135deg at left,#000 90deg,transparent 0) 0 50%/12px 16px repeat-y;mask:conic-gradient(from -135deg at left,#000 90deg,transparent 0) 0 50%/12px 16px repeat-y}
 @media (max-width:900px){.comanda::after{display:none}}
+/* En compu: las opciones y el menú se desplazan cada uno por su lado */
+@media screen and (min-width:901px){
+  body{height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+  .estudio{flex:1;min-height:0}
+  .comanda,.tapete{overflow-y:auto;overscroll-behavior:contain;min-height:0}
+  .comanda{scrollbar-width:thin;scrollbar-color:var(--linea) transparent}
+  .salida{padding-bottom:1.5rem}
+  /* la orilla dentada de la comanda pasa al fondo del tapete para que no la recorte el scroll */
+  .comanda::after{display:none}
+  .tapete{background-image:conic-gradient(from -135deg at left,var(--papel) 90deg,transparent 0),linear-gradient(var(--raya-fuerte) 1px,transparent 1px),linear-gradient(90deg,var(--raya-fuerte) 1px,transparent 1px),linear-gradient(var(--raya) 1px,transparent 1px),linear-gradient(90deg,var(--raya) 1px,transparent 1px);
+    background-size:12px 16px,120px 120px,120px 120px,24px 24px,24px 24px;background-position:0 0,-1px -1px,-1px -1px,-1px -1px,-1px -1px;
+    background-repeat:repeat-y,repeat,repeat,repeat,repeat;background-attachment:local}
+  .lienzo{position:static}
+}
 /* ===== Textura del fondo (imágenes en gris que toman el color del menú) ===== */
 .m-textura{position:absolute !important;inset:0;pointer-events:none;mix-blend-mode:soft-light;opacity:.85;background-size:720px}
 .hoja[data-textura=papel] .m-textura{background-image:url(img/textura-papel.jpg)}

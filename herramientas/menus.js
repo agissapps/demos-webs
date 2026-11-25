@@ -560,7 +560,9 @@ function itemHTML(si, ii, it, total) {
     </div>
   </div>`;
 }
+const ES_BEBIDAS = /bebida|bevande|para tomar|drinks/i;
 function renderEditor() {
+  $("#add-bebidas").hidden = estado.secciones.some((s) => ES_BEBIDAS.test(s.titulo));
   const pal = modo === "sencillo" ? "producto" : "platillo";
   edSec.innerHTML = estado.secciones.map((s, si) => `
     <fieldset class="sec">
@@ -666,6 +668,16 @@ form.addEventListener("click", (ev) => {
   if (foco) ($(foco) || $(`[data-acc="item-add"][data-s="${si}"]`))?.focus();
 });
 
+// Sección de bebidas lista: la del tipo de negocio, o una general
+$("#add-bebidas").addEventListener("click", () => {
+  const p = PLANTILLAS[estado.tema].secciones.find((s) => ES_BEBIDAS.test(s.titulo));
+  const base = p ? p.items : [["Agua fresca", "Jamaica, horchata o limón", "Medio 30 / Litro 50"], ["Refresco", "", "30"], ["Café de olla", "", "30"]];
+  estado.secciones.push({ titulo: p ? p.titulo : "Bebidas", items: base.map(([n, d, pr, o = {}]) => ({ n, d, p: pr, f: null, r: false, e: o.e || "", x: false })) });
+  estado.editado = true;
+  renderEditor(); guardar(); renderHoja();
+  const i = estado.secciones.length - 1; $(`#s-${i}`)?.focus();
+  mostrar("Agregamos la sección de bebidas al final. Cambia los nombres y precios a tu gusto.");
+});
 $("#add-sec").addEventListener("click", () => {
   estado.secciones.push({ titulo: "Nueva sección", items: [{ n: "", d: "", p: "", f: null, e: "", x: false }] });
   estado.editado = true;
