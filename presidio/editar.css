@@ -1,0 +1,52 @@
+/* Modo edición de textos (solo con ?editar) */
+.editando [contenteditable] {
+  cursor: text; border-radius: 4px;
+  outline: 1.5px dashed transparent; outline-offset: 4px;
+  transition: outline-color .2s ease, background-color .2s ease;
+}
+.editando [contenteditable]:hover { outline-color: color-mix(in srgb, var(--rosa) 90%, transparent); }
+.editando [contenteditable]:focus { outline: 2px solid var(--rosa); }
+.editando .editado { background-color: color-mix(in srgb, var(--rosa) 30%, transparent); }
+
+/* Mientras se edita: el botón de WhatsApp no estorba y el panel abierto deja tocar su texto */
+.editando .whats { display: none; }
+.editando .acordeon li.abierto button { pointer-events: none; }
+
+.editor {
+  position: fixed; z-index: 60; left: 1.2rem; bottom: 1.2rem;
+  width: min(23rem, calc(100% - 2.4rem));
+  display: grid; gap: .5rem;
+  padding: 1.1rem 1.2rem 1.2rem; border-radius: 1.1rem;
+  background: var(--cafe); color: var(--marfil);
+  border: 1px solid color-mix(in srgb, var(--marfil) 14%, transparent);
+  box-shadow: 0 24px 50px -18px rgb(0 0 0 / .55);
+  font: 400 .92rem/1.45 var(--texto), system-ui, sans-serif;
+}
+.editor p { margin: 0; }
+.editor-titulo { font-family: var(--display); font-size: 1.3rem; line-height: 1.1; }
+.editor-ayuda { color: color-mix(in srgb, var(--marfil) 80%, transparent); }
+.editor-cuenta { color: var(--rosa); font-weight: 600; }
+.editor-acciones { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .25rem; }
+.editor button {
+  font: inherit; font-weight: 600; cursor: pointer;
+  padding: .62rem 1.05rem; border-radius: 999px; border: 1px solid transparent;
+}
+.editor-pdf { background: var(--rosa); color: var(--cafe); }
+.editor-pdf:hover { background: color-mix(in srgb, var(--rosa) 85%, var(--marfil)); }
+.editor-descartar {
+  background: transparent; color: var(--marfil);
+  border-color: color-mix(in srgb, var(--marfil) 35%, transparent);
+}
+.editor-descartar:hover { border-color: var(--marfil); }
+.editor button:focus-visible { outline: 2px solid var(--marfil); outline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .editor {
+    left: 0; right: 0; bottom: 0; width: auto;
+    border-radius: 1rem 1rem 0 0; gap: .35rem;
+    padding: .85rem 1rem calc(.9rem + env(safe-area-inset-bottom));
+  }
+  .editor-ayuda { display: none; }
+  .editor-titulo { font-size: 1.1rem; }
+  .editando body { padding-bottom: 8.5rem; }
+}

@@ -126,7 +126,10 @@ revisarBarra();
   const conPuntero = matchMedia('(hover: hover) and (pointer: fine)').matches;
   items.forEach((li) => {
     li.querySelector('button').addEventListener('click', () => abrir(li));
-    if (conPuntero) li.addEventListener('mouseenter', () => abrir(li));
+    // En modo edición solo se abren con clic, para no cerrar el texto que se está escribiendo
+    if (conPuntero) li.addEventListener('mouseenter', () => {
+      if (!document.documentElement.classList.contains('editando')) abrir(li);
+    });
   });
 }
 
@@ -186,4 +189,11 @@ revisarBarra();
 
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lineas.join('\n'))}`, '_blank', 'noopener');
   });
+}
+
+// ---------- Modo edición de textos: solo con ?editar en la dirección ----------
+if (new URLSearchParams(location.search).has('editar')) {
+  const editor = document.createElement('script');
+  editor.src = 'editar.js';
+  document.body.append(editor);
 }
