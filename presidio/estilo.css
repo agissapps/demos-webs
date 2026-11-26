@@ -187,8 +187,8 @@ button { font: inherit; color: inherit; }
 .casa-fondo::after {
   content: ""; position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, var(--marfil) 0%, transparent 20%, transparent 80%, var(--marfil) 100%),
-    linear-gradient(to right, color-mix(in srgb, var(--marfil) 50%, transparent), color-mix(in srgb, var(--marfil) 66%, transparent));
+    linear-gradient(to bottom, var(--marfil) 0%, transparent 18%, transparent 82%, var(--marfil) 100%),
+    linear-gradient(to right, color-mix(in srgb, var(--marfil) 58%, transparent), color-mix(in srgb, var(--marfil) 72%, transparent));
 }
 @media (prefers-reduced-motion: reduce) { .casa-fondo img { transition: opacity .01s; scale: 1; } }
 .casa-cabeza {
@@ -228,29 +228,14 @@ button { font: inherit; color: inherit; }
 }
 .panel[hidden] { display: none; }
 
-/* Marcos: la foto va dentro del arco dorado y el arreglo queda encima.
-   Los porcentajes ubican la abertura de cada marco (imagen de 1200 × 1604). */
-.enmarcado { position: relative; aspect-ratio: 1200 / 1604; }
-.enmarcado > :first-child {
-  position: absolute; margin: 0;
-  left: var(--x); top: var(--y); width: var(--w); height: var(--h);
-  border-radius: var(--arco); overflow: hidden;
-  object-fit: cover;
+.escena {
+  margin: 0; position: relative; justify-self: center;
+  width: min(100%, calc(min(74svh, 46rem) * .8)); aspect-ratio: 4 / 5;
+  border-radius: 14rem 14rem 1.2rem 1.2rem; overflow: hidden;
+  background: var(--arena);
 }
-.enmarcado > .marco {
-  position: absolute; inset: 0; z-index: 1;
-  width: 100%; height: 100%; pointer-events: none;
-  filter: drop-shadow(0 18px 24px rgb(52 43 37 / .22));
-}
-.enmarcado-botanico { --x: 21.15%; --y: 9.15%; --w: 60.7%; --h: 79.55%; }
-.enmarcado-boda { --x: 18.75%; --y: 13.5%; --w: 62.2%; --h: 73.8%; }
-.enmarcado-cocina { --x: 8.2%; --y: 3.4%; --w: 82.85%; --h: 89.5%; }
-
-.panel .enmarcado { justify-self: center; width: min(100%, calc(min(80svh, 50rem) * .748)); }
-.escena { background: var(--arena); }
 .escena-foto, .escena-video { width: 100%; height: 100%; object-fit: cover; }
 .panel:not([hidden]) .escena { view-transition-name: escena; }
-.panel:not([hidden]) .enmarcado > .marco { view-transition-name: marco-casa; }
 .panel:not([hidden]) .panel-texto { view-transition-name: escena-texto; }
 
 .panel-texto {
@@ -306,7 +291,7 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 860px) {
   .panel { grid-template-columns: 1fr; gap: 1.8rem; }
-  .panel .enmarcado { width: min(100%, 24rem); }
+  .escena { width: min(100%, 26rem); }
 }
 
 /* ---------- Celebraciones ---------- */
@@ -402,21 +387,14 @@ button { font: inherit; color: inherit; }
 
 /* ---------- Servicio ---------- */
 .servicio {
-  position: relative; isolation: isolate; overflow: clip;
-  padding: clamp(4.5rem, 11vh, 7.5rem) var(--margen) max(11rem, 25vw);
+  padding: clamp(4.5rem, 11vh, 7.5rem) var(--margen);
   background: var(--cafe); color: var(--marfil);
 }
-/* Bodegón de cocina mexicana: la mesa queda como base de la sección */
-.servicio::before {
-  content: ""; position: absolute; z-index: -1;
-  left: 50%; bottom: 0; translate: -50% 4%;
-  width: max(100%, 44rem); aspect-ratio: 2400 / 1355;
-  background: url("img/cocina-bodegon.webp") center bottom / cover no-repeat;
-  mask-image: linear-gradient(to bottom, transparent, #000 38%);
-}
-.servicio::after {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: linear-gradient(to right, transparent 45%, color-mix(in srgb, var(--cafe) 55%, transparent) 75%, transparent);
+.servicio {
+  position: relative; overflow: clip;
+  background:
+    radial-gradient(60rem 40rem at 12% 30%, color-mix(in srgb, var(--rosa) 16%, transparent), transparent 70%),
+    var(--cafe);
 }
 
 .cocina {
@@ -426,8 +404,10 @@ button { font: inherit; color: inherit; }
 
 /* Collage: foto principal en arco, detalle encimado y sello giratorio */
 .cocina-collage { position: relative; padding: 0 12% 14% 0; width: 100%; max-width: 34rem; justify-self: center; }
-.cocina-collage .enmarcado { width: 100%; }
-.cocina-collage .marco { filter: drop-shadow(0 20px 28px rgb(0 0 0 / .5)); }
+.cocina-principal {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: 16rem 16rem 1.2rem 1.2rem;
+}
 .cocina-detalle {
   position: absolute; right: 0; bottom: 0;
   width: 42%; aspect-ratio: 3 / 4; object-fit: cover;
@@ -460,9 +440,8 @@ button { font: inherit; color: inherit; }
 .cocina-incluye li {
   display: flex; align-items: center; gap: .7rem;
   padding: .85rem 1rem; border-radius: .9rem;
-  background: color-mix(in srgb, var(--cafe) 72%, transparent);
-  backdrop-filter: blur(8px);
-  border: 1px solid color-mix(in srgb, var(--marfil) 16%, transparent);
+  background: color-mix(in srgb, var(--marfil) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--marfil) 14%, transparent);
   font-weight: 500;
 }
 .cocina-incluye li::before {
@@ -486,13 +465,14 @@ button { font: inherit; color: inherit; }
     radial-gradient(50rem 36rem at 90% 10%, color-mix(in srgb, var(--salvia) 35%, transparent), transparent 70%),
     var(--olivo);
 }
-.contacto-visual { position: relative; }
-.contacto-foto { margin: 0 auto; width: min(100%, 32rem); }
-.contacto-foto > img:first-child { object-position: 50% 70%; }
-.contacto-foto .marco { filter: drop-shadow(0 20px 28px rgb(0 0 0 / .4)); }
+.contacto-visual { position: relative; padding-bottom: 4rem; }
+.contacto-foto { margin: 0; }
+.contacto-foto img {
+  width: 100%; aspect-ratio: 4 / 5; max-height: 44rem; object-fit: cover; object-position: 50% 70%;
+  border-radius: 18rem 18rem 1.2rem 1.2rem;
+}
 .contacto-tarjeta {
-  position: relative; z-index: 2;
-  margin: -3.5rem auto 0; width: min(100%, 30rem);
+  position: absolute; left: clamp(-1rem, -2vw, 0rem); right: 12%; bottom: 0;
   display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start;
   padding: 1.4rem 1.5rem; border-radius: 1.2rem;
   background: var(--marfil); color: var(--cafe);
@@ -537,6 +517,7 @@ button { font: inherit; color: inherit; }
   .contacto-visual { order: 2; max-width: 30rem; }
   .contacto-formulario { order: 1; }
   .contacto-mapa { order: 3; }
+  .contacto-tarjeta { left: .8rem; right: .8rem; }
 }
 @media (max-width: 460px) { .formulario-fila { grid-template-columns: 1fr; } }
 
