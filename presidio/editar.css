@@ -8,6 +8,16 @@
 .editando [contenteditable]:focus { outline: 2px solid var(--rosa); }
 .editando .editado { background-color: color-mix(in srgb, var(--rosa) 30%, transparent); }
 
+/* Texto de botones, pestañas y enlaces: el contorno toma el color del propio texto
+   para que se vea también sobre botones rosas u oscuros */
+.editando .texto-boton { -webkit-user-select: text; user-select: text; outline-offset: 3px; }
+.editando .texto-boton:hover { outline-color: currentColor; }
+.editando .texto-boton:focus { outline: 2px solid currentColor; }
+.editando .texto-boton.editado {
+  background-color: color-mix(in srgb, currentColor 16%, transparent);
+  box-shadow: 0 0 0 .2em color-mix(in srgb, currentColor 16%, transparent);
+}
+
 /* Mientras se edita: el botón de WhatsApp no estorba y el panel abierto deja tocar su texto */
 .editando .whats { display: none; }
 .editando .acordeon li.abierto button { pointer-events: none; }

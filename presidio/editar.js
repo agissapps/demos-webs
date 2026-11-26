@@ -1,5 +1,5 @@
 // Modo edición de textos: se activa con ?editar en la dirección.
-// Cualquier texto (menos botones y enlaces) se puede cambiar con un clic,
+// Cualquier texto, botón o enlace se puede cambiar con un clic,
 // los cambios se guardan en este navegador y se descargan en un PDF.
 {
   const CLAVE = 'presidio-cambios-v1';
@@ -34,27 +34,64 @@
     });
   };
 
-  // Textos editables: títulos, párrafos, listas y datos; nunca botones, enlaces ni el formulario
-  const editables = [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main dt, main dd, footer p')]
+  // Textos editables: títulos, párrafos, listas y datos (sin los campos del formulario)
+  const textos = [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main dt, main dd, footer p')]
     .filter((el) => !el.closest('a, button, form, select, [aria-hidden="true"], .portada-control'))
     .filter((el) => !el.querySelector('a, button, input, select, textarea, img, h1, h2, h3, p, li'))
     .filter((el) => leer(el));
 
+  // Botones, pestañas y enlaces con texto: su texto va dentro de un <span> que se edita.
+  // Van al final de la lista para que los cambios ya guardados conserven su número.
+  const botones = [...document.querySelectorAll('header a, header button, main a, main button, footer a, footer button')]
+    .filter((b) => !b.closest('[aria-hidden="true"], .acordeon, .miniaturas, .portada-puntos'))
+    .filter((b) => !b.querySelector('img, svg') && leer(b))
+    .map((b) => {
+      const s = document.createElement('span');
+      s.className = 'texto-boton';
+      s.append(...b.childNodes);
+      b.append(s);
+      return s;
+    });
+
+  const editables = [...textos, ...botones];
   const originales = editables.map(leer);
+  const original = (el) => el && (originales[editables.indexOf(el)] ?? leer(el));
+
+  // Las etiquetas del acordeón repiten su título: se actualizan solas al editarlo
+  const sincronizarAcordeon = () => document.querySelectorAll('.acordeon li').forEach((li) => {
+    const titulo = li.querySelector('h3');
+    const etiqueta = li.querySelector('button span');
+    if (titulo && etiqueta) etiqueta.textContent = leer(titulo).replace(/\n/g, ' ');
+  });
 
   const SECCIONES = {
     inicio: 'Portada', casa: 'Recorre la casa', celebraciones: '¿Qué vamos a celebrar?',
     servicio: 'La cocina', contacto: 'Agenda una visita',
   };
   const TIPOS = { H1: 'título principal', H2: 'título', H3: 'subtítulo', DT: 'etiqueta', DD: 'dato', LI: 'punto de lista' };
+  const tipo = (el) => {
+    const control = el.closest('a, button');
+    if (!control) return TIPOS[el.tagName] || 'texto';
+    if (control.getAttribute('role') === 'tab') return 'pestaña';
+    if (control.closest('.barra-nav')) return 'menú';
+    if (control.matches('.boton, button')) return 'botón';
+    return 'enlace';
+  };
+  // Los nombres de pestaña, panel y dato salen del texto original, aunque se hayan editado
   const ubicacion = (el) => {
-    const seccion = el.closest('section[id], footer');
-    const partes = [seccion?.tagName === 'FOOTER' ? 'Pie de página' : SECCIONES[seccion?.id] || 'Página'];
+    const seccion = el.closest('section[id], header, footer');
+    const partes = [
+      seccion?.tagName === 'HEADER' ? 'Barra superior'
+        : seccion?.tagName === 'FOOTER' ? 'Pie de página'
+        : SECCIONES[seccion?.id] || 'Página',
+    ];
     const panel = el.closest('.panel');
-    if (panel) partes.push(document.getElementById(panel.getAttribute('aria-labelledby'))?.textContent.trim());
+    if (panel) partes.push(original(document.getElementById(panel.getAttribute('aria-labelledby'))?.querySelector('.texto-boton')));
     const item = el.closest('.acordeon li');
-    if (item) partes.push(item.querySelector('button span')?.textContent.trim());
-    return `${partes.filter(Boolean).join(' › ')} (${TIPOS[el.tagName] || 'texto'})`;
+    if (item) partes.push(original(item.querySelector('h3')));
+    const etiqueta = el.closest('a') && el.closest('dd')?.previousElementSibling;
+    if (etiqueta?.tagName === 'DT') partes.push(original(etiqueta));
+    return `${partes.filter(Boolean).join(' › ')} (${tipo(el)})`;
   };
 
   // ---------- Barra de edición ----------
@@ -64,7 +101,7 @@
   barra.setAttribute('aria-label', 'Edición de textos');
   barra.innerHTML = `
     <p class="editor-titulo">Modo edición</p>
-    <p class="editor-ayuda">Haz clic en cualquier texto para cambiarlo. Cuando termines, descarga el PDF y envíalo.</p>
+    <p class="editor-ayuda">Haz clic en cualquier texto, botón o enlace para cambiarlo. Cuando termines, descarga el PDF y envíalo.</p>
     <p class="editor-cuenta" aria-live="polite"></p>
     <div class="editor-acciones">
       <button type="button" class="editor-pdf">Descargar cambios en PDF</button>
@@ -115,10 +152,52 @@
       if (ahora === originales[i]) delete cambios[i];
       else cambios[i] = { donde: ubicacion(el), antes: originales[i], ahora };
       el.classList.toggle('editado', i in cambios);
+      if (el.tagName === 'H3') sincronizarAcordeon();
       guardar();
     });
+
+    if (el.classList.contains('texto-boton')) {
+      // Dentro de un botón las teclas no cambian de pestaña ni lo activan; Enter termina la edición
+      el.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        if (e.key === 'Enter') { e.preventDefault(); el.blur(); }
+      });
+      el.addEventListener('keyup', (e) => {
+        e.stopPropagation();
+        if (e.key === ' ') e.preventDefault();
+      });
+    }
   });
+  sincronizarAcordeon();
   guardar();
+
+  // Un clic en un botón o enlace edita su texto: los enlaces no navegan y el formulario no se envía.
+  // Las pestañas siguen cambiando para poder editar lo que hay en cada una.
+  const ponerCursor = (texto, x, y) => {
+    texto.focus();
+    let rango = null;
+    const punto = document.caretPositionFromPoint?.(x, y);
+    if (punto) {
+      rango = document.createRange();
+      rango.setStart(punto.offsetNode, punto.offset);
+    } else {
+      rango = document.caretRangeFromPoint?.(x, y) ?? null;
+    }
+    if (!rango || !texto.contains(rango.startContainer)) {
+      rango = document.createRange();
+      rango.selectNodeContents(texto);
+      rango.collapse(false);
+    }
+    getSelection().removeAllRanges();
+    getSelection().addRange(rango);
+  };
+  document.addEventListener('click', (e) => {
+    const control = e.target.closest?.('a, button');
+    const texto = control?.querySelector(':scope > .texto-boton');
+    if (!texto) return;
+    if (control.matches('a') || control.type === 'submit') e.preventDefault();
+    if (document.activeElement !== texto) ponerCursor(texto, e.clientX, e.clientY);
+  }, true);
 
   barra.querySelector('.editor-descartar').addEventListener('click', () => {
     if (!Object.keys(cambios).length) return;
@@ -128,6 +207,7 @@
       editables[i].classList.remove('editado');
     });
     cambios = {};
+    sincronizarAcordeon();
     guardar();
   });
 
