@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventos Presidio · Celebra en el Centro Histórico de Mazatlán</title>
+  <meta name="description" content="Bodas, baby showers, pedidas de mano y comidas familiares en una casona del Centro Histórico de Mazatlán. Recorre los espacios de Presidio y agenda una visita.">
+  <meta name="theme-color" content="#4B533B">
+  <link rel="icon" href="img/logo.webp">
+  <link rel="preload" as="image" href="img/entrada.webp" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<a class="saltar" href="#contacto">Ir a cotizar mi evento</a>
+
+<header class="barra">
+  <a href="#inicio" class="barra-marca" aria-label="Eventos Presidio, inicio">
+    <img src="img/logo.webp" alt="" width="46" height="46">
+    <span>Presidio <small>Eventos</small></span>
+  </a>
+  <nav class="barra-nav" aria-label="Principal">
+    <a href="#casa">La casa</a>
+    <a href="#celebraciones">Celebraciones</a>
+    <a href="#servicio">Cómo trabajamos</a>
+  </nav>
+  <a class="boton boton-chico" href="#contacto">Cotiza tu evento</a>
+</header>
+
+<main>
+
+  <!-- PORTADA: fotos que cambian solas -->
+  <section class="portada" id="inicio" aria-labelledby="t-portada">
+    <div class="portada-fotos" aria-hidden="true">
+      <img class="activa" src="img/entrada.webp" alt="" width="1200" height="1600" fetchpriority="high" style="--foco: 50% 62%">
+      <img src="img/arco.webp" alt="" width="1200" height="1600" fetchpriority="low" style="--foco: 50% 42%">
+      <img src="img/terraza.webp" alt="" width="1200" height="1600" fetchpriority="low" style="--foco: 50% 58%">
+      <img src="img/patio-sombrilla.webp" alt="" width="860" height="1170" fetchpriority="low" style="--foco: 55% 58%">
+      <img src="img/jardin-eucalipto.webp" alt="" width="1220" height="814" fetchpriority="low" style="--foco: 50% 55%">
+    </div>
+
+    <div class="portada-contenido">
+      <p class="portada-lugar">Casona en el Centro Histórico de Mazatlán</p>
+      <h1 id="t-portada">Pásale.<br>Tu fiesta ya tiene casa.</h1>
+      <p class="portada-intro">Un patio con un árbol centenario, muros de ladrillo antiguo, terraza al atardecer y la cocina de Presidio. Bodas, baby showers, pedidas y comidas que se alargan hasta que se prenden los focos.</p>
+      <div class="portada-acciones">
+        <a class="boton boton-rosa" href="#contacto">Agenda una visita</a>
+        <a class="boton boton-claro" href="#casa">Recorre la casa</a>
+      </div>
+    </div>
+
+    <div class="portada-control">
+      <p class="portada-pie" aria-live="polite"><span id="pie-foto">El patio del árbol</span></p>
+      <div class="portada-puntos" role="group" aria-label="Fotos de la portada">
+        <button type="button" aria-label="Foto 1: el patio del árbol" aria-pressed="true"></button>
+        <button type="button" aria-label="Foto 2: arco de flores" aria-pressed="false"></button>
+        <button type="button" aria-label="Foto 3: la terraza" aria-pressed="false"></button>
+        <button type="button" aria-label="Foto 4: comida bajo las sombrillas" aria-pressed="false"></button>
+        <button type="button" aria-label="Foto 5: mesas bajo los árboles" aria-pressed="false"></button>
+      </div>
+      <button type="button" class="pausa" id="pausa-portada" aria-label="Pausar fotos">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="i-pausa" fill="currentColor" d="M7 5h3v14H7zM14 5h3v14h-3z"/><path class="i-play" fill="currentColor" d="M8 5v14l11-7z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- LA CASA: recorrido por pestañas -->
+  <section class="casa" id="casa" aria-labelledby="t-casa">
+    <div class="casa-cabeza">
+      <h2 id="t-casa">Recorre la casa</h2>
+      <p>Cuatro espacios, cada uno con su luz. Elige uno y asómate.</p>
+    </div>
+
+    <div class="pestanas" role="tablist" aria-label="Espacios de Presidio">
+      <button type="button" role="tab" id="tab-patio" aria-selected="true" tabindex="0">El patio del árbol</button>
+      <button type="button" role="tab" id="tab-faroles" aria-selected="false" tabindex="-1">El patio de los faroles</button>
+      <button type="button" role="tab" id="tab-terraza" aria-selected="false" tabindex="-1">La terraza</button>
+      <button type="button" role="tab" id="tab-salon" aria-selected="false" tabindex="-1">El salón de los arcos</button>
+    </div>
+
+    <div class="paneles">
+      <div class="panel" role="tabpanel" aria-labelledby="tab-patio">
+        <figure class="escena">
+          <img class="escena-foto" src="img/ceremonia.webp" alt="Ceremonia bajo el árbol con los novios frente al arco de flores" width="1200" height="1600" loading="lazy">
+          <video class="escena-video" muted loop playsinline preload="none" poster="video/patio-poster.webp" hidden></video>
+        </figure>
+        <div class="panel-texto">
+          <p class="panel-lead">Un árbol viejísimo da sombra a todo el patio. De día la luz se cuela entre las hojas; de noche se encienden las series de focos colgadas de sus ramas.</p>
+          <p>Aquí caben la ceremonia, la mesa de los novios y la pista sin que nadie tenga que moverse de lugar.</p>
+          <p class="ideal"><strong>Ideal para</strong> bodas, ceremonias civiles y comidas largas al aire libre.</p>
+          <ul class="miniaturas" aria-label="Más fotos del patio">
+            <li><button type="button" aria-pressed="true" data-src="img/ceremonia.webp" data-alt="Ceremonia bajo el árbol con los novios frente al arco de flores"><img src="img/ceremonia.webp" alt="Ver ceremonia" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/patio-sombrilla.webp" data-alt="Invitados conversando bajo sombrillas de rayas junto a la escalera de hierro"><img src="img/patio-sombrilla.webp" alt="Ver comida bajo las sombrillas" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/mesa-novios.webp" data-alt="Mesa de los novios con flores en el piso bajo el árbol"><img src="img/mesa-novios.webp" alt="Ver mesa de los novios" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-video="video/patio.mp4" class="mini-video"><img src="video/patio-poster.webp" alt="Ver video del patio" width="120" height="150" loading="lazy"><span aria-hidden="true">▶</span></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" aria-labelledby="tab-faroles" hidden>
+        <figure class="escena">
+          <img class="escena-foto" src="img/baby-shower.webp" alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo" width="820" height="1165" loading="lazy">
+        </figure>
+        <div class="panel-texto">
+          <p class="panel-lead">Muros de ladrillo con siglos encima, faroles de herrería y un techo de vidrio que deja pasar la luz sin el sol de mediodía.</p>
+          <p>Las paredes sin restaurar son parte del encanto: cualquier montaje, del más sencillo al más producido, luce contra ellas.</p>
+          <p class="ideal"><strong>Ideal para</strong> baby showers, bautizos y cumpleaños de día.</p>
+          <ul class="miniaturas" aria-label="Más fotos del patio de los faroles">
+            <li><button type="button" aria-pressed="true" data-src="img/baby-shower.webp" data-alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo"><img src="img/baby-shower.webp" alt="Ver baby shower" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/tulipanes.webp" data-alt="Mesa larga con tulipanes amarillos y flores blancas junto al muro de ladrillo"><img src="img/tulipanes.webp" alt="Ver mesa con tulipanes" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/lampara.webp" data-alt="Lámpara de bejuco, copa azul y servilleta amarilla anudada"><img src="img/lampara.webp" alt="Ver detalle de mesa" width="120" height="150" loading="lazy"></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" aria-labelledby="tab-terraza" hidden>
+        <figure class="escena">
+          <img class="escena-foto" src="img/terraza.webp" alt="Mesa redonda con mantel floral bajo una sombrilla con flecos en la terraza" width="1200" height="1600" loading="lazy">
+        </figure>
+        <div class="panel-texto">
+          <p class="panel-lead">Arriba, entre las azoteas del Centro, la tarde se pone dorada. Es el lugar para el brindis justo antes de que se meta el sol.</p>
+          <p>Perfecta para grupos que buscan intimidad: una cena de aniversario, una pedida o la comida de los más cercanos.</p>
+          <p class="ideal"><strong>Ideal para</strong> pedidas de mano, cenas íntimas y cócteles al atardecer.</p>
+          <ul class="miniaturas" aria-label="Más fotos de la terraza">
+            <li><button type="button" aria-pressed="true" data-src="img/terraza.webp" data-alt="Mesa redonda con mantel floral bajo una sombrilla con flecos en la terraza"><img src="img/terraza.webp" alt="Ver mesa bajo la sombrilla" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/terraza-atardecer.webp" data-alt="Mesa larga con rosas blancas y velas al atardecer"><img src="img/terraza-atardecer.webp" alt="Ver la terraza al atardecer" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/centro-mesa.webp" data-alt="Centro de mesa con flores, velas largas y copas de vidrio verde"><img src="img/centro-mesa.webp" alt="Ver centro de mesa" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/pedida.webp" data-alt="Corazón de rosas rojas con letrero de neón para una pedida de mano"><img src="img/pedida.webp" alt="Ver pedida de mano" width="120" height="150" loading="lazy"></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" aria-labelledby="tab-salon" hidden>
+        <figure class="escena">
+          <img class="escena-foto" src="img/salon.webp" alt="Salón con puertas de madera en arco, lámparas de globo y mesa larga con rosas blancas" width="860" height="1150" loading="lazy">
+        </figure>
+        <div class="panel-texto">
+          <p class="panel-lead">Techos altos, puertas de madera de dos hojas y un medio punto que abre hacia el jardín. Adentro se está fresco aunque afuera haga calor de Mazatlán.</p>
+          <p>La opción segura para temporada de lluvias o para quien prefiere un evento bajo techo sin renunciar a la vista.</p>
+          <p class="ideal"><strong>Ideal para</strong> cenas formales, eventos de empresa y plan B en días de lluvia.</p>
+          <ul class="miniaturas" aria-label="Más fotos del salón">
+            <li><button type="button" aria-pressed="true" data-src="img/salon.webp" data-alt="Salón con puertas de madera en arco, lámparas de globo y mesa larga con rosas blancas"><img src="img/salon.webp" alt="Ver el salón" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/jardin-eucalipto.webp" data-alt="Mesas de madera con camino de eucalipto y velas al caer la tarde"><img src="img/jardin-eucalipto.webp" alt="Ver mesas con eucalipto" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/servilleta.webp" data-alt="Plato con servilleta de lino verde y galleta de recuerdo"><img src="img/servilleta.webp" alt="Ver detalle de plato" width="120" height="150" loading="lazy"></button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CELEBRACIONES: paneles que se expanden -->
+  <section class="celebraciones" id="celebraciones" aria-labelledby="t-celebra">
+    <div class="celebraciones-cabeza">
+      <h2 id="t-celebra">¿Qué vamos a celebrar?</h2>
+      <p>Pasa el cursor o toca cada foto.</p>
+    </div>
+    <ul class="acordeon">
+      <li class="abierto">
+        <button type="button" aria-expanded="true" aria-controls="c-bodas"><span>Bodas</span></button>
+        <img src="img/arco.webp" alt="" width="1200" height="1600" loading="lazy" style="--foco: 50% 40%">
+        <div class="acordeon-texto" id="c-bodas">
+          <h3>Bodas</h3>
+          <p>Ceremonia bajo el árbol, cena en el patio y fiesta hasta tarde, todo sin cambiar de lugar.</p>
+        </div>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false" aria-controls="c-baby"><span>Baby showers</span></button>
+        <img src="img/baby-shower.webp" alt="" width="820" height="1165" loading="lazy" style="--foco: 50% 36%">
+        <div class="acordeon-texto" id="c-baby">
+          <h3>Baby showers</h3>
+          <p>Mesas largas, flores y luz de día. Tú eliges la temática; nosotros el montaje y el menú.</p>
+        </div>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false" aria-controls="c-pedidas"><span>Pedidas y cenas románticas</span></button>
+        <img src="img/pedida.webp" alt="" width="975" height="1185" loading="lazy" style="--foco: 55% 55%">
+        <div class="acordeon-texto" id="c-pedidas">
+          <h3>Pedidas y cenas románticas</h3>
+          <p>Preparamos la sorpresa: flores, velas y una mesa solo para dos. Tú solo llega.</p>
+        </div>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false" aria-controls="c-familia"><span>Comidas familiares</span></button>
+        <img src="img/jardin-eucalipto.webp" alt="" width="1220" height="814" loading="lazy" style="--foco: 42% 60%">
+        <div class="acordeon-texto" id="c-familia">
+          <h3>Comidas familiares</h3>
+          <p>Cumpleaños, bautizos y reuniones de domingo con comida mexicana hecha en casa.</p>
+        </div>
+      </li>
+      <li>
+        <button type="button" aria-expanded="false" aria-controls="c-empresa"><span>Eventos de empresa</span></button>
+        <img src="img/salon.webp" alt="" width="860" height="1150" loading="lazy" style="--foco: 38% 70%">
+        <div class="acordeon-texto" id="c-empresa">
+          <h3>Eventos de empresa</h3>
+          <p>Cenas de fin de año, lanzamientos y comidas de equipo en un lugar que sí se recuerda.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- MOMENTOS: tira de fotos en movimiento -->
+  <section class="momentos" aria-label="Momentos en Presidio">
+    <div class="momentos-pista">
+      <ul class="momentos-tira">
+        <li><img src="img/centro-mesa.webp" alt="Centro de mesa con flores y copas verdes" width="1200" height="1600" loading="lazy"></li>
+        <li><img src="img/lampara.webp" alt="Lámpara de bejuco sobre mesa con copas azules" width="800" height="1180" loading="lazy"></li>
+        <li><img src="img/terraza-atardecer.webp" alt="Mesa larga en la terraza al atardecer" width="860" height="1185" loading="lazy"></li>
+        <li><img src="img/servilleta.webp" alt="Servilleta de lino verde con galleta de recuerdo" width="860" height="1180" loading="lazy"></li>
+        <li><img src="img/mesa-novios.webp" alt="Mesa de los novios con flores bajo el árbol" width="1200" height="1600" loading="lazy"></li>
+        <li><img src="img/tulipanes.webp" alt="Mesa con tulipanes amarillos" width="820" height="1200" loading="lazy"></li>
+        <li><img src="img/ceremonia.webp" alt="Ceremonia bajo el árbol frente al arco de flores" width="1200" height="1600" loading="lazy"></li>
+        <li><img src="img/patio-sombrilla.webp" alt="Invitados bajo sombrillas de rayas en el patio" width="860" height="1170" loading="lazy"></li>
+      </ul>
+    </div>
+    <button type="button" class="pausa pausa-oscura" id="pausa-tira" aria-label="Pausar fotos en movimiento">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="i-pausa" fill="currentColor" d="M7 5h3v14H7zM14 5h3v14h-3z"/><path class="i-play" fill="currentColor" d="M8 5v14l11-7z"/></svg>
+    </button>
+  </section>
+
+  <!-- SERVICIO: cocina + pasos -->
+  <section class="servicio" id="servicio" aria-labelledby="t-servicio">
+    <div class="cocina">
+      <div class="cocina-collage">
+        <img class="cocina-principal" src="img/arrachera.webp" alt="Corte de res rebanado en sartén de hierro con cebollas asadas, cilantro y rábano" width="1195" height="1205" loading="lazy">
+        <img class="cocina-detalle" src="img/centro-mesa.webp" alt="Mesa puesta con flores, velas largas y copas de vidrio verde" width="1200" height="1600" loading="lazy">
+        <div class="sello" aria-hidden="true">
+          <svg viewBox="0 0 200 200">
+            <defs><path id="sello-circulo" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
+            <text><textPath href="#sello-circulo" textLength="500" lengthAdjust="spacing">Cocina de México · Hecho en casa · Mazatlán ·</textPath></text>
+          </svg>
+          <img src="img/logo.webp" alt="" width="90" height="90" loading="lazy">
+        </div>
+      </div>
+
+      <div class="cocina-texto">
+        <h2 id="t-servicio">La cocina de Presidio, en tu mesa</h2>
+        <p class="cocina-lead">El menú de tu evento sale de la misma cocina que atiende el restaurante todos los días.</p>
+        <p>Lo armamos contigo, platillo por platillo, y lo ajustamos hasta que quede como lo imaginaste.</p>
+        <ul class="cocina-incluye" aria-label="Lo que armamos contigo">
+          <li>Tiempos y platillos</li>
+          <li>Bebidas y brindis</li>
+          <li>Menú para niños</li>
+          <li>Opciones sin carne</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="proceso">
+      <h3 class="proceso-titulo">Así armamos tu evento</h3>
+      <ol class="pasos">
+        <li><h4>Nos escribes</h4><p>Qué celebras, la fecha y cuántos invitados esperas.</p></li>
+        <li><h4>Conoces la casa</h4><p>Recorres los espacios y eliges dónde se ve mejor tu evento.</p></li>
+        <li><h4>Cerramos la propuesta</h4><p>Menú, bebidas, montaje y decoración en una sola cotización.</p></li>
+        <li><h4>Llegas a disfrutar</h4><p>Nosotros nos encargamos de todo. Tú recibe a tus invitados.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto" aria-labelledby="t-contacto">
+    <div class="contacto-visual">
+      <figure class="contacto-foto">
+        <img src="img/mesa-novios.webp" alt="Mesa de los novios con mantel blanco y flores bajo el gran árbol del patio" width="1200" height="1600" loading="lazy">
+      </figure>
+      <div class="contacto-tarjeta">
+        <img src="img/logo.webp" alt="Presidio, Cocina de México" width="64" height="64" loading="lazy">
+        <dl>
+          <div><dt>Dirección</dt>
+          <dd>Niños Héroes 1511, Col. Centro, Mazatlán, Sinaloa</dd></div>
+          <div><dt>WhatsApp de eventos</dt>
+          <dd><a href="https://wa.me/526691550358" target="_blank" rel="noopener">669 155 0358</a></dd></div>
+          <div><dt>Reservaciones del restaurante</dt>
+          <dd><a href="tel:+526692231021">669 223 1021</a></dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="contacto-formulario">
+      <h2 id="t-contacto">Agenda una visita</h2>
+      <p class="contacto-intro">Ven a conocer la casa antes de decidir. Llena esto y te abrimos WhatsApp con el mensaje listo; solo tienes que enviarlo.</p>
+
+    <form class="formulario" id="formulario" novalidate>
+      <label>Tu nombre
+        <input name="nombre" autocomplete="name" required>
+      </label>
+      <label>¿Qué celebras?
+        <select name="tipo" required>
+          <option value="">Elige una opción</option>
+          <option>Boda</option>
+          <option>Baby shower</option>
+          <option>Pedida de mano o cena romántica</option>
+          <option>Cumpleaños o comida familiar</option>
+          <option>Evento de empresa</option>
+          <option>Otro</option>
+        </select>
+      </label>
+      <div class="formulario-fila">
+        <label>Fecha tentativa
+          <input name="fecha" type="date">
+        </label>
+        <label>Invitados
+          <input name="invitados" type="number" inputmode="numeric" min="2" placeholder="Ej. 80">
+        </label>
+      </div>
+      <label>¿Algo más que debamos saber?
+        <textarea name="mensaje" rows="3" placeholder="Horario, espacio que te gustó, ideas de decoración…"></textarea>
+      </label>
+      <p class="formulario-error" id="error" role="alert" hidden></p>
+      <button class="boton" type="submit">Enviar por WhatsApp</button>
+    </form>
+    </div>
+
+    <div class="contacto-mapa">
+      <iframe title="Mapa: Presidio en Niños Héroes 1511, Centro, Mazatlán" src="https://maps.google.com/maps?q=Ni%C3%B1os%20H%C3%A9roes%201511%2C%20Centro%2C%20Mazatl%C3%A1n%2C%20Sinaloa&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="boton boton-rosa" href="https://www.google.com/maps/search/?api=1&query=Presidio+Cocina+de+M%C3%A9xico+Ni%C3%B1os+H%C3%A9roes+1511+Mazatl%C3%A1n" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <p>Eventos Presidio · Cocina de México · Centro Histórico de Mazatlán</p>
+  <a href="#inicio">Volver arriba</a>
+</footer>
+
+<a class="whats" href="https://wa.me/526691550358?text=Hola%2C%20quiero%20informes%20para%20un%20evento%20en%20Presidio" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<script src="app.js" defer></script>
+</body>
+</html>
