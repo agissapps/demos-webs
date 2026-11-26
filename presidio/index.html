@@ -25,7 +25,6 @@
   <nav class="barra-nav" aria-label="Principal">
     <a href="#casa">La casa</a>
     <a href="#celebraciones">Celebraciones</a>
-    <a href="#servicio">La cocina</a>
   </nav>
   <a class="boton boton-chico" href="#contacto">Cotiza tu evento</a>
 </header>
@@ -44,8 +43,8 @@
 
     <div class="portada-contenido">
       <p class="portada-lugar">Casona en el Centro Histórico de Mazatlán</p>
-      <h1 id="t-portada">Pásale.<br>Tu fiesta ya tiene casa.</h1>
-      <p class="portada-intro">Un patio con un árbol centenario, muros de ladrillo antiguo, terraza al atardecer y la cocina de Presidio. Bodas, baby showers, pedidas y comidas que se alargan hasta que se prenden los focos.</p>
+      <h1 id="t-portada">Una casona<br>con historia.</h1>
+      <p class="portada-intro">Entre el jardín y las terrazas de Casa García, Presidio te invita a celebrar bodas, pedidas de mano, reuniones familiares y eventos de empresa en el corazón del Centro Histórico de Mazatlán. Ven a conocer la casona e imagina cómo se vería tu celebración aquí.</p>
       <div class="portada-acciones">
         <a class="boton boton-rosa" href="#contacto">Agenda una visita</a>
         <a class="boton boton-claro" href="#casa">Recorre la casa</a>
@@ -53,11 +52,11 @@
     </div>
 
     <div class="portada-control">
-      <p class="portada-pie" aria-live="polite"><span id="pie-foto">El patio del árbol</span></p>
+      <p class="portada-pie" aria-live="polite"><span id="pie-foto">El patio central</span></p>
       <div class="portada-puntos" role="group" aria-label="Fotos de la portada">
-        <button type="button" aria-label="Foto 1: el patio del árbol" aria-pressed="true"></button>
+        <button type="button" aria-label="Foto 1: el patio central" aria-pressed="true"></button>
         <button type="button" aria-label="Foto 2: arco de flores" aria-pressed="false"></button>
-        <button type="button" aria-label="Foto 3: la terraza" aria-pressed="false"></button>
+        <button type="button" aria-label="Foto 3: las terrazas" aria-pressed="false"></button>
         <button type="button" aria-label="Foto 4: comida bajo las sombrillas" aria-pressed="false"></button>
         <button type="button" aria-label="Foto 5: mesas bajo los árboles" aria-pressed="false"></button>
       </div>
@@ -70,34 +69,48 @@
   <!-- LA CASA: recorrido por pestañas -->
   <section class="casa" id="casa" aria-labelledby="t-casa">
     <div class="casa-fondo" aria-hidden="true">
-      <img class="activo" src="img/fondo-patio.webp" alt="" width="640" height="560" loading="lazy">
-      <img src="img/fondo-faroles.webp" alt="" width="640" height="562" loading="lazy">
+      <img class="activo" src="img/fondo-faroles.webp" alt="" width="640" height="562" loading="lazy">
+      <img src="img/fondo-patio.webp" alt="" width="640" height="560" loading="lazy">
       <img src="img/fondo-terraza.webp" alt="" width="640" height="426" loading="lazy">
       <img src="img/fondo-salon.webp" alt="" width="640" height="512" loading="lazy">
     </div>
     <div class="casa-cabeza">
       <h2 id="t-casa">Recorre la casa</h2>
-      <p>Cuatro espacios, cada uno con su luz. Elige uno y asómate.</p>
+      <p>Descubre el encanto de cada rincón de Casa García y encuentra el lugar para tu próxima celebración.</p>
     </div>
 
     <div class="pestanas" role="tablist" aria-label="Espacios de Presidio">
-      <button type="button" role="tab" id="tab-patio" aria-selected="true" tabindex="0">El patio del árbol</button>
-      <button type="button" role="tab" id="tab-faroles" aria-selected="false" tabindex="-1">El patio de los faroles</button>
-      <button type="button" role="tab" id="tab-terraza" aria-selected="false" tabindex="-1">La terraza</button>
-      <button type="button" role="tab" id="tab-salon" aria-selected="false" tabindex="-1">El salón de los arcos</button>
+      <button type="button" role="tab" id="tab-cristal" aria-selected="true" tabindex="0">Salón de Cristal</button>
+      <button type="button" role="tab" id="tab-patio" aria-selected="false" tabindex="-1">Patio Central</button>
+      <button type="button" role="tab" id="tab-terrazas" aria-selected="false" tabindex="-1">Las Terrazas de Presidio</button>
+      <button type="button" role="tab" id="tab-alto" aria-selected="false" tabindex="-1">Salón Alto</button>
     </div>
 
     <div class="paneles">
-      <div class="panel" role="tabpanel" aria-labelledby="tab-patio">
+      <div class="panel" role="tabpanel" aria-labelledby="tab-cristal">
+        <figure class="escena">
+          <img class="escena-foto" src="img/baby-shower.webp" alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo" width="820" height="1165" loading="lazy">
+        </figure>
+        <div class="panel-texto">
+          <p class="panel-lead">La luz natural entra por el techo de cristal y los ventanales enmarcan el patio de Casa García.</p>
+          <p>Un salón con aire acondicionado para celebrar un bautizo, un baby shower o una comida con tus personas más cercanas.</p>
+          <ul class="miniaturas" aria-label="Más fotos del Salón de Cristal">
+            <li><button type="button" aria-pressed="true" data-src="img/baby-shower.webp" data-alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo"><img src="img/baby-shower.webp" alt="Ver baby shower" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/tulipanes.webp" data-alt="Mesa larga con tulipanes amarillos y flores blancas junto al muro de ladrillo"><img src="img/tulipanes.webp" alt="Ver mesa con tulipanes" width="120" height="150" loading="lazy"></button></li>
+            <li><button type="button" aria-pressed="false" data-src="img/lampara.webp" data-alt="Lámpara de bejuco, copa azul y servilleta amarilla anudada"><img src="img/lampara.webp" alt="Ver detalle de mesa" width="120" height="150" loading="lazy"></button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" aria-labelledby="tab-patio" hidden>
         <figure class="escena">
           <img class="escena-foto" src="img/ceremonia.webp" alt="Ceremonia bajo el árbol con los novios frente al arco de flores" width="1200" height="1600" loading="lazy">
           <video class="escena-video" muted loop playsinline preload="none" poster="video/patio-poster.webp" hidden></video>
         </figure>
         <div class="panel-texto">
-          <p class="panel-lead">Un árbol viejísimo da sombra a todo el patio. De día la luz se cuela entre las hojas; de noche se encienden las series de focos colgadas de sus ramas.</p>
-          <p>Aquí caben la ceremonia, la mesa de los novios y la pista sin que nadie tenga que moverse de lugar.</p>
-          <p class="ideal"><strong>Ideal para</strong> bodas, ceremonias civiles y comidas largas al aire libre.</p>
-          <ul class="miniaturas" aria-label="Más fotos del patio">
+          <p class="panel-lead">Celebra al aire libre, bajo las ramas de los árboles y entre los muros de la antigua finca de Casa García.</p>
+          <p>Al caer la tarde, las luces entre el follaje acompañan bodas, cenas y encuentros en el corazón del Centro Histórico de Mazatlán.</p>
+          <ul class="miniaturas" aria-label="Más fotos del Patio Central">
             <li><button type="button" aria-pressed="true" data-src="img/ceremonia.webp" data-alt="Ceremonia bajo el árbol con los novios frente al arco de flores"><img src="img/ceremonia.webp" alt="Ver ceremonia" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/patio-sombrilla.webp" data-alt="Invitados conversando bajo sombrillas de rayas junto a la escalera de hierro"><img src="img/patio-sombrilla.webp" alt="Ver comida bajo las sombrillas" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/mesa-novios.webp" data-alt="Mesa de los novios con flores en el piso bajo el árbol"><img src="img/mesa-novios.webp" alt="Ver mesa de los novios" width="120" height="150" loading="lazy"></button></li>
@@ -106,31 +119,14 @@
         </div>
       </div>
 
-      <div class="panel" role="tabpanel" aria-labelledby="tab-faroles" hidden>
-        <figure class="escena">
-          <img class="escena-foto" src="img/baby-shower.webp" alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo" width="820" height="1165" loading="lazy">
-        </figure>
-        <div class="panel-texto">
-          <p class="panel-lead">Muros de ladrillo con siglos encima, faroles de herrería y un techo de vidrio que deja pasar la luz sin el sol de mediodía.</p>
-          <p>Las paredes sin restaurar son parte del encanto: cualquier montaje, del más sencillo al más producido, luce contra ellas.</p>
-          <p class="ideal"><strong>Ideal para</strong> baby showers, bautizos y cumpleaños de día.</p>
-          <ul class="miniaturas" aria-label="Más fotos del patio de los faroles">
-            <li><button type="button" aria-pressed="true" data-src="img/baby-shower.webp" data-alt="Baby shower en tonos rosa con mesa larga frente al muro antiguo"><img src="img/baby-shower.webp" alt="Ver baby shower" width="120" height="150" loading="lazy"></button></li>
-            <li><button type="button" aria-pressed="false" data-src="img/tulipanes.webp" data-alt="Mesa larga con tulipanes amarillos y flores blancas junto al muro de ladrillo"><img src="img/tulipanes.webp" alt="Ver mesa con tulipanes" width="120" height="150" loading="lazy"></button></li>
-            <li><button type="button" aria-pressed="false" data-src="img/lampara.webp" data-alt="Lámpara de bejuco, copa azul y servilleta amarilla anudada"><img src="img/lampara.webp" alt="Ver detalle de mesa" width="120" height="150" loading="lazy"></button></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="panel" role="tabpanel" aria-labelledby="tab-terraza" hidden>
+      <div class="panel" role="tabpanel" aria-labelledby="tab-terrazas" hidden>
         <figure class="escena">
           <img class="escena-foto" src="img/terraza.webp" alt="Mesa redonda con mantel floral bajo una sombrilla con flecos en la terraza" width="1200" height="1600" loading="lazy">
         </figure>
         <div class="panel-texto">
-          <p class="panel-lead">Arriba, entre las azoteas del Centro, la tarde se pone dorada. Es el lugar para el brindis justo antes de que se meta el sol.</p>
-          <p>Perfecta para grupos que buscan intimidad: una cena de aniversario, una pedida o la comida de los más cercanos.</p>
-          <p class="ideal"><strong>Ideal para</strong> pedidas de mano, cenas íntimas y cócteles al atardecer.</p>
-          <ul class="miniaturas" aria-label="Más fotos de la terraza">
+          <p class="panel-lead">Entre las copas de los árboles y los muros de la antigua casona, nuestras terrazas te invitan a celebrar al aire libre.</p>
+          <p>Imagina tu ceremonia bajo las ramas, un brindis al caer la tarde o una cena con tus invitados en el Centro Histórico de Mazatlán.</p>
+          <ul class="miniaturas" aria-label="Más fotos de las terrazas">
             <li><button type="button" aria-pressed="true" data-src="img/terraza.webp" data-alt="Mesa redonda con mantel floral bajo una sombrilla con flecos en la terraza"><img src="img/terraza.webp" alt="Ver mesa bajo la sombrilla" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/terraza-atardecer.webp" data-alt="Mesa larga con rosas blancas y velas al atardecer"><img src="img/terraza-atardecer.webp" alt="Ver la terraza al atardecer" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/centro-mesa.webp" data-alt="Centro de mesa con flores, velas largas y copas de vidrio verde"><img src="img/centro-mesa.webp" alt="Ver centro de mesa" width="120" height="150" loading="lazy"></button></li>
@@ -139,15 +135,14 @@
         </div>
       </div>
 
-      <div class="panel" role="tabpanel" aria-labelledby="tab-salon" hidden>
+      <div class="panel" role="tabpanel" aria-labelledby="tab-alto" hidden>
         <figure class="escena">
           <img class="escena-foto" src="img/salon.webp" alt="Salón con puertas de madera en arco, lámparas de globo y mesa larga con rosas blancas" width="860" height="1150" loading="lazy">
         </figure>
         <div class="panel-texto">
-          <p class="panel-lead">Techos altos, puertas de madera de dos hojas y un medio punto que abre hacia el jardín. Adentro se está fresco aunque afuera haga calor de Mazatlán.</p>
-          <p>La opción segura para temporada de lluvias o para quien prefiere un evento bajo techo sin renunciar a la vista.</p>
-          <p class="ideal"><strong>Ideal para</strong> cenas formales, eventos de empresa y plan B en días de lluvia.</p>
-          <ul class="miniaturas" aria-label="Más fotos del salón">
+          <p class="panel-lead">En la planta alta de Casa García, un salón con amplios ventanales, luz natural y aire acondicionado te espera para celebrar en petit comité.</p>
+          <p>Un espacio para compartir una comida familiar, brindar por un aniversario o reunir a tus personas más cercanas.</p>
+          <ul class="miniaturas" aria-label="Más fotos del Salón Alto">
             <li><button type="button" aria-pressed="true" data-src="img/salon.webp" data-alt="Salón con puertas de madera en arco, lámparas de globo y mesa larga con rosas blancas"><img src="img/salon.webp" alt="Ver el salón" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/jardin-eucalipto.webp" data-alt="Mesas de madera con camino de eucalipto y velas al caer la tarde"><img src="img/jardin-eucalipto.webp" alt="Ver mesas con eucalipto" width="120" height="150" loading="lazy"></button></li>
             <li><button type="button" aria-pressed="false" data-src="img/servilleta.webp" data-alt="Plato con servilleta de lino verde y galleta de recuerdo"><img src="img/servilleta.webp" alt="Ver detalle de plato" width="120" height="150" loading="lazy"></button></li>
@@ -177,7 +172,7 @@
         <img src="img/baby-shower.webp" alt="" width="820" height="1165" loading="lazy" style="--foco: 50% 36%">
         <div class="acordeon-texto" id="c-baby">
           <h3>Baby showers</h3>
-          <p>Mesas largas, flores y luz de día. Tú eliges la temática; nosotros el montaje y el menú.</p>
+          <p>Mesas largas, flores y luz de día. Tú eliges la temática; nosotros el montaje.</p>
         </div>
       </li>
       <li>
@@ -193,7 +188,7 @@
         <img src="img/jardin-eucalipto.webp" alt="" width="1220" height="814" loading="lazy" style="--foco: 42% 60%">
         <div class="acordeon-texto" id="c-familia">
           <h3>Comidas familiares</h3>
-          <p>Cumpleaños, bautizos y reuniones de domingo con comida mexicana hecha en casa.</p>
+          <p>Cumpleaños, bautizos y reuniones de domingo con tus personas más cercanas.</p>
         </div>
       </li>
       <li>
@@ -224,35 +219,6 @@
     <button type="button" class="pausa pausa-oscura" id="pausa-tira" aria-label="Pausar fotos en movimiento">
       <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path class="i-pausa" fill="currentColor" d="M7 5h3v14H7zM14 5h3v14h-3z"/><path class="i-play" fill="currentColor" d="M8 5v14l11-7z"/></svg>
     </button>
-  </section>
-
-  <!-- SERVICIO: la cocina -->
-  <section class="servicio" id="servicio" aria-labelledby="t-servicio">
-    <div class="cocina">
-      <div class="cocina-collage">
-        <img class="cocina-principal" src="img/arrachera.webp" alt="Corte de res rebanado en sartén de hierro con cebollas asadas, cilantro y rábano" width="1195" height="1205" loading="lazy">
-        <img class="cocina-detalle" src="img/centro-mesa.webp" alt="Mesa puesta con flores, velas largas y copas de vidrio verde" width="1200" height="1600" loading="lazy">
-        <div class="sello" aria-hidden="true">
-          <svg viewBox="0 0 200 200">
-            <defs><path id="sello-circulo" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs>
-            <text><textPath href="#sello-circulo" textLength="500" lengthAdjust="spacing">Cocina de México · Hecho en casa · Mazatlán ·</textPath></text>
-          </svg>
-          <img src="img/logo.webp" alt="" width="90" height="90" loading="lazy">
-        </div>
-      </div>
-
-      <div class="cocina-texto">
-        <h2 id="t-servicio">La cocina de Presidio, en tu mesa</h2>
-        <p class="cocina-lead">El menú de tu evento sale de la misma cocina que atiende el restaurante todos los días.</p>
-        <p>Lo armamos contigo, platillo por platillo, y lo ajustamos hasta que quede como lo imaginaste.</p>
-        <ul class="cocina-incluye" aria-label="Lo que armamos contigo">
-          <li>Tiempos y platillos</li>
-          <li>Bebidas y brindis</li>
-          <li>Menú para niños</li>
-          <li>Opciones sin carne</li>
-        </ul>
-      </div>
-    </div>
   </section>
 
   <!-- CONTACTO -->
@@ -318,7 +284,7 @@
 </main>
 
 <footer class="pie">
-  <p>Eventos Presidio · Cocina de México · Centro Histórico de Mazatlán</p>
+  <p>Eventos Presidio · Centro Histórico de Mazatlán</p>
   <a href="#inicio">Volver arriba</a>
 </footer>
 

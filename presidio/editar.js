@@ -66,7 +66,7 @@
 
   const SECCIONES = {
     inicio: 'Portada', casa: 'Recorre la casa', celebraciones: '¿Qué vamos a celebrar?',
-    servicio: 'La cocina', contacto: 'Agenda una visita',
+    contacto: 'Agenda una visita',
   };
   const TIPOS = { H1: 'título principal', H2: 'título', H3: 'subtítulo', DT: 'etiqueta', DD: 'dato', LI: 'punto de lista' };
   const tipo = (el) => {

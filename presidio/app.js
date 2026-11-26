@@ -21,7 +21,7 @@ revisarBarra();
   const puntos = [...document.querySelectorAll('.portada-puntos button')];
   const pie = document.getElementById('pie-foto');
   const boton = document.getElementById('pausa-portada');
-  const pies = ['El patio del árbol', 'Arco de flores en el patio', 'La terraza', 'Comida bajo las sombrillas', 'Mesas bajo los árboles'];
+  const pies = ['El patio central', 'Arco de flores en el patio', 'Las terrazas', 'Comida bajo las sombrillas', 'Mesas bajo los árboles'];
   let actual = 0;
   let reloj = null;
   let pausada = sinMovimiento;
