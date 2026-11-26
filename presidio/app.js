@@ -53,12 +53,14 @@ revisarBarra();
 {
   const tabs = [...document.querySelectorAll('.pestanas [role="tab"]')];
   const paneles = [...document.querySelectorAll('.panel')];
+  const fondos = [...document.querySelectorAll('.casa-fondo img')];
 
   const detenerVideos = () => document.querySelectorAll('.escena-video').forEach((v) => v.pause());
 
   const elegir = (tab, enfocar) => {
     if (tab.getAttribute('aria-selected') === 'true') return;
     detenerVideos();
+    fondos.forEach((f, i) => f.classList.toggle('activo', tabs[i] === tab));
     transicion(() => {
       tabs.forEach((t, i) => {
         const si = t === tab;

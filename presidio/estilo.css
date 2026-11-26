@@ -171,7 +171,26 @@ button { font: inherit; color: inherit; }
 }
 
 /* ---------- Recorre la casa ---------- */
-.casa { padding: clamp(4.5rem, 11vh, 7.5rem) var(--margen); }
+.casa {
+  position: relative; isolation: isolate; overflow: clip;
+  padding: clamp(4.5rem, 11vh, 7.5rem) var(--margen);
+}
+
+/* Fondo: foto real del espacio elegido, desenfocada y lavada en marfil */
+.casa-fondo { position: absolute; inset: 0; z-index: -1; }
+.casa-fondo img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0; scale: 1.04;
+  transition: opacity 1.1s ease, scale 6s ease-out;
+}
+.casa-fondo img.activo { opacity: 1; scale: 1; }
+.casa-fondo::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, var(--marfil) 0%, transparent 18%, transparent 82%, var(--marfil) 100%),
+    linear-gradient(to right, color-mix(in srgb, var(--marfil) 58%, transparent), color-mix(in srgb, var(--marfil) 72%, transparent));
+}
+@media (prefers-reduced-motion: reduce) { .casa-fondo img { transition: opacity .01s; scale: 1; } }
 .casa-cabeza {
   display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .8rem 3rem;
   margin-bottom: 2rem;
@@ -219,7 +238,15 @@ button { font: inherit; color: inherit; }
 .panel:not([hidden]) .escena { view-transition-name: escena; }
 .panel:not([hidden]) .panel-texto { view-transition-name: escena-texto; }
 
-.panel-texto { max-width: 34rem; }
+.panel-texto {
+  max-width: 36rem;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  border-radius: 1.4rem;
+  background: color-mix(in srgb, var(--marfil) 82%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, #fff 55%, transparent);
+  box-shadow: 0 30px 60px -36px rgb(52 43 37 / .45);
+}
 .panel-lead { font-family: var(--display); font-size: clamp(1.4rem, 2.2vw, 1.85rem); line-height: 1.28; }
 .ideal {
   margin-top: 1.4rem; padding-left: 1rem;
@@ -239,6 +266,11 @@ button { font: inherit; color: inherit; }
 .miniaturas button[aria-pressed="true"] { opacity: 1; outline-color: var(--olivo); }
 .miniaturas img { width: 100%; height: 100%; object-fit: cover; transition: scale .4s var(--suave); }
 .miniaturas button:hover img { scale: 1.08; }
+@media (max-width: 560px) {
+  .miniaturas { flex-wrap: nowrap; }
+  .miniaturas li { flex: 1 1 0; min-width: 0; max-width: 5.8rem; }
+  .miniaturas button { width: 100%; }
+}
 .mini-video span {
   position: absolute; inset: 0; display: grid; place-items: center;
   color: var(--marfil); font-size: 1.1rem; background: rgb(52 43 37 / .3);
@@ -417,40 +449,9 @@ button { font: inherit; color: inherit; }
   background: var(--rosa); border-radius: var(--arco);
 }
 
-/* Proceso como línea de tiempo */
-.proceso {
-  margin-top: clamp(4rem, 10vh, 6.5rem); padding: clamp(2rem, 4vw, 3rem);
-  border-radius: 1.6rem;
-  background: color-mix(in srgb, var(--marfil) 6%, transparent);
-  border: 1px solid color-mix(in srgb, var(--marfil) 12%, transparent);
-}
-.proceso-titulo { font-size: clamp(1.7rem, 2.6vw, 2.3rem); margin-bottom: 2.2rem; }
-.pasos {
-  position: relative; list-style: none; margin: 0; padding: 0; counter-reset: paso;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem;
-}
-.pasos::before {
-  content: ""; position: absolute; left: 1.6rem; right: 1.6rem; top: 1.75rem;
-  border-top: 1px dashed color-mix(in srgb, var(--rosa) 60%, transparent);
-}
-.pasos li { position: relative; counter-increment: paso; }
-.pasos li::before {
-  content: counter(paso);
-  display: grid; place-items: center; width: 3.2rem; height: 3.8rem; margin-bottom: 1.2rem;
-  border-radius: var(--arco); background: var(--rosa); color: var(--cafe);
-  font-family: var(--display); font-size: 1.6rem; line-height: 1;
-  box-shadow: 0 0 0 .4rem var(--cafe);
-}
-.pasos h4 { font-family: var(--display); font-weight: 400; font-size: 1.35rem; line-height: 1.1; margin: 0 0 .5rem; }
-.pasos p { margin: 0; color: var(--arena); max-width: 26ch; }
-
 @media (max-width: 900px) {
   .cocina { grid-template-columns: 1fr; }
   .cocina-collage { max-width: 30rem; }
-  .pasos { grid-template-columns: 1fr; gap: 1.6rem; }
-  .pasos::before { left: 1.6rem; right: auto; top: 1rem; bottom: 1rem; border-top: 0; border-left: 1px dashed color-mix(in srgb, var(--rosa) 60%, transparent); }
-  .pasos li { padding-left: 4.6rem; min-height: 3.8rem; }
-  .pasos li::before { position: absolute; left: 0; top: 0; margin: 0; }
 }
 @media (max-width: 460px) { .cocina-incluye { grid-template-columns: 1fr; } }
 
